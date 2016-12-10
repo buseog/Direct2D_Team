@@ -123,3 +123,11 @@ typedef struct tagStatus
 	float		fAttackSpeed;
 }STAT;
 
+typedef struct tagStore
+{
+	wstring			wstrName;	
+	D3DXVECTOR3			vPos;
+	CImage			pngImage;
+
+
+}STORE;

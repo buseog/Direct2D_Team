@@ -34,6 +34,9 @@ void CMiniView::OnDraw(CDC* pDC)
 
 	CBackGround*	pBackGround = ((CMainFrame*)AfxGetMainWnd())->GetMainView()->GetBackGround();
 
+	if (pBackGround == NULL)
+		return;
+
 	CDevice::GetInstance()->GetDevice()->Clear(0, NULL, 
 		D3DCLEAR_STENCIL | D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET, 
 		D3DCOLOR_ARGB(255, 0, 0, 255), 1.f, 0);

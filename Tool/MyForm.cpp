@@ -125,6 +125,7 @@ void CMyForm::OnDestroy()
 
 	::Safe_Delete(m_pMapTool);
 	::Safe_Delete(m_pUnitTool);
+	::Safe_Delete(m_pVillageTool);
 }
 
 CMapTool*	CMyForm::GetMapTool(void)
