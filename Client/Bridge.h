@@ -14,10 +14,10 @@ public:
 	void	SetFrame(const wstring& wstrStateKey);
 
 public:
-	virtual HRESULT	Initialize(void)PURE;
-	virtual void	Progress(INFO& rInfo)PURE;
-	virtual void	Render(void)PURE;
-	virtual void	Release(void)PURE;
+	virtual HRESULT	Initialize(void) PURE;
+	virtual void	Progress(void) PURE;
+	virtual void	Render(void) PURE;
+	virtual void	Release(void) PURE;
 
 public:
 	CBridge(void);
