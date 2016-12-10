@@ -22,12 +22,11 @@ HRESULT CBackGround::Initialize(void)
 		{
 			TILE*	pTile = new TILE;
 
-			float fX = float(j * TILECX);
-			float fY = float(i * TILECY);
-
+			float fX = float(j * TILECX) + ((i % 2) * (TILECX / 2.f));
+			float fY = (float)i * (TILECY / 2.f);
 			pTile->vPos = D3DXVECTOR3(fX, fY, 0.f);
 			pTile->vSize = D3DXVECTOR3((float)TILECX, (float)TILECY, 0.f);
-			pTile->byDrawID = 1;
+			pTile->byDrawID = 0;
 			pTile->byOption = 0;
 
 			m_vecTile.push_back(pTile);
@@ -64,7 +63,7 @@ void CBackGround::Render(void)
 			if(iIndex < 0 || iIndex >= TILEX * TILEY)
 				break;
 
-			const TEXINFO*	pTexture = CTextureMgr::GetInstance()->GetTexture(L"SNOWTILE", L"SnowTile", m_vecTile[iIndex]->byDrawID);
+			const TEXINFO*	pTexture = CTextureMgr::GetInstance()->GetTexture(L"TILE", L"Tile", m_vecTile[iIndex]->byDrawID);
 
 			D3DXMatrixTranslation(&matTrans, 
 				m_vecTile[iIndex]->vPos.x - m_pMainView->GetScrollPos(0),
@@ -74,14 +73,14 @@ void CBackGround::Render(void)
 			m_pDevice->GetSprite()->SetTransform(&matTrans);
 
 			m_pDevice->GetSprite()->Draw(pTexture->pTexture, 
-				NULL, &D3DXVECTOR3(30.f, 30.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+				NULL, &D3DXVECTOR3(62.f, 32.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 			// ÆùÆ® 
-			wsprintf(szBuf, L"%d", iIndex);
+			/*wsprintf(szBuf, L"%d", iIndex);
 			m_pDevice->GetFont()->DrawTextW(m_pDevice->GetSprite(), 
 				szBuf, lstrlen(szBuf), 
 				NULL, NULL, 
-				D3DCOLOR_ARGB(255, 255, 255, 255));
+				D3DCOLOR_ARGB(255, 255, 255, 255));*/
 
 		}
 	}
@@ -97,7 +96,7 @@ void CBackGround::MiniRender(void)
 		{
 			int	iIndex = i * TILEX + j;
 
-			const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(L"SNOWTILE", L"SnowTile", m_vecTile[iIndex]->byDrawID);
+			const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(L"TILE", L"Tile", m_vecTile[iIndex]->byDrawID);
 
 			D3DXMatrixTranslation(&matTrans, 
 				m_vecTile[iIndex]->vPos.x,
@@ -106,7 +105,7 @@ void CBackGround::MiniRender(void)
 
 			m_pDevice->GetSprite()->SetTransform(&matTrans);
 			m_pDevice->GetSprite()->Draw(pTexture->pTexture, 
-				NULL, &D3DXVECTOR3(30.f, 30.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+				NULL, &D3DXVECTOR3(62.f, 32.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 		}
 	}

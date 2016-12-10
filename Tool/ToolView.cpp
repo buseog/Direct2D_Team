@@ -175,15 +175,15 @@ void CToolView::OnInitialUpdate()
 		return;
 	}
 
-	if(FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Cube.png", 
+	/*if(FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Cube.png", 
 		L"CUBE", TEX_SINGLE)))
 	{
 		AfxMessageBox(L"싱글 텍스쳐 생성 실패");
 		return;
-	}
+	}*/
 
-	if(FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Tile/SnowTile%d.png", 
-		L"SNOWTILE", TEX_MULTI, L"SnowTile", 5)))
+	if(FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Tile/Tile%d.png", 
+		L"TILE", TEX_MULTI, L"Tile", 216)))
 	{
 		AfxMessageBox(L"멀티 텍스쳐 생성 실패");
 		return;
