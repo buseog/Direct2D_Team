@@ -256,30 +256,6 @@
 		<Filter
 			Name="97. Mgr"
 			>
-			<File
-				RelativePath=".\AStar.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\AStar.h"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-			</File>
 			<Filter
 				Name="00. Device"
 				>
@@ -337,7 +313,7 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="02. KeyMgr"
+				Name="06. KeyMgr"
 				>
 				<File
 					RelativePath=".\KeyMgr.cpp"
@@ -349,7 +325,50 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="03. TimeMgr"
+				Name="02. SceneMgr"
+				>
+				<File
+					RelativePath=".\SceneMgr.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SceneMgr.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="03. ObjMgr"
+				>
+				<File
+					RelativePath=".\ObjMgr.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\ObjMgr.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="05. AStar"
+				>
+				<File
+					RelativePath=".\AStar.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\AStar.h"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+				</File>
+			</Filter>
+			<Filter
+				Name="04. TimeMgr"
 				>
 				<File
 					RelativePath=".\TimeMgr.cpp"
@@ -371,6 +390,62 @@
 					RelativePath=".\ObjFactory.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="01. Bridge"
+				>
+				<File
+					RelativePath=".\Bridge.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Bridge.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="01. Scene"
+			>
+			<File
+				RelativePath=".\Scene.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Scene.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="02. Obj"
+			>
+			<File
+				RelativePath=".\Obj.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Obj.h"
+				>
+			</File>
+			<Filter
+				Name="00. Back"
+				>
+				<File
+					RelativePath=".\Back.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Back.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="01. Player"
+				>
+			</Filter>
+			<Filter
+				Name="02. Effect"
+				>
 			</Filter>
 		</Filter>
 		<File

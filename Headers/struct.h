@@ -20,16 +20,23 @@ typedef struct tagTexture
 
 }TEXINFO;
 
-typedef struct tagTile
+typedef struct tagToolTile
 {
 	D3DXVECTOR3			vPos;
 	D3DXVECTOR3			vSize;
 	BYTE				byOption;
 	BYTE				byDrawID;
-	float				fAngle;
-	float				fMirror;
-
 }TILE;
+
+typedef struct tagClilTile
+{
+	D3DXVECTOR3			vPos;
+	D3DXVECTOR3			vSize;
+	BYTE				byOption;
+	BYTE				byDrawID;
+	list<int>			Connectlist;
+
+}TILE2;
 
 typedef struct tagAction
 {
@@ -75,3 +82,44 @@ typedef	struct tagTexturePath
 
 	}
 }IMGPATH;
+
+
+typedef struct tagFrame
+{
+	float		fFrame;
+	float		fCount;
+	float		fMax;
+
+	tagFrame(void){}
+	tagFrame(float _fFrame, float _fCount, float _fMax)
+		: fFrame(_fFrame), fCount(_fCount), fMax(_fMax)
+	{
+
+	}
+
+}FRAME;
+
+typedef	struct tagAStarNode
+{
+	float				fCost;
+	int					iIndex;
+	tagAStarNode*		pParent;
+
+}NODE;
+
+typedef struct tagStatus
+{
+	wstring		strName;
+	int			iHp;
+	int			iMp;
+	int			iLevel;
+	int			iExp;
+	int			iStr;
+	int			iDex;
+	int			iInt;
+	int			iAttack;
+	int			iDef;
+	float		fMoveSpeed;
+	float		fAttackSpeed;
+}STAT;
+

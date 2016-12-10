@@ -29,8 +29,6 @@ HRESULT CBackGround::Initialize(void)
 			pTile->vSize = D3DXVECTOR3((float)TILECX, (float)TILECY, 0.f);
 			pTile->byDrawID = 1;
 			pTile->byOption = 0;
-			pTile->fAngle = 0;
-			pTile->fMirror = 1;
 
 			m_vecTile.push_back(pTile);
 		}
@@ -48,7 +46,7 @@ void CBackGround::Progress(void)
 
 void CBackGround::Render(void)
 {
-	D3DXMATRIX	matScale, matRot, matTrans, matWorld;
+	D3DXMATRIX	matTrans;
 	TCHAR		szBuf[MIN_STR] = L"";
 
 	int iCountY = WINCY / TILECY + 1;
@@ -68,20 +66,12 @@ void CBackGround::Render(void)
 
 			const TEXINFO*	pTexture = CTextureMgr::GetInstance()->GetTexture(L"SNOWTILE", L"SnowTile", m_vecTile[iIndex]->byDrawID);
 
-			D3DXMatrixIdentity(&matWorld);
-
-			D3DXMatrixScaling(&matScale, m_vecTile[iIndex]->fMirror, 1.f, 0.f);
-
-			D3DXMatrixRotationZ(&matRot, D3DXToRadian(m_vecTile[iIndex]->fAngle));
-
 			D3DXMatrixTranslation(&matTrans, 
 				m_vecTile[iIndex]->vPos.x - m_pMainView->GetScrollPos(0),
 				m_vecTile[iIndex]->vPos.y - m_pMainView->GetScrollPos(1),
 				0.f);
 
-			matWorld = matScale * matRot * matTrans;
-
-			m_pDevice->GetSprite()->SetTransform(&matWorld);
+			m_pDevice->GetSprite()->SetTransform(&matTrans);
 
 			m_pDevice->GetSprite()->Draw(pTexture->pTexture, 
 				NULL, &D3DXVECTOR3(30.f, 30.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -99,7 +89,7 @@ void CBackGround::Render(void)
 
 void CBackGround::MiniRender(void)
 {
-	D3DXMATRIX	matScale, matRot, matTrans, matWorld;
+	D3DXMATRIX	matTrans;
 
 	for(int i = 0; i < TILEY; ++i)
 	{
@@ -109,20 +99,12 @@ void CBackGround::MiniRender(void)
 
 			const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(L"SNOWTILE", L"SnowTile", m_vecTile[iIndex]->byDrawID);
 
-			D3DXMatrixIdentity(&matWorld);
-
-			D3DXMatrixScaling(&matScale, m_vecTile[iIndex]->fMirror, 1.f, 0.f);
-
-			D3DXMatrixRotationZ(&matRot, D3DXToRadian(m_vecTile[iIndex]->fAngle));
-
 			D3DXMatrixTranslation(&matTrans, 
 				m_vecTile[iIndex]->vPos.x,
 				m_vecTile[iIndex]->vPos.y,
 				0.f);
 
-			matWorld = matScale * matRot * matTrans;
-
-			m_pDevice->GetSprite()->SetTransform(&matWorld);
+			m_pDevice->GetSprite()->SetTransform(&matTrans);
 			m_pDevice->GetSprite()->Draw(pTexture->pTexture, 
 				NULL, &D3DXVECTOR3(30.f, 30.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
@@ -160,12 +142,8 @@ void CBackGround::TileChange(const D3DXVECTOR3& vPos, const int& iDrawID, const 
 			if (iNum < 0 || iNum > TILEX * TILEY)
 				break;
 
-			m_vecAction.push_back(new TILE_ACTION(iNum, m_vecTile[iNum]->byDrawID, m_vecTile[iNum]->byOption, iDrawID, iOption));
-
 			m_vecTile[iNum]->byDrawID = iDrawID;
 			m_vecTile[iNum]->byOption = iOption;
-			m_vecTile[iNum]->fAngle = fAngle;
-			m_vecTile[iNum]->fMirror = fMirror;
 		}
 	}
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Include.h"
+#include "Bigheader.h"
 
 class CAStar
 {
@@ -20,12 +20,13 @@ public:
 
 	void	MakeRoute(void);
 	bool	CheckList(const int& iIndex);
-	NODE*	CreateNode(int iIndex, NODE* pParent, const vector<TILE*>* pTile);
+	NODE*	CreateNode(int iIndex, NODE* pParent, const vector<TILE2*>* pTile);
+
 	static bool	Compare(const NODE* pTemp, const NODE* pDest);
 
 	void	StartPos(const D3DXVECTOR3& vStartPos, const D3DXVECTOR3& vGoalPos);
 	int		GetTileIndex(const D3DXVECTOR3& vPos);
-	bool	Picking(const D3DXVECTOR3& vPos, const TILE* pTile);
+	bool	Picking(const D3DXVECTOR3& vPos, const TILE2* pTile);
 
 	list<int>*		GetBestList(void);
 

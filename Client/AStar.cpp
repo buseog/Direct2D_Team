@@ -17,7 +17,7 @@ void CAStar::AStarStart(const int& iStartIndex, const int& iGoalIndex)
 	if(iStartIndex == iGoalIndex)
 		return;
 
-	const vector<TILE*>*	pVecTile = CObjMgr::GetInstance()->GetTile();
+	const vector<TILE2*>*	pVecTile = CObjMgr::GetInstance()->GetTile();
 
 	if(pVecTile == NULL)
 		return;
@@ -51,7 +51,7 @@ void CAStar::MakeRoute(void)
 
 	m_CloseList.push_back(pParent);			// 검색 대상에서 제외
 
-	const vector<TILE*>*	pVecTile = CObjMgr::GetInstance()->GetTile();
+	const vector<TILE2*>*	pVecTile = CObjMgr::GetInstance()->GetTile();
 
 	if(pVecTile == NULL)
 		return;
@@ -61,107 +61,14 @@ void CAStar::MakeRoute(void)
 
 	while(true)
 	{
-		// 1. 맵 상에 존재하는 인덱스 노드인가?	
-		// 2. 옵션 값이 '0'인가?
-		// 3. 오픈, 클로즈 리스트 푸쉬백 되었는가?
-
-		// 위쪽 방향 예외처리
-		iIndex = pParent->iIndex - TILEX * 2;	
-
-		if((pParent->iIndex >= TILEX * 2)								&& 
-		  ((*pVecTile)[iIndex]->byOption == 0)							&&
-			CheckList(iIndex))
+		for (list<int>::iterator listiter = (*pVecTile)[pParent->iIndex]->Connectlist.begin();
+			listiter != (*pVecTile)[pParent->iIndex]->Connectlist.end(); ++listiter)
 		{
-			pNode = CreateNode(iIndex, pParent, pVecTile);
-			m_OpenList.push_back(pNode);
-		}
-
-		// 아래 방향 예외처리
-		iIndex = pParent->iIndex + TILEX * 2;	
-
-		if((pParent->iIndex < (TILEX * TILEY) - (TILEX * 2))			&& 
-			((*pVecTile)[iIndex]->byOption == 0)						&&
-			CheckList(iIndex))
-		{
-			pNode = CreateNode(iIndex, pParent, pVecTile);
-			m_OpenList.push_back(pNode);
-		}
-
-		// 왼쪽 방향 예외처리
-		iIndex = pParent->iIndex - 1;	
-
-		if((pParent->iIndex %  TILEX != 0)								&& 
-			((*pVecTile)[iIndex]->byOption == 0)						&&
-			CheckList(iIndex))
-		{
-			pNode = CreateNode(iIndex, pParent, pVecTile);
-			m_OpenList.push_back(pNode);
-		}
-
-		// 오른쪽 방향 예외처리
-		iIndex = pParent->iIndex + 1;	
-
-		if((pParent->iIndex %  TILEX != TILEX - 1)						&& 
-			((*pVecTile)[iIndex]->byOption == 0)						&&
-			CheckList(iIndex))
-		{
-			pNode = CreateNode(iIndex, pParent, pVecTile);
-			m_OpenList.push_back(pNode);
-		}
-
-		// 오른쪽 위 방향 예외처리
-		iIndex = pParent->iIndex - (TILEX - (pParent->iIndex / TILEX) % 2);	
-				// 170	- (20 - ((170 / 20) % 2))
-				// 150	- (20 - ((150 / 20) % 2))
-				// 131	- (20 - ((131 / 20) % 2))
-		if((pParent->iIndex % (TILEX * 2) != (TILEX * 2) - 1)			&& 
-			(pParent->iIndex >= TILEX)									&&
-			((*pVecTile)[iIndex]->byOption == 0)						&&
-			CheckList(iIndex))
-		{
-			pNode = CreateNode(iIndex, pParent, pVecTile);
-			m_OpenList.push_back(pNode);
-		}
-
-		// 오른쪽 아래 방향 예외처리
-		iIndex = pParent->iIndex + (TILEX + (pParent->iIndex / TILEX) % 2);	
-
-		if((pParent->iIndex % (TILEX * 2) != (TILEX * 2) - 1)			&& 
-			(pParent->iIndex < (TILEX * TILEY) - (TILEX))				&& 
-			((*pVecTile)[iIndex]->byOption == 0)						&&
-			CheckList(iIndex))
-		{
-			pNode = CreateNode(iIndex, pParent, pVecTile);
-			m_OpenList.push_back(pNode);
-		}
-
-		// 왼쪽 아래 방향 예외처리
-		iIndex = pParent->iIndex + (TILEX + (pParent->iIndex / TILEX) % 2) - 1;	
-			// 70 + (20 + ((70 / 20) % 2)) - 1
-			// 90 + (20 + ((90 / 20) % 2)) - 1
-			// 109 + (20 + ((109 / 20) % 2)) - 1	
-		if((pParent->iIndex % (TILEX * 2) != 0)							&& 
-			(pParent->iIndex < (TILEX * TILEY) - (TILEX))				&& 
-			((*pVecTile)[iIndex]->byOption == 0)						&&
-			CheckList(iIndex))
-		{
-			pNode = CreateNode(iIndex, pParent, pVecTile);
-			m_OpenList.push_back(pNode);
-		}
-
-		// 왼쪽 위 방향 예외처리
-		iIndex = pParent->iIndex - (TILEX + (pParent->iIndex / TILEX + 1) % 2);	
-		// 104 - 20 + ((104 / 20) % 2 ) - 1
-		// 84 - 20  + ((84 / 20) % 2 )  - 1
-		// 63 - 20  + ((63 / 20) % 2 )  - 1
-			
-		if((pParent->iIndex % (TILEX * 2) != 0)							&& 
-			(pParent->iIndex >= TILEX)									&& 
-			((*pVecTile)[iIndex]->byOption == 0)						&&
-			CheckList(iIndex))
-		{
-			pNode = CreateNode(iIndex, pParent, pVecTile);
-			m_OpenList.push_back(pNode);
+			if ((*pVecTile)[pParent->iIndex]->byOption == 0)
+			{
+				pNode = CreateNode(*listiter, pParent, pVecTile);
+				m_OpenList.push_back(pNode);
+			}
 		}
 
 		m_OpenList.sort(Compare);
@@ -212,7 +119,7 @@ bool CAStar::CheckList(const int& iIndex)
 	return true;
 }
 
-NODE* CAStar::CreateNode(int iIndex, NODE* pParent, const vector<TILE*>* pTile)
+NODE* CAStar::CreateNode(int iIndex, NODE* pParent, const vector<TILE2*>* pTile)
 {
 	NODE*	pNode = new NODE;
 
@@ -245,7 +152,7 @@ void CAStar::StartPos(const D3DXVECTOR3& vStartPos, const D3DXVECTOR3& vGoalPos)
 
 int CAStar::GetTileIndex(const D3DXVECTOR3& vPos)
 {
-	const vector<TILE*>*	pVecTile = CObjMgr::GetInstance()->GetTile();
+	const vector<TILE2*>*	pVecTile = CObjMgr::GetInstance()->GetTile();
 
 	if(pVecTile == NULL)
 		return -1;
@@ -261,7 +168,7 @@ int CAStar::GetTileIndex(const D3DXVECTOR3& vPos)
 	return -1;
 }
 
-bool CAStar::Picking(const D3DXVECTOR3& vPos, const TILE* pTile)
+bool CAStar::Picking(const D3DXVECTOR3& vPos, const TILE2* pTile)
 {
 
 	D3DXVECTOR3		vPoint[4] = 
