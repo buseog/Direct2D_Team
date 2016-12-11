@@ -67,15 +67,23 @@ void CBack::Render(void)
 				NULL, &D3DXVECTOR3(TILECX / 2.f, TILECY / 2.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 			// ÆùÆ®
-			wsprintf(szBuf, L"%d", iIndex);
+		/*	wsprintf(szBuf, L"%d", iIndex);
 			CDevice::GetInstance()->GetFont()->DrawTextW(CDevice::GetInstance()->GetSprite(), 
 				szBuf, lstrlen(szBuf), 
 				NULL, NULL, 
-				D3DCOLOR_ARGB(255, 255, 255, 255));
+				D3DCOLOR_ARGB(255, 255, 255, 255));*/
 
 
 		}
 	}
+
+	CDevice::GetInstance()->Render_End();
+	CDevice::GetInstance()->Render_Begin();
+	
+
+
+	CDevice::GetInstance()->Render_End();
+	CDevice::GetInstance()->Render_Begin();
 }
 
 void CBack::Release(void)

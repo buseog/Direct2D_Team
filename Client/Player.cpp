@@ -12,6 +12,8 @@ CPlayer::~CPlayer(void)
 
 HRESULT CPlayer::Initialize(void)
 {
+
+	
 	return S_OK;
 }
 

@@ -15,7 +15,7 @@ protected:
 	bool					m_bDestroy;
 	float					m_fScrollSpeed;
 	wstring					m_wstrObjKey;
-	
+	DATA					m_tData;
 
 public:
 	void	SetPos(const D3DXVECTOR3& vPos);

@@ -24,7 +24,21 @@ enum OBJID
 	OBJ_MISSILE,
 	OBJ_MONSTER,
 	OBJ_EFFECT,
+	OBJ_UI,
 	OBJ_END
+};
+
+enum UIID
+{
+	UI_MAIN,
+	UI_HP,
+	UI_MP,
+	UI_LEVEL,
+	UI_ATTACK,
+	UI_EXP,
+	UI_STAT,
+	UI_END
+
 };
 
 enum ITEMID
@@ -37,4 +51,11 @@ enum ITEMID
 	IT_BELT,
 	IT_FOOD,
 	IT_END
+};
+
+enum DATAID		
+{ 
+	PLAYER_DATA, 
+	PLAYER_MATRIX, 
+	PLAYER_END
 };

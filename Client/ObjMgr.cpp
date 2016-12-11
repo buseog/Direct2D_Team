@@ -26,7 +26,7 @@ void CObjMgr::AddObject(OBJID eObjID, CObj* pObj)
 HRESULT CObjMgr::Initialize(void)
 {
 	m_ObjList[OBJ_BACK].push_back(CObjFactory<CBack>::CreateObj(0, 0));
-	m_ObjList[OBJ_PLAYER].push_back(CBridgeFactory<CPlayer, CUnitBridge>::CreateBridge(L"Player"));
+//	m_ObjList[OBJ_PLAYER].push_back(CBridgeFactory<CPlayer, CUnitBridge>::CreateBridge(L"Player"));
 	return S_OK;
 }
 
