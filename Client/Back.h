@@ -9,11 +9,13 @@ private:
 	int					m_iTileRenderX;
 	int					m_iTileRenderY;
 
+private:
+	void	LoadTile(const wstring& wstrPath);
+	void	MoveScroll(void);
+	void	MouseLock(void);
+
 public:
 	const vector<TILE2*>* GetTile(void);
-
-private:
-	void LoadTile(const wstring& wstrPath);
 
 public:
 	virtual HRESULT Initialize(void);

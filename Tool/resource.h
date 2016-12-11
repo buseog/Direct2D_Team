@@ -47,7 +47,10 @@
 #define IDC_BUTTON4                     1009
 #define IDC_EDIT1                       1010
 #define IDC_RADIO1                      1011
+
 #define IDC_EDIT8                       1011
+
+//#define IDC_EDIT7                       1011
 #define IDC_BUTTON2                     1012
 #define IDC_RADIO2                      1012
 #define IDC_EDIT7                       1012
@@ -89,7 +92,11 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
+<<<<<<< HEAD
 #define _APS_NEXT_RESOURCE_VALUE        321
+=======
+#define _APS_NEXT_RESOURCE_VALUE        312
+>>>>>>> 7284e74de8561996b2294bfb56bb8415a4ba1d75
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1026
 #define _APS_NEXT_SYMED_VALUE           319

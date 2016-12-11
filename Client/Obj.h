@@ -12,19 +12,22 @@ protected:
 	FRAME					m_tFrame;
 	INFO					m_tInfo;
 	
-	float					m_fSpeed;
+	bool					m_bDestroy;
+	float					m_fScrollSpeed;
 	wstring					m_wstrObjKey;
-
+	
 
 public:
 	void	SetPos(const D3DXVECTOR3& vPos);
 	void	SetPos(float fX, float fY);
+	void	SetDestroy(bool	_YN);
 	void	SetBridge(CBridge* pBridge);
 
-	CBridge*	GetBridge(void);
-
-	const INFO* GetInfo(void) const;
-	const wstring& GetObjKey(void);
+public:
+	CBridge*		GetBridge(void);
+	const bool		GetDestroy(void);
+	const INFO*		GetInfo(void) const;
+	const wstring&	GetObjKey(void);
 
 public:
 	virtual HRESULT	Initialize(void)PURE;

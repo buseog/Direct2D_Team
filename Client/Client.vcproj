@@ -379,6 +379,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="07. CrowdMgr"
+				>
+				<File
+					RelativePath=".\CrowdMgr.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CrowdMgr.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="98. Design"
@@ -386,6 +398,10 @@
 			<Filter
 				Name="00. ObjFactory"
 				>
+				<File
+					RelativePath=".\BridgeFactory.h"
+					>
+				</File>
 				<File
 					RelativePath=".\ObjFactory.h"
 					>
@@ -402,6 +418,54 @@
 					RelativePath=".\Bridge.h"
 					>
 				</File>
+				<Filter
+					Name="00. ObjBridge"
+					>
+					<File
+						RelativePath=".\ObjBridge.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\ObjBridge.h"
+						>
+					</File>
+					<Filter
+						Name="00. UnitBridge"
+						>
+						<File
+							RelativePath=".\UnitBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\UnitBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="01. EffectBridge"
+						>
+						<File
+							RelativePath=".\EffectBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\EffectBridge.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="01. UiBridge"
+					>
+					<File
+						RelativePath=".\UiBridge.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UiBridge.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -415,6 +479,66 @@
 				RelativePath=".\Scene.h"
 				>
 			</File>
+			<Filter
+				Name="00. Start"
+				>
+				<File
+					RelativePath=".\Start.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Start.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="01. Menu"
+				>
+				<File
+					RelativePath=".\MyMenu.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\MyMenu.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="02. Field"
+				>
+				<File
+					RelativePath=".\Field.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Field.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="03. Village"
+				>
+				<File
+					RelativePath=".\Village.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Village.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="04. BattleField"
+				>
+				<File
+					RelativePath=".\BattleField.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\BattleField.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="02. Obj"
@@ -442,9 +566,101 @@
 			<Filter
 				Name="01. Player"
 				>
+				<File
+					RelativePath=".\Player.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Player.h"
+					>
+				</File>
 			</Filter>
 			<Filter
-				Name="02. Effect"
+				Name="04. Effect"
+				>
+				<File
+					RelativePath=".\Effect.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Effect.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="02. Missile"
+				>
+				<File
+					RelativePath=".\Missile.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Missile.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="03. Monster"
+				>
+				<File
+					RelativePath=".\Monster.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Monster.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="03. UI"
+			>
+			<File
+				RelativePath=".\Ui.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Ui.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="04. Item"
+			>
+			<File
+				RelativePath=".\Item.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Item.h"
+				>
+			</File>
+			<Filter
+				Name="00. Weapon"
+				>
+			</Filter>
+			<Filter
+				Name="01. Armor"
+				>
+			</Filter>
+			<Filter
+				Name="02. Glove"
+				>
+			</Filter>
+			<Filter
+				Name="03. Helmet"
+				>
+			</Filter>
+			<Filter
+				Name="04. Boots"
+				>
+			</Filter>
+			<Filter
+				Name="05. Belt"
+				>
+			</Filter>
+			<Filter
+				Name="06. Food"
 				>
 			</Filter>
 		</Filter>

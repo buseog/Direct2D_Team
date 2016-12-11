@@ -2,6 +2,11 @@
 #include "SceneMgr.h"
 #include "Scene.h"
 #include "ObjMgr.h"
+#include "Start.h"
+#include "MyMenu.h"
+#include "Field.h"
+#include "Village.h"
+#include "BattleField.h"
 
 
 IMPLEMENT_SINGLETON(CSceneMgr)
@@ -22,12 +27,24 @@ void CSceneMgr::SetScene(SCENEID _eScene)
 
 	switch(_eScene)
 	{
-	case SC_LOGO:
-		
+	case SC_START:
+		m_pScene = new CStart;
 		break;
 
-	case SC_STAGE:
-		
+	case SC_MENU:
+		m_pScene = new CMyMenu;
+		break;
+
+	case SC_FILED:
+		m_pScene = new CField;
+		break;
+	
+	case SC_VILLAGE:
+		m_pScene = new CVillage;
+		break;
+
+	case SC_BATTLEFIELD:
+		m_pScene = new CBattleField;
 		break;
 	}
 

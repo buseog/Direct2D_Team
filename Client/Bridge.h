@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Obj.h"
+class CObj;
 
 class CBridge
 {
@@ -10,14 +10,14 @@ protected:
 	FRAME		m_tFrame;
 
 public:
-	void		SetObj(CObj* pObj);
+	void	SetObj(CObj* pObj);
 	void	SetFrame(const wstring& wstrStateKey);
 
 public:
-	virtual HRESULT	Initialize(void)PURE;
-	virtual void	Progress(INFO& rInfo)PURE;
-	virtual void	Render(void)PURE;
-	virtual void	Release(void)PURE;
+	virtual HRESULT	Initialize(void) PURE;
+	virtual void	Progress(void) PURE;
+	virtual void	Render(void) PURE;
+	virtual void	Release(void) PURE;
 
 public:
 	CBridge(void);

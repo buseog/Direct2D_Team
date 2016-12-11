@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Back.h"
 #include "TimeMgr.h"
+#include "BridgeFactory.h"
 
 CBack::CBack(void)
 : m_iTileRenderX(0)
@@ -13,59 +14,20 @@ CBack::~CBack(void)
 	Release();
 }
 
-const vector<TILE2*>* CBack::GetTile(void)
-{
-	return &m_vecTile;
-}
-
-void CBack::LoadTile(const wstring& wstrPath)
-{
-	HANDLE  hFile = CreateFile(wstrPath.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-
-	DWORD	dwByte = 0;
-
-	while(1)
-	{
-		TILE2*			pTile = new TILE2;
-
-		ReadFile(hFile, pTile, sizeof(TILE2), &dwByte, NULL);
-
-		if(dwByte == 0)
-		{
-			::Safe_Delete(pTile);
-			break;
-		}
-
-		m_vecTile.push_back(pTile);
-	}
-
-	CloseHandle(hFile);
-}
-
-
 HRESULT CBack::Initialize(void)
 {
 	LoadTile(L"../Data/map.dat");
-	m_fSpeed = 500.f;
+	m_fScrollSpeed = 500.f;
+
+	MouseLock();
 
 	return S_OK;
 }
 
 void CBack::Progress(void)
 {
-	D3DXVECTOR3		vMousePos = ::GetMouse();
+	MoveScroll();
 
-	if(0 > vMousePos.x)
-		m_vScroll.x += m_fSpeed * CTimeMgr::GetInstance()->GetTime();
-
-	if(WINCX < vMousePos.x)
-		m_vScroll.x -= m_fSpeed * CTimeMgr::GetInstance()->GetTime();
-
-	if(0 > vMousePos.y)
-		m_vScroll.y += m_fSpeed * CTimeMgr::GetInstance()->GetTime();
-
-	if(WINCY < vMousePos.y)
-		m_vScroll.y -= m_fSpeed * CTimeMgr::GetInstance()->GetTime();
 
 }
 
@@ -102,7 +64,7 @@ void CBack::Render(void)
 
 			CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
 			CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
-				NULL, &D3DXVECTOR3(65.f, 34.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+				NULL, &D3DXVECTOR3(TILECX / 2.f, TILECY / 2.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 			// ÆùÆ®
 			wsprintf(szBuf, L"%d", iIndex);
@@ -120,4 +82,82 @@ void CBack::Release(void)
 {
 	for_each(m_vecTile.begin(), m_vecTile.end(), DeleteObj());
 	m_vecTile.clear();
+}
+
+const vector<TILE2*>* CBack::GetTile(void)
+{
+	return &m_vecTile;
+}
+
+void CBack::LoadTile(const wstring& wstrPath)
+{
+	HANDLE  hFile = CreateFile(wstrPath.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	DWORD	dwByte = 0;
+
+	while(1)
+	{
+		TILE2*			pTile = new TILE2;
+
+		ReadFile(hFile, pTile, sizeof(TILE2), &dwByte, NULL);
+
+		if(dwByte == 0)
+		{
+			::Safe_Delete(pTile);
+			break;
+		}
+
+		m_vecTile.push_back(pTile);
+	}
+
+	CloseHandle(hFile);
+
+	if (m_vecTile.empty())
+	{
+
+		for (int i = 0; i < TILEY; ++i)
+		{
+			for (int j = 0; j < TILEX; ++j)
+			{
+				TILE2*	pTile = new TILE2;
+
+				float fX = float(j * TILECX) + ((i % 2) * (TILECX / 2.f));
+				float fY = (float)i * (TILECY / 2.f);
+				pTile->vPos = D3DXVECTOR3(fX, fY, 0.f);
+				pTile->vSize = D3DXVECTOR3((float)TILECX, (float)TILECY, 0.f);
+				pTile->byDrawID = 0;
+				pTile->byOption = 0;
+
+				m_vecTile.push_back(pTile);
+			}
+		}
+	}
+}
+
+void	CBack::MoveScroll(void)
+{
+	D3DXVECTOR3		vMousePos = ::GetMouse();
+
+	if(vMousePos.x < 20)
+		m_vScroll.x += m_fScrollSpeed * CTimeMgr::GetInstance()->GetTime();
+
+	if(WINCX - 20 < vMousePos.x)
+		m_vScroll.x -= m_fScrollSpeed * CTimeMgr::GetInstance()->GetTime();
+
+	if(20 > vMousePos.y)
+		m_vScroll.y += m_fScrollSpeed * CTimeMgr::GetInstance()->GetTime();
+
+	if(WINCY - 20 < vMousePos.y)
+		m_vScroll.y -= m_fScrollSpeed * CTimeMgr::GetInstance()->GetTime();
+}
+
+void	CBack::MouseLock(void)
+{
+	RECT rc;
+	GetWindowRect(g_hWnd, &rc);
+	rc.left += 20;
+	rc.top += 30;
+	rc.right -= 20;
+	rc.bottom -= 20;
+	ClipCursor(&rc);
 }

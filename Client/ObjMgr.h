@@ -11,14 +11,15 @@ private:
 	list<CObj*>		m_ObjList[OBJ_END];
 	
 public:
-	void			AddObject(OBJID eObjID, CObj* pObj);
+	void		AddObject(OBJID eObjID, CObj* pObj);
+	const		vector<TILE2*>*		GetTile(void);
+	const		CObj* GetObj(OBJID _eID);
+
+public:
 	HRESULT			Initialize(void);
 	void			Progress(void);
 	void			Render(void);
 	void			Release();
-
-	const vector<TILE2*>*		GetTile(void);
-	const CObj* GetObj(OBJID _eID);
 
 private:
 	CObjMgr(void);

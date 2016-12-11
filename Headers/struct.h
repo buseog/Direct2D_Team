@@ -20,6 +20,7 @@ typedef struct tagTexture
 
 }TEXINFO;
 
+// 툴에서 사용할 타일.
 typedef struct tagToolTile
 {
 	D3DXVECTOR3			vPos;
@@ -28,6 +29,7 @@ typedef struct tagToolTile
 	BYTE				byDrawID;
 }TILE;
 
+// 클라에서 사용될타일. AStar용 인접리스트 가지고있음
 typedef struct tagClilTile
 {
 	D3DXVECTOR3			vPos;
@@ -38,6 +40,7 @@ typedef struct tagClilTile
 
 }TILE2;
 
+// 이전툴에서 쓰던 타일돌리는 구조체
 typedef struct tagAction
 {
 	int iIndex;
@@ -55,6 +58,7 @@ typedef struct tagAction
 	}
 }TILE_ACTION;
 
+// 이전툴에서 쓰던 유닛데이터 삭제예정
 typedef struct tagUnitData
 {
 	wstring			wstrName;
@@ -69,6 +73,7 @@ typedef struct tagUnitData
 
 }UNITDATA;
 
+// 경로 저장하기위한 구조체
 typedef	struct tagTexturePath
 {
 	wstring			wstrObjKey;
@@ -83,7 +88,7 @@ typedef	struct tagTexturePath
 	}
 }IMGPATH;
 
-
+// 스프라이트 돌릴 구조체
 typedef struct tagFrame
 {
 	float		fFrame;
@@ -99,6 +104,8 @@ typedef struct tagFrame
 
 }FRAME;
 
+
+// AStar 리스트 노드
 typedef	struct tagAStarNode
 {
 	float				fCost;
@@ -107,6 +114,7 @@ typedef	struct tagAStarNode
 
 }NODE;
 
+// 유닛 스텟
 typedef struct tagStatus
 {
 	wstring		strName;
@@ -123,3 +131,23 @@ typedef struct tagStatus
 	float		fAttackSpeed;
 }STAT;
 
+// 마을툴에서 사용하는 구조체
+typedef struct tagStore
+{
+	wstring			wstrName;	
+	D3DXVECTOR3			vPos;
+	CImage			pngImage;
+
+
+}STORE;
+
+// 아이템 구조체
+typedef struct tagItem
+{
+	wstring			wstrName;
+	D3DXVECTOR3		vPos;
+	int				iOption;
+	int				iWeight;
+	int				iPrice;
+	ITEMID			eType;
+}ITEM;

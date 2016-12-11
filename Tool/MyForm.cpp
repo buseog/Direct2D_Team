@@ -112,6 +112,7 @@ void CMyForm::OnClickButton()
 	m_pBack->Release();
 	m_pBack->Initialize();
 
+
 	((CMainFrame*)AfxGetMainWnd())->GetMainView()->Invalidate(TRUE);
 
 	UpdateData(FALSE);
