@@ -12,8 +12,8 @@ const WORD	MAX_STR = 256;
 const int TILECX = 62;
 const int TILECY = 32;
 
-const int TILEX = 60;
-const int TILEY = 50;
+const int TILEX = 20;
+const int TILEY = 30;
 
 // Å°°ª
 const DWORD				KEY_LBUTTON = 0x00000001;

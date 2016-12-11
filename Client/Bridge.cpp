@@ -32,3 +32,11 @@ void CBridge::SetFrame(const wstring& wstrStateKey)
 	m_tFrame.fMax = m_tFrame.fCount;
 
 }
+
+void	CBridge::Frame(void)
+{
+	m_tFrame.fFrame += m_tFrame.fCount * CTimeMgr::GetInstance()->GetTime();
+
+	if(m_tFrame.fFrame > m_tFrame.fMax)
+		m_tFrame.fFrame = 0;
+}

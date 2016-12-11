@@ -14,5 +14,10 @@ CCrowdMgr::~CCrowdMgr(void)
 
 void CCrowdMgr::Release(void)
 {
+	m_vecSelectUnit.clear();
+}
 
+vector<CObj*>*	CCrowdMgr::GetSelectList(void)
+{
+	return &m_vecSelectUnit;
 }

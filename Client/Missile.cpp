@@ -26,5 +26,5 @@ void CMissile::Render(void)
 
 void CMissile::Release(void)
 {
-	::Safe_Delete(m_pBridge);
+	//::Safe_Delete(m_pBridge);
 }

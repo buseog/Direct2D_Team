@@ -13,7 +13,8 @@ private:
 public:
 	void		AddObject(OBJID eObjID, CObj* pObj);
 	const		vector<TILE2*>*		GetTile(void);
-	const		CObj* GetObj(OBJID _eID);
+	const		CObj*				GetObj(OBJID _eID);
+	list<CObj*>*	GetObjList(OBJID _eID);
 
 public:
 	HRESULT			Initialize(void);

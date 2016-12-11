@@ -2,10 +2,14 @@
 #include "Back.h"
 #include "TimeMgr.h"
 #include "BridgeFactory.h"
+#include "KeyMgr.h"
+#include "ObjMgr.h"
+#include "CrowdMgr.h"
 
 CBack::CBack(void)
 : m_iTileRenderX(0)
 , m_iTileRenderY(0)
+, m_iDragState(0)
 {
 }
 
@@ -27,6 +31,7 @@ HRESULT CBack::Initialize(void)
 void CBack::Progress(void)
 {
 	MoveScroll();
+	Drag();
 
 
 }
@@ -75,6 +80,19 @@ void CBack::Render(void)
 
 
 		}
+	}
+
+	if (m_iDragState == 1)
+	{
+		CDevice::GetInstance()->Render_End();
+		CDevice::GetInstance()->Render_Begin();
+
+		CDevice::GetInstance()->GetLine()->Begin();
+		CDevice::GetInstance()->GetLine()->Draw(m_vDrag, 5, D3DCOLOR_ARGB(255, 255, 255, 255));
+		CDevice::GetInstance()->GetLine()->End();
+
+		CDevice::GetInstance()->Render_End();
+		CDevice::GetInstance()->Render_Begin();
 	}
 }
 
@@ -128,6 +146,40 @@ void CBack::LoadTile(const wstring& wstrPath)
 				pTile->byDrawID = 0;
 				pTile->byOption = 0;
 
+				int iIndex = i * TILEX + j;
+
+				// 위
+				if (i > 1)
+					pTile->Connectlist.push_back(iIndex - TILEX);
+
+				// 오른쪽위
+				if (i > 0 && j <= TILEX - 1)
+					pTile->Connectlist.push_back(iIndex - TILEX + 1);
+
+				// 오른쪽
+				if (j < TILEX -2)
+					pTile->Connectlist.push_back(iIndex +1);
+
+				// 오른쪽 아래
+				if (i < TILEY - 1&& j <= TILEX - 1)
+					pTile->Connectlist.push_back(iIndex + TILEX +1);
+
+				// 아래
+				if (i < TILEY -2)
+					pTile->Connectlist.push_back(iIndex + TILEX);
+
+				// 왼쪽 아래
+				if (i < TILEY - 1 && j >= 0)
+					pTile->Connectlist.push_back(iIndex + TILEX - 1);
+
+				// 왼쪽
+				if (j > 1)
+					pTile->Connectlist.push_back(iIndex - 1);
+
+				// 왼쪽 위
+				if (j >= 0 && i > 0)
+					pTile->Connectlist.push_back(iIndex - TILEX - 1);
+
 				m_vecTile.push_back(pTile);
 			}
 		}
@@ -161,3 +213,71 @@ void	CBack::MouseLock(void)
 	rc.bottom -= 20;
 	ClipCursor(&rc);
 }
+
+void	CBack::Drag(void)
+{
+	D3DXVECTOR3	vMouse = ::GetMouse();
+
+	if(CKeyMgr::GetInstance()->KeyPressed(KEY_LBUTTON))
+	{
+		m_rcDrag.right = long(vMouse.x + m_vScroll.x);
+		m_rcDrag.bottom = long(vMouse.y + m_vScroll.y);
+
+		if (m_rcDrag.left > m_rcDrag.right)
+		{
+			long TempX = m_rcDrag.left;
+			m_rcDrag.left = m_rcDrag.right;
+			m_rcDrag.right = TempX;
+		}
+		if (m_rcDrag.top > m_rcDrag.bottom)
+		{
+			long TempY = m_rcDrag.top;
+			m_rcDrag.top = m_rcDrag.bottom;
+			m_rcDrag.bottom = TempY;
+		}
+
+		m_vDrag[0] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.top);
+		m_vDrag[1] = D3DXVECTOR2((float)m_rcDrag.right, (float)m_rcDrag.top);
+		m_vDrag[2] = D3DXVECTOR2((float)m_rcDrag.right, (float)m_rcDrag.bottom);
+		m_vDrag[3] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.bottom);
+		m_vDrag[4] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.top);
+		
+		list<CObj*>* pUnitList = CObjMgr::GetInstance()->GetObjList(OBJ_PLAYER);
+		CCrowdMgr::GetInstance()->Release();
+
+		for (list<CObj*>::iterator iter = pUnitList->begin(); iter != pUnitList->end(); ++iter)
+		{
+			if ((*iter)->GetInfo()->vPos.x > m_rcDrag.left &&
+				(*iter)->GetInfo()->vPos.x < m_rcDrag.right &&
+				(*iter)->GetInfo()->vPos.y > m_rcDrag.top &&
+				(*iter)->GetInfo()->vPos.y < m_rcDrag.bottom)
+			{
+				CCrowdMgr::GetInstance()->GetSelectList()->push_back(*iter);
+			}
+		}
+		m_iDragState = 0;
+		ZeroMemory(&m_vDrag, sizeof(D3DXVECTOR2) * 5);
+
+	}
+	else if (GetAsyncKeyState(VK_LBUTTON) && m_iDragState == 0)
+	{
+		m_iDragState = 1;
+
+		m_rcDrag.left = long(vMouse.x  + m_vScroll.x);
+		m_rcDrag.top = long(vMouse.y  + m_vScroll.y);
+	}
+	else if (m_iDragState == 1)
+	{
+		m_rcDrag.right = long(vMouse.x + m_vScroll.x);
+		m_rcDrag.bottom = long(vMouse.y + m_vScroll.y);
+
+		m_vDrag[0] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.top);
+		m_vDrag[1] = D3DXVECTOR2((float)m_rcDrag.right, (float)m_rcDrag.top);
+		m_vDrag[2] = D3DXVECTOR2((float)m_rcDrag.right, (float)m_rcDrag.bottom);
+		m_vDrag[3] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.bottom);
+		m_vDrag[4] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.top);
+	}
+
+
+
+}	

@@ -20,7 +20,7 @@ HRESULT CUiBridge::Initialize(void)
 	return S_OK;
 }
 
-void CUiBridge::Progress(void)
+void CUiBridge::Progress(INFO& rInfo)
 {
 	
 }
@@ -46,3 +46,7 @@ void CUiBridge::Release(void)
 	
 }
 
+void	CUiBridge::WorldMatrix(INFO& rInfo)
+{
+
+}

@@ -26,5 +26,5 @@ void CMonster::Render(void)
 
 void CMonster::Release(void)
 {
-	::Safe_Delete(m_pBridge);
+	//::Safe_Delete(m_pBridge);
 }

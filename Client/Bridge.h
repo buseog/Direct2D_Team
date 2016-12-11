@@ -9,13 +9,17 @@ protected:
 	wstring		m_wstrStateKey;
 	FRAME		m_tFrame;
 
+protected:
+	void	Frame(void);
+	virtual void	WorldMatrix(INFO& rInfo) PURE;
+
 public:
 	void	SetObj(CObj* pObj);
 	void	SetFrame(const wstring& wstrStateKey);
 
 public:
 	virtual HRESULT	Initialize(void) PURE;
-	virtual void	Progress(void) PURE;
+	virtual void	Progress(INFO& rInfo) PURE;
 	virtual void	Render(void) PURE;
 	virtual void	Release(void) PURE;
 

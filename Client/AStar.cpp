@@ -147,6 +147,9 @@ void CAStar::StartPos(const D3DXVECTOR3& vStartPos, const D3DXVECTOR3& vGoalPos)
 	m_iStartIndex = GetTileIndex(vStartPos);
 	m_iGoalIndex = GetTileIndex(vGoalPos);
 
+	if (m_iGoalIndex < 0 || m_iGoalIndex >= TILEX * TILEY)
+		return;
+
 	AStarStart(m_iStartIndex, m_iGoalIndex);
 }
 
