@@ -28,6 +28,7 @@ public:
 
 public:
 	void	SetMainView(CToolView*	pMainView);
+	void	SetTile(float _fX, float _fY);
 
 public:
 	CBackGround(void);

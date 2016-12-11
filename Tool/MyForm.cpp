@@ -4,7 +4,8 @@
 #include "stdafx.h"
 #include "Tool.h"
 #include "MyForm.h"
-
+#include "BackGround.h"
+#include "MainFrm.h"
 
 // CMyForm
 
@@ -12,27 +13,29 @@ IMPLEMENT_DYNCREATE(CMyForm, CFormView)
 
 CMyForm::CMyForm()
 :CFormView(CMyForm::IDD)
-,m_pMapTool(NULL)
-,m_pUnitTool(NULL)
-,m_pItemTool(NULL)
-,m_pVillageTool(NULL)
+, m_TileY(0)
+, m_TileX(0)
 {
-
+	m_DlgTab1 = NULL;
 }
 
 CMyForm::~CMyForm()
 {
+	::Safe_Delete(m_DlgTab1);
 }
 
 void CMyForm::DoDataExchange(CDataExchange* pDX)
 {
 	CFormView::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_COMBO1, m_ToolComboList);
+	DDX_Control(pDX, IDC_TAB1, m_TabCtrl);
+
+	DDX_Text(pDX, IDC_EDIT7, m_TileY);
+	DDX_Text(pDX, IDC_EDIT1, m_TileX);
 }
 
 BEGIN_MESSAGE_MAP(CMyForm, CFormView)
-	ON_CBN_SELCHANGE(IDC_COMBO1, &CMyForm::OnToolComboBox)
-	ON_WM_DESTROY()
+
+	ON_BN_CLICKED(IDC_BUTTON1, &CMyForm::OnClickButton)
 END_MESSAGE_MAP()
 
 
@@ -55,69 +58,7 @@ void CMyForm::Dump(CDumpContext& dc) const
 
 // CMyForm 메시지 처리기입니다.
 
-void CMyForm::OnInitialUpdate()
-{
-	CFormView::OnInitialUpdate();
-
-	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
-
-	m_ToolComboList.AddString(L"Map Tool");
-	m_ToolComboList.AddString(L"Unit Tool");
-	m_ToolComboList.AddString(L"Item Tool");
-	m_ToolComboList.AddString(L"Village Tool");
-
-	m_ToolComboList.SetCurSel(0);
-}
-
-void CMyForm::OnToolComboBox()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-
-	switch (m_ToolComboList.GetCurSel())
-	{
-	case 0:
-		if (m_pMapTool == NULL)
-		{
-			m_pMapTool = new CMapTool;
-			m_pMapTool->Create(IDD_MAPTOOL);
-		}
-
-		m_pMapTool->ShowWindow(SW_SHOW);
-		break;
-
-	case 1:
-		if (m_pUnitTool == NULL)
-		{
-			m_pUnitTool = new CUnitTool;
-			m_pUnitTool->Create(IDD_UNITTOOL);
-		}
-
-		m_pUnitTool->ShowWindow(SW_SHOW);
-		break;
-
-	case 2:
-		if (m_pItemTool == NULL)
-		{
-			m_pItemTool = new CItemTool;
-			m_pItemTool->Create(IDD_ITEMTOOL);
-		}
-
-		m_pItemTool->ShowWindow(SW_SHOW);
-		break;
-
-	case 3:
-		if (m_pVillageTool == NULL)
-		{
-			m_pVillageTool = new CVillageTool;
-			m_pVillageTool->Create(IDD_VILLAGETOOL);
-		}
-
-		m_pVillageTool->ShowWindow(SW_SHOW);
-		break;
-	}
-}
-
-void CMyForm::OnDestroy()
+/*void CMyForm::OnDestroy()
 {
 	CFormView::OnDestroy();
 
@@ -125,14 +66,54 @@ void CMyForm::OnDestroy()
 
 	::Safe_Delete(m_pMapTool);
 	::Safe_Delete(m_pUnitTool);
+}*/
+
+void CMyForm::OnInitialUpdate()
+{
+	CFormView::OnInitialUpdate();
+
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+
+	m_TabCtrl.DeleteAllItems();
+	m_TabCtrl.InsertItem(0, L"Map");
+	m_TabCtrl.InsertItem(1, L"Object");
+	m_TabCtrl.InsertItem(2, L"Monster");
+
+	CRect rect;
+
+	m_DlgTab1 = new CDlgTab1;
+	m_DlgTab1->Create(IDD_DIALOG2, &m_TabCtrl );
+	m_DlgTab1->GetWindowRect(&rect);
+	m_DlgTab1->MoveWindow(5,25, rect.Width(), rect.Height());
+	m_DlgTab1->ShowWindow(SW_SHOW);
+
+	m_DlgTab2 = new CDlgTab2;
+	m_DlgTab2->Create(IDD_DIALOG1, &m_TabCtrl );
+	m_DlgTab2->GetWindowRect(&rect);
+	m_DlgTab2->MoveWindow(5,25, rect.Width(), rect.Height());
+	m_DlgTab2->ShowWindow(SW_SHOW);
+
+	m_DlgTab3 = new CDlgTab3;
+	m_DlgTab3->Create(IDD_DIALOG3, &m_TabCtrl );
+	m_DlgTab3->GetWindowRect(&rect);
+	m_DlgTab3->MoveWindow(5,25, rect.Width(), rect.Height());
+	m_DlgTab3->ShowWindow(SW_SHOW);
 }
 
-CMapTool*	CMyForm::GetMapTool(void)
+void CMyForm::OnClickButton()
 {
-	return m_pMapTool;
-}
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 
-CUnitTool*	CMyForm::GetUnitTool(void)
-{
-	return m_pUnitTool;
+	UpdateData(TRUE);
+
+	m_pBack = ((CMainFrame*)AfxGetMainWnd())->GetMainView()->GetBackGround();
+
+	m_pBack->SetTile(m_TileX, m_TileY);
+	m_pBack->Release();
+	m_pBack->Initialize();
+
+	((CMainFrame*)AfxGetMainWnd())->GetMainView()->Invalidate(TRUE);
+
+	UpdateData(FALSE);
+
 }

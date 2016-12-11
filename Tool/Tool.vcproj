@@ -191,11 +191,11 @@
 				UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 				>
 				<File
-					RelativePath=".\res\Tool.ico"
+					RelativePath="h:\ESSUEv.1\Tool\res\Tool.ico"
 					>
 				</File>
 				<File
-					RelativePath="h:\ESSUEv.1\Tool\res\Tool.ico"
+					RelativePath=".\res\Tool.ico"
 					>
 				</File>
 				<File
@@ -215,19 +215,19 @@
 					>
 				</File>
 				<File
-					RelativePath=".\res\Toolbar256.bmp"
-					>
-				</File>
-				<File
 					RelativePath="h:\ESSUEv.1\Tool\res\Toolbar256.bmp"
 					>
 				</File>
 				<File
-					RelativePath="h:\ESSUEv.1\Tool\res\ToolDoc.ico"
+					RelativePath=".\res\Toolbar256.bmp"
 					>
 				</File>
 				<File
 					RelativePath=".\res\ToolDoc.ico"
+					>
+				</File>
+				<File
+					RelativePath="h:\ESSUEv.1\Tool\res\ToolDoc.ico"
 					>
 				</File>
 				<File
@@ -241,11 +241,11 @@
 				UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 				>
 				<File
-					RelativePath=".\Resource.h"
+					RelativePath="h:\ESSUEv.1\Tool\resource.h"
 					>
 				</File>
 				<File
-					RelativePath="h:\ESSUEv.1\Tool\resource.h"
+					RelativePath=".\Resource.h"
 					>
 				</File>
 				<File
@@ -334,6 +334,42 @@
 					RelativePath=".\MyForm.h"
 					>
 				</File>
+				<Filter
+					Name="00. DlgTab1"
+					>
+					<File
+						RelativePath=".\DlgTab1.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\DlgTab1.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="01. DlgTab2"
+					>
+					<File
+						RelativePath=".\DlgTab2.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\DlgTab2.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="02. DlgTab3"
+					>
+					<File
+						RelativePath=".\DlgTab3.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\DlgTab3.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="01. MiniView"
@@ -344,6 +380,30 @@
 				</File>
 				<File
 					RelativePath=".\MiniView.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="02. SecondForm"
+				>
+				<File
+					RelativePath=".\SecondForm.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SecondForm.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="03. SecondMini"
+				>
+				<File
+					RelativePath=".\SecondMini.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SecondMini.h"
 					>
 				</File>
 			</Filter>

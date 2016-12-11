@@ -7,6 +7,7 @@
 #include "ToolView.h"
 #include "MiniView.h"
 #include "MyForm.h"
+#include "SecondForm.h"
 
 class CMainFrame : public CFrameWndEx
 {
@@ -19,16 +20,20 @@ protected: // serialization에서만 만들어집니다.
 public:
 	CSplitterWnd			m_MainSplitter;
 	CSplitterWnd			m_SecondSplitter;
+	CSplitterWnd			m_ThirdSplitter; // 은지 추가
+
 // 작업입니다.
 private:
 	CToolView*				m_pMainView;
 	CMiniView*				m_pMiniView;
 	CMyForm*				m_pMyForm;
+	CSecondForm*			m_pSecondForm; // 은지 추가
 
 public:
-	CToolView*	GetMainView(void);
-	CMiniView*	GetMiniView(void);
-	CMyForm*	GetForm(void);
+	CToolView*		GetMainView(void);
+	CMiniView*		GetMiniView(void);
+	CMyForm*		GetForm(void);
+	CSecondForm*	GetSecondForm(void); // 은지 추가
 
 // 재정의입니다.
 public:
