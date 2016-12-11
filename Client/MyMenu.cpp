@@ -29,3 +29,7 @@ void	CMyMenu::Release(void)
 {
 
 }
+
+void	CMyMenu::LoadPNG(void)
+{
+}

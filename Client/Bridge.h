@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Obj.h"
+class CObj;
 
 class CBridge
 {

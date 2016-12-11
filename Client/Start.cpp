@@ -29,3 +29,7 @@ void	CStart::Release(void)
 {
 
 }
+
+void	CStart::LoadPNG(void)
+{
+}

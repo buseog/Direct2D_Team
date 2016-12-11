@@ -29,3 +29,7 @@ void	CField::Release(void)
 {
 
 }
+
+void	CField::LoadPNG(void)
+{
+}

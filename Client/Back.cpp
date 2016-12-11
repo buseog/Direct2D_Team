@@ -19,6 +19,8 @@ HRESULT CBack::Initialize(void)
 	LoadTile(L"../Data/map.dat");
 	m_fScrollSpeed = 500.f;
 
+	MouseLock();
+
 	return S_OK;
 }
 
@@ -62,7 +64,7 @@ void CBack::Render(void)
 
 			CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
 			CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
-				NULL, &D3DXVECTOR3(65.f, 34.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+				NULL, &D3DXVECTOR3(TILECX / 2.f, TILECY / 2.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 			// ÆùÆ®
 			wsprintf(szBuf, L"%d", iIndex);
@@ -109,6 +111,27 @@ void CBack::LoadTile(const wstring& wstrPath)
 	}
 
 	CloseHandle(hFile);
+
+	if (m_vecTile.empty())
+	{
+
+		for (int i = 0; i < TILEY; ++i)
+		{
+			for (int j = 0; j < TILEX; ++j)
+			{
+				TILE2*	pTile = new TILE2;
+
+				float fX = float(j * TILECX) + ((i % 2) * (TILECX / 2.f));
+				float fY = (float)i * (TILECY / 2.f);
+				pTile->vPos = D3DXVECTOR3(fX, fY, 0.f);
+				pTile->vSize = D3DXVECTOR3((float)TILECX, (float)TILECY, 0.f);
+				pTile->byDrawID = 0;
+				pTile->byOption = 0;
+
+				m_vecTile.push_back(pTile);
+			}
+		}
+	}
 }
 
 void	CBack::MoveScroll(void)
@@ -116,34 +139,25 @@ void	CBack::MoveScroll(void)
 	D3DXVECTOR3		vMousePos = ::GetMouse();
 
 	if(vMousePos.x < 20)
-	{
 		m_vScroll.x += m_fScrollSpeed * CTimeMgr::GetInstance()->GetTime();
 
-		if (vMousePos.x < 0)
-			vMousePos.x = 3;
-	}
-
 	if(WINCX - 20 < vMousePos.x)
-	{
 		m_vScroll.x -= m_fScrollSpeed * CTimeMgr::GetInstance()->GetTime();
 
-		if (vMousePos.x > WINCX)
-			vMousePos.x = WINCX - 3;
-	}
-
 	if(20 > vMousePos.y)
-	{
 		m_vScroll.y += m_fScrollSpeed * CTimeMgr::GetInstance()->GetTime();
 
-		if (vMousePos.y < 0)
-			vMousePos.y = 3;
-	}
-
 	if(WINCY - 20 < vMousePos.y)
-	{
 		m_vScroll.y -= m_fScrollSpeed * CTimeMgr::GetInstance()->GetTime();
+}
 
-		if (vMousePos.y > WINCY)
-			vMousePos.y = WINCY - 3;
-	}
+void	CBack::MouseLock(void)
+{
+	RECT rc;
+	GetWindowRect(g_hWnd, &rc);
+	rc.left += 20;
+	rc.top += 30;
+	rc.right -= 20;
+	rc.bottom -= 20;
+	ClipCursor(&rc);
 }

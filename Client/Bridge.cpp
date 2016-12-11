@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Bridge.h"
 #include "TextureMgr.h"
+#include "Obj.h"
 
 CBridge::CBridge(void)
 : m_pObj(NULL)

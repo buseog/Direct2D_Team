@@ -24,7 +24,7 @@ public:
 	void	SetBridge(CBridge* pBridge);
 
 public:
-	CBridge*	GetBridge(void);
+	CBridge*		GetBridge(void);
 	const bool		GetDestroy(void);
 	const INFO*		GetInfo(void) const;
 	const wstring&	GetObjKey(void);

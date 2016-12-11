@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "UiBridge.h"
+#include "Obj.h"
 
 CUiBridge::CUiBridge(void)
 {

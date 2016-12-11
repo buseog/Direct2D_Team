@@ -29,3 +29,8 @@ void	CVillage::Release(void)
 {
 
 }
+
+void	CVillage::LoadPNG(void)
+{
+
+}

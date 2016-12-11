@@ -1,39 +1,40 @@
 #pragma once
 
 #include "Bridge.h"
+#include "Obj.h"
 
-template <typename T>
+template <typename T, typename T2>
 class CBridgeFactory
 {
 public:
-	template <typename T2>
-	static CBridge*	CreateBridge(const wstring& wstrState, float _fX = 0, float _fY = 0)
+	static CObj*	CreateBridge(const wstring& wstrState, float _fX = 0, float _fY = 0)
 	{
 		CObj*	pObj = new T;
 		CBridge* pBridge = new T2;
 
-		pObj->SetBridge(pBirdge);
+		pObj->SetBridge(pBridge);
 		pObj->Initialize();
-		pEffect->SetPos(vPos);
+		pObj->SetPos(_fX, _fY);
 
 		pBridge->SetFrame(wstrState);
 		pBridge->Initialize();
+		pBridge->SetObj(pObj);
 
 		return pObj;
 	}
 
-	template <typename T2>
-	static CBridge*	CreateBridge(const wstring& wstrState, D3DXVECTOR3 vPos)
+	static CObj*	CreateBridge(const wstring& wstrState, D3DXVECTOR3 vPos)
 	{
 		CObj*	pObj = new T;
 		CBridge* pBridge = new T2;
 
-		pObj->SetBridge(pBirdge);
+		pObj->SetBridge(pBridge);
 		pObj->Initialize();
-		pEffect->SetPos(_fX, _fY);
+		pObj->SetPos(vPos);
 
 		pBridge->SetFrame(wstrState);
 		pBridge->Initialize();
+		pBridge->SetObj(pObj);
 
 		return pObj;
 	}

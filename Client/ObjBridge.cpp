@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "ObjBridge.h"
+#include "Obj.h"
 
 CObjBridge::CObjBridge(void)
 {
