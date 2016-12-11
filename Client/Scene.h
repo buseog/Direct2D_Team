@@ -5,6 +5,9 @@
 class CScene
 {
 public:
+	void	CreateBridge();
+
+public:
 	virtual HRESULT	Initialize(void)PURE;
 	virtual void	Progress(void)PURE;
 	virtual void	Render(void)PURE;

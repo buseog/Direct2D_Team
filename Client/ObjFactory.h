@@ -2,7 +2,7 @@
 
 #include "Obj.h"
 
-template<typename T>
+template <typename T>
 class CObjFactory
 {
 public:

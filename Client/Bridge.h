@@ -10,7 +10,7 @@ protected:
 	FRAME		m_tFrame;
 
 public:
-	void		SetObj(CObj* pObj);
+	void	SetObj(CObj* pObj);
 	void	SetFrame(const wstring& wstrStateKey);
 
 public:

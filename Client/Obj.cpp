@@ -6,6 +6,7 @@ D3DXVECTOR3	CObj::m_vScroll;
 CObj::CObj(void)
 : m_wstrObjKey(L"")
 , m_pBridge(NULL)
+, m_bDestroy(false)
 {
 	ZeroMemory(&m_tInfo, sizeof(INFO));
 	D3DXMatrixIdentity(&m_tInfo.matWorld);
@@ -32,6 +33,11 @@ void CObj::SetBridge(CBridge* pBridge)
 	m_pBridge = pBridge;
 }
 
+void CObj::SetDestroy(bool	_YN)
+{
+	m_bDestroy = _YN;
+}
+
 CBridge* CObj::GetBridge(void)
 {
 	return m_pBridge;
@@ -45,4 +51,9 @@ const INFO* CObj::GetInfo(void) const
 const wstring& CObj::GetObjKey(void)
 {
 	return m_wstrObjKey;
+}
+
+const	bool	CObj::GetDestroy(void)
+{
+	return m_bDestroy;
 }
