@@ -379,6 +379,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="07. CrowdMgr"
+				>
+				<File
+					RelativePath=".\CrowdMgr.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CrowdMgr.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="98. Design"
