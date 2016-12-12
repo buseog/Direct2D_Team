@@ -195,3 +195,4 @@ typedef struct tagKey
 	CString		m_ObjKey;
 	CString		m_StateKey;
 }KEY;
+

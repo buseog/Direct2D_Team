@@ -13,7 +13,9 @@ CPlayer::~CPlayer(void)
 
 HRESULT CPlayer::Initialize(void)
 {
+	
 	m_wstrObjKey = L"PLAYER";
+
 	return S_OK;
 }
 
