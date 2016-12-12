@@ -86,12 +86,12 @@ typedef struct tagUnitDataDetail
 	int iWeight;
 
 
-	BOOL bCaravan;
-	BOOL bRapidAttack;
-	BOOL bRapidMoveSpeed;
-	BOOL bHardSkin;
-	BOOL bBadassDMG;
-	BOOL bTank;
+	BOOL bCaravan; //소지가능 무게 2배
+	BOOL bRapidAttack;//공속2배
+	BOOL bRapidMoveSpeed;//이속2배
+	BOOL bHardSkin;//방어력2배
+	BOOL bBadassDMG;//공격력2배
+	BOOL bTank;//체력2배
 	UINT UnitType;
 }DETAILDATA;
 

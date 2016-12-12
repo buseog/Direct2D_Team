@@ -100,6 +100,16 @@
 #define IDC_RADIO3                      1045
 #define IDC_UNITEDIT8                   1046
 #define IDC_UNITEDIT15                  1047
+#define IDC_RADIOITEMTYPE4              1048
+#define IDC_RADIOITEMDETAIL1            1049
+#define IDC_RADIOITEMDETAIL2            1050
+#define IDC_RADIOITEMDETAIL3            1051
+#define IDC_RADIOITEMDETAIL4            1052
+#define IDC_RADIO9                      1053
+#define IDC_RADIOITEMDETAIL5            1053
+#define IDC_RADIOITEMTYPE1              1054
+#define IDC_RADIOITEMTYPE2              1055
+#define IDC_RADIOITEMTYPE3              1056
 
 // Next default values for new objects
 // 
@@ -107,7 +117,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        312
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1048
+#define _APS_NEXT_CONTROL_VALUE         1057
 #define _APS_NEXT_SYMED_VALUE           319
 #endif
 #endif

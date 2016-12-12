@@ -59,6 +59,9 @@ public:	// 패스 파인더 임시
 	afx_msg void OnBnClickedButtonUnitTool();
 private:
 	CUnitTool m_UnitTool;
+	CItemTool m_ItemTool;
+public:
+	CItemTool* GetItemTool(void);
 };
 
 

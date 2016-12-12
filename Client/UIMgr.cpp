@@ -6,6 +6,8 @@
 #include "UIFactory.h"
 #include "MainUi.h"
 #include "Inventory.h"
+#include "Status.h"
+#include "StatusBridge.h"
 #include "Back.h"
 
 IMPLEMENT_SINGLETON(CUIMgr)
@@ -30,6 +32,8 @@ HRESULT	CUIMgr::Initialize(void)
 	
 
 	m_UiList[UI_INVEN].push_back(CUIFactory<CInventory,CInvenBridge>::CreateUI(L"Inventory", 580.f,250.f));
+
+	m_UiList[UI_STAT].push_back(CUIFactory<CStatus,CStatusBridge>::CreateUI(L"Status", 180.f,250.f));
 
 	return S_OK;
 }

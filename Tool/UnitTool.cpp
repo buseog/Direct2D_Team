@@ -5,7 +5,7 @@
 #include "Tool.h"
 #include "UnitTool.h"
 #include "FileInfo.h"
-
+#include "MainFrm.h"
 // CUnitTool 대화 상자입니다.
 
 IMPLEMENT_DYNAMIC(CUnitTool, CDialog)
@@ -88,6 +88,7 @@ BEGIN_MESSAGE_MAP(CUnitTool, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON4, &CUnitTool::OnBnClickedButtonLoad)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_RADIO1,IDC_RADIO3, RadioCtrl)
 	ON_BN_CLICKED(IDC_BUTTON5, &CUnitTool::OnBnClickedButton5)
+	ON_BN_CLICKED(IDC_BUTTON6, &CUnitTool::OnBnClickedButtonShowItemTool)
 END_MESSAGE_MAP()
 
 
@@ -615,4 +616,18 @@ void CUnitTool::OnBnClickedButton5()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	test(L"../Texture");
+}
+
+void CUnitTool::OnBnClickedButtonShowItemTool()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	//((*CMainFrame)AfxGetMainWnd())->
+	//((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool();
+	if(((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool()->GetSafeHwnd() == NULL)
+	{
+		//m_pUnitTool = new CUnitTool;
+		((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool()->Create(IDD_ITEMTOOL);
+	}
+
+	((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool()->ShowWindow(SW_SHOW);
 }

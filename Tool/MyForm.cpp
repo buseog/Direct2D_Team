@@ -183,3 +183,8 @@ void CMyForm::OnBnClickedButtonUnitTool()
 	m_UnitTool.ShowWindow(SW_SHOW);
 
 }
+
+CItemTool* CMyForm::GetItemTool(void)
+{
+	return &m_ItemTool;
+}
