@@ -481,6 +481,30 @@
 						RelativePath=".\UiBridge.h"
 						>
 					</File>
+					<Filter
+						Name="00. MainUIBridge"
+						>
+						<File
+							RelativePath=".\MainUiBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\MainUiBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="01. InvenBridge"
+						>
+						<File
+							RelativePath=".\InvenBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\InvenBridge.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 		</Filter>
@@ -654,6 +678,14 @@
 			<Filter
 				Name="01. Inventory"
 				>
+				<File
+					RelativePath=".\Inventory.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Inventory.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="02. Status"

@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "UiBridge.h"
 #include "Ui.h"
-#include "UIMgr.h"
+
 
 CUiBridge::CUiBridge(void)
 {
@@ -24,16 +24,15 @@ HRESULT CUiBridge::Initialize(void)
 
 void CUiBridge::Progress(INFO& rInfo)
 {
-	WorldMatrix(rInfo);
+	
 }
 
 void CUiBridge::Render(void)
 {
-	//const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pObj->GetObjKey(), 
-	//	m_wstrStateKey, (int)m_tFrame.fFrame);
+	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pObj->GetObjKey(), 
+		m_wstrStateKey, (int)m_tFrame.fFrame);
 
-	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pUi->GetObjKey());
-
+	
 	if(pTexture == NULL)
 		return;
 
@@ -53,13 +52,5 @@ void CUiBridge::Release(void)
 void	CUiBridge::WorldMatrix(INFO& rInfo)
 {
 	
-	D3DXMATRIX	matTrans;
-
-	D3DXMatrixTranslation(&matTrans, 
-		rInfo.vPos.x , 
-		rInfo.vPos.y, 
-		0.f);
-
-	rInfo.matWorld = matTrans;
 
 }

@@ -31,11 +31,7 @@ enum OBJID
 enum UIID
 {
 	UI_MAIN,
-	UI_HP,
-	UI_MP,
-	UI_LEVEL,
-	UI_ATTACK,
-	UI_EXP,
+	UI_INVEN,
 	UI_STAT,
 	UI_END
 

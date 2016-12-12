@@ -58,4 +58,11 @@ void	CBattleField::LoadPNG(void)
 		ERR_MSG(L"MainUI 싱글 텍스쳐 생성 실패");
 		return;
 	}
+
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI20.png", 
+		L"Inventory", TEX_SINGLE)))
+	{
+		ERR_MSG(L"Inventory 싱글 텍스쳐 생성 실패");
+		return;
+	}
 }
