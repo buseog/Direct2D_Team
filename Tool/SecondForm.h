@@ -27,6 +27,11 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 
+public: //수치 출력 관련
+	CString m_StateKey;
+	CString m_ObjKey;
+
+	void	SetKey(float _fObjKey, float _StateKey);
 };
 
 

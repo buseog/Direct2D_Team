@@ -29,6 +29,7 @@ void CDlgTab1::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CDlgTab1, CDialog)
 	ON_WM_ERASEBKGND()
+	ON_LBN_SELCHANGE(IDC_LIST1, &CDlgTab1::OnAddBox)
 END_MESSAGE_MAP()
 
 
@@ -86,3 +87,12 @@ BOOL CDlgTab1::OnInitDialog()
 	// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
 
+
+void CDlgTab1::OnAddBox()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	UpdateData(TRUE);
+UpdateData(FALSE);
+
+}

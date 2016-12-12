@@ -24,4 +24,6 @@ public:
 	virtual BOOL OnInitDialog();
 
 	CListBox m_ListBox01;
+
+	afx_msg void OnAddBox();
 };

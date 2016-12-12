@@ -64,4 +64,5 @@ public:
 	afx_msg void OnStageComboBox();
 	
 	virtual BOOL OnInitDialog();
+	afx_msg void OnEnChangeEdit1();
 };
