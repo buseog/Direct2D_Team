@@ -57,3 +57,8 @@ const	bool	CObj::GetDestroy(void)
 {
 	return m_bDestroy;
 }
+
+const D3DXVECTOR3	CObj::GetScroll(void)
+{
+	return m_vScroll;
+}

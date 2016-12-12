@@ -24,10 +24,11 @@ public:
 	void	SetBridge(CBridge* pBridge);
 
 public:
-	CBridge*		GetBridge(void);
-	const bool		GetDestroy(void);
-	const INFO*		GetInfo(void) const;
-	const wstring&	GetObjKey(void);
+	CBridge*			GetBridge(void);
+	const bool			GetDestroy(void);
+	const INFO*			GetInfo(void) const;
+	const wstring&		GetObjKey(void);
+	const D3DXVECTOR3	GetScroll(void);
 
 public:
 	virtual HRESULT	Initialize(void)PURE;

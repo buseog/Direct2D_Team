@@ -16,9 +16,10 @@ public:
 		pObj->Initialize();
 		pObj->SetPos(_fX, _fY);
 
-		pBridge->SetFrame(wstrState);
 		pBridge->Initialize();
 		pBridge->SetObj(pObj);
+		pBridge->SetFrame(wstrState);
+		
 
 		return pObj;
 	}

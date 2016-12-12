@@ -21,7 +21,7 @@ HRESULT CObjBridge::Initialize(void)
 	return S_OK;
 }
 
-void CObjBridge::Progress(void)
+void CObjBridge::Progress(INFO& rInfo)
 {
 	
 }
@@ -47,3 +47,8 @@ void CObjBridge::Release(void)
 	
 }
 
+
+void	CObjBridge::WorldMatrix(INFO& rInfo)
+{
+
+}

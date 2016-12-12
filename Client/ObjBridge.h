@@ -4,13 +4,16 @@
 class CObjBridge :
 	public CBridge
 {
+protected:
+	virtual void	WorldMatrix(INFO& rInfo);
+
 public:
 	virtual HRESULT	Initialize(void);
-	virtual void	Progress(void);
+	virtual void	Progress(INFO& rInfo);
 	virtual void	Render(void);
 	virtual void	Release(void);
 public:
 	CObjBridge(void);
 	CObjBridge(CObj* pObj);
-	~CObjBridge(void);
+	virtual ~CObjBridge(void);
 };

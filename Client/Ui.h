@@ -2,7 +2,7 @@
 
 #include "Obj.h"
 #include "Bigheader.h"
-#include "Observer.h"
+
 
 class CBridge;
 class CUi :
@@ -14,14 +14,19 @@ protected:
 	wstring					m_wstrObjKey;
 	CBridge*				m_pBridge;
 
-	CObserver*				m_Observer;
-	
 
 public:
-	virtual HRESULT Initialize(void);
-	virtual void Progress(void);
-	virtual void Render(void);
-	virtual void Release(void);
+	const INFO*		GetInfo(void) const;
+	void			SetPos(const D3DXVECTOR3& vPos);
+	void			SetPos(float fX, float fY);
+	void			SetBridge(CBridge* pBridge);
+	const wstring&	GetObjKey(void);
+	
+public:
+	virtual HRESULT	Initialize(void)PURE;
+	virtual void	Progress(void)PURE;
+	virtual void	Render(void)PURE;
+	virtual void	Release(void)PURE;
 
 
 public:

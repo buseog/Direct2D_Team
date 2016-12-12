@@ -4,26 +4,19 @@
 #include "UnitTool.h"
 #include "ItemTool.h"
 #include "VillageTool.h"
+#include "BackGround.h"
+
+#include "DlgTab1.h"
+#include "DlgTab2.h"
+#include "DlgTab3.h"
+#include "afxcmn.h"
 
 
 // CMyForm 폼 뷰입니다.
-
+class CMainFrm;
 class CMyForm : public CFormView
 {
 	DECLARE_DYNCREATE(CMyForm)
-
-private:
-	CComboBox m_ToolComboList;
-
-	CMapTool*	m_pMapTool;
-	CUnitTool*	m_pUnitTool;
-	CItemTool*	m_pItemTool;
-	CVillageTool*	m_pVillageTool;
-
-
-public:
-	CMapTool*	GetMapTool(void);
-	CUnitTool*	GetUnitTool(void);
 
 protected:
 	CMyForm();           // 동적 만들기에 사용되는 protected 생성자입니다.
@@ -43,10 +36,21 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 
+public: // 탭 관련 변수
+	CTabCtrl	m_TabCtrl;
+	CDlgTab1*	m_DlgTab1;
+	CDlgTab2*	m_DlgTab2;
+	CDlgTab3*	m_DlgTab3;
+
 public:
 	virtual void OnInitialUpdate();
-	afx_msg void OnToolComboBox();
-	afx_msg void OnDestroy();
+
+public: // 타일 개수 변경
+	CBackGround*	m_pBack;
+	float m_TileY;
+	float m_TileX;
+	afx_msg void OnClickButton();
+
 };
 
 

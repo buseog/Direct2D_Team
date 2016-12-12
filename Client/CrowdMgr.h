@@ -12,6 +12,7 @@ private:
 
 public:
 	void	Release(void);
+	vector<CObj*>*	GetSelectList(void);
 
 private:
 	CCrowdMgr(void);

@@ -2,33 +2,41 @@
 #include "Ui.h"
 
 CUi::CUi(void)
+:m_pBridge(NULL)
 {
+	ZeroMemory(&m_tInfo, sizeof(INFO));
 }
 
 CUi::~CUi(void)
 {
-	Release();
-}
-
-HRESULT	CUi::Initialize(void)
-{
-
-	return S_OK;
 
 }
 
-void	CUi::Progress(void)
+const INFO* CUi::GetInfo(void) const
 {
+	return &m_tInfo;
+}
 
+
+void CUi::SetPos(const D3DXVECTOR3& vPos)
+{
+	m_tInfo.vPos = vPos;
+}
+
+void CUi::SetPos(float fX, float fY)
+{
+	m_tInfo.vPos.x = fX;
+	m_tInfo.vPos.y = fY;
+	m_tInfo.vPos.z = 0.f;
 	
 }
-
-void CUi::Render(void)
+const wstring& CUi::GetObjKey(void)
 {
-	
+	return m_wstrObjKey;
 }
 
-void CUi::Release(void)
+void CUi::SetBridge(CBridge* pBridge)
 {
-	
+
+	m_pBridge = pBridge;
 }

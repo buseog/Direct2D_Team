@@ -48,22 +48,17 @@ void CBackGround::Render(void)
 	D3DXMATRIX	matTrans;
 	TCHAR		szBuf[MIN_STR] = L"";
 
-	int iCountY = WINCY / TILECY + 1;
-	int iCountX = WINCX / TILECX + 1;
-
-	for (int i = 0; i < iCountY; ++i)
+	for (int i = 0; i < TILEY; ++i)
 	{
-		for (int j = 0; j < iCountX; ++j)
+		for (int j = 0; j < TILEX; ++j)
 		{
-			int iCullX = (m_pMainView->GetScrollPos(0)) / TILECX;
-			int iCullY = (m_pMainView->GetScrollPos(1)) / TILECY;
-
-			int iIndex = (i + iCullY) * TILEX + (j + iCullX);
+			int	iIndex = i * TILEX + j;
 
 			if(iIndex < 0 || iIndex >= TILEX * TILEY)
 				break;
 
 			const TEXINFO*	pTexture = CTextureMgr::GetInstance()->GetTexture(L"TILE", L"Tile", m_vecTile[iIndex]->byDrawID);
+
 
 			D3DXMatrixTranslation(&matTrans, 
 				m_vecTile[iIndex]->vPos.x - m_pMainView->GetScrollPos(0),
@@ -71,7 +66,6 @@ void CBackGround::Render(void)
 				0.f);
 
 			m_pDevice->GetSprite()->SetTransform(&matTrans);
-
 			m_pDevice->GetSprite()->Draw(pTexture->pTexture, 
 				NULL, &D3DXVECTOR3(62.f, 32.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
@@ -248,4 +242,10 @@ void CBackGround::ReturnAction(void)
 		::Safe_Delete(*iter);
 		m_vecAction.pop_back();
 	}
+}
+
+void CBackGround::SetTile(float _fX, float _fY)
+{
+	TILEX = (int)_fX;
+	TILEY = (int)_fY;
 }

@@ -61,7 +61,7 @@ void CSceneMgr::SetScene(SCENEID _eScene)
 		return;
 	}
 
-		if(FAILED(CUIMgr::GetInstance()->Initialize()))
+	if(FAILED(CUIMgr::GetInstance()->Initialize()))
 	{
 		ERR_MSG(L"UIMgr Init Failed");
 		return;

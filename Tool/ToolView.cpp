@@ -163,7 +163,7 @@ void CToolView::OnInitialUpdate()
 
 	pMainFrm->SetWindowPos(NULL,	// 프레임 크기들을 합하여 창의 위치를 재조정하는 함수
 		400, 100, 
-		int(WINCX + fRowFrm), 
+		int(WINCX + fRowFrm) + 200,  // 은지 변경 
 		int(WINCY + fColFrm), 
 		SWP_NOZORDER);
 
@@ -219,9 +219,9 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
-	CScrollView::OnLButtonDown(nFlags, point);
+	/*CScrollView::OnLButtonDown(nFlags, point);
 
-	CMapTool*	pMapTool = ((CMainFrame*)AfxGetMainWnd())->GetForm()->GetMapTool();
+	CMapTool*	pMapTool = ((CMainFrame*)AfxGetMainWnd())->GetForm();
 
 	D3DXVECTOR3 Mouse = ::GetMouse();
 
@@ -231,19 +231,19 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 	m_pBack->TileChange(D3DXVECTOR3(Mouse), pMapTool->GetTileNumber(), pMapTool->GetTileSize(), pMapTool->GetTileOption(), pMapTool->GetTileAngle(), pMapTool->GetTileMirror());
 
 	Invalidate(TRUE);
-	((CMainFrame*)AfxGetMainWnd())->GetMiniView()->Invalidate(TRUE);
+	((CMainFrame*)AfxGetMainWnd())->GetMiniView()->Invalidate(TRUE);*/
 }
 
 void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
-	CScrollView::OnMouseMove(nFlags, point);
+	//CScrollView::OnMouseMove(nFlags, point);
 }
 
 void CToolView::OnRButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
-	CScrollView::OnRButtonDown(nFlags, point);
+	//CScrollView::OnRButtonDown(nFlags, point);
 }

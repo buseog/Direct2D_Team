@@ -4,6 +4,9 @@
 #include "SceneMgr.h"
 #include "KeyMgr.h"
 #include "ObjMgr.h"
+#include "UIMgr.h"
+#include "AStar.h"
+#include "CrowdMgr.h"
 
 CMainGame::CMainGame(void)
 : m_pDevice(CDevice::GetInstance())
@@ -60,12 +63,14 @@ void CMainGame::Render(void)
 
 void CMainGame::Release(void)
 {
+	CCrowdMgr::GetInstance()->DestroyInstance();
+	CAStar::GetInstance()->DestroyInstance();
 	CKeyMgr::GetInstance()->DestroyInstance();
 	CTimeMgr::GetInstance()->DestroyInstance();
 	CTextureMgr::GetInstance()->DestroyInstance();
 	CObjMgr::GetInstance()->DestroyInstance();
+	CUIMgr::GetInstance()->DestroyInstance();
 	m_pSceneMgr->DestroyInstance();
 	m_pDevice->DestroyInstance();
 }
-
 

@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+	#include "StdAfx.h"
 #include "Device.h"
 
 IMPLEMENT_SINGLETON(CDevice)
