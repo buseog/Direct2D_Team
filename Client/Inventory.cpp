@@ -2,6 +2,7 @@
 #include "Inventory.h"
 #include "Bridge.h"
 #include "Item.h"
+#include "Weapon.h"
 
 CInventory::CInventory(void)
 {
@@ -55,6 +56,6 @@ void	CInventory::Picking(void)
 
 CItem* CInventory::CreateItem(float _fX, float _fY,float _fCX, float _fCY, string strITName)
 {
-	CItem*	pItem = new CItem;
+	CItem*	pItem = new CWeapon;
 	return pItem;
 }

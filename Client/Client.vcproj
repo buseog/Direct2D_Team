@@ -189,6 +189,28 @@
 				</File>
 			</Filter>
 			<Filter
+				Name="헤더 파일"
+				Filter="h;hpp;hxx;hm;inl;inc;xsd"
+				UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+				>
+				<File
+					RelativePath=".\Client.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Resource.h"
+					>
+				</File>
+				<File
+					RelativePath=".\stdafx.h"
+					>
+				</File>
+				<File
+					RelativePath=".\targetver.h"
+					>
+				</File>
+			</Filter>
+			<Filter
 				Name="소스 파일"
 				Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 				UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
@@ -216,28 +238,6 @@
 							UsePrecompiledHeader="1"
 						/>
 					</FileConfiguration>
-				</File>
-			</Filter>
-			<Filter
-				Name="헤더 파일"
-				Filter="h;hpp;hxx;hm;inl;inc;xsd"
-				UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
-				>
-				<File
-					RelativePath=".\Client.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Resource.h"
-					>
-				</File>
-				<File
-					RelativePath=".\stdafx.h"
-					>
-				</File>
-				<File
-					RelativePath=".\targetver.h"
-					>
 				</File>
 			</Filter>
 		</Filter>
@@ -506,6 +506,18 @@
 						</File>
 					</Filter>
 				</Filter>
+				<Filter
+					Name="02. ItemBridge"
+					>
+					<File
+						RelativePath=".\ItemBridge.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\ItemBridge.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -706,30 +718,86 @@
 			<Filter
 				Name="00. Weapon"
 				>
+				<File
+					RelativePath=".\Weapon.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Weapon.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="01. Armor"
 				>
+				<File
+					RelativePath=".\Armor.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Armor.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="02. Glove"
 				>
-			</Filter>
-			<Filter
-				Name="03. Helmet"
-				>
+				<File
+					RelativePath=".\Glove.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Glove.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="04. Boots"
 				>
+				<File
+					RelativePath=".\Boots.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Boots.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="05. Belt"
 				>
+				<File
+					RelativePath=".\Belt.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Belt.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="06. Food"
 				>
+				<File
+					RelativePath=".\Food.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Food.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="03. Helmet"
+				>
+				<File
+					RelativePath=".\Helmet.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Helmet.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<File
