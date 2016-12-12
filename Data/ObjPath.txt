@@ -1,0 +1,12 @@
+Back|Object|55|..\Texture\Back\Object\Back%d.png
+Town|Armor|3|..\Texture\Back\Town\Armor\Town%d.png
+Town|Bank|3|..\Texture\Back\Town\Bank\Town%d.png
+Town|Big|2|..\Texture\Back\Town\Big\Town%d.png
+Town|Clinic|3|..\Texture\Back\Town\Clinic\Town%d.png
+Town|GBarrack|3|..\Texture\Back\Town\GBarrack\Town%d.png
+Town|GovernmentOffice|3|..\Texture\Back\Town\GovernmentOffice\Town%d.png
+Town|Inn|3|..\Texture\Back\Town\Inn\Town%d.png
+Town|Middle|2|..\Texture\Back\Town\Middle\Town%d.png
+Town|Small|2|..\Texture\Back\Town\Small\Town%d.png
+Town|Whalf|3|..\Texture\Back\Town\Whalf\Town%d.png
+Town|WStore|3|..\Texture\Back\Town\WStore\Town%d.png

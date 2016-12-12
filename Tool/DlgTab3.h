@@ -1,4 +1,5 @@
 #pragma once
+#include "afxwin.h"
 
 
 // CDlgTab3 대화 상자입니다.
@@ -20,4 +21,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	virtual BOOL OnInitDialog();
+
+	CListBox m_ListBox03;
 };

@@ -1,4 +1,5 @@
 #pragma once
+#include "afxwin.h"
 
 
 // CDlgTab1 대화 상자입니다.
@@ -12,7 +13,7 @@ public:
 	virtual ~CDlgTab1();
 
 // 대화 상자 데이터입니다.
-	enum { IDD = IDD_DIALOG2 };
+	enum { IDD = IDD_DIALOG1 };
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
@@ -20,6 +21,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
-	int m_ListBox1;
 	virtual BOOL OnInitDialog();
+
+	CListBox m_ListBox01;
 };
