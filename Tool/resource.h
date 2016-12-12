@@ -46,11 +46,14 @@
 #define IDC_PICTURE                     1009
 #define IDC_EDIT1                       1010
 #define IDC_EDIT8                       1011
+#define IDC_EDIT2                       1011
 #define IDC_BUTTON2                     1012
 #define IDC_EDIT7                       1012
+#define IDC_EDIT3                       1012
 #define IDC_BUTTON3                     1013
 #define IDC_SLIDER1                     1013
 #define IDC_EDIT9                       1013
+#define IDC_EDIT5                       1013
 #define IDC_BUTTON6                     1014
 #define IDC_EDIT10                      1014
 #define IDC_SLIDER3                     1015
@@ -100,16 +103,15 @@
 #define IDC_RADIO3                      1045
 #define IDC_UNITEDIT8                   1046
 #define IDC_UNITEDIT15                  1047
-#define IDC_RADIOITEMTYPE4              1048
 #define IDC_RADIOITEMDETAIL1            1049
 #define IDC_RADIOITEMDETAIL2            1050
 #define IDC_RADIOITEMDETAIL3            1051
 #define IDC_RADIOITEMDETAIL4            1052
-#define IDC_RADIO9                      1053
 #define IDC_RADIOITEMDETAIL5            1053
-#define IDC_RADIOITEMTYPE1              1054
-#define IDC_RADIOITEMTYPE2              1055
-#define IDC_RADIOITEMTYPE3              1056
+#define IDC_RADIOITEMTYPE1              1060
+#define IDC_RADIOITEMTYPE2              1061
+#define IDC_RADIOITEMTYPE3              1062
+#define IDC_RADIOITEMTYPE4              1063
 
 // Next default values for new objects
 // 
@@ -118,6 +120,6 @@
 #define _APS_NEXT_RESOURCE_VALUE        312
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1057
-#define _APS_NEXT_SYMED_VALUE           319
+#define _APS_NEXT_SYMED_VALUE           320
 #endif
 #endif

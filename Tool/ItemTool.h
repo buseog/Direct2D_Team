@@ -20,11 +20,17 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
-	afx_msg void SelItemType(UINT ID);
-	afx_msg void SelItemDetail(UINT ID);
+	afx_msg void CheckItemType(UINT ID);
+	afx_msg void CheckItemDetail(UINT ID);
 private:
 	void ItemTypeChecked(void);
 private:
 	UINT m_ItemType;//라디오버튼
 	UINT m_ItemDetail;
+private:
+	CString m_ItemName;
+	int m_iATK;
+	int m_iDef;
+	int m_iWeight;
+	int m_iHeal;
 };
