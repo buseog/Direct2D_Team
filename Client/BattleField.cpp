@@ -1,11 +1,8 @@
 #include "StdAfx.h"
 #include "BattleField.h"
 #include "ObjMgr.h"
-<<<<<<< HEAD
 #include "CrowdMgr.h"
-=======
 #include "UIMgr.h"
->>>>>>> 67e80fa0f110638cd0ffa948da7ee5cffd47642d
 
 CBattleField::CBattleField(void)
 {

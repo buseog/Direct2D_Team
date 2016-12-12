@@ -80,27 +80,8 @@ void CBack::Render(void)
 			CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
 				NULL, &D3DXVECTOR3(TILECX / 2.f, TILECY / 2.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
-<<<<<<< HEAD
-=======
-			// ÆùÆ®
-		/*	wsprintf(szBuf, L"%d", iIndex);
-			CDevice::GetInstance()->GetFont()->DrawTextW(CDevice::GetInstance()->GetSprite(), 
-				szBuf, lstrlen(szBuf), 
-				NULL, NULL, 
-				D3DCOLOR_ARGB(255, 255, 255, 255));*/
-
-
->>>>>>> 67e80fa0f110638cd0ffa948da7ee5cffd47642d
 		}
 	}
-
-	CDevice::GetInstance()->Render_End();
-	CDevice::GetInstance()->Render_Begin();
-	
-
-
-	CDevice::GetInstance()->Render_End();
-	CDevice::GetInstance()->Render_Begin();
 
 	if (m_iDragState == 1)
 	{

@@ -152,17 +152,6 @@ typedef struct tagItem
 	ITEMID			eType;
 }ITEM;
 
-
-// UI	±¸Á¶Ã¼(?)
-typedef struct tagUIData
-{
-
-	int		iLevel;
-	int		iAttack;
-
-
-}DATA;
-
 typedef struct tagKey
 {
 	CString		m_ObjKey;
