@@ -4,6 +4,7 @@
 #include "SceneMgr.h"
 #include "KeyMgr.h"
 #include "ObjMgr.h"
+#include "UIMgr.h"
 #include "AStar.h"
 #include "CrowdMgr.h"
 
@@ -39,6 +40,9 @@ void CMainGame::Progress(void)
 
 	if (m_pSceneMgr)
 		m_pSceneMgr->Progress();
+	D3DXMatrixTranslation(&m_matTrans, 600.f, 50.f, 0.f);
+
+	
 }
 
 void CMainGame::Render(void)
@@ -64,8 +68,8 @@ void CMainGame::Release(void)
 	CTimeMgr::GetInstance()->DestroyInstance();
 	CTextureMgr::GetInstance()->DestroyInstance();
 	CObjMgr::GetInstance()->DestroyInstance();
+	CUIMgr::GetInstance()->DestroyInstance();
 	m_pSceneMgr->DestroyInstance();
 	m_pDevice->DestroyInstance();
 }
-
 

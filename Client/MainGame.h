@@ -8,6 +8,9 @@ class CMainGame
 private:
 	CDevice*		m_pDevice;
 	CSceneMgr*		m_pSceneMgr;
+	float			m_fTime;
+	int				m_iCount;
+	D3DXMATRIX		m_matTrans;
 	
 
 public:

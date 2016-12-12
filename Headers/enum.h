@@ -24,7 +24,17 @@ enum OBJID
 	OBJ_MISSILE,
 	OBJ_MONSTER,
 	OBJ_EFFECT,
+	OBJ_UI,
 	OBJ_END
+};
+
+enum UIID
+{
+	UI_MAIN,
+	UI_INVEN,
+	UI_STAT,
+	UI_END
+
 };
 
 enum ITEMID
@@ -39,9 +49,17 @@ enum ITEMID
 	IT_END
 };
 
+
 enum ORDERID
 {
 	OD_STAND,
 	OD_ASTAR,
 	OD_MOVE
+};
+
+enum DATAID		
+{ 
+	PLAYER_DATA, 
+	PLAYER_MATRIX, 
+	PLAYER_END
 };

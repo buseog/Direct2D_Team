@@ -2,6 +2,7 @@
 #include "SceneMgr.h"
 #include "Scene.h"
 #include "ObjMgr.h"
+#include "UIMgr.h"
 #include "Start.h"
 #include "MyMenu.h"
 #include "Field.h"
@@ -57,6 +58,12 @@ void CSceneMgr::SetScene(SCENEID _eScene)
 	if(FAILED(CObjMgr::GetInstance()->Initialize()))
 	{
 		ERR_MSG(L"ObjMgr Init Failed");
+		return;
+	}
+
+	if(FAILED(CUIMgr::GetInstance()->Initialize()))
+	{
+		ERR_MSG(L"UIMgr Init Failed");
 		return;
 	}
 }

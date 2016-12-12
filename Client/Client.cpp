@@ -29,6 +29,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	MSG msg;
 	msg.message = WM_NULL;
 
+
 	// 전역 문자열을 초기화합니다.
 	LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 	LoadString(hInstance, IDC_CLIENT, szWindowClass, MAX_LOADSTRING);
@@ -173,6 +174,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 	case WM_KEYDOWN:
+		switch(wParam)
+		{
+		case VK_ESCAPE:
+			PostQuitMessage(0);
+			break;
+		}
 		break;
 
 	case WM_DESTROY:

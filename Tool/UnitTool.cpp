@@ -58,6 +58,7 @@ BEGIN_MESSAGE_MAP(CUnitTool, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON1, &CUnitTool::OnSaveData)
 	ON_BN_CLICKED(1006, &CUnitTool::OnLoadData)
 	ON_CBN_SELCHANGE(IDC_COMBO1, &CUnitTool::OnStageComboBox)
+	ON_EN_CHANGE(IDC_EDIT1, &CUnitTool::OnEnChangeEdit1)
 END_MESSAGE_MAP()
 
 void CUnitTool::Release(void)
@@ -422,4 +423,14 @@ BOOL CUnitTool::OnInitDialog()
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
+}
+
+void CUnitTool::OnEnChangeEdit1()
+{
+	// TODO:  RICHEDIT 컨트롤인 경우, 이 컨트롤은
+	// CDialog::OnInitDialog() 함수를 재지정 
+	//하고 마스크에 OR 연산하여 설정된 ENM_CHANGE 플래그를 지정하여 CRichEditCtrl().SetEventMask()를 호출하지 않으면
+	// 이 알림 메시지를 보내지 않습니다.
+
+	// TODO:  여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }

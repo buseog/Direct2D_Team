@@ -151,3 +151,21 @@ typedef struct tagItem
 	int				iPrice;
 	ITEMID			eType;
 }ITEM;
+
+
+// UI	±¸Á¶Ã¼(?)
+typedef struct tagUIData
+{
+
+	int		iLevel;
+	int		iAttack;
+
+
+}DATA;
+
+typedef struct tagKey
+{
+	CString		m_ObjKey;
+	CString		m_StateKey;
+}KEY;
+

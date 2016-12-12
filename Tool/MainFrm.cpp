@@ -216,7 +216,7 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 
 	m_MainSplitter.CreateStatic(this, 1, 3);
 
-	m_MainSplitter.CreateView(0,1, RUNTIME_CLASS(CToolView), CSize(WINCX, WINCY), pContext);
+	m_MainSplitter.CreateView(0,1, RUNTIME_CLASS(CToolView), CSize(WINCX + 200, WINCY), pContext);
 
 	m_SecondSplitter.CreateStatic(&m_MainSplitter, 2, 1, 
 		WS_CHILD | WS_VISIBLE, 

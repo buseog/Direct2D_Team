@@ -17,11 +17,15 @@ CMyForm::CMyForm()
 , m_TileX(0)
 {
 	m_DlgTab1 = NULL;
+	m_DlgTab2 = NULL;
+	m_DlgTab3 = NULL;
 }
 
 CMyForm::~CMyForm()
 {
 	::Safe_Delete(m_DlgTab1);
+	::Safe_Delete(m_DlgTab2);
+	::Safe_Delete(m_DlgTab3);
 }
 
 void CMyForm::DoDataExchange(CDataExchange* pDX)
@@ -36,6 +40,8 @@ void CMyForm::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CMyForm, CFormView)
 
 	ON_BN_CLICKED(IDC_BUTTON1, &CMyForm::OnClickButton)
+	ON_BN_CLICKED(IDC_BUTTON7, &CMyForm::OnPathFind)
+	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CMyForm::OnTcnSelchangeTab1)
 END_MESSAGE_MAP()
 
 
@@ -81,23 +87,26 @@ void CMyForm::OnInitialUpdate()
 
 	CRect rect;
 
+	m_DlgTab3 = new CDlgTab3;
+	m_DlgTab2 = new CDlgTab2;
 	m_DlgTab1 = new CDlgTab1;
-	m_DlgTab1->Create(IDD_DIALOG2, &m_TabCtrl );
+
+	m_DlgTab1->Create(IDD_DIALOG1, &m_TabCtrl );
 	m_DlgTab1->GetWindowRect(&rect);
 	m_DlgTab1->MoveWindow(5,25, rect.Width(), rect.Height());
 	m_DlgTab1->ShowWindow(SW_SHOW);
 
-	m_DlgTab2 = new CDlgTab2;
-	m_DlgTab2->Create(IDD_DIALOG1, &m_TabCtrl );
+	m_DlgTab2->Create(IDD_DIALOG2, &m_TabCtrl );
 	m_DlgTab2->GetWindowRect(&rect);
 	m_DlgTab2->MoveWindow(5,25, rect.Width(), rect.Height());
 	m_DlgTab2->ShowWindow(SW_SHOW);
 
-	m_DlgTab3 = new CDlgTab3;
 	m_DlgTab3->Create(IDD_DIALOG3, &m_TabCtrl );
 	m_DlgTab3->GetWindowRect(&rect);
 	m_DlgTab3->MoveWindow(5,25, rect.Width(), rect.Height());
 	m_DlgTab3->ShowWindow(SW_SHOW);
+
+	Invalidate(TRUE);
 }
 
 void CMyForm::OnClickButton()
@@ -117,4 +126,46 @@ void CMyForm::OnClickButton()
 
 	UpdateData(FALSE);
 
+}
+
+void CMyForm::OnPathFind()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	if(m_PathFind.GetSafeHwnd() == NULL)
+	{
+		m_PathFind.Create(IDD_PATHFIND);
+	}
+
+	m_PathFind.ShowWindow(SW_SHOW);
+}
+
+void CMyForm::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	int iIndex = m_TabCtrl.GetCurSel();
+
+	switch(iIndex)
+	{
+	case 0:
+		m_DlgTab1->ShowWindow(SW_SHOW);
+		m_DlgTab2->ShowWindow(SW_HIDE);
+		m_DlgTab3->ShowWindow(SW_HIDE);
+		break;
+
+	case 1:
+		m_DlgTab1->ShowWindow(SW_HIDE);
+		m_DlgTab2->ShowWindow(SW_SHOW);
+		m_DlgTab3->ShowWindow(SW_HIDE);
+		break;
+
+	case 2:
+		m_DlgTab1->ShowWindow(SW_HIDE);
+		m_DlgTab2->ShowWindow(SW_HIDE);
+		m_DlgTab3->ShowWindow(SW_SHOW);
+		break;
+		
+	}
+
+	*pResult = 0;
 }

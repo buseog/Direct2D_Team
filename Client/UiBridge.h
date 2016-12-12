@@ -15,6 +15,6 @@ public:
 
 public:
 	CUiBridge(void);
-	CUiBridge(CObj*	pObj);
+	CUiBridge(CUi*	pUi);
 	virtual ~CUiBridge(void);
 };

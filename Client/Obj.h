@@ -16,11 +16,17 @@ protected:
 	int						m_iOrder;
 	bool					m_bSelect;
 	bool					m_bDestroy;
+<<<<<<< HEAD
 	float					m_fScrollSpeed;	
 	float					m_fRotation;
 	float					m_fRevolution;
 	wstring					m_wstrObjKey;	
 	
+=======
+	float					m_fScrollSpeed;
+	wstring					m_wstrObjKey;
+	DATA					m_tData;
+>>>>>>> 67e80fa0f110638cd0ffa948da7ee5cffd47642d
 
 public:
 	void	SetPos(const D3DXVECTOR3& vPos);

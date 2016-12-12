@@ -10,6 +10,7 @@
 #include "DlgTab2.h"
 #include "DlgTab3.h"
 #include "afxcmn.h"
+#include "PathFind.h"
 
 
 // CMyForm 폼 뷰입니다.
@@ -51,6 +52,10 @@ public: // 타일 개수 변경
 	float m_TileX;
 	afx_msg void OnClickButton();
 
+public:	// 패스 파인더 임시
+	afx_msg void OnPathFind();
+	CPathFind	m_PathFind;
+	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 
