@@ -59,19 +59,57 @@ typedef struct tagAction
 }TILE_ACTION;
 
 // 이전툴에서 쓰던 유닛데이터 삭제예정
+//typedef struct tagUnitData
+//{
+//	wstring			wstrName;
+//	float			fHp;
+//	float			fAttack;
+//	float			fAttackSpeed;
+//	float			fSpeed;
+//	int				iGold;
+//
+//	BYTE			byOption;
+//	wstring			wstrImage;
+//
+//}UNITDATA;
+
+typedef struct tagUnitDataDetail
+{
+	int iLevel;
+	int iStr;
+	int iDex;
+	int iVital;
+	int iInt;
+
+	int iExperience;
+	int iBonusPoint;
+	int iWeight;
+
+
+	BOOL bCaravan;
+	BOOL bRapidAttack;
+	BOOL bRapidMoveSpeed;
+	BOOL bHardSkin;
+	BOOL bBadassDMG;
+	BOOL bTank;
+	UINT UnitType;
+}DETAILDATA;
+
 typedef struct tagUnitData
 {
-	wstring			wstrName;
-	float			fHp;
-	float			fAttack;
-	float			fAttackSpeed;
-	float			fSpeed;
-	int				iGold;
+	//CString strName;
+	wstring	wstrName;
+	int iAttack;
+	int iDeffence;
+	int iHealthPoint;
+	float fAttackSpeed;
+	float fMoveSpeed;
+	float fRange;
+	DETAILDATA tDetail;
 
-	BYTE			byOption;
-	wstring			wstrImage;
 
 }UNITDATA;
+
 
 // 경로 저장하기위한 구조체
 typedef	struct tagTexturePath

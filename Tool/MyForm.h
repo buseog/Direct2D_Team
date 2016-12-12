@@ -56,6 +56,9 @@ public:	// 패스 파인더 임시
 	afx_msg void OnPathFind();
 	CPathFind	m_PathFind;
 	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnBnClickedButtonUnitTool();
+private:
+	CUnitTool m_UnitTool;
 };
 
 

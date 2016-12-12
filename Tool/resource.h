@@ -44,61 +44,70 @@
 #define IDC_LIST1                       1008
 #define IDC_BUTTON8                     1008
 #define IDC_PICTURE                     1009
-#define IDC_BUTTON4                     1009
 #define IDC_EDIT1                       1010
-#define IDC_RADIO1                      1011
-
 #define IDC_EDIT8                       1011
-
-//#define IDC_EDIT7                       1011
 #define IDC_BUTTON2                     1012
-#define IDC_RADIO2                      1012
 #define IDC_EDIT7                       1012
 #define IDC_BUTTON3                     1013
-#define IDC_RADIO3                      1013
 #define IDC_SLIDER1                     1013
 #define IDC_EDIT9                       1013
-#define IDC_EDIT2                       1014
 #define IDC_BUTTON6                     1014
 #define IDC_EDIT10                      1014
-#define IDC_EDIT3                       1015
 #define IDC_SLIDER3                     1015
 #define IDC_BUTTON7                     1015
 #define IDC_EDIT11                      1015
 #define IDC_EDIT4                       1016
 #define IDC_SLIDER4                     1016
-#define IDC_EDIT5                       1017
-#define IDC_EDIT6                       1018
-#define IDC_RADIO4                      1019
-#define IDC_RADIO5                      1020
 #define IDC_CHECK1                      1020
-#define IDC_LIST2                       1021
+#define IDC_UNITCHECK1                  1020
 #define IDC_CHECK2                      1021
-#define IDC_PICTURE1                    1022
+#define IDC_UNITCHECK2                  1021
 #define IDC_CHECK3                      1022
+#define IDC_PICTURE1                    1022
 #define IDC_CHECK4                      1023
+#define IDC_UNITEDIT2                   1023
+#define IDC_UNITEDIT3                   1024
 #define IDC_LIST3                       1025
 #define IDC_BUTTON9                     1026
+#define IDC_UNITEDIT5                   1026
 #define IDC_EDIT12                      1027
+#define IDC_UNITEDIT6                   1027
 #define IDC_EDIT13                      1028
+#define IDC_UNITEDIT7                   1028
 #define IDC_EDIT14                      1029
+#define IDC_UNITEDIT1                   1029
 #define IDC_EDIT15                      1030
+#define IDC_UNITEDIT9                   1030
 #define IDC_EDIT16                      1031
+#define IDC_UNITEDIT10                  1031
 #define IDC_EDIT17                      1032
+#define IDC_UNITEDIT11                  1032
 #define IDC_EDIT18                      1033
+#define IDC_UNITEDIT12                  1033
 #define IDC_EDIT19                      1034
+#define IDC_UNITCHECK3                  1034
+#define IDC_UNITCHECK4                  1035
+#define IDC_UNITCHECK5                  1036
+#define IDC_CHECK6                      1037
+#define IDC_UNITCHECK6                  1037
+#define IDC_UNITEDIT13                  1038
+#define IDC_UNITEDIT14                  1039
+#define IDC_RADIO1                      1040
+#define IDC_RADIO2                      1041
+#define IDC_LIST2                       1042
+#define IDC_BUTTON4                     1043
+#define IDC_UNITEDIT4                   1044
+#define IDC_RADIO3                      1045
+#define IDC_UNITEDIT8                   1046
+#define IDC_UNITEDIT15                  1047
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-<<<<<<< HEAD
-#define _APS_NEXT_RESOURCE_VALUE        321
-=======
 #define _APS_NEXT_RESOURCE_VALUE        312
->>>>>>> 7284e74de8561996b2294bfb56bb8415a4ba1d75
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1026
+#define _APS_NEXT_CONTROL_VALUE         1048
 #define _APS_NEXT_SYMED_VALUE           319
 #endif
 #endif
