@@ -7,28 +7,41 @@ class CObj
 {
 protected:
 	static  D3DXVECTOR3		m_vScroll;
+	D3DXVECTOR3				m_vTargetPoint;
 	CBridge*				m_pBridge;
 
 	FRAME					m_tFrame;
 	INFO					m_tInfo;
 	
+	int						m_iOrder;
+	bool					m_bSelect;
 	bool					m_bDestroy;
-	float					m_fScrollSpeed;
-	wstring					m_wstrObjKey;
+	float					m_fScrollSpeed;	
+	float					m_fRotation;
+	float					m_fRevolution;
+	wstring					m_wstrObjKey;	
 	
 
 public:
 	void	SetPos(const D3DXVECTOR3& vPos);
-	void	SetPos(float fX, float fY);
-	void	SetDestroy(bool	_YN);
-	void	SetBridge(CBridge* pBridge);
+	void	SetPos(float fX, float fY);		
+	void	SetDestroy(bool	_YN);			// 외부에서 데스트로이 해줘야될경우
+	void	SetBridge(CBridge* pBridge);	// 브릿지 셋해주는함수
+	void	SetSelect(bool YN);				// 군중매니저에 선택됬는지 셋
+	void	SetTargetPoint(D3DXVECTOR3 pTargetPoint);
+	void	SetRevolution(float fAngle);
+	void	SetOrder(ORDERID eOrder);
 
 public:
-	CBridge*			GetBridge(void);
-	const bool			GetDestroy(void);
-	const INFO*			GetInfo(void) const;
-	const wstring&		GetObjKey(void);
-	const D3DXVECTOR3	GetScroll(void);
+	CBridge*			GetBridge(void);	// 브릿지 반환
+	const bool			GetDestroy(void);	// 파괴해야 될 객체인지 확인
+	const INFO*			GetInfo(void) const;// 인포 반환
+	const wstring&		GetObjKey(void);	// ObjKey반환
+	const D3DXVECTOR3	GetScroll(void);	// 스크롤값 반환
+	const D3DXVECTOR3	GetTargetPoint(void);
+	const bool			GetSelect(void);	// 군중 매니저에 선택여부 반환
+	const float			GetRevolution(void);
+	const int			GetOrder(void);
 
 public:
 	virtual HRESULT	Initialize(void)PURE;

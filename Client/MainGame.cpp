@@ -35,7 +35,6 @@ HRESULT CMainGame::Initialize(void)
 
 void CMainGame::Progress(void)
 {
-	CKeyMgr::GetInstance()->KeyCheck();
 	CTimeMgr::GetInstance()->SetTime();
 
 	if (m_pSceneMgr)

@@ -81,4 +81,5 @@
 #include "Device.h"
 #include <afxdlgs.h>
 
+
 using namespace std;

@@ -38,3 +38,10 @@ enum ITEMID
 	IT_FOOD,
 	IT_END
 };
+
+enum ORDERID
+{
+	OD_STAND,
+	OD_ASTAR,
+	OD_MOVE
+};

@@ -9,7 +9,7 @@ const WORD	MIN_STR = 64;
 const WORD	MAX_STR = 256;
 
 
-const int TILECX = 62;
+const int TILECX = 64;
 const int TILECY = 32;
 
 

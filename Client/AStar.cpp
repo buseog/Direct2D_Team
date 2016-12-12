@@ -6,6 +6,7 @@ IMPLEMENT_SINGLETON(CAStar)
 
 CAStar::CAStar(void)
 {
+	
 }
 
 CAStar::~CAStar(void)
@@ -32,13 +33,14 @@ void CAStar::AStarStart(const int& iStartIndex, const int& iGoalIndex)
 
 void CAStar::Release(void)
 {
-	for_each(m_OpenList.begin(), m_OpenList.end(), DeleteObj());
-	m_OpenList.clear();
+	for_each(m_OpenMap.begin(), m_OpenMap.end(), DeleteMap());
+	m_OpenMap.clear();
 
 	for_each(m_CloseList.begin(), m_CloseList.end(), DeleteObj());
 	m_CloseList.clear();
 
-	m_BestList.clear();
+	m_bCheck.resize(TILEX * TILEY);
+	fill(m_bCheck.begin(), m_bCheck.end(), false);
 }
 
 void CAStar::MakeRoute(void)
@@ -49,7 +51,8 @@ void CAStar::MakeRoute(void)
 	pParent->pParent = NULL;
 	pParent->fCost   = 0.f;
 
-	m_CloseList.push_back(pParent);			// 검색 대상에서 제외
+	m_CloseList.push_back(pParent);
+	m_bCheck[pParent->iIndex] = true;
 
 	const vector<TILE2*>*	pVecTile = CObjMgr::GetInstance()->GetTile();
 
@@ -64,34 +67,35 @@ void CAStar::MakeRoute(void)
 		for (list<int>::iterator listiter = (*pVecTile)[pParent->iIndex]->Connectlist.begin();
 			listiter != (*pVecTile)[pParent->iIndex]->Connectlist.end(); ++listiter)
 		{
-			if ((*pVecTile)[pParent->iIndex]->byOption == 0)
+			if ((*pVecTile)[*listiter]->byOption == 0 &&
+				m_bCheck[*listiter] == false)
 			{
 				pNode = CreateNode(*listiter, pParent, pVecTile);
-				m_OpenList.push_back(pNode);
+				m_bCheck[*listiter] = true;
+				m_OpenMap.insert(multimap<float, NODE*>::value_type(pNode->fCost,pNode));
 			}
 		}
 
-		m_OpenList.sort(Compare);
+		NODE* pLowCostNode = m_OpenMap.begin()->second;
 
-		list<NODE*>::iterator		iter = m_OpenList.begin();
-
-		pParent = *iter;
+		pParent = pLowCostNode;
 		
-		m_CloseList.push_back(*iter);
-		m_OpenList.erase(iter);
+		m_CloseList.push_back(pParent);
+		m_OpenMap.erase(m_OpenMap.begin());
 
 		if(pParent->iIndex == m_iGoalIndex)
 		{
 			while(true)
 			{
-				m_BestList.push_back(pParent->iIndex);
+				m_pBestList->push_back(pParent->iIndex);
 				pParent = pParent->pParent;
 
 				if(pParent->iIndex == m_iStartIndex)
 					break;
 			}
 
-			m_BestList.reverse();
+			m_pBestList->reverse();
+			m_pBestList = NULL;
 
 			break;
 		}
@@ -100,24 +104,6 @@ void CAStar::MakeRoute(void)
 
 }
 
-bool CAStar::CheckList(const int& iIndex)
-{
-	for(list<NODE*>::iterator	iter = m_OpenList.begin();
-		iter != m_OpenList.end(); ++iter)
-	{
-		if((*iter)->iIndex == iIndex)
-			return false;
-	}
-
-	for(list<NODE*>::iterator	iter = m_CloseList.begin();
-		iter != m_CloseList.end(); ++iter)
-	{
-		if((*iter)->iIndex == iIndex)
-			return false;
-	}
-
-	return true;
-}
 
 NODE* CAStar::CreateNode(int iIndex, NODE* pParent, const vector<TILE2*>* pTile)
 {
@@ -137,17 +123,14 @@ NODE* CAStar::CreateNode(int iIndex, NODE* pParent, const vector<TILE2*>* pTile)
 	return pNode;
 }
 
-bool CAStar::Compare(const NODE* pTemp, const NODE* pDest)
-{
-	return pTemp->fCost < pDest->fCost;
-}
-
-void CAStar::StartPos(const D3DXVECTOR3& vStartPos, const D3DXVECTOR3& vGoalPos)
+void CAStar::StartPos(const D3DXVECTOR3& vStartPos, const D3DXVECTOR3& vGoalPos, list<int>* pBestList)
 {
 	m_iStartIndex = GetTileIndex(vStartPos);
 	m_iGoalIndex = GetTileIndex(vGoalPos);
+	m_pBestList = pBestList;
 
-	if (m_iGoalIndex < 0 || m_iGoalIndex >= TILEX * TILEY)
+	if (m_iGoalIndex < 0 || m_iGoalIndex >= TILEX * TILEY ||
+		m_iStartIndex < 0 || m_iStartIndex >= TILEX * TILEY)
 		return;
 
 	AStarStart(m_iStartIndex, m_iGoalIndex);
@@ -214,9 +197,4 @@ bool CAStar::Picking(const D3DXVECTOR3& vPos, const TILE2* pTile)
 	}
 
 	return true;
-}
-
-list<int>* CAStar::GetBestList(void)
-{
-	return &m_BestList;
 }

@@ -15,6 +15,7 @@ public:
 		pObj->SetBridge(pBridge);
 		pObj->Initialize();
 		pObj->SetPos(_fX, _fY);
+		pObj->SetTargetPoint(pObj->GetInfo()->vPos);
 
 		pBridge->Initialize();
 		pBridge->SetObj(pObj);
@@ -32,6 +33,7 @@ public:
 		pObj->SetBridge(pBridge);
 		pObj->Initialize();
 		pObj->SetPos(vPos);
+		pObj->SetTargetPoint(pObj->GetInfo()->vPos);
 
 		pBridge->SetFrame(wstrState);
 		pBridge->Initialize();
