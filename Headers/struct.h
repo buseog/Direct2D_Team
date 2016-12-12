@@ -152,6 +152,7 @@ typedef struct tagItem
 	ITEMID			eType;
 }ITEM;
 
+
 // UI	±¸Á¶Ã¼(?)
 typedef struct tagUIData
 {
@@ -161,3 +162,10 @@ typedef struct tagUIData
 
 
 }DATA;
+
+typedef struct tagKey
+{
+	CString		m_ObjKey;
+	CString		m_StateKey;
+}KEY;
+
