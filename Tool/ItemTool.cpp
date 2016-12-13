@@ -11,7 +11,12 @@
 IMPLEMENT_DYNAMIC(CItemTool, CDialog)
 
 CItemTool::CItemTool(CWnd* pParent /*=NULL*/)
-	: CDialog(CItemTool::IDD, pParent)
+: CDialog(CItemTool::IDD, pParent),m_ItemType(0),m_ItemDetail(0)
+, m_ItemName(_T(""))
+, m_iATK(0)
+, m_iDef(0)
+, m_iWeight(0)
+, m_iHeal(0)
 {
 
 }
@@ -23,11 +28,73 @@ CItemTool::~CItemTool()
 void CItemTool::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
+	DDX_Text(pDX, IDC_EDIT1, m_ItemName);
+	DDX_Text(pDX, IDC_EDIT2, m_iATK);
+	DDX_Text(pDX, IDC_EDIT3, m_iDef);
+	DDX_Text(pDX, IDC_EDIT4, m_iWeight);
+	DDX_Text(pDX, IDC_EDIT5, m_iHeal);
+
+	DDX_Radio(pDX, IDC_RADIOITEMDETAIL1, (int&)m_ItemDetail);
+	//DDX_Radio(pDX, IDC_RADIOITEMTYPE1, (int&)m_ItemType);
+	DDX_Radio(pDX, IDC_RADIOITEMTYPE1,(int&)m_ItemType);
+	
 }
 
 
 BEGIN_MESSAGE_MAP(CItemTool, CDialog)
+	ON_CONTROL_RANGE(BN_CLICKED, IDC_RADIOITEMDETAIL1,IDC_RADIOITEMDETAIL5, CheckItemDetail)
+	ON_CONTROL_RANGE(BN_CLICKED, IDC_RADIOITEMTYPE1,IDC_RADIOITEMTYPE4, CheckItemType)
+	//ON_CONTROL_RANGE(BN_CLICKED, IDC_RADIOITEMTYPE1, IDC_RADIOITEMTYPE4, CheckItemType)
 END_MESSAGE_MAP()
 
 
 // CItemTool ¸Þ½ÃÁö Ã³¸®±âÀÔ´Ï´Ù.
+void CItemTool::CheckItemType(UINT ID) 
+{
+	int i=0;
+	UpdateData(TRUE);
+	ItemTypeChecked();
+	UpdateData(FALSE);
+
+}
+void CItemTool::ItemTypeChecked(void)
+{
+	switch(m_ItemType)
+	{ ///¸®¼Ò½º ¸®½ºÆ® °»½Å
+
+	case 0: //¹«±â
+		
+		GetDlgItem(IDC_RADIOITEMDETAIL1)->SetWindowText(L"°Ë");
+		GetDlgItem(IDC_RADIOITEMDETAIL2)->SetWindowText(L"È°");
+		GetDlgItem(IDC_RADIOITEMDETAIL3)->SetWindowText(L"ºÎÃ¤");
+		GetDlgItem(IDC_RADIOITEMDETAIL4)->SetWindowText(L"¿°ÁÖ");
+		GetDlgItem(IDC_RADIOITEMDETAIL5)->SetWindowText(L"Ã¢");
+
+		break; 
+	case 1: //¹æ¾î±¸
+		GetDlgItem(IDC_RADIOITEMDETAIL1)->SetWindowText(L"°©¿Ê");
+		GetDlgItem(IDC_RADIOITEMDETAIL2)->SetWindowText(L"Àå°©");
+		GetDlgItem(IDC_RADIOITEMDETAIL3)->SetWindowText(L"´ë°¥");
+		GetDlgItem(IDC_RADIOITEMDETAIL4)->SetWindowText(L"ÀåÈ­");
+		GetDlgItem(IDC_RADIOITEMDETAIL5)->SetWindowText(L"Çã¸®¶ì");
+		break; 
+	case 2: //À½½Ä¹°
+		GetDlgItem(IDC_RADIOITEMDETAIL1)->SetWindowText(L"µÅÁö±¹¹ä");
+		GetDlgItem(IDC_RADIOITEMDETAIL2)->SetWindowText(L"ÇÜ¹ö°Å");
+		GetDlgItem(IDC_RADIOITEMDETAIL3)->SetWindowText(L"ÇÖµµ±×");
+		GetDlgItem(IDC_RADIOITEMDETAIL4)->SetWindowText(L"½Ò¹ä");
+		GetDlgItem(IDC_RADIOITEMDETAIL5)->SetWindowText(L"º¸¸®¹ä");
+		break; 
+	case 3://±³¿ªÇ°
+		GetDlgItem(IDC_RADIOITEMDETAIL1)->SetWindowText(L"½Ñ°Å");
+		GetDlgItem(IDC_RADIOITEMDETAIL2)->SetWindowText(L"Á¶±Ý½Ñ°Å");
+		GetDlgItem(IDC_RADIOITEMDETAIL3)->SetWindowText(L"Àû´çÇÑ°Å");
+		GetDlgItem(IDC_RADIOITEMDETAIL4)->SetWindowText(L"Á¶±Ýºñ½Ñ°Å");
+		GetDlgItem(IDC_RADIOITEMDETAIL5)->SetWindowText(L"ºñ½Ñ°Å");
+		break;
+	}
+}
+void CItemTool::CheckItemDetail(UINT ID)
+{
+	int i=0;
+}

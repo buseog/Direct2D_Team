@@ -42,9 +42,15 @@ public: // 탭 관련 변수
 	CDlgTab1*	m_DlgTab1;
 	CDlgTab2*	m_DlgTab2;
 	CDlgTab3*	m_DlgTab3;
+	CUnitTool	m_UnitTool;
+	CItemTool	m_ItemTool;
+
+public:
+	CItemTool* GetItemTool(void);
 
 public:
 	virtual void OnInitialUpdate();
+
 
 public: // 타일 개수 변경
 	CBackGround*	m_pBack;

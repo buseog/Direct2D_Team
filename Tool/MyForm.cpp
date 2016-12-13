@@ -169,3 +169,9 @@ void CMyForm::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 
 	*pResult = 0;
 }
+
+
+CItemTool* CMyForm::GetItemTool(void)
+{
+	return &m_ItemTool;
+}

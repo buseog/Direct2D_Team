@@ -58,18 +58,42 @@ typedef struct tagAction
 	}
 }TILE_ACTION;
 
-// 이전툴에서 쓰던 유닛데이터 삭제예정
+// 현도 유닛 구조체
+typedef struct tagUnitDataDetail
+{
+	int iLevel;
+	int iStr;
+	int iDex;
+	int iVital;
+	int iInt;
+
+	int iExperience;
+	int iBonusPoint;
+	int iWeight;
+
+
+	BOOL bCaravan; //소지가능 무게 2배
+	BOOL bRapidAttack;//공속2배
+	BOOL bRapidMoveSpeed;//이속2배
+	BOOL bHardSkin;//방어력2배
+	BOOL bBadassDMG;//공격력2배
+	BOOL bTank;//체력2배
+	UINT UnitType;
+}DETAILDATA;
+
+// 현도 유닛 데이타
 typedef struct tagUnitData
 {
-	wstring			wstrName;
-	float			fHp;
-	float			fAttack;
-	float			fAttackSpeed;
-	float			fSpeed;
-	int				iGold;
+	//CString strName;
+	wstring	wstrName;
+	int iAttack;
+	int iDeffence;
+	int iHealthPoint;
+	float fAttackSpeed;
+	float fMoveSpeed;
+	float fRange;
+	DETAILDATA tDetail;
 
-	BYTE			byOption;
-	wstring			wstrImage;
 
 }UNITDATA;
 

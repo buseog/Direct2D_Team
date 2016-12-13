@@ -1,8 +1,14 @@
 #pragma once
 #include "afxwin.h"
-#include "FileInfo.h"
+
 
 // CUnitTool 대화 상자입니다.
+
+
+
+
+
+
 
 class CUnitTool : public CDialog
 {
@@ -19,50 +25,98 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
 
 	DECLARE_MESSAGE_MAP()
+private:
+	
+	CStatic m_Picture;// 비트맵이미지
+	CImage* pPngImage;
 
-public: //value
-	CString m_strName;
-	float m_fHp;
-	float m_fAttack;
-	float m_fAttackSpeed;
-	float m_fSpeed;
-	int m_iGold;
 
-public: // user
-	CFileInfo					m_FileInfo;
-
-	map<CString, CImage*>		m_MapPngImage;
-	map<CString, UNITDATA*>     m_MapUnitData;
-
-	int							m_iDrawID;
-	int							m_iStage;
+private:
+	void Release(void);
 
 public:
-	void	Release(void);
-	
-public: // control
-	CListBox					m_UnitListBox;
-	CListBox					m_ListBox;
-	CStatic						m_Picture;
-	CComboBox					m_StageComboBox;
-
-	CButton						m_Option[2];
-	CButton						m_Class[3];
-public:
-
-	afx_msg void OnPictureList();
-	afx_msg void OnDropFiles(HDROP hDropInfo);
-	
-	
-	afx_msg void OnClassButton();
-	afx_msg void OnListBox();
-	afx_msg void OnAddUnit();
-	
-	afx_msg void OnDeleteData();
-	afx_msg void OnSaveData();
-	afx_msg void OnLoadData();
-	afx_msg void OnStageComboBox();
-	
 	virtual BOOL OnInitDialog();
-	afx_msg void OnEnChangeEdit1();
+private: //Container
+	map<CString, UNITDATA*>		m_MapUnitData;
+private: ///basestatus
+	CString m_strName;
+	int m_iStr;
+	int m_iDex;
+	int m_iVital;
+	int m_iInt;
+	
+private:
+	
+	int m_iLevel;
+	int m_iAttack;
+	int m_iDeffence;
+	int m_iHealthPoint;
+	int m_iExperience;
+	int m_iBonusPoint;
+	int m_iWeight;
+	float m_fAttackSpeed;
+	float m_fMoveSpeed;
+	float m_fRange;
+	///test
+	list<CString> keylist;
+	list<CString> addrlist;
+	map<CString,CString> mapTest;
+
+private://체크박스
+	CButton m_Caravan;
+	CButton m_RapidAttack;
+	CButton m_RapidMoveSpeed;
+	CButton m_HardSkin;
+	CButton m_BadassDMG;
+	CButton m_Tank;
+
+private:
+	UINT m_UnitType;//라디오버튼
+private:
+	CListBox m_UnitList;//유닛리스트
+	CListBox m_PortraitList;//초상화리스트
+
+	
+
+private://수식연산함수
+	void CalcWeight(void);
+	void CalcAttack(void);
+	void CalcDeffence(void);
+	void CalcHealthPoint(void);
+	void CalcAttackSpeed(void);
+	void CalcMoveSpeed(void);
+private:
+	void SetRadioAction(void);
+	void test(CString _Path);
+
+public:
+	afx_msg void OnEnChangeSTR();
+	afx_msg void OnEnChangeDEX();
+	afx_msg void OnEnChangeVITAL();
+	afx_msg void OnEnChangeINT();
+	afx_msg void OnEnChangeLEVEL();
+
+	afx_msg void OnBnClickedCheckCaravan();
+
+
+public:
+	afx_msg void OnBnClickedCheckBadassDMG();
+	afx_msg void OnBnClickedCheckTank();
+	afx_msg void OnBnClickedCheckRapidAttack();
+	afx_msg void OnBnClickedCheckRapidMoveSpeed();
+	afx_msg void OnBnClickedCheckHardSkin();
+	afx_msg void RadioCtrl(UINT ID);
+	
+
+public:
+	afx_msg void AddUnit();
+	afx_msg void DeleteUnit();
+
+public:
+	afx_msg void OnLbnSelchangeAddedUnitList();
+	afx_msg void OnBnClickedButtonSave();
+	afx_msg void OnBnClickedButtonLoad();
+	afx_msg void OnBnClickedButton5();
+
+	afx_msg void OnBnClickedButtonShowItemTool();
 };
