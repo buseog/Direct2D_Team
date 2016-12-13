@@ -11,7 +11,10 @@
 CMainGame::CMainGame(void)
 : m_pDevice(CDevice::GetInstance())
 , m_pSceneMgr(CSceneMgr::GetInstance())
+, m_fTime(0.f)
+, m_iCount(0)
 {
+	ZeroMemory(m_szFPS, sizeof(TCHAR) * MIN_STR);
 }
 
 CMainGame::~CMainGame(void)
@@ -47,6 +50,17 @@ void CMainGame::Progress(void)
 
 void CMainGame::Render(void)
 {
+	++m_iCount;
+
+	m_fTime += CTimeMgr::GetInstance()->GetTime();
+
+	if(m_fTime > 1.f)
+	{
+		m_fTime = 0.f;
+		wsprintf(m_szFPS, L"FPS : %d", m_iCount);
+		m_iCount = 0;
+	}
+
 	m_pDevice->GetDevice()->Clear(0, NULL, 
 		D3DCLEAR_STENCIL | D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET, 
 		D3DCOLOR_ARGB(255, 0, 0, 255), 1.f, 0);
@@ -55,6 +69,14 @@ void CMainGame::Render(void)
 
 	if (m_pSceneMgr)
 		m_pSceneMgr->Render();
+
+	m_pDevice->GetSprite()->SetTransform(&m_matTrans);
+
+	m_pDevice->GetFont()->DrawTextW(m_pDevice->GetSprite(), 
+		m_szFPS, 
+		lstrlen(m_szFPS), 
+		NULL, NULL, 
+		D3DCOLOR_ARGB(255, 255, 255, 0));
 
 	m_pDevice->Render_End();
 	m_pDevice->GetDevice()->Present(NULL, NULL, NULL, NULL);

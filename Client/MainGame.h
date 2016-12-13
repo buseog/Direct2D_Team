@@ -10,6 +10,7 @@ private:
 	CSceneMgr*		m_pSceneMgr;
 	float			m_fTime;
 	int				m_iCount;
+	TCHAR			m_szFPS[MIN_STR];
 	D3DXMATRIX		m_matTrans;
 	
 
