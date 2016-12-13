@@ -22,18 +22,17 @@ HRESULT	CInventory::Initialize(void)
 
 void	CInventory::Progress(void)
 {
-	
 	m_pBridge->Progress(m_tInfo);	
-	
-
 
 }
 
 void	CInventory::Render(void)
 {
-
+	if(GetKeyState('I') && 0x0001)
+	{
 	m_pBridge->Render();
-
+	
+	}
 
 }
 

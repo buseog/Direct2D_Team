@@ -8,6 +8,7 @@ class CInventory :
 private:
 	vector<CItem*>	m_ItemSlot;
 
+
 public:
 	void AddItem();
 	void Picking();
