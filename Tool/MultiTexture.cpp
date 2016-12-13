@@ -41,7 +41,7 @@ HRESULT CMultiTexture::InsertTexture(const wstring& wstrFilePath,
 			D3DPOOL_MANAGED,						// 현재 읽는 이미지들을 어떤 메모리에 보관할지 결정
 			D3DX_DEFAULT,							// 테두리 표현을 어떻게 할 것인가
 			D3DX_DEFAULT,							// 확대, 축소시 어떻게 할 것인가	
-			NULL,									// 제거할 이미지 색상
+			D3DCOLOR_ARGB(255,212,192,212),									// 제거할 이미지 색상
 			&pTexInfo->tImgInfo,					// 이미지 정보 저장할 곳
 			NULL,									// 팔레트 처리 방식
 			&pTexInfo->pTexture)))				// 이미지를 어디에 보관할 곳

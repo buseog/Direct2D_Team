@@ -504,18 +504,6 @@
 			Name="03. Dialog"
 			>
 			<Filter
-				Name="00. MapTool"
-				>
-				<File
-					RelativePath=".\MapTool.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\MapTool.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="01. UnitTool"
 				>
 				<File
@@ -540,7 +528,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="03. VillageTool"
+				Name="00. VillageTool"
 				>
 				<File
 					RelativePath=".\VillageTool.cpp"
@@ -552,7 +540,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="04. PathFind"
+				Name="03. PathFind"
 				>
 				<File
 					RelativePath=".\PathFind.cpp"

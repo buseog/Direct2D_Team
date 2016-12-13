@@ -1,6 +1,5 @@
 #pragma once
 #include "afxwin.h"
-#include "MapTool.h"
 #include "UnitTool.h"
 #include "ItemTool.h"
 #include "VillageTool.h"
@@ -62,6 +61,9 @@ public:	// 패스 파인더 임시
 	afx_msg void OnPathFind();
 	CPathFind	m_PathFind;
 	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
+public:
+	afx_msg void OnUnitTool();
+
 };
 
 

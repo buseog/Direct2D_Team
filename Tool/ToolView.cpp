@@ -11,7 +11,6 @@
 #include "Bigheader.h"
 #include "TextureMgr.h"
 #include "MainFrm.h"
-#include "MapTool.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
