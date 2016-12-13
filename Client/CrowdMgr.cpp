@@ -86,6 +86,13 @@ void	CCrowdMgr::Progress(void)
 	{
 		D3DXVECTOR3 vMouse = ::GetMouse() - m_vecSelectUnit[0]->GetScroll();
 		
+		for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
+		{
+			if (i % 2 == 0)
+			{
+				
+			}
+		}
 	}
 
 	
