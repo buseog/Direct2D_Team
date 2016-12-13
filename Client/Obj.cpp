@@ -7,10 +7,16 @@ CObj::CObj(void)
 : m_wstrObjKey(L"")
 , m_pBridge(NULL)
 , m_bDestroy(false)
+, m_bSelect(false)
+, m_fRotation(0.f)
+, m_fRevolution(0.f)
+, m_iOrder(0)
 {
 	ZeroMemory(&m_tInfo, sizeof(INFO));
+	ZeroMemory(&m_vTargetPoint, sizeof(D3DXVECTOR3));
 	D3DXMatrixIdentity(&m_tInfo.matWorld);
 	m_tInfo.vLook = D3DXVECTOR3(1.f, 0.f, 0.f);
+	m_tInfo.vDir = D3DXVECTOR3(0.f, 0.f, 0.f);
 }
 
 CObj::~CObj(void)
@@ -38,6 +44,11 @@ void CObj::SetDestroy(bool	_YN)
 	m_bDestroy = _YN;
 }
 
+void	CObj::SetSelect(bool YN)
+{
+	m_bSelect = YN;
+}
+
 CBridge* CObj::GetBridge(void)
 {
 	return m_pBridge;
@@ -61,4 +72,39 @@ const	bool	CObj::GetDestroy(void)
 const D3DXVECTOR3	CObj::GetScroll(void)
 {
 	return m_vScroll;
+}
+
+const bool			CObj::GetSelect(void)
+{
+	return m_bSelect;
+}
+
+const D3DXVECTOR3	CObj::GetTargetPoint(void)
+{
+	return m_vTargetPoint;
+}
+
+void	CObj::SetTargetPoint(D3DXVECTOR3 pTargetPoint)
+{
+	m_vTargetPoint = pTargetPoint;
+}
+
+void	CObj::SetRevolution(float fAngle)
+{
+	m_fRevolution = fAngle;
+}
+
+const float CObj::GetRevolution(void)
+{
+	return m_fRevolution;
+}
+
+void	CObj::SetOrder(ORDERID eOrder)
+{
+	m_iOrder = eOrder;
+}
+
+const int CObj::GetOrder(void)
+{
+	return m_iOrder;
 }

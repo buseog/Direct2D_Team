@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "BattleField.h"
 #include "ObjMgr.h"
+#include "CrowdMgr.h"
 #include "UIMgr.h"
 
 CBattleField::CBattleField(void)
@@ -20,6 +21,7 @@ HRESULT	CBattleField::Initialize(void)
 
 void	CBattleField::Progress(void)
 {
+	CCrowdMgr::GetInstance()->Progress();
 	CObjMgr::GetInstance()->Progress();
 	CUIMgr::GetInstance()->Progress();
 }

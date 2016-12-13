@@ -49,6 +49,14 @@ enum ITEMID
 	IT_END
 };
 
+
+enum ORDERID
+{
+	OD_STAND,
+	OD_ASTAR,
+	OD_MOVE
+};
+
 enum DATAID		
 { 
 	PLAYER_DATA, 

@@ -7,22 +7,13 @@ class CKeyMgr
 	DECLARE_SINGLETON(CKeyMgr)
 
 private:
-	DWORD		m_dwKey;
-	DWORD		m_dwKeyPressed;
-	DWORD		m_dwKeyPresseds[3];
-
-	DWORD		m_dwKeyDown;
+	bool	m_bKeyDown[MAX_PATH];
+	bool	m_bKeyUp[MAX_PATH];
 
 public:
-	void		KeyCheck(void);
-	bool		KeyPressed(DWORD dwKey);
-	bool		KeyPressed(DWORD dwKey, int iIndex);
-
-	bool		KeyDown(DWORD dwKey);
-
-	bool		KeyCombine(DWORD dwFirstKey, DWORD dwSecondKey);
-
-
+	bool	StayKeyDown(int nKey);
+	bool	KeyDown(int nKey);
+	bool	KeyUp(int nKey);
 
 private:
 	CKeyMgr(void);
