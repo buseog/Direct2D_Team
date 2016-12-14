@@ -57,13 +57,6 @@ HRESULT CTextureMgr::InsertTexture(const wstring& wstrFilePath,
 
 void CTextureMgr::Release(void)
 {
-	/*for(map<wstring, CTexture*>::iterator	iter = m_MapTexture.begin();
-		iter != m_MapTexture.end(); ++iter)
-	{
-		::Safe_Delete(iter->second);
-	}
-	m_MapTexture.clear();*/
-
 	for_each(m_MapTexture.begin(), m_MapTexture.end(), DeleteMap());
 	m_MapTexture.clear();
 }
@@ -83,7 +76,7 @@ const TEXINFO* CTextureMgr::GetTexture(const wstring& wstrObjKey,
 HRESULT CTextureMgr::ReadImgPath(const wstring& wstrImgPath)
 {
 	wifstream		LoadFile;
-	LoadFile.open("../Data/ImgPath.txt", ios::in);
+	LoadFile.open(wstrImgPath.c_str(), ios::in);
 
 	TCHAR		szObjKey[MIN_STR]	= L"";
 	TCHAR		szStateKey[MIN_STR] = L"";
@@ -103,7 +96,7 @@ HRESULT CTextureMgr::ReadImgPath(const wstring& wstrImgPath)
 
 		if(FAILED(CTextureMgr::GetInstance()->InsertTexture(szImgPath, szObjKey, TEX_MULTI, szStateKey, iCount)))
 		{
-			ERR_MSG(L"Stage 멀티 텍스쳐 생성 실패");
+			ERR_MSG(L"Path 멀티 텍스쳐 생성 실패");
 			return E_FAIL;
 		}
 	}		

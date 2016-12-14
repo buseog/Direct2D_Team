@@ -49,7 +49,7 @@ void CPathFind::OnSaveButton()
 
 	wofstream		SaveFile;
 
-	SaveFile.open(L"../Data/TilePath.txt", ios::out);
+	SaveFile.open(L"../Data/Path.txt", ios::out);
 
 	int		iCount = 0;
 
@@ -71,7 +71,7 @@ void CPathFind::OnSaveButton()
 
 	SaveFile.close();		// 사실 사용하지 않아도 된다.
 
-	WinExec("notepad.exe ../Data/TilePath.txt", SW_SHOW);
+	WinExec("notepad.exe ../Data/Path.txt", SW_SHOW);
 }
 
 void CPathFind::OnLoadButton()
@@ -80,7 +80,7 @@ void CPathFind::OnLoadButton()
 	UpdateData(TRUE);
 
 	wifstream		LoadFile;
-	LoadFile.open("../Data/TilePath.txt", ios::in);
+	LoadFile.open("../Data/Path.txt", ios::in);
 
 	TCHAR		szObjKey[MIN_STR]	= L"";
 	TCHAR		szStateKey[MIN_STR] = L"";

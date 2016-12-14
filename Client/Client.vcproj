@@ -368,7 +368,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="04. TimeMgr"
+				Name="08. TimeMgr"
 				>
 				<File
 					RelativePath=".\TimeMgr.cpp"
@@ -392,7 +392,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="08. UIMgr"
+				Name="04. UIMgr"
 				>
 				<File
 					RelativePath=".\UIMgr.cpp"
@@ -410,10 +410,6 @@
 			<Filter
 				Name="00. ObjFactory"
 				>
-				<File
-					RelativePath=".\BridgeFactory.h"
-					>
-				</File>
 				<File
 					RelativePath=".\ObjFactory.h"
 					>
@@ -446,7 +442,7 @@
 						>
 					</File>
 					<Filter
-						Name="00. UnitBridge"
+						Name="02. UnitBridge"
 						>
 						<File
 							RelativePath=".\UnitBridge.cpp"
@@ -458,7 +454,7 @@
 						</File>
 					</Filter>
 					<Filter
-						Name="01. EffectBridge"
+						Name="03. EffectBridge"
 						>
 						<File
 							RelativePath=".\EffectBridge.cpp"
@@ -466,6 +462,30 @@
 						</File>
 						<File
 							RelativePath=".\EffectBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="01. PlayerBridge"
+						>
+						<File
+							RelativePath=".\PlayerBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\PlayerBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="00. BackBridge"
+						>
+						<File
+							RelativePath=".\BackBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\BackBridge.h"
 							>
 						</File>
 					</Filter>
@@ -752,6 +772,10 @@
 				>
 			</Filter>
 		</Filter>
+		<File
+			RelativePath=".\ClassDiagram1.cd"
+			>
+		</File>
 		<File
 			RelativePath=".\ReadMe.txt"
 			>

@@ -1,13 +1,12 @@
 #include "StdAfx.h"
 #include "Back.h"
 #include "TimeMgr.h"
-#include "BridgeFactory.h"
+#include "ObjFactory.h"
 #include "KeyMgr.h"
 #include "ObjMgr.h"
 #include "CrowdMgr.h"
 #include "Player.h"
 #include "UnitBridge.h"
-#include "BridgeFactory.h"
 
 CBack::CBack(void)
 : m_iTileRenderX(0)
@@ -39,7 +38,7 @@ void CBack::Progress(void)
 	if (CKeyMgr::GetInstance()->KeyDown('1'))
 	{
 		D3DXVECTOR3 vPos = ::GetMouse() - m_vScroll;
-		CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CBridgeFactory<CPlayer, CUnitBridge>::CreateBridge(L"Walk_1", vPos.x, vPos.y));
+		CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Walk_1", vPos.x, vPos.y));
 	}
 
 
@@ -102,6 +101,8 @@ void CBack::Release(void)
 {
 	for_each(m_vecTile.begin(), m_vecTile.end(), DeleteObj());
 	m_vecTile.clear();
+
+	::Safe_Delete(m_pBridge);
 }
 
 const vector<TILE2*>* CBack::GetTile(void)

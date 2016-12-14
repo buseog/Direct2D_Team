@@ -23,26 +23,26 @@ CUIMgr::~CUIMgr(void)
 
 void CUIMgr::AddUI(UIID eUiID, CUi* pUi)
 {
-	m_UiList[eUiID].push_back(pUi);
+	m_UiList[m_eSceneID][eUiID].push_back(pUi);
 }
 
 HRESULT	CUIMgr::Initialize(void)
 {
-	m_UiList[UI_MAIN].push_back(CUIFactory<CMainUi,CMainUiBridge>::CreateUI(L"MainUI",400.f,553.f));
+	m_UiList[m_eSceneID][UI_MAIN].push_back(CUIFactory<CMainUi,CMainUiBridge>::CreateUI(L"MainUI",400.f,553.f));
 		
-	m_UiList[UI_INVEN].push_back(CUIFactory<CInventory,CInvenBridge>::CreateUI(L"Inventory", 580.f,250.f));
+	m_UiList[m_eSceneID][UI_INVEN].push_back(CUIFactory<CInventory,CInvenBridge>::CreateUI(L"Inventory", 580.f,250.f));
 
-	m_UiList[UI_STAT].push_back(CUIFactory<CStatus,CStatusBridge>::CreateUI(L"Status", 180.f,250.f));
+	//m_UiList[m_eSceneID][UI_STAT].push_back(CUIFactory<CStatus,CStatusBridge>::CreateUI(L"Status", 180.f,250.f));
 
 	return S_OK;
 }
 
 void CUIMgr::Progress(void)
 {
-		for(size_t i = 0; i < UI_END; ++i)
+	for(size_t i = 0; i < UI_END; ++i)
 	{
-		for(list<CUi*>::iterator	iter = m_UiList[i].begin();
-			iter != m_UiList[i].end(); ++iter)
+		for(list<CUi*>::iterator	iter = m_UiList[m_eSceneID][i].begin();
+			iter != m_UiList[m_eSceneID][i].end(); ++iter)
 		{
 			(*iter)->Progress();
 		}
@@ -55,8 +55,8 @@ void CUIMgr::Render(void)
 {
 	for(size_t i = 0; i < UI_END; ++i)
 	{
-		for(list<CUi*>::iterator	iter = m_UiList[i].begin();
-			iter != m_UiList[i].end(); ++iter)
+		for(list<CUi*>::iterator	iter = m_UiList[m_eSceneID][i].begin();
+			iter != m_UiList[m_eSceneID][i].end(); ++iter)
 		{
 			(*iter)->Render();
 		}
@@ -66,13 +66,21 @@ void CUIMgr::Render(void)
 
 void CUIMgr::Release()
 {
-	for(size_t i = 0; i < UI_END; ++i)
+	for (int id = 0; id < SC_END; ++id)
 	{
-		for(list<CUi*>::iterator	iter = m_UiList[i].begin();
-			iter != m_UiList[i].end(); ++iter)
+		for(size_t i = 0; i < UI_END; ++i)
 		{
-			::Safe_Delete(*iter);
+			for(list<CUi*>::iterator	iter = m_UiList[id][i].begin();
+				iter != m_UiList[id][i].end(); ++iter)
+			{
+				::Safe_Delete(*iter);
+			}
+			m_UiList[id][i].clear();
 		}
-		m_UiList[i].clear();
 	}
+}
+
+void CUIMgr::SetSceneID(SCENEID	eID)
+{
+	m_eSceneID = eID;
 }

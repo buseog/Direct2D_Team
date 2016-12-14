@@ -1,5 +1,6 @@
 #pragma once
 #include "bridge.h"
+#include "Obj.h"
 
 class CObjBridge :
 	public CBridge

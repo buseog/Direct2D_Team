@@ -7,13 +7,13 @@ class CUnitBridge :
 private:
 	list<int>		m_vecBestList;
 
+protected:
+	virtual void	WorldMatrix(INFO& rInfo);
+
 private:
 	void	KeyInput(INFO& rInfo);
 	void	Move(INFO& rInfo);
 	void	AStarMove(INFO& rInfo);
-
-protected:
-	virtual void	WorldMatrix(INFO& rInfo);
 
 public:
 	void	SetAstar(D3DXVECTOR3 vMouse);
