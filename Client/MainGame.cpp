@@ -13,8 +13,11 @@ CMainGame::CMainGame(void)
 , m_pSceneMgr(CSceneMgr::GetInstance())
 , m_fTime(0.f)
 , m_iCount(0)
+,m_fMouseX(0)
+,m_fMouseY(0)
 {
 	ZeroMemory(m_szFPS, sizeof(TCHAR) * MIN_STR);
+	ZeroMemory(m_szMOUSEPOS, sizeof(TCHAR) * MIN_STR);
 }
 
 CMainGame::~CMainGame(void)
@@ -50,10 +53,14 @@ void CMainGame::Progress(void)
 
 void CMainGame::Render(void)
 {
+	D3DXMATRIX matTrans;
+	D3DXMatrixTranslation(&matTrans, 600.f, 100.f, 0.f);
 	++m_iCount;
 
 	m_fTime += CTimeMgr::GetInstance()->GetTime();
-
+	m_fMouseX = ::GetMouse().x;
+	m_fMouseY = ::GetMouse().y;
+	wsprintf(m_szMOUSEPOS,L"MouseX : %d  MouseY : %d" ,(int)m_fMouseX,(int)m_fMouseY);
 	if(m_fTime > 1.f)
 	{
 		m_fTime = 0.f;
@@ -77,6 +84,12 @@ void CMainGame::Render(void)
 		lstrlen(m_szFPS), 
 		NULL, NULL, 
 		D3DCOLOR_ARGB(255, 255, 255, 0));
+	m_pDevice->GetSprite()->SetTransform(&matTrans);
+	m_pDevice->GetFont()->DrawTextW(m_pDevice->GetSprite(), 
+		m_szMOUSEPOS, 
+		lstrlen(m_szMOUSEPOS), 
+		NULL, NULL, 
+		D3DCOLOR_ARGB(255, 255, 255, 0));
 
 	m_pDevice->Render_End();
 	m_pDevice->GetDevice()->Present(NULL, NULL, NULL, NULL);
@@ -94,4 +107,5 @@ void CMainGame::Release(void)
 	m_pSceneMgr->DestroyInstance();
 	m_pDevice->DestroyInstance();
 }
+
 

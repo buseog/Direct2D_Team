@@ -4,6 +4,7 @@
 #include "ObjFactory.h"
 #include "Back.h"
 #include "Player.h"
+#include "PlayerBridge.h"
 #include "UnitBridge.h"
 
 
@@ -29,8 +30,8 @@ HRESULT CObjMgr::Initialize(void)
 {
 	m_ObjList[m_eSceneID][OBJ_BACK].push_back(CObjFactory<CBack, CBackBridge>::CreateObj(L"Walk_1", 0, 0));
 
-//	m_ObjList[OBJ_PLAYER].push_back(CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Player"));
-	m_ObjList[m_eSceneID][OBJ_PLAYER].push_back(CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
+	m_ObjList[m_eSceneID][OBJ_PLAYER].push_back(CObjFactory<CPlayer, CPlayerBridge>::CreateObj(L"Player", 0, 0));
+	//m_ObjList[m_eSceneID][OBJ_PLAYER].push_back(CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
 
 	return S_OK;
 }

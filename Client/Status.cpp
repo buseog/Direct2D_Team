@@ -1,10 +1,11 @@
 #include "StdAfx.h"
 #include "Status.h"
 #include "Bridge.h"
-//#include "Item.h"
-//#include "Weapon.h"
+#include "KeyMgr.h"
+
 
 CStatus::CStatus(void)
+: m_bKeyCheck(false)
 {
 }
 
@@ -25,30 +26,29 @@ void	CStatus::Progress(void)
 {
 	
 	m_pBridge->Progress(m_tInfo);	
+
+	if(CKeyMgr::GetInstance()->KeyDown('S'))
+	{
+		if(m_bKeyCheck)
+		{
+			m_bKeyCheck = false;
+		}
+		else
+			m_bKeyCheck = true;
+	}
 	
-
-
 }
 
-void	CStatus::Render(void)
+void CStatus::Render(void)
 {
-
-	m_pBridge->Render();
-
-
+	if(m_bKeyCheck)
+	{
+		m_pBridge->Render();
+	}
+		
 }
 
 void	CStatus::Release(void)
 {
 	::Safe_Delete(m_pBridge);
-}
-
-void	CStatus::AddItem(void)
-{
-
-}
-
-void	CStatus::Picking(void)
-{
-
 }

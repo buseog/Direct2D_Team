@@ -20,7 +20,7 @@ HRESULT	CMainUi::Initialize(void)
 	return S_OK;
 }
 
-void		CMainUi::Progress(void)
+void CMainUi::Progress(void)
 {
 	
 
@@ -28,13 +28,13 @@ void		CMainUi::Progress(void)
 
 }
 
-void	CMainUi::Render(void)
+void CMainUi::Render(void)
 {
 	m_pBridge->Render();
 	
 }
 
-void	CMainUi::Release(void)
+void CMainUi::Release(void)
 {
 	::Safe_Delete(m_pBridge);
 }

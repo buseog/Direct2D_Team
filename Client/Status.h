@@ -1,14 +1,11 @@
 #pragma once
 #include "ui.h"
 
-//class CItem;
 class CStatus :
 	public CUi
 {
-public:
-	void AddItem();
-	void Picking();
-	//CItem*	CreateItem(float _fX, float _fY,float _fCX, float _fCY, string _strITname);
+private:
+	bool		m_bKeyCheck;	// 키 체크를 하기 위한 불 변수
 
 public:
 	virtual HRESULT Initialize(void);

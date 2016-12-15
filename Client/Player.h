@@ -10,6 +10,7 @@ public:
 	virtual void Render(void);
 	virtual void Release(void);
 
+
 public:
 	CPlayer(void);
 	~CPlayer(void);

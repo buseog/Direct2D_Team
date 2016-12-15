@@ -91,6 +91,21 @@ HRESULT CDevice::InitDevice(void)
 	if(FAILED(D3DXCreateFontIndirect(m_pDevice, &tFontInfo2, &m_pLoadingFont)))
 	{
 		ERR_MSG(L"로딩폰트 객체 생성 실패");
+	}
+
+	// UI 폰트 객체 생성
+	D3DXFONT_DESCW			tFontInfo3;
+	ZeroMemory(&tFontInfo3, sizeof(D3DXFONT_DESCW));
+
+	tFontInfo3.Height = 12;
+	tFontInfo3.Width = 6;
+	tFontInfo3.Weight = FW_LIGHT;
+	tFontInfo3.CharSet = HANGEUL_CHARSET;
+	lstrcpy(tFontInfo3.FaceName, L"굴림");
+
+	if(FAILED(D3DXCreateFontIndirect(m_pDevice, &tFontInfo3, &m_pUIFont)))
+	{
+		ERR_MSG(L"폰트 객체 생성 실패");
 		return E_FAIL;
 	}
 
@@ -109,6 +124,7 @@ void CDevice::Release(void)
 	m_pLine->Release();
 	m_pLoadingFont->Release();
 	m_pFont->Release();
+	m_pUIFont->Release();
 	m_pSprite->Release();
 	m_pDevice->Release();
 	m_p3D->Release();
@@ -150,6 +166,11 @@ LPD3DXFONT CDevice::GetFont(void)
 LPD3DXFONT CDevice::GetLoadingFont(void)
 {	
 	return m_pLoadingFont;
+}
+
+LPD3DXFONT CDevice::GetUIFont(void)
+{
+	return m_pUIFont;
 }
 
 LPD3DXLINE CDevice::GetLine(void)

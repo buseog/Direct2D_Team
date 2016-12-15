@@ -10,7 +10,10 @@ private:
 	CSceneMgr*		m_pSceneMgr;
 	float			m_fTime;
 	int				m_iCount;
+	float           m_fMouseX;
+	float           m_fMouseY;
 	TCHAR			m_szFPS[MIN_STR];
+	TCHAR			m_szMOUSEPOS[MIN_STR];
 	D3DXMATRIX		m_matTrans;
 	
 

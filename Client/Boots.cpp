@@ -11,6 +11,7 @@ CBoots::~CBoots(void)
 }
 HRESULT CBoots::Initialize(void)
 {
+	m_wstrObjKey = L"TestBoots";
 	return S_OK;
 }
 int CBoots::Progress(void)

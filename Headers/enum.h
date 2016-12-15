@@ -31,6 +31,7 @@ enum UIID
 	UI_MAIN,
 	UI_INVEN,
 	UI_STAT,
+	UI_STORE,
 	UI_END
 
 };
@@ -44,6 +45,7 @@ enum ITEMID
 	IT_BOOTS,
 	IT_BELT,
 	IT_FOOD,
+	IT_TRADE,
 	IT_END
 };
 

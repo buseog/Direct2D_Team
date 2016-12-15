@@ -12,6 +12,7 @@ private:
 	LPD3DXSPRITE		m_pSprite;
 	LPD3DXFONT			m_pFont;
 	LPD3DXFONT			m_pLoadingFont;
+	LPD3DXFONT			m_pUIFont;
 	LPD3DXLINE			m_pLine;
 
 public:
@@ -26,6 +27,7 @@ public:
 	LPD3DXSPRITE	  GetSprite(void);
 	LPD3DXFONT		  GetFont(void);
 	LPD3DXFONT		  GetLoadingFont(void);
+	LPD3DXFONT		  GetUIFont(void);
 	LPD3DXLINE		  GetLine(void);
 
 private:
