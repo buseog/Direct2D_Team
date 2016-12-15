@@ -470,13 +470,6 @@
 							<File
 								RelativePath=".\MoveEffectBridge.cpp"
 								>
-								<FileConfiguration
-									Name="Debug|Win32"
-									>
-									<Tool
-										Name="VCCLCompilerTool"
-									/>
-								</FileConfiguration>
 							</File>
 							<File
 								RelativePath=".\MoveEffectBridge.h"
@@ -496,13 +489,6 @@
 							<File
 								RelativePath=".\StandEffectBridge.cpp"
 								>
-								<FileConfiguration
-									Name="Debug|Win32"
-									>
-									<Tool
-										Name="VCCLCompilerTool"
-									/>
-								</FileConfiguration>
 							</File>
 							<File
 								RelativePath=".\StandEffectBridge.h"
@@ -616,19 +602,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="01. Menu"
-				>
-				<File
-					RelativePath=".\MyMenu.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\MyMenu.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="02. Field"
+				Name="01. Field"
 				>
 				<File
 					RelativePath=".\Field.cpp"
@@ -652,7 +626,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="04. BattleField"
+				Name="02. BattleField"
 				>
 				<File
 					RelativePath=".\BattleField.cpp"

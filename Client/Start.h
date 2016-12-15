@@ -4,6 +4,14 @@
 class CStart :
 	public CScene
 {
+private:
+	HANDLE				m_hThread;
+	CRITICAL_SECTION	m_Crt;
+
+public:
+	static unsigned int __stdcall ImgLoadThreadFunc(void*	pArg);
+	CRITICAL_SECTION	GetCrt(void);
+
 public:
 	virtual HRESULT	Initialize(void);
 	virtual void	Progress(void);

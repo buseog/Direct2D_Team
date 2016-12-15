@@ -32,7 +32,7 @@ HRESULT CMainGame::Initialize(void)
 	}
 
 	CTimeMgr::GetInstance()->InitTime();
-	m_pSceneMgr->SetScene(SC_BATTLEFIELD);
+	m_pSceneMgr->SetScene(SC_START);
 
 	return S_OK;
 }

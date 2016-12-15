@@ -4,7 +4,6 @@
 #include "ObjMgr.h"
 #include "UIMgr.h"
 #include "Start.h"
-#include "MyMenu.h"
 #include "Field.h"
 #include "Village.h"
 #include "BattleField.h"
@@ -32,10 +31,6 @@ void CSceneMgr::SetScene(SCENEID _eScene)
 		m_pScene = new CStart;
 		break;
 
-	case SC_MENU:
-		m_pScene = new CMyMenu;
-		break;
-
 	case SC_FILED:
 		m_pScene = new CField;
 		break;
@@ -55,14 +50,14 @@ void CSceneMgr::SetScene(SCENEID _eScene)
 		return;
 	}
 
-	CObjMgr::GetInstance()->SetSceneID(SC_BATTLEFIELD);
+	CObjMgr::GetInstance()->SetSceneID(_eScene);
 	if(FAILED(CObjMgr::GetInstance()->Initialize()))
 	{
 		ERR_MSG(L"ObjMgr Init Failed");
 		return;
 	}
 
-	CUIMgr::GetInstance()->SetSceneID(SC_BATTLEFIELD);
+	CUIMgr::GetInstance()->SetSceneID(_eScene);
 	if(FAILED(CUIMgr::GetInstance()->Initialize()))
 	{
 		ERR_MSG(L"UIMgr Init Failed");
