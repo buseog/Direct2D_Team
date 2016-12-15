@@ -55,12 +55,14 @@ void CSceneMgr::SetScene(SCENEID _eScene)
 		return;
 	}
 
+	CObjMgr::GetInstance()->SetSceneID(SC_BATTLEFIELD);
 	if(FAILED(CObjMgr::GetInstance()->Initialize()))
 	{
 		ERR_MSG(L"ObjMgr Init Failed");
 		return;
 	}
 
+	CUIMgr::GetInstance()->SetSceneID(SC_BATTLEFIELD);
 	if(FAILED(CUIMgr::GetInstance()->Initialize()))
 	{
 		ERR_MSG(L"UIMgr Init Failed");

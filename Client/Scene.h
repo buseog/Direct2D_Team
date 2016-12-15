@@ -1,13 +1,13 @@
 #pragma once
 
 #include "Bigheader.h"
+#include "Obj.h"
+#include "Ui.h"
 
 class CScene
 {
 public:
-	void	CreateBridge();
-	
-
+	void			CreateBridge();
 
 public:
 	virtual HRESULT	Initialize(void)PURE;

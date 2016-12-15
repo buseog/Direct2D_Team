@@ -27,9 +27,9 @@ public:
 	void	SetDestroy(bool	_YN);			// 외부에서 데스트로이 해줘야될경우
 	void	SetBridge(CBridge* pBridge);	// 브릿지 셋해주는함수
 	void	SetSelect(bool YN);				// 군중매니저에 선택됬는지 셋
-	void	SetTargetPoint(D3DXVECTOR3 pTargetPoint);
-	void	SetRevolution(float fAngle);
-	void	SetOrder(ORDERID eOrder);
+	void	SetTargetPoint(D3DXVECTOR3 pTargetPoint);	// 목표 지점 좌표 셋
+	void	SetRevolution(float fAngle);				// 중점기준 공전좌표
+	void	SetOrder(ORDERID eOrder);					// 이동명령 타입셋
 
 public:
 	CBridge*			GetBridge(void);	// 브릿지 반환
@@ -41,6 +41,7 @@ public:
 	const bool			GetSelect(void);	// 군중 매니저에 선택여부 반환
 	const float			GetRevolution(void);
 	const int			GetOrder(void);
+	const RECT			GetRect(void);
 
 public:
 	virtual HRESULT	Initialize(void)PURE;

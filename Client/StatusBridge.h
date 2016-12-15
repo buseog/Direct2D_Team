@@ -15,5 +15,5 @@ public:
 	virtual void	Release(void);
 public:
 	CStatusBridge(void);
-	~CStatusBridge(void);
+	virtual ~CStatusBridge(void);
 };

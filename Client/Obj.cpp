@@ -108,3 +108,15 @@ const int CObj::GetOrder(void)
 {
 	return m_iOrder;
 }
+
+const RECT CObj::GetRect(void)
+{
+	RECT rc = {
+		long(m_tInfo.vPos.x - m_tInfo.vSize.x),
+		long(m_tInfo.vPos.y - m_tInfo.vSize.y),
+		long(m_tInfo.vPos.x + m_tInfo.vSize.x),
+		long(m_tInfo.vPos.y + m_tInfo.vSize.y)
+	};
+
+	return rc;
+}

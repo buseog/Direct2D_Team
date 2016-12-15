@@ -8,9 +8,11 @@ class CUIMgr
 	DECLARE_SINGLETON(CUIMgr)
 
 private:
-	list<CUi*>		m_UiList[UI_END];
+	list<CUi*>		m_UiList[SC_END][UI_END];
+	SCENEID			m_eSceneID;
 
 public:
+	void		SetSceneID(SCENEID	dID);		// 해당하는 씬에 대한 리스트를 작동시키려는 용도
 	void	AddUI(UIID	eUiID, CUi*	pUi);
 	const	CUi*	GetUi(UIID _eUI);
 	
