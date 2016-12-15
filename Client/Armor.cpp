@@ -7,10 +7,12 @@ CArmor::CArmor(void)
 
 CArmor::~CArmor(void)
 {
+	
 	Release();
 }
 HRESULT CArmor::Initialize(void)
 {
+	m_wstrObjKey = L"TestArmor";
 	return S_OK;
 }
 int CArmor::Progress(void)

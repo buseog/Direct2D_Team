@@ -107,7 +107,7 @@ void CStatusBridge::Render(void)
 		m_szPrint, 
 		lstrlen(m_szPrint), 
 		NULL, NULL, 
-		D3DCOLOR_ARGB(255, 255, 255, 255));*/
+		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	// 포인트
 	wsprintf(m_szPrint, L"포인트              %d", pPlayer->GetPlayerStat()->tDetail.iBonusPoint);

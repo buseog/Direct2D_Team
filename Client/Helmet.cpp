@@ -11,6 +11,8 @@ CHelmet::~CHelmet(void)
 }
 HRESULT CHelmet::Initialize(void)
 {
+	m_wstrObjKey = L"TestHelmet";
+	m_tItem.wstrName = L"Head";
 	return S_OK;
 }
 int CHelmet::Progress(void)

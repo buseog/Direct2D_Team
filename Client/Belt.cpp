@@ -11,6 +11,7 @@ CBelt::~CBelt(void)
 }
 HRESULT CBelt::Initialize(void)
 {
+	m_wstrObjKey = L"TestBelt";
 	return S_OK;
 }
 int CBelt::Progress(void)
