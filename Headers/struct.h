@@ -29,6 +29,16 @@ typedef struct tagToolTile
 	BYTE				byDrawID;
 }TILE;
 
+// 지형 오브젝트 사용 시 필요한 정보
+typedef	struct	tagBackObj
+{
+	D3DXVECTOR3			vPos;
+	int					iIndex;
+	CString				szState;
+	CString				szObj;
+
+}BACK;
+
 // 클라에서 사용될타일. AStar용 인접리스트 가지고있음
 typedef struct tagClilTile
 {

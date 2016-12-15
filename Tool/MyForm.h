@@ -3,7 +3,6 @@
 #include "UnitTool.h"
 #include "ItemTool.h"
 #include "VillageTool.h"
-#include "BackGround.h"
 
 #include "DlgTab1.h"
 #include "DlgTab2.h"
@@ -38,9 +37,9 @@ protected:
 
 public: // 탭 관련 변수
 	CTabCtrl	m_TabCtrl;
-	CDlgTab1*	m_DlgTab1;
-	CDlgTab2*	m_DlgTab2;
-	CDlgTab3*	m_DlgTab3;
+	CDlgTab1	m_DlgTab1;
+	CDlgTab2	m_DlgTab2;
+	CDlgTab3	m_DlgTab3;
 	CUnitTool	m_UnitTool;
 	CItemTool	m_ItemTool;
 
@@ -61,7 +60,8 @@ public:	// 패스 파인더 임시
 	afx_msg void OnPathFind();
 	CPathFind	m_PathFind;
 	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
-public:
+
+public: // 유닛 
 	afx_msg void OnUnitTool();
 
 };

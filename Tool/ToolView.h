@@ -4,7 +4,7 @@
 
 
 #pragma once
-#include "BackGround.h"
+class CBackGround;
 
 class CToolDoc;
 

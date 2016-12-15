@@ -7,9 +7,10 @@
 
 #include "MainFrm.h"
 #include "ToolView.h"
-#include "MyForm.h"
+
 #include "MiniView.h"
 #include "SecondForm.h"
+#include "SecondMini.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -216,7 +217,7 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 
 	m_MainSplitter.CreateStatic(this, 1, 3);
 
-	m_MainSplitter.CreateView(0,1, RUNTIME_CLASS(CToolView), CSize(WINCX + 200, WINCY), pContext);
+	m_MainSplitter.CreateView(0,1, RUNTIME_CLASS(CToolView), CSize(WINCX, WINCY), pContext);
 
 	m_SecondSplitter.CreateStatic(&m_MainSplitter, 2, 1, 
 		WS_CHILD | WS_VISIBLE, 
@@ -229,7 +230,7 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 	m_SecondSplitter.CreateView(0, 0, RUNTIME_CLASS(CMiniView), CSize(200, 150), pContext);
 	m_SecondSplitter.CreateView(1, 0, RUNTIME_CLASS(CMyForm), CSize(200, 450), pContext);
 
-	m_ThirdSplitter.CreateView(0, 0, RUNTIME_CLASS(CMiniView), CSize(200, 150), pContext);
+	m_ThirdSplitter.CreateView(0, 0, RUNTIME_CLASS(CSecondMini), CSize(200, 150), pContext);
 	m_ThirdSplitter.CreateView(1, 0, RUNTIME_CLASS(CSecondForm), CSize(200, 450), pContext);
 
 	m_MainSplitter.SetColumnInfo(0, 200, 10);
@@ -237,8 +238,9 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 	m_pMainView = (CToolView*)m_MainSplitter.GetPane(0, 1);
 	m_pMiniView = (CMiniView*)m_SecondSplitter.GetPane(0, 0);
 	m_pMyForm = (CMyForm*)m_SecondSplitter.GetPane(1, 0);
+	m_pSecondMini = (CSecondMini*)m_ThirdSplitter.GetPane(0, 0);
 	m_pSecondForm = (CSecondForm*)m_ThirdSplitter.GetPane(1, 0);
-
+	
 
 
 	return TRUE;
@@ -262,4 +264,9 @@ CMyForm*	CMainFrame::GetForm(void)
 CSecondForm*	CMainFrame::GetSecondForm(void)
 {
 	return m_pSecondForm;
+}
+
+CSecondMini*	CMainFrame::GetSecondMini(void)
+{
+	return m_pSecondMini;
 }

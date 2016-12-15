@@ -2,10 +2,15 @@
 #include "BackGround.h"
 #include "TextureMgr.h"
 #include "ToolView.h"
+#include "KeyMgr.h"
+
+
 
 CBackGround::CBackGround(void)
 : m_pDevice(CDevice::GetInstance())
 , m_pMainView(NULL)
+, m_bTileCheck(false)
+, m_iCountKey(0)
 {
 }
 
@@ -33,8 +38,6 @@ HRESULT CBackGround::Initialize(void)
 		}
 	}
 
-
-
 	return S_OK;
 }
 
@@ -48,61 +51,68 @@ void CBackGround::Render(void)
 	D3DXMATRIX	matTrans;
 	TCHAR		szBuf[MIN_STR] = L"";
 
-	for (int i = 0; i < TILEY; ++i)
+	const TEXINFO*	pBackTexture = CTextureMgr::GetInstance()->GetTexture(L"MAP", L"Map", m_iCountKey);
+	
+	D3DXMatrixTranslation(&matTrans, 
+				(float)pBackTexture->tImgInfo.Width - m_pMainView->GetScrollPos(0), (float)pBackTexture->tImgInfo.Height - m_pMainView->GetScrollPos(1), 0.f);
+	
+	m_pDevice->GetSprite()->SetTransform(&matTrans);
+	m_pDevice->GetSprite()->Draw(pBackTexture->pTexture, 
+				NULL, &D3DXVECTOR3((float)pBackTexture->tImgInfo.Width, (float)pBackTexture->tImgInfo.Height, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	if(m_bTileCheck)
 	{
-		for (int j = 0; j < TILEX; ++j)
+		for (int i = 0; i < TILEY; ++i)
 		{
-			int	iIndex = i * TILEX + j;
+			for (int j = 0; j < TILEX; ++j)
+			{
+				int	iIndex = i * TILEX + j;
 
-			if(iIndex < 0 || iIndex >= TILEX * TILEY)
-				break;
+				if(iIndex < 0 || iIndex >= TILEX * TILEY)
+					break;
 
-			const TEXINFO*	pTexture = CTextureMgr::GetInstance()->GetTexture(L"TILE", L"Tile", m_vecTile[iIndex]->byDrawID);
+				const TEXINFO*	pTexture = CTextureMgr::GetInstance()->GetTexture(L"TILE", L"Tile", m_vecTile[iIndex]->byDrawID);
 
 
-			D3DXMatrixTranslation(&matTrans, 
-				m_vecTile[iIndex]->vPos.x - m_pMainView->GetScrollPos(0),
-				m_vecTile[iIndex]->vPos.y - m_pMainView->GetScrollPos(1),
-				0.f);
+				D3DXMatrixTranslation(&matTrans, 
+					m_vecTile[iIndex]->vPos.x - m_pMainView->GetScrollPos(0),
+					m_vecTile[iIndex]->vPos.y - m_pMainView->GetScrollPos(1),
+					0.f);
 
-			m_pDevice->GetSprite()->SetTransform(&matTrans);
-			m_pDevice->GetSprite()->Draw(pTexture->pTexture, 
-				NULL, &D3DXVECTOR3(62.f, 32.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+				m_pDevice->GetSprite()->SetTransform(&matTrans);
+				m_pDevice->GetSprite()->Draw(pTexture->pTexture, 
+					NULL, &D3DXVECTOR3(32.f, 16.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
-			// 폰트 
-			/*wsprintf(szBuf, L"%d", iIndex);
+				// 폰트
+			wsprintf(szBuf, L"%d", iIndex);
 			m_pDevice->GetFont()->DrawTextW(m_pDevice->GetSprite(), 
 				szBuf, lstrlen(szBuf), 
 				NULL, NULL, 
-				D3DCOLOR_ARGB(255, 255, 255, 255));*/
-
+				D3DCOLOR_ARGB(255, 255, 255, 255));
+			}
 		}
 	}
+
+	ObjRender();
+
 }	
 
 void CBackGround::MiniRender(void)
 {
-	D3DXMATRIX	matTrans;
+	D3DXMATRIX	matScale, matTrans, matWorld;
 
-	for(int i = 0; i < TILEY; ++i)
-	{
-		for(int j = 0; j < TILEX; ++j)
-		{
-			int	iIndex = i * TILEX + j;
+	const TEXINFO*	pBackTexture = CTextureMgr::GetInstance()->GetTexture(L"MAP", L"Map", m_iCountKey);
+	
+	D3DXMatrixScaling(&matScale, 0.6f, 0.6f, 0.f);
 
-			const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(L"TILE", L"Tile", m_vecTile[iIndex]->byDrawID);
+	D3DXMatrixTranslation(&matTrans, 
+				0.f, 0.f, 0.f);
 
-			D3DXMatrixTranslation(&matTrans, 
-				m_vecTile[iIndex]->vPos.x,
-				m_vecTile[iIndex]->vPos.y,
-				0.f);
-
-			m_pDevice->GetSprite()->SetTransform(&matTrans);
-			m_pDevice->GetSprite()->Draw(pTexture->pTexture, 
-				NULL, &D3DXVECTOR3(62.f, 32.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
-
-		}
-	}
+	matWorld = matScale * matTrans;
+	
+	m_pDevice->GetSprite()->SetTransform(&matWorld);
+	m_pDevice->GetSprite()->Draw(pBackTexture->pTexture, 
+				NULL, NULL/*&D3DXVECTOR3(1892.f, 780.f, 0.f)*/, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 }
 
 void CBackGround::Release(void)
@@ -119,27 +129,17 @@ void CBackGround::SetMainView(CToolView* pMainView)
 	m_pMainView = pMainView;
 }
 
-void CBackGround::TileChange(const D3DXVECTOR3& vPos, const int& iDrawID, const int& iSize, const int& iOption, const float& fAngle, const float& fMirror)
+void CBackGround::TileChange(const D3DXVECTOR3& vPos, const int& iDrawID/*, const int& iSize, const int& iOption, const float& fAngle, const float& fMirror*/)
 {
 	int iIndex = GetTileIndex(vPos);
 
 	if (iIndex < 0)
 		return;
 
-	for (int i = 0; i < iSize; ++i)
-	{
-		for (int j = 0; j < iSize; ++j)
-		{
-			int iNum = iIndex + (i * TILEX) + j;
-
-			if (iNum < 0 || iNum > TILEX * TILEY)
-				break;
-
-			m_vecTile[iNum]->byDrawID = iDrawID;
-			m_vecTile[iNum]->byOption = iOption;
-		}
-	}
+	m_vecTile[iIndex]->byDrawID = iDrawID;
+	m_vecTile[iIndex]->byOption = 2;
 }
+
 int CBackGround::GetTileIndex(const D3DXVECTOR3& vPos)
 {
 	for (size_t i = 0; i < m_vecTile.size(); ++i)
@@ -248,4 +248,99 @@ void CBackGround::SetTile(float _fX, float _fY)
 {
 	TILEX = (int)_fX;
 	TILEY = (int)_fY;
+}
+
+void CBackGround::SetTileCheck(bool _bTileCheck)
+{
+	m_bTileCheck = _bTileCheck;
+}
+
+bool CBackGround::GetTileCheck(void)
+{
+	return m_bTileCheck;
+}
+
+void CBackGround::SetCount(int _iCountKey)
+{
+	m_iCountKey = _iCountKey;
+}
+
+void CBackGround::SetObjCount(int _iBackCountKey)
+{
+	m_iBackCountKey = _iBackCountKey;
+}
+
+void CBackGround::SetObjszState(CString _szStateKey)
+{
+	m_szBackStateKey = _szStateKey;
+}
+
+void CBackGround::SetObjszObj(CString _szObjKey)
+{
+	m_szBackObjKey = _szObjKey;
+}
+
+void CBackGround::ObjPick(D3DXVECTOR3& vPos, int& iIndex, CString& szObj, CString& szState)
+{
+	BACK*	pBack = new BACK;
+
+	pBack->vPos.x = ::GetMouse().x + m_pMainView->GetScrollPos(0);
+	pBack->vPos.y = ::GetMouse().y + m_pMainView->GetScrollPos(1);
+	pBack->iIndex = iIndex;
+	pBack->szObj = szObj;
+	pBack->szState = szState;
+
+	m_vecBack.push_back(pBack);
+}
+
+void CBackGround::ObjRender(void)
+{
+	D3DXMATRIX	matTrans;
+	TCHAR		szBuf[MIN_STR] = L"";
+
+	for (size_t i = 0; i < m_vecBack.size(); ++i)
+	{
+
+		const TEXINFO*	pObjTexture = CTextureMgr::GetInstance()->GetTexture(L"OBJECT", L"Object", m_vecBack[i]->iIndex);
+		
+		D3DXMatrixTranslation(&matTrans, m_vecBack[i]->vPos.x - m_pMainView->GetScrollPos(0), m_vecBack[i]->vPos.y - m_pMainView->GetScrollPos(1), 0.f);
+		
+		m_pDevice->GetSprite()->SetTransform(&matTrans);
+		m_pDevice->GetSprite()->Draw(pObjTexture->pTexture, 
+			NULL, &D3DXVECTOR3(pObjTexture->tImgInfo.Width / 2.f, pObjTexture->tImgInfo.Height / 2.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+}
+
+
+vector<TILE*>* CBackGround::GetTile(void)
+{
+	return &m_vecTile;
+}
+
+vector<BACK*>* CBackGround::GetObject(void)
+{
+	return &m_vecBack;
+}
+
+void CBackGround::SecondRender(void)
+{
+	D3DXMATRIX	matScale, matTrans, matWorld;
+
+	const TEXINFO*	pObjTexture = CTextureMgr::GetInstance()->GetTexture(L"OBJECT", L"Object", m_iBackCountKey);
+		
+	D3DXMatrixScaling(&matScale, 0.2f, 0.2f, 0.f);
+
+	D3DXMatrixTranslation(&matTrans,0.f, 0.f, 0.f);
+
+	matWorld = matScale * matTrans;
+		
+	m_pDevice->GetSprite()->SetTransform(&matWorld);
+	m_pDevice->GetSprite()->Draw(pObjTexture->pTexture, 
+					NULL, NULL/*&D3DXVECTOR3(1892.f, 780.f, 0.f)*/, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+}
+
+int CBackGround::GetObjCount(void)
+{
+	return m_iBackCountKey;
 }
