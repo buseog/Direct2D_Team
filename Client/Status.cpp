@@ -32,9 +32,11 @@ void	CStatus::Progress(void)
 
 void	CStatus::Render(void)
 {
+	if(GetKeyState('P') && 0x0001)
+	{
+		m_pBridge->Render();
 
-	m_pBridge->Render();
-
+	}
 
 }
 

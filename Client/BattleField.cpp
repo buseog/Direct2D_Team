@@ -29,12 +29,12 @@ void	CBattleField::Progress(void)
 void	CBattleField::Render(void)
 {
 	CObjMgr::GetInstance()->Render();
- 	CUIMgr::GetInstance()->Render();
+	CUIMgr::GetInstance()->Render();
 }
 
 void	CBattleField::Release(void)
 {
-	
+
 
 }
 
@@ -72,6 +72,65 @@ void	CBattleField::LoadPNG(void)
 		L"Status", TEX_SINGLE)))
 	{
 		ERR_MSG(L"Status 싱글 텍스쳐 생성 실패");
+		return;
+	}
+
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/TownBack/UI7.png", 
+		L"Store", TEX_SINGLE)))
+	{
+		ERR_MSG(L"Store 싱글 텍스쳐 생성 실패");
+		return;
+	}
+
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/TownBack/UI10.png", 
+		L"ToolTip", TEX_SINGLE)))
+	{
+		ERR_MSG(L"Store 싱글 텍스쳐 생성 실패");
+		return;
+	}
+
+
+	///아이템테스트
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Item/Weapon/0.png", 
+		L"TestWeapon", TEX_SINGLE)))
+	{
+		ERR_MSG(L"TestArmor 싱글 텍스쳐 생성 실패");
+		return;
+	}
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Item/Armor/0.png", 
+		L"TestArmor", TEX_SINGLE)))
+	{
+		ERR_MSG(L"TestArmor 싱글 텍스쳐 생성 실패");
+		return;
+	}
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Item/Glove/0.png", 
+		L"TestGlove", TEX_SINGLE)))
+	{
+		ERR_MSG(L"TestGlove 싱글 텍스쳐 생성 실패");
+		return;
+	}
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Item/Helmet/0.png", 
+		L"TestHelmet", TEX_SINGLE)))
+	{
+		ERR_MSG(L"TestArmor 싱글 텍스쳐 생성 실패");
+		return;
+	}
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Item/Shoes/0.png", 
+		L"TestBoots", TEX_SINGLE)))
+	{
+		ERR_MSG(L"TestArmor 싱글 텍스쳐 생성 실패");
+		return;
+	}
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Item/Belt/0.png", 
+		L"TestBelt", TEX_SINGLE)))
+	{
+		ERR_MSG(L"TestArmor 싱글 텍스쳐 생성 실패");
+		return;
+	}
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Item/Food/0.png", 
+		L"TestFood", TEX_SINGLE)))
+	{
+		ERR_MSG(L"TestFood 싱글 텍스쳐 생성 실패");
 		return;
 	}
 }

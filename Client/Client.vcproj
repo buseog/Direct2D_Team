@@ -257,18 +257,6 @@
 			Name="97. Mgr"
 			>
 			<Filter
-				Name="00. Device"
-				>
-				<File
-					RelativePath=".\Device.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Device.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="01. TextureMgr"
 				>
 				<File
@@ -403,6 +391,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="00. Device"
+				>
+				<File
+					RelativePath=".\Device.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Device.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="98. Design"
@@ -514,6 +514,18 @@
 						</File>
 						<File
 							RelativePath=".\StatusBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="04. StoreBridge"
+						>
+						<File
+							RelativePath=".\StoreBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\StoreBridge.h"
 							>
 						</File>
 					</Filter>
@@ -711,6 +723,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="04. Store"
+				>
+				<File
+					RelativePath=".\Store.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Store.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="04. Item"
@@ -726,30 +750,86 @@
 			<Filter
 				Name="00. Weapon"
 				>
+				<File
+					RelativePath=".\Weapon.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Weapon.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="01. Armor"
 				>
+				<File
+					RelativePath=".\Armor.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Armor.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="02. Glove"
 				>
+				<File
+					RelativePath=".\Glove.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Glove.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="03. Helmet"
 				>
+				<File
+					RelativePath=".\Helmet.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Helmet.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="04. Boots"
 				>
+				<File
+					RelativePath=".\Boots.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Boots.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="05. Belt"
 				>
+				<File
+					RelativePath=".\Belt.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Belt.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="06. Food"
 				>
+				<File
+					RelativePath=".\Food.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Food.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<File

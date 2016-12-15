@@ -173,7 +173,10 @@ typedef struct tagItem
 	int				iOption;
 	int				iWeight;
 	int				iPrice;
+	int				iCount;
 	ITEMID			eType;
+
+
 }ITEM;
 
 typedef struct tagKey

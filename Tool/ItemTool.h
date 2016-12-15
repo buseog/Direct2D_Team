@@ -1,4 +1,5 @@
 #pragma once
+#include "afxwin.h"
 
 
 // CItemTool 대화 상자입니다.
@@ -24,13 +25,28 @@ public:
 	afx_msg void CheckItemDetail(UINT ID);
 private:
 	void ItemTypeChecked(void);
+	void SetItemDetail(ITEM* _pItem);
+	void Release(void);
 private:
 	UINT m_ItemType;//라디오버튼
 	UINT m_ItemDetail;
 private:
 	CString m_ItemName;
-	int m_iATK;
-	int m_iDef;
+	int m_iOption;
+	int m_iPrice;
 	int m_iWeight;
-	int m_iHeal;
+	
+	//list<ITEM*> m_ItemList;
+	map<CString,ITEM*> m_mapItemData;
+	//int m_iHeal;
+public:
+	virtual BOOL OnInitDialog();
+private:
+	CListBox m_ItemList;
+public:
+	afx_msg void AddItem();
+	afx_msg void DeleteItem();
+	afx_msg void SaveItemSet();
+	afx_msg void LoadItemSet();
+	afx_msg void OnSelChangeItemList();
 };
