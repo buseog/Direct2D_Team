@@ -16,7 +16,7 @@ HRESULT CEffectBridge::Initialize(void)
 
 void CEffectBridge::Progress(INFO& rInfo)
 {
-
+	
 }
 
 void CEffectBridge::Render(void)
@@ -29,7 +29,3 @@ void CEffectBridge::Release(void)
 	
 }
 
-void	CEffectBridge::WorldMatrix(void)
-{
-
-}

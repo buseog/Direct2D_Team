@@ -1,5 +1,7 @@
 #pragma once
 #include "afxwin.h"
+#include "SecondForm.h"
+#include "BackGround.h"
 
 
 // CDlgTab1 대화 상자입니다.
@@ -23,7 +25,12 @@ public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	virtual BOOL OnInitDialog();
 
+public: // 기본 함수
 	CListBox m_ListBox01;
+	CSecondForm*	m_pSecondForm;
+	CBackGround*	m_pBack;
 
+public: // 리스트 박스 클릭 관련 기능
 	afx_msg void OnAddBox();
+	int				m_iCount;
 };

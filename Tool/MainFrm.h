@@ -8,6 +8,7 @@
 #include "MiniView.h"
 #include "MyForm.h"
 #include "SecondForm.h"
+#include "SecondMini.h"
 
 class CMainFrame : public CFrameWndEx
 {
@@ -28,12 +29,14 @@ private:
 	CMiniView*				m_pMiniView;
 	CMyForm*				m_pMyForm;
 	CSecondForm*			m_pSecondForm; // 은지 추가
+	CSecondMini*			m_pSecondMini; // 은지 추가
 
 public:
 	CToolView*		GetMainView(void);
 	CMiniView*		GetMiniView(void);
 	CMyForm*		GetForm(void);
 	CSecondForm*	GetSecondForm(void); // 은지 추가
+	CSecondMini*	GetSecondMini(void); // 은지 추가
 
 // 재정의입니다.
 public:

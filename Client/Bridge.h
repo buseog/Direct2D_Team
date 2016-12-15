@@ -11,7 +11,7 @@ protected:
 	FRAME		m_tFrame;
 
 protected:
-	void	Frame(void);
+	virtual void	Frame(void);
 	virtual void	WorldMatrix(INFO& rInfo) PURE;
 
 public:

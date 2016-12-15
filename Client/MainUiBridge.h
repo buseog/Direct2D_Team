@@ -17,5 +17,5 @@ public:
 
 public:
 	CMainUiBridge(void);
-	~CMainUiBridge(void);
+	virtual ~CMainUiBridge(void);
 };

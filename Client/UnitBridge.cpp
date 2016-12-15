@@ -44,6 +44,22 @@ void CUnitBridge::Progress(INFO& rInfo)
 
 void CUnitBridge::Render(void)
 {
+	if (m_pObj->GetSelect())
+	{
+		const TEXINFO*		pSelTexture = CTextureMgr::GetInstance()->GetTexture(L"SelectEffect");
+
+		if(pSelTexture == NULL)
+			return;
+
+		float fX = pSelTexture->tImgInfo.Width / 2.f;
+		float fY = pSelTexture->tImgInfo.Height / 2.f + 30;
+
+		CDevice::GetInstance()->GetSprite()->SetTransform(&m_pObj->GetInfo()->matWorld);
+		CDevice::GetInstance()->GetSprite()->Draw(pSelTexture->pTexture, 
+			NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	}
+
 	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pObj->GetObjKey(), 
 		m_wstrStateKey, (int)m_tFrame.fFrame);
 
@@ -51,7 +67,7 @@ void CUnitBridge::Render(void)
 		return;
 
 	float fX = pTexture->tImgInfo.Width / 2.f;
-	float fY = pTexture->tImgInfo.Height / 2.f;
+	float fY = pTexture->tImgInfo.Height / 2.f + 30.f;
 
 	CDevice::GetInstance()->GetSprite()->SetTransform(&m_pObj->GetInfo()->matWorld);
 	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
@@ -65,14 +81,40 @@ void CUnitBridge::Release(void)
 
 void	CUnitBridge::WorldMatrix(INFO& rInfo)
 {
-	D3DXMATRIX	matTrans;
+	D3DXMATRIX	matScale, matTrans;
+
+	if (rInfo.vDir.x < 0)
+	{
+		D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
+	}
+	else
+	{
+		D3DXMatrixScaling(&matScale, -1.f, 1.f, 0.f);
+	}
+
+	if (rInfo.vDir.y >= 0.75f)
+		m_wstrStateKey = L"Walk_5";
+
+	else if (rInfo.vDir.y >= 0.25f)
+		m_wstrStateKey = L"Walk_1";
+
+	else if (rInfo.vDir.y >= -0.25f)
+		m_wstrStateKey = L"Walk_2";
+
+	else if (rInfo.vDir.y >= -0.75f)
+		m_wstrStateKey = L"Walk_3";
+
+	else
+		m_wstrStateKey = L"Walk_4";
+
+
 
 	D3DXMatrixTranslation(&matTrans, 
 		rInfo.vPos.x + m_pObj->GetScroll().x, 
 		rInfo.vPos.y + m_pObj->GetScroll().y, 
 		0.f);
 
-	rInfo.matWorld = matTrans;
+	rInfo.matWorld = matScale * matTrans;
 }
 
 void	CUnitBridge::KeyInput(INFO& rInfo)
@@ -83,6 +125,7 @@ void	CUnitBridge::KeyInput(INFO& rInfo)
 void	CUnitBridge::Move(INFO& rInfo)
 {
 	rInfo.vDir = m_pObj->GetTargetPoint() - rInfo.vPos;
+	
 	float	fDistance = D3DXVec3Length(&rInfo.vDir);
 	D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
 

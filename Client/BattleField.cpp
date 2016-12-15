@@ -47,13 +47,6 @@ void	CBattleField::LoadPNG(void)
 		return;
 	}
 
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Player/Walk_1/KimSimin%d.png", 
-		L"PLAYER", TEX_MULTI, L"Walk_1", 8)))
-	{
-		ERR_MSG(L"Player 멀티 텍스쳐 생성 실패");
-		return;
-	}
-
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/Pannel/UI0.png", 
 		L"MainUI", TEX_SINGLE)))
 	{
@@ -133,4 +126,15 @@ void	CBattleField::LoadPNG(void)
 		ERR_MSG(L"TestFood 싱글 텍스쳐 생성 실패");
 		return;
 	}
+
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/SelectEffect/SelectEffect.png", 
+		L"SelectEffect", TEX_SINGLE)))
+	{
+		ERR_MSG(L"SelectEffect 싱글 텍스쳐 생성 실패");
+		return;
+	}
+
+	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/PlayerPath.txt");
+	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/EffectPath.txt");
+
 }

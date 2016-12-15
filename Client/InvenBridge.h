@@ -15,5 +15,5 @@ public:
 	virtual void	Release(void);
 public:
 	CInvenBridge(void);
-	~CInvenBridge(void);
+	virtual ~CInvenBridge(void);
 };
