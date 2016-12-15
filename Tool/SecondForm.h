@@ -1,7 +1,6 @@
 #pragma once
 
 
-
 // CSecondForm 폼 뷰입니다.
 
 class CSecondForm : public CFormView
@@ -32,6 +31,17 @@ public: //수치 출력 관련
 	CString m_ObjKey;
 
 	void	SetKey(float _fObjKey, float _StateKey);
+
+public: // 세이브, 로드 관련
+	afx_msg void	OnLoadButton();
+	afx_msg void	OnSaveButton();
+	void			Release(void);	
+	void			SetTile(vector<TILE*> _pTile);
+	vector<TILE*>	m_pTile;
+
+	/*map<BYTE, TILE*>	m_MapTileData;
+	map<int, BACK*>		m_MapObjectData;*/
+
 };
 
 

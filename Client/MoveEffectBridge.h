@@ -8,6 +8,9 @@ protected:
 	virtual void	WorldMatrix(INFO& rInfo);
 
 public:
+	void	Move(INFO& rInfo);
+
+public:
 	virtual HRESULT	Initialize(void);
 	virtual void	Progress(INFO& rInfo);
 	virtual void	Render(void);

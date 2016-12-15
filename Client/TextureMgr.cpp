@@ -7,6 +7,7 @@ IMPLEMENT_SINGLETON(CTextureMgr)
 
 
 CTextureMgr::CTextureMgr(void)
+:m_iCounting(0)
 {
 }
 
@@ -43,12 +44,16 @@ HRESULT CTextureMgr::InsertTexture(const wstring& wstrFilePath,
 			return E_FAIL;
 		}
 		m_MapTexture.insert(map<wstring, CTexture*>::value_type(wstrObjKey, pTexture));
+
+		++m_iCounting;
 	}
 	else
 	{
 		if(TEX_MULTI == eTexType)
 		{
 			iter->second->InsertTexture(wstrFilePath, wstrStateKey, iCnt);
+
+			++m_iCounting;
 		}
 	}
 
@@ -115,4 +120,19 @@ size_t CTextureMgr::GetImgCount(const wstring& wstrObjKey,
 		return -1;
 
 	return ((CMultiTexture*)iter->second)->GetImgCount(wstrStateKey);
+}
+
+void CTextureMgr::SetString(wstring _wstrBuf)
+{
+	m_wstrString = _wstrBuf;
+}
+
+const std::wstring& CTextureMgr::GetString(void)
+{
+	return m_wstrString;
+}
+
+int CTextureMgr::GetCounting(void)
+{
+	return m_iCounting;
 }

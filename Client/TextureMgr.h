@@ -8,6 +8,8 @@ class CTextureMgr
 	DECLARE_SINGLETON(CTextureMgr)
 private:
 	map<wstring, CTexture*>		m_MapTexture;
+	wstring						m_wstrString;
+	int							m_iCounting;
 
 public:
 	HRESULT		InsertTexture(const wstring& wstrFilePath,		// 파일이 있는 경로
@@ -27,6 +29,9 @@ public:
 							const wstring& wstrStateKey = L"");
 
 
+	void		SetString(wstring _wstrBuf);
+	const wstring&	GetString(void);
+	int			GetCounting(void);
 private:
 	CTextureMgr(void);
 	~CTextureMgr(void);

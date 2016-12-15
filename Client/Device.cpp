@@ -8,6 +8,7 @@ CDevice::CDevice(void)
 , m_pDevice(NULL)
 , m_pSprite(NULL)
 , m_pFont(NULL)
+, m_pLoadingFont(NULL)
 , m_pLine(NULL)
 {
 }
@@ -35,9 +36,9 @@ HRESULT CDevice::InitDevice(void)
 	DWORD		vp;
 
 	if(DeviceCaps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT)
-		vp = D3DCREATE_HARDWARE_VERTEXPROCESSING;
+		vp = D3DCREATE_HARDWARE_VERTEXPROCESSING | D3DCREATE_MULTITHREADED;
 	else
-		vp = D3DCREATE_SOFTWARE_VERTEXPROCESSING;
+		vp = D3DCREATE_SOFTWARE_VERTEXPROCESSING | D3DCREATE_MULTITHREADED;
 
 	D3DPRESENT_PARAMETERS		d3dpp;
 	ZeroMemory(&d3dpp, sizeof(D3DPRESENT_PARAMETERS));
@@ -76,6 +77,23 @@ HRESULT CDevice::InitDevice(void)
 		return E_FAIL;
 	}
 
+	// 로딩폰트 객체 생성
+
+	D3DXFONT_DESCW			tFontInfo2;
+	ZeroMemory(&tFontInfo, sizeof(D3DXFONT_DESCW));
+
+	tFontInfo2.Height = 20;
+	tFontInfo2.Width = 10;
+	tFontInfo2.Weight = FW_HEAVY;
+	tFontInfo2.CharSet = HANGEUL_CHARSET;
+	lstrcpy(tFontInfo2.FaceName, L"굴림");
+
+	if(FAILED(D3DXCreateFontIndirect(m_pDevice, &tFontInfo2, &m_pLoadingFont)))
+	{
+		ERR_MSG(L"로딩폰트 객체 생성 실패");
+		return E_FAIL;
+	}
+
 	// 라인객체 생성
 	if(FAILED(D3DXCreateLine(m_pDevice, &m_pLine)))
 	{
@@ -89,6 +107,7 @@ HRESULT CDevice::InitDevice(void)
 void CDevice::Release(void)
 {
 	m_pLine->Release();
+	m_pLoadingFont->Release();
 	m_pFont->Release();
 	m_pSprite->Release();
 	m_pDevice->Release();
@@ -126,6 +145,11 @@ LPD3DXSPRITE CDevice::GetSprite(void)
 LPD3DXFONT CDevice::GetFont(void)
 {
 	return m_pFont;
+}
+
+LPD3DXFONT CDevice::GetLoadingFont(void)
+{	
+	return m_pLoadingFont;
 }
 
 LPD3DXLINE CDevice::GetLine(void)

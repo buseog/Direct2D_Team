@@ -40,3 +40,15 @@ void CUi::SetBridge(CBridge* pBridge)
 
 	m_pBridge = pBridge;
 }
+
+const RECT CUi::GetRect(void)
+{
+	RECT rc = {
+		m_tInfo.vPos.x - m_tInfo.vSize.x,
+		m_tInfo.vPos.y - m_tInfo.vSize.x,
+		m_tInfo.vPos.x + m_tInfo.vSize.x,
+		m_tInfo.vPos.y + m_tInfo.vSize.x
+	};
+
+	return rc;
+}

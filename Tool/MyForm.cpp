@@ -16,16 +16,12 @@ CMyForm::CMyForm()
 , m_TileY(0)
 , m_TileX(0)
 {
-	m_DlgTab1 = NULL;
-	m_DlgTab2 = NULL;
-	m_DlgTab3 = NULL;
+
 }
 
 CMyForm::~CMyForm()
 {
-	::Safe_Delete(m_DlgTab1);
-	::Safe_Delete(m_DlgTab2);
-	::Safe_Delete(m_DlgTab3);
+
 }
 
 void CMyForm::DoDataExchange(CDataExchange* pDX)
@@ -87,27 +83,25 @@ void CMyForm::OnInitialUpdate()
 	m_TabCtrl.InsertItem(2, L"Monster");
 
 	CRect rect;
+	m_TabCtrl.GetClientRect(&rect);
 
-	m_DlgTab3 = new CDlgTab3;
-	m_DlgTab2 = new CDlgTab2;
-	m_DlgTab1 = new CDlgTab1;
+	m_DlgTab1.Create(IDD_DIALOG1, &m_TabCtrl );
+	m_DlgTab1.GetWindowRect(&rect);
+	m_DlgTab1.MoveWindow(5,25, rect.Width(), rect.Height());
+	m_DlgTab1.ShowWindow(SW_SHOW);
 
-	m_DlgTab1->Create(IDD_DIALOG1, &m_TabCtrl );
-	m_DlgTab1->GetWindowRect(&rect);
-	m_DlgTab1->MoveWindow(5,25, rect.Width(), rect.Height());
-	m_DlgTab1->ShowWindow(SW_SHOW);
+	m_DlgTab2.Create(IDD_DIALOG2, &m_TabCtrl );
+	m_DlgTab2.GetWindowRect(&rect);
+	m_DlgTab2.MoveWindow(5,25, rect.Width(), rect.Height());
+	m_DlgTab2.ShowWindow(SW_HIDE);
 
-	m_DlgTab2->Create(IDD_DIALOG2, &m_TabCtrl );
-	m_DlgTab2->GetWindowRect(&rect);
-	m_DlgTab2->MoveWindow(5,25, rect.Width(), rect.Height());
-	m_DlgTab2->ShowWindow(SW_SHOW);
+	m_DlgTab3.Create(IDD_DIALOG3, &m_TabCtrl );
+	m_DlgTab3.GetWindowRect(&rect);
+	m_DlgTab3.MoveWindow(5,25, rect.Width(), rect.Height());
+	m_DlgTab3.ShowWindow(SW_HIDE);
 
-	m_DlgTab3->Create(IDD_DIALOG3, &m_TabCtrl );
-	m_DlgTab3->GetWindowRect(&rect);
-	m_DlgTab3->MoveWindow(5,25, rect.Width(), rect.Height());
-	m_DlgTab3->ShowWindow(SW_SHOW);
+	Invalidate(false);
 
-	Invalidate(TRUE);
 }
 
 void CMyForm::OnClickButton()
@@ -122,8 +116,9 @@ void CMyForm::OnClickButton()
 	m_pBack->Release();
 	m_pBack->Initialize();
 
-
+	((CMainFrame*)AfxGetMainWnd())->GetMainView()->SetScrollSizes(MM_TEXT, CSize(TILECX * (int)m_TileX, (TILECY / 2) * (int)m_TileY));
 	((CMainFrame*)AfxGetMainWnd())->GetMainView()->Invalidate(TRUE);
+
 
 	UpdateData(FALSE);
 
@@ -143,32 +138,34 @@ void CMyForm::OnPathFind()
 void CMyForm::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(TRUE);
 
 	int iIndex = m_TabCtrl.GetCurSel();
 
 	switch(iIndex)
 	{
 	case 0:
-		m_DlgTab1->ShowWindow(SW_SHOW);
-		m_DlgTab2->ShowWindow(SW_HIDE);
-		m_DlgTab3->ShowWindow(SW_HIDE);
+		m_DlgTab1.ShowWindow(SW_SHOW);
+		m_DlgTab2.ShowWindow(SW_HIDE);
+		m_DlgTab3.ShowWindow(SW_HIDE);
 		break;
 
 	case 1:
-		m_DlgTab1->ShowWindow(SW_HIDE);
-		m_DlgTab2->ShowWindow(SW_SHOW);
-		m_DlgTab3->ShowWindow(SW_HIDE);
+		m_DlgTab1.ShowWindow(SW_HIDE);
+		m_DlgTab2.ShowWindow(SW_SHOW);
+		m_DlgTab3.ShowWindow(SW_HIDE);
 		break;
 
 	case 2:
-		m_DlgTab1->ShowWindow(SW_HIDE);
-		m_DlgTab2->ShowWindow(SW_HIDE);
-		m_DlgTab3->ShowWindow(SW_SHOW);
+		m_DlgTab1.ShowWindow(SW_HIDE);
+		m_DlgTab2.ShowWindow(SW_HIDE);
+		m_DlgTab3.ShowWindow(SW_SHOW);
 		break;
 		
 	}
 
-	*pResult = 0;
+	UpdateData(FALSE);
+
 }
 
 
@@ -176,6 +173,7 @@ CItemTool* CMyForm::GetItemTool(void)
 {
 	return &m_ItemTool;
 }
+
 void CMyForm::OnUnitTool()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.

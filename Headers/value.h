@@ -13,5 +13,5 @@ const int TILECX = 64;
 const int TILECY = 32;
 
 
-static int TILEX = 20;
-static int TILEY = 30;
+static int TILEX = 40;
+static int TILEY = 60;

@@ -4,6 +4,7 @@
 #include "SceneMgr.h"
 
 CStart::CStart(void)
+:m_iMaxLoad(50)
 {
 }
 
@@ -17,6 +18,12 @@ unsigned int __stdcall CStart::ImgLoadThreadFunc(void* pArg)
 	CStart*		pStart = (CStart*)pArg;
 
 	EnterCriticalSection(&pStart->GetCrt());
+
+	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/PlayerPath.txt");
+
+	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/EffectPath.txt");
+
+	CTextureMgr::GetInstance()->SetString(L"Press Enter");
 
 	LeaveCriticalSection(&pStart->GetCrt());
 	_endthreadex(0);
@@ -70,6 +77,34 @@ void	CStart::Render(void)
 	CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
 	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
 		NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	float fPercent = (float)CTextureMgr::GetInstance()->GetCounting() / (float)m_iMaxLoad * 100.f;
+	int	iLoading = int(fPercent / 1.8f);
+
+	for (int i = 0; i < iLoading; ++i)
+	{
+		const TEXINFO*		pLoading = CTextureMgr::GetInstance()->GetTexture(L"UI", L"LoadingBar", i);
+		
+		fX = pLoading->tImgInfo.Width / 2.f;
+		fY = pLoading->tImgInfo.Height / 2.f;
+		
+		D3DXMatrixTranslation(&matTrans, 
+			230 + pLoading->tImgInfo.Width * i,
+			550, 0.f);
+
+		CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
+		CDevice::GetInstance()->GetSprite()->Draw(pLoading->pTexture, 
+			NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+
+	D3DXMatrixTranslation(&matTrans, 350.f, 500.f, 0.f);
+	CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
+	CDevice::GetInstance()->GetLoadingFont()->DrawTextW(CDevice::GetInstance()->GetSprite(),
+		CTextureMgr::GetInstance()->GetString().c_str(),
+		CTextureMgr::GetInstance()->GetString().length(),
+		NULL, 0, D3DCOLOR_ARGB(255, 0, 0, 0));
+
+
 
 }
 

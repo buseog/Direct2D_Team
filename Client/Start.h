@@ -7,6 +7,7 @@ class CStart :
 private:
 	HANDLE				m_hThread;
 	CRITICAL_SECTION	m_Crt;
+	int					m_iMaxLoad;
 
 public:
 	static unsigned int __stdcall ImgLoadThreadFunc(void*	pArg);

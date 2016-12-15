@@ -1,5 +1,7 @@
 #pragma once
 #include "afxwin.h"
+#include "SecondForm.h"
+#include "BackGround.h"
 
 
 // CDlgTab2 대화 상자입니다.
@@ -21,10 +23,18 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
-
-public:
-	void	ListBoxAddItem(void);
 	virtual BOOL OnInitDialog();
 
+public: 
 	CListBox m_ListBox02;
+	CSecondForm*		m_pSecondForm;
+	CBackGround*		m_pBack;
+	
+public:
+	afx_msg void OnAddBox();
+	void	ListBoxAddItem(void);
+	CString			m_szStateKey;
+	CString			m_szObjKey;
+	int				m_iCount;
+	
 };

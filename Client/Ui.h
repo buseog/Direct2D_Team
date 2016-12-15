@@ -21,6 +21,7 @@ public:
 	void			SetPos(float fX, float fY);
 	void			SetBridge(CBridge* pBridge);
 	const wstring&	GetObjKey(void);
+	const RECT		GetRect(void);
 	
 public:
 	virtual HRESULT	Initialize(void)PURE;

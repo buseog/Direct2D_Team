@@ -17,6 +17,7 @@ HRESULT CMoveEffectBridge::Initialize(void)
 void CMoveEffectBridge::Progress(INFO& rInfo)
 {
 	WorldMatrix(rInfo);
+	Move(rInfo);
 	Frame();
 }
 
@@ -51,4 +52,19 @@ void CMoveEffectBridge::WorldMatrix(INFO& rInfo)
 		0.f);
 
 	rInfo.matWorld = matTrans;
+}
+
+
+void	CMoveEffectBridge::Move(INFO& rInfo)
+{
+	rInfo.vDir = m_pObj->GetTargetPoint() - rInfo.vPos;
+	
+	float	fDistance = D3DXVec3Length(&rInfo.vDir);
+	D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
+
+	if(fDistance > 10.f)
+	{
+		rInfo.vPos += rInfo.vDir * 300 * CTimeMgr::GetInstance()->GetTime();
+	}
+
 }

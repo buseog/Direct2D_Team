@@ -55,11 +55,9 @@ BOOL CDlgTab1::OnInitDialog()
 	UpdateData(TRUE);
 
 	wifstream		LoadFile;
-	LoadFile.open("../Data/TilePath.txt", ios::in);
+	LoadFile.open("../Data/MapPath.txt", ios::in);
 
-	TCHAR		szObjKey[MIN_STR]	= L"";
-	TCHAR		szStateKey[MIN_STR] = L"";
-	TCHAR		szCount[MIN_STR]	= L"";
+
 	TCHAR		szImgPath[MAX_PATH] = L"";
 
 	wstring		wstrCombine = L"";
@@ -67,20 +65,15 @@ BOOL CDlgTab1::OnInitDialog()
 
 	while(!LoadFile.eof())
 	{
-		LoadFile.getline(szObjKey, MIN_STR, '|');
-		LoadFile.getline(szStateKey, MIN_STR, '|');
-		LoadFile.getline(szCount, MIN_STR, '|');
+
 		LoadFile.getline(szImgPath, MAX_PATH);
 
-		wstrCombine = wstring(szObjKey) + L"|" + wstring(szStateKey) + L"|";
-		wstrCombine += szCount;
-		wstrCombine += L"|" + wstring(szImgPath);
+		wstrCombine = wstring(szImgPath);
 
 		m_ListBox01.AddString(wstrCombine.c_str());
 
 	}
-
-
+	
 	UpdateData(FALSE);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -93,6 +86,18 @@ void CDlgTab1::OnAddBox()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 
 	UpdateData(TRUE);
-UpdateData(FALSE);
+	
+	m_iCount = m_ListBox01.GetCurSel();
+
+	m_pBack = ((CMainFrame*)AfxGetMainWnd())->GetMainView()->GetBackGround();
+
+	m_pBack->SetCount(m_iCount);
+
+	Invalidate(false);
+	((CMainFrame*)AfxGetMainWnd())->GetMainView()->Invalidate(false);
+	((CMainFrame*)AfxGetMainWnd())->GetMiniView()->Invalidate(false);
+
+	UpdateData(FALSE);
+
 
 }

@@ -75,6 +75,5 @@ void	CBattleField::LoadPNG(void)
 		return;
 	}
 
-	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/PlayerPath.txt");
-	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/EffectPath.txt");
+	
 }

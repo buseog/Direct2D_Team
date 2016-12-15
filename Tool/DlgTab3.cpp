@@ -23,7 +23,7 @@ CDlgTab3::~CDlgTab3()
 void CDlgTab3::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_LIST1, m_ListBox03);
+	DDX_Control(pDX, IDC_LIST3, m_ListBox03);
 }
 
 
