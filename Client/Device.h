@@ -11,6 +11,8 @@ private:
 	LPDIRECT3DDEVICE9	m_pDevice;
 	LPD3DXSPRITE		m_pSprite;
 	LPD3DXFONT			m_pFont;
+
+	LPD3DXFONT			m_pUIFont;
 	LPD3DXLINE			m_pLine;
 
 public:
@@ -24,6 +26,7 @@ public:
 	LPDIRECT3DDEVICE9 GetDevice(void);
 	LPD3DXSPRITE	  GetSprite(void);
 	LPD3DXFONT		  GetFont(void);
+	LPD3DXFONT		  GetUIFont(void);
 	LPD3DXLINE		  GetLine(void);
 
 private:

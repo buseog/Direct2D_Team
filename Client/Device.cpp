@@ -76,6 +76,22 @@ HRESULT CDevice::InitDevice(void)
 		return E_FAIL;
 	}
 
+	// UI 迄飘 按眉 积己
+	D3DXFONT_DESCW			tFontInfo3;
+	ZeroMemory(&tFontInfo3, sizeof(D3DXFONT_DESCW));
+
+	tFontInfo3.Height = 12;
+	tFontInfo3.Width = 6;
+	tFontInfo3.Weight = FW_LIGHT;
+	tFontInfo3.CharSet = HANGEUL_CHARSET;
+	lstrcpy(tFontInfo3.FaceName, L"奔覆");
+
+		if(FAILED(D3DXCreateFontIndirect(m_pDevice, &tFontInfo3, &m_pUIFont)))
+	{
+		ERR_MSG(L"迄飘 按眉 积己 角菩");
+		return E_FAIL;
+	}
+
 	// 扼牢按眉 积己
 	if(FAILED(D3DXCreateLine(m_pDevice, &m_pLine)))
 	{
@@ -90,6 +106,7 @@ void CDevice::Release(void)
 {
 	m_pLine->Release();
 	m_pFont->Release();
+	m_pUIFont->Release();
 	m_pSprite->Release();
 	m_pDevice->Release();
 	m_p3D->Release();
@@ -126,6 +143,11 @@ LPD3DXSPRITE CDevice::GetSprite(void)
 LPD3DXFONT CDevice::GetFont(void)
 {
 	return m_pFont;
+}
+
+LPD3DXFONT CDevice::GetUIFont(void)
+{
+	return m_pUIFont;
 }
 
 LPD3DXLINE CDevice::GetLine(void)

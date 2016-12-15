@@ -4,7 +4,6 @@
 class CStatusBridge :
 	public CUiBridge
 {
-
 protected:
 	virtual void	WorldMatrix(INFO& rInfo);
 

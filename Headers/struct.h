@@ -91,11 +91,12 @@ typedef struct tagUnitDataDetail
 	UINT UnitType;
 }DETAILDATA;
 
-// 현도 유닛 데이타
+// 현도 유닛 데이타 (Stat 창에서 함께 씀)
 typedef struct tagUnitData
 {
 	//CString strName;
 	wstring	wstrName;
+
 	int iAttack;
 	int iDeffence;
 	int iHealthPoint;
@@ -148,23 +149,6 @@ typedef	struct tagAStarNode
 
 }NODE;
 
-// 유닛 스텟
-typedef struct tagStatus
-{
-	wstring		strName;
-	int			iHp;
-	int			iMp;
-	int			iLevel;
-	int			iExp;
-	int			iStr;
-	int			iDex;
-	int			iInt;
-	int			iAttack;
-	int			iDef;
-	float		fMoveSpeed;
-	float		fAttackSpeed;
-}STAT;
-
 // 마을툴에서 사용하는 구조체
 typedef struct tagStore
 {
@@ -190,5 +174,6 @@ typedef struct tagKey
 {
 	CString		m_ObjKey;
 	CString		m_StateKey;
+
 }KEY;
 

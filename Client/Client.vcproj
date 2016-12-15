@@ -470,13 +470,6 @@
 							<File
 								RelativePath=".\MoveEffectBridge.cpp"
 								>
-								<FileConfiguration
-									Name="Debug|Win32"
-									>
-									<Tool
-										Name="VCCLCompilerTool"
-									/>
-								</FileConfiguration>
 							</File>
 							<File
 								RelativePath=".\MoveEffectBridge.h"
@@ -496,13 +489,6 @@
 							<File
 								RelativePath=".\StandEffectBridge.cpp"
 								>
-								<FileConfiguration
-									Name="Debug|Win32"
-									>
-									<Tool
-										Name="VCCLCompilerTool"
-									/>
-								</FileConfiguration>
 							</File>
 							<File
 								RelativePath=".\StandEffectBridge.h"
