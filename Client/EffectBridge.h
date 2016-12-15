@@ -4,9 +4,6 @@
 class CEffectBridge :
 	public CObjBridge
 {
-protected:
-	virtual void	WorldMatrix(INFO& rInfo);
-
 public:
 	virtual HRESULT	Initialize(void);
 	virtual void	Progress(INFO& rInfo);

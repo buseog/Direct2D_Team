@@ -40,9 +40,17 @@ void CObjMgr::Progress(void)
 	for(size_t i = 0; i < OBJ_END; ++i)
 	{
 		for(list<CObj*>::iterator	iter = m_ObjList[m_eSceneID][i].begin();
-			iter != m_ObjList[m_eSceneID][i].end(); ++iter)
+			iter != m_ObjList[m_eSceneID][i].end(); )
 		{
 			(*iter)->Progress();
+
+			if ((*iter)->GetDestroy())
+			{
+				::Safe_Delete(*iter);
+				iter = m_ObjList[m_eSceneID][i].erase(iter);
+			}
+			else
+				++iter;
 		}
 	}
 }

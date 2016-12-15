@@ -7,7 +7,7 @@
 #include "ObjMgr.h"
 #include "ObjFactory.h"
 #include "Effect.h"
-#include "EffectBridge.h"
+#include "StandEffectBridge.h"
 
 IMPLEMENT_SINGLETON(CCrowdMgr)
 
@@ -45,7 +45,7 @@ void	CCrowdMgr::Progress(void)
 		for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
 		{
 			D3DXVECTOR3 vMouse = ::GetMouse() - m_vecSelectUnit[i]->GetScroll();
-			CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CObjFactory<CEffect, CEffectBridge>::CreateObj(L"MoveMark", vMouse));
+			CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CObjFactory<CEffect, CStandEffectBridge>::CreateObj(L"MoveMark", vMouse));
 			((CUnitBridge*)m_vecSelectUnit[i]->GetBridge())->SetAstar(vMouse);
 			m_vecSelectUnit[i]->SetOrder(OD_ASTAR);
 		}
