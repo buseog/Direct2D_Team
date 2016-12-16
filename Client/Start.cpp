@@ -90,7 +90,7 @@ void	CStart::Render(void)
 		
 		D3DXMatrixTranslation(&matTrans, 
 			230 + pLoading->tImgInfo.Width * i,
-			550, 0.f);
+			550, 0);
 
 		CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
 		CDevice::GetInstance()->GetSprite()->Draw(pLoading->pTexture, 

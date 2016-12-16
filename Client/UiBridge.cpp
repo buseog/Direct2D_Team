@@ -4,6 +4,7 @@
 
 
 CUiBridge::CUiBridge(void)
+: m_iPriority(0)
 {
 }
 
@@ -53,4 +54,9 @@ void	CUiBridge::WorldMatrix(INFO& rInfo)
 {
 	
 
+}
+
+int		CUiBridge::Picking(void)
+{
+	return -1;
 }

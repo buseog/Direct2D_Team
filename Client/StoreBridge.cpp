@@ -135,10 +135,11 @@ void CStoreBridge::Render(void)
 
 }
 
-void CStoreBridge::Picking(void)
+int CStoreBridge::Picking(void)
 {
 	if(m_bState==FALSE)
-		return;
+		return -1;
+
 	D3DXVECTOR3 vecMousepos = ::GetMouse();
 	float fX = pTexture->tImgInfo.Width  / 2.f;
 	float fY = pTexture->tImgInfo.Height / 2.f;
@@ -163,7 +164,7 @@ void CStoreBridge::Picking(void)
 				//showtooltip
 				m_bToolTip=TRUE;
 				m_iToolTipIndex=i;
-				return;
+				break;
 			}
 			else
 			{
@@ -173,6 +174,8 @@ void CStoreBridge::Picking(void)
 		}
 	}
 	//::GetMouse();
+
+	return m_iPriority;
 }
 void CStoreBridge::ShowToolTip(/*int _iIndex,*/)
 {

@@ -160,3 +160,9 @@ void	CStatusBridge::WorldMatrix(INFO& rInfo)
 	rInfo.matWorld = matTrans;
 
 }
+
+
+int	CStatusBridge::Picking(void)
+{
+	return m_iPriority;
+}

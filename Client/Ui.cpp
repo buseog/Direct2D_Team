@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "Ui.h"
+#include "UiBridge.h"
 
 CUi::CUi(void)
 :m_pBridge(NULL)
@@ -44,11 +45,16 @@ void CUi::SetBridge(CBridge* pBridge)
 const RECT CUi::GetRect(void)
 {
 	RECT rc = {
-		m_tInfo.vPos.x - m_tInfo.vSize.x,
-		m_tInfo.vPos.y - m_tInfo.vSize.x,
-		m_tInfo.vPos.x + m_tInfo.vSize.x,
-		m_tInfo.vPos.y + m_tInfo.vSize.x
+		long(m_tInfo.vPos.x - m_tInfo.vSize.x),
+		long(m_tInfo.vPos.y - m_tInfo.vSize.y),
+		long(m_tInfo.vPos.x + m_tInfo.vSize.x),
+		long(m_tInfo.vPos.y + m_tInfo.vSize.y)
 	};
 
 	return rc;
+}
+
+int CUi::Picking(void)
+{
+	return ((CUiBridge*)m_pBridge)->Picking();
 }

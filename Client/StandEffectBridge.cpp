@@ -55,7 +55,7 @@ void CStandEffectBridge::WorldMatrix(INFO& rInfo)
 
 void	CStandEffectBridge::Frame(void)
 {
-	m_tFrame.fFrame += m_tFrame.fCount * CTimeMgr::GetInstance()->GetTime() * 1.5;
+	m_tFrame.fFrame += m_tFrame.fCount * CTimeMgr::GetInstance()->GetTime() * 1.5f;
 
 	if(m_tFrame.fFrame > m_tFrame.fMax)
 		m_pObj->SetDestroy(true);

@@ -758,7 +758,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="04. Store"
+				Name="03. Store"
 				>
 				<File
 					RelativePath=".\Store.cpp"

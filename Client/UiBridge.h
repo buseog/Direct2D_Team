@@ -5,7 +5,13 @@ class CUiBridge :
 	public CBridge
 {
 protected:
+	int		m_iPriority;
+
+protected:
 	virtual void	WorldMatrix(INFO& rInfo);
+
+public:
+	virtual int		Picking(void);
 
 public:
 	virtual HRESULT	Initialize(void);

@@ -61,3 +61,8 @@ void	CInvenBridge::WorldMatrix(INFO& rInfo)
 	rInfo.matWorld = matTrans;
 
 }
+
+int	CInvenBridge::Picking(void)
+{
+	return m_iPriority;
+}

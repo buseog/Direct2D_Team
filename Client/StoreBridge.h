@@ -14,6 +14,7 @@ public:
 	virtual void	Progress(INFO& rInfo);
 	virtual void	Render(void);
 	virtual void	Release(void);
+	virtual int		Picking(void);
 
 private:
 	BOOL m_bState;
@@ -26,10 +27,10 @@ private:
 private:
 	void AddItem(ITEMID _itemid);
 	void DeleteContainedOverItem(void);
-	void Picking(void);
 	void ShowToolTip(/*int _iIndex,*/);
 public :
 	void SetState(void);
+	
 public:
 	CStoreBridge(void);
 	~CStoreBridge(void);

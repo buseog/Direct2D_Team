@@ -22,7 +22,8 @@ public:
 	void			SetBridge(CBridge* pBridge);
 	const wstring&	GetObjKey(void);
 	const RECT		GetRect(void);
-	
+	int				Picking(void);
+
 public:
 	virtual HRESULT	Initialize(void)PURE;
 	virtual void	Progress(void)PURE;
