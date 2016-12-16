@@ -15,9 +15,9 @@ HRESULT CHelmet::Initialize(void)
 	m_tItem.wstrName = L"Head";
 	return S_OK;
 }
-int CHelmet::Progress(void)
+void CHelmet::Progress(void)
 {
-	return 0;
+	
 }
 void CHelmet::Render(void)
 {

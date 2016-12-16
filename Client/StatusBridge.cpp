@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "StatusBridge.h"
 #include "UIMgr.h"
+#include "Ui.h"
+#include "Obj.h"
 #include "ObjMgr.h"
 #include "UIFactory.h"
 #include "MyButton.h"
@@ -103,6 +105,7 @@ void CStatusBridge::Render(void)
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	// °ø°Ý·Â
+
 	wsprintf(m_szPrint, L"%d", pPlayer->GetPlayerStat()->iAttack);
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x + 90.f, m_pUi->GetInfo()->vPos.y - 42.f, 0.f);

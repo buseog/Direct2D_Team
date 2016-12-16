@@ -4,6 +4,7 @@
 
 CUi::CUi(void)
 :m_pBridge(NULL)
+,m_bView(false)
 {
 	ZeroMemory(&m_tInfo, sizeof(INFO));
 }
@@ -18,7 +19,7 @@ const INFO* CUi::GetInfo(void) const
 	return &m_tInfo;
 }
 
-
+		
 void CUi::SetPos(const D3DXVECTOR3& vPos)
 {
 	m_tInfo.vPos = vPos;

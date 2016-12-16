@@ -8,7 +8,6 @@ CUiBridge::CUiBridge(void)
 {
 }
 
-
 CUiBridge::CUiBridge(CUi*	pUi)
 :CBridge(pUi)
 {
@@ -30,7 +29,7 @@ void CUiBridge::Progress(INFO& rInfo)
 
 void CUiBridge::Render(void)
 {
-	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pObj->GetObjKey(), 
+	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pUi->GetObjKey(), 
 		m_wstrStateKey, (int)m_tFrame.fFrame);
 
 	

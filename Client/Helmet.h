@@ -9,7 +9,7 @@ public:
 	~CHelmet(void);
 public:
 	virtual HRESULT Initialize(void);
-	virtual int Progress(void);
+	virtual void Progress(void);
 	virtual void Render(void);
 	virtual void Release(void);
 };
