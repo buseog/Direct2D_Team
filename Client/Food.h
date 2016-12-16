@@ -4,6 +4,13 @@
 class CFood :
 	public CItem
 {
+private:
+	wstring			m_wstrStateKey;	
+	
+	
+public:
+	void WorldMatrix(void);
+
 public:
 	CFood(void);
 	~CFood(void);

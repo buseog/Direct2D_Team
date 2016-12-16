@@ -31,6 +31,7 @@ enum UIID
 	UI_INVEN,
 	UI_STAT,
 	UI_STORE,
+	UI_BUTTON, // 은지 추가
 	UI_END
 };
 

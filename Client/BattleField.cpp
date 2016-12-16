@@ -136,7 +136,7 @@ void	CBattleField::LoadPNG(void)
 		ERR_MSG(L"TestArmor 싱글 텍스쳐 생성 실패")
 		return;
 	}
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Item/Food/0.png", 
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Item/Food/2.png", 
 		L"TestFood", TEX_SINGLE)))
 	{
 		ERR_MSG(L"TestFood 싱글 텍스쳐 생성 실패")
@@ -149,4 +149,14 @@ void	CBattleField::LoadPNG(void)
 		ERR_MSG(L"SelectEffect 싱글 텍스쳐 생성 실패")
 		return;
 	}
+
+	/////////////스텟 창 테스트 /////////////////////////////
+	if(FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI15.png", 
+		L"Button", TEX_SINGLE)))
+	{
+		ERR_MSG(L"Button 싱글 텍스쳐 생성 실패");
+		return;
+	}
+
+
 }

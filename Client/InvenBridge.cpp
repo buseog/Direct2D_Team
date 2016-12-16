@@ -7,12 +7,14 @@
 #include "KeyMgr.h"
 #include "Weapon.h"
 #include "Armor.h"
+#include "Food.h"
 #include "EmptyItem.h"
 
 CInvenBridge::CInvenBridge(void)
 : m_bSelect(false)
 , m_bDrag(false)
 , m_iSelectIndex(-1)
+, m_iFood(-1)
 
 {
 }
@@ -25,6 +27,7 @@ CInvenBridge::~CInvenBridge(void)
 
 HRESULT CInvenBridge::Initialize(void)
 {
+
 	m_wstrStateKey = L"Inventory";
 
 
@@ -34,6 +37,7 @@ HRESULT CInvenBridge::Initialize(void)
 		m_ItemSlot.push_back(CreateEmpty(m_tInfo.vPos));
 	
 	}
+
 	return S_OK;
 }
 
@@ -145,6 +149,48 @@ void CInvenBridge::AddItem(INFO& rInfo)
 			}
 		}
 	}
+
+	if(CKeyMgr::GetInstance()->KeyDown('U'))
+	{
+		for(size_t i =0; i < 10; ++i)
+		{
+			if(m_ItemSlot[i]->GetObjKey() == L"TestFood")
+			{
+				if(m_ItemSlot[i]->GetItemInfo()->iCount < 500)
+				{
+					m_ItemSlot[i]->SetFoodPlus(100);
+					break;
+				}
+
+				else if(m_ItemSlot[i]->GetItemInfo()->iCount >= 500)
+				{
+					for(int j = 0; j < 10; ++j)
+					{
+						if(m_ItemSlot[j]->GetObjKey() == L"Empty")
+						{
+							CItem*	pTemp = m_ItemSlot[j]; 
+							//m_ItemSlot[j]->SetFoodZero();
+							m_ItemSlot[j] = CreateFood(rInfo.vPos);
+							m_ItemSlot[j]->SetFoodPlus(100);
+							::Safe_Delete(pTemp);
+							break;
+						}
+					break;
+					}
+				
+				}
+			}
+
+			if(m_ItemSlot[i]->GetObjKey() == L"Empty")
+			{
+				CItem*	pTemp = m_ItemSlot[i]; 
+				m_ItemSlot[i] = CreateFood(rInfo.vPos);
+				m_ItemSlot[i]->SetFoodPlus(100);
+				::Safe_Delete(pTemp);
+				break;
+			}
+		}
+	}
 	
 }
 
@@ -197,6 +243,13 @@ CItem*	CInvenBridge::CreateWeapon(D3DXVECTOR3 vPos)
 CItem*	CInvenBridge::CreateArmor(D3DXVECTOR3 vPos)
 {
 	CItem*	pItem = CItemFactory<CArmor>::CreateItem(vPos);
+	
+	return pItem;
+}
+
+CItem*	CInvenBridge::CreateFood(D3DXVECTOR3 vPos)
+{
+	CItem*	pItem = CItemFactory<CFood>::CreateItem(vPos);
 	
 	return pItem;
 }

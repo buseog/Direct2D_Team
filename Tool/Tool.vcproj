@@ -68,6 +68,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="d3d9.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -191,11 +192,11 @@
 				UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 				>
 				<File
-					RelativePath="h:\ESSUEv.1\Tool\res\Tool.ico"
+					RelativePath=".\res\Tool.ico"
 					>
 				</File>
 				<File
-					RelativePath=".\res\Tool.ico"
+					RelativePath="h:\ESSUEv.1\Tool\res\Tool.ico"
 					>
 				</File>
 				<File
@@ -215,19 +216,19 @@
 					>
 				</File>
 				<File
-					RelativePath="h:\ESSUEv.1\Tool\res\Toolbar256.bmp"
-					>
-				</File>
-				<File
 					RelativePath=".\res\Toolbar256.bmp"
 					>
 				</File>
 				<File
-					RelativePath=".\res\ToolDoc.ico"
+					RelativePath="h:\ESSUEv.1\Tool\res\Toolbar256.bmp"
 					>
 				</File>
 				<File
 					RelativePath="h:\ESSUEv.1\Tool\res\ToolDoc.ico"
+					>
+				</File>
+				<File
+					RelativePath=".\res\ToolDoc.ico"
 					>
 				</File>
 				<File
@@ -241,11 +242,11 @@
 				UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 				>
 				<File
-					RelativePath="h:\ESSUEv.1\Tool\resource.h"
+					RelativePath=".\Resource.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Resource.h"
+					RelativePath="h:\ESSUEv.1\Tool\resource.h"
 					>
 				</File>
 				<File

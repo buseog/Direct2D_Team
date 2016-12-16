@@ -1,11 +1,13 @@
 #pragma once
 #include "uibridge.h"
 
+class CUi;
 class CStatusBridge :
 	public CUiBridge
 {
 protected:
-	virtual void	WorldMatrix(INFO& rInfo);
+	virtual void		WorldMatrix(INFO& rInfo);
+	vector<CUi*>		m_vecButton;
 
 public:
 	virtual HRESULT	Initialize(void);
