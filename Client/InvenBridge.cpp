@@ -154,7 +154,7 @@ int CInvenBridge::Picking(INFO& rInfo)
 		Pt.x = (long)GetMouse().x;
 		Pt.y = (long)GetMouse().y;
 
-	if(CKeyMgr::GetInstance()->KeyUp(VK_LBUTTON, 1))
+	if(CKeyMgr::GetInstance()->KeyUp(VK_LBUTTON, 1) && m_iSelectIndex >= 0)
 	{
 		for(size_t j =0; j<10; ++j)
 		{

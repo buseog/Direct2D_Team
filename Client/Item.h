@@ -21,10 +21,8 @@ public:
 	RECT				GetRect(void);
 	bool				GetEmpty(void);
 	ITEM*				GetItemInfo(void);
-	wstring				GetItemKey(void);
-	
-	const wstring		GetObjKey(void);
 	CBridge*			GetBridge(void);
+	const wstring		GetObjKey(void);
 
 	void	SetItemProperty(wstring _Name, ITEMID _eType,int _iOption,int _iPrice, int _iWeight);
 		

@@ -27,23 +27,8 @@ HRESULT CStoreBridge::Initialize(void)
 {
 
 	m_wstrStateKey = L"Store";
-	AddItem(IT_BELT);
-	AddItem(IT_ARMOR);
-	AddItem(IT_WEAPON);
-	AddItem(IT_FOOD);
-	AddItem(IT_BOOTS);
-	AddItem(IT_HELMET);
-	AddItem(IT_FOOD);
-	AddItem(IT_BOOTS);
-	AddItem(IT_HELMET);
-	AddItem(IT_FOOD);
-	AddItem(IT_BOOTS);
-	AddItem(IT_HELMET);
-	AddItem(IT_HELMET);
-	AddItem(IT_HELMET);
-	AddItem(IT_HELMET);
-	AddItem(IT_HELMET);
-	AddItem(IT_HELMET);
+	LoadData();
+
 
 
 	//DeleteContainedOverItem();
@@ -59,10 +44,10 @@ void CStoreBridge::Progress(INFO& rInfo)
 	int iIndexY=0;
 	for(vector<CItem*>::size_type i=0;i<m_vecItem.size();i++)
 	{
-		pItemTexture = CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetItemKey());
+		pItemTexture = CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetObjKey());
 
-		float fIconX = (float)(CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetItemKey())->tImgInfo.Width);
-		float fIconY = (float)(CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetItemKey())->tImgInfo.Height);
+		float fIconX = (float)(CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetObjKey())->tImgInfo.Width);
+		float fIconY = (float)(CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetObjKey())->tImgInfo.Height);
 		//m_vecItem[i]
 
 		float fx = m_pUi->GetInfo()->vPos.x;
@@ -71,14 +56,7 @@ void CStoreBridge::Progress(INFO& rInfo)
 		float fY = fy-fy/4+12;
 
 		m_vecItem[i]->SetPos(D3DXVECTOR3(fX+(iIndexX*(fIconX+4)),fY+(iIndexY*(fIconY+5)),0.f));
-		/*m_vecItem[i]->SetPos(D3DXVECTOR3(pItemTexture->tImgInfo.Width  / 2.f +((fIconX*2+8)-(iIndexX*fIconX+(iIndexX*4))),
-		pItemTexture->tImgInfo.Height / 2.f + (fIconY-9)-((fIconY+5)*iIndexY),
-		0));*/
-		//float fXtmp = pItemTexture->tImgInfo.Width  / 2.f +((fIconX*2+8)-(iIndexX*fIconX+(iIndexX*4)));
-		//float fYtmp = pItemTexture->tImgInfo.Height / 2.f + (fIconY-9)-((fIconY+5)*iIndexY);
-		//CDevice::GetInstance()->GetSprite()->SetTransform(&m_pUi->GetInfo()->matWorld);
 
-		//&D3DXVECTOR3(fXtmp, fYtmp, 0.f) ,
 
 		iIndexX++;
 		if(iIndexX%5==0)
@@ -110,7 +88,7 @@ void CStoreBridge::Render(void)
 	for(vector<CItem*>::size_type i=0;i<m_vecItem.size();i++)
 	{
 		D3DXMATRIX matTrans;
-		pItemTexture = CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetItemKey());
+		pItemTexture = CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetObjKey());
 		D3DXMatrixTranslation(&matTrans,m_vecItem[i]->GetInfo()->vPos.x,m_vecItem[i]->GetInfo()->vPos.y,0.f);
 		CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
 		CDevice::GetInstance()->GetSprite()->Draw(pItemTexture->pTexture, 
@@ -151,8 +129,8 @@ int CStoreBridge::Picking(void)
 	{
 		for(vector<CItem*>::size_type i=0;i<m_vecItem.size();i++)
 		{
-			float fIconX = (float)(CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetItemKey())->tImgInfo.Width)/2.f;
-			float fIconY = (float)(CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetItemKey())->tImgInfo.Height)/2.f;
+			float fIconX = (float)(CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetObjKey())->tImgInfo.Width)/2.f;
+			float fIconY = (float)(CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetObjKey())->tImgInfo.Height)/2.f;
 			float fItemX =m_vecItem[i]->GetInfo()->vPos.x;
 			float fItemY =m_vecItem[i]->GetInfo()->vPos.y;
 			if(vecMousepos.x >= fItemX-fIconX &&//오른쪽
@@ -164,16 +142,14 @@ int CStoreBridge::Picking(void)
 				//showtooltip
 				m_bToolTip=TRUE;
 				m_iToolTipIndex=i;
-				break;
+				return 0;
 			}
-			else
-			{
-				m_bToolTip=FALSE;
-			}
-
 		}
 	}
-	//::GetMouse();
+
+	m_bToolTip=FALSE;
+	m_iToolTipIndex=99;
+
 
 	return m_iPriority;
 }
@@ -193,7 +169,7 @@ void CStoreBridge::ShowToolTip(/*int _iIndex,*/)
 
 
 	//초상화
-	pItemTexture = CTextureMgr::GetInstance()->GetTexture(m_vecItem[m_iToolTipIndex]->GetItemKey());
+	pItemTexture = CTextureMgr::GetInstance()->GetTexture(m_vecItem[m_iToolTipIndex]->GetObjKey());
 	D3DXMatrixTranslation(&matTrans,ToolTipPosX-100,ToolTipPosY-50,0.f);
 	CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
 	CDevice::GetInstance()->GetSprite()->Draw(pItemTexture->pTexture, 
@@ -255,7 +231,9 @@ void CStoreBridge::Release(void)
 	for(vector<CItem*>::size_type i=0;i<m_vecItem.size();i++)
 	{
 		::Safe_Delete(m_vecItem[i]);
+		//::Safe_Delete(m_vecLoadItemData[i]);
 	}
+
 
 }
 
@@ -274,7 +252,7 @@ void	CStoreBridge::WorldMatrix(INFO& rInfo)
 
 }
 
-void	CStoreBridge::AddItem(ITEMID _itemid)
+void	CStoreBridge::AddItem(ITEMID _itemid,int _iIndex)
 {
 	CItem* pItemTest;
 	switch(_itemid)
@@ -283,49 +261,70 @@ void	CStoreBridge::AddItem(ITEMID _itemid)
 		{
 			pItemTest = new CWeapon;
 			((CWeapon*)pItemTest)->Initialize();
-			((CWeapon*)pItemTest)->SetItemProperty(L"무기이름",IT_WEAPON,10,1000,30);
+			((CWeapon*)pItemTest)->SetItemProperty(m_vecLoadItemData[_iIndex]->wstrName,
+				m_vecLoadItemData[_iIndex]->eType,m_vecLoadItemData[_iIndex]->iOption,
+				m_vecLoadItemData[_iIndex]->iPrice,
+				m_vecLoadItemData[_iIndex]->iWeight);
 			break;
 		}
 	case IT_ARMOR:
 		{
 			pItemTest = new CArmor;
 			((CArmor*)pItemTest)->Initialize();
-			((CArmor*)pItemTest)->SetItemProperty(L"가슴이름",IT_ARMOR,10,1000,30);
+			((CArmor*)pItemTest)->SetItemProperty(m_vecLoadItemData[_iIndex]->wstrName,
+				m_vecLoadItemData[_iIndex]->eType,m_vecLoadItemData[_iIndex]->iOption,
+				m_vecLoadItemData[_iIndex]->iPrice,
+				m_vecLoadItemData[_iIndex]->iWeight);
 			break;
 		}
 	case IT_GLOVE:
 		{
 			pItemTest = new CGlove;
 			((CGlove*)pItemTest)->Initialize();
-			((CGlove*)pItemTest)->SetItemProperty(L"손가락이름",IT_GLOVE,10,1000,30);
+			((CGlove*)pItemTest)->SetItemProperty(m_vecLoadItemData[_iIndex]->wstrName,
+				m_vecLoadItemData[_iIndex]->eType,m_vecLoadItemData[_iIndex]->iOption,
+				m_vecLoadItemData[_iIndex]->iPrice,
+				m_vecLoadItemData[_iIndex]->iWeight);
 			break;
 		}
 	case IT_HELMET:
 		{
 			pItemTest = new CHelmet;
 			((CHelmet*)pItemTest)->Initialize();
-			((CHelmet*)pItemTest)->SetItemProperty(L"하이바이름",IT_HELMET,10,1000,30);
+			((CHelmet*)pItemTest)->SetItemProperty(m_vecLoadItemData[_iIndex]->wstrName,
+				m_vecLoadItemData[_iIndex]->eType,m_vecLoadItemData[_iIndex]->iOption,
+				m_vecLoadItemData[_iIndex]->iPrice,
+				m_vecLoadItemData[_iIndex]->iWeight);
 			break;
 		}
 	case IT_BOOTS:
 		{
 			pItemTest = new CBoots;
 			((CBoots*)pItemTest)->Initialize();
-			((CBoots*)pItemTest)->SetItemProperty(L"발가락이름",IT_BOOTS,10,1000,30);
+			((CBoots*)pItemTest)->SetItemProperty(m_vecLoadItemData[_iIndex]->wstrName,
+				m_vecLoadItemData[_iIndex]->eType,m_vecLoadItemData[_iIndex]->iOption,
+				m_vecLoadItemData[_iIndex]->iPrice,
+				m_vecLoadItemData[_iIndex]->iWeight);
 			break;
 		}
 	case IT_BELT:
 		{
 			pItemTest = new CBelt;
 			((CBelt*)pItemTest)->Initialize();
-			((CBelt*)pItemTest)->SetItemProperty(L"허리이름",IT_BELT,10,1000,30);
+			((CBelt*)pItemTest)->SetItemProperty(m_vecLoadItemData[_iIndex]->wstrName,
+				m_vecLoadItemData[_iIndex]->eType,m_vecLoadItemData[_iIndex]->iOption,
+				m_vecLoadItemData[_iIndex]->iPrice,
+				m_vecLoadItemData[_iIndex]->iWeight);
 			break;
 		}
 	case IT_FOOD:
 		{
 			pItemTest = new CFood;
 			((CFood*)pItemTest)->Initialize();
-			((CFood*)pItemTest)->SetItemProperty(L"음식이름",IT_FOOD,10,1000,30);
+			((CFood*)pItemTest)->SetItemProperty(m_vecLoadItemData[_iIndex]->wstrName,
+				m_vecLoadItemData[_iIndex]->eType,m_vecLoadItemData[_iIndex]->iOption,
+				m_vecLoadItemData[_iIndex]->iPrice,
+				m_vecLoadItemData[_iIndex]->iWeight);
 			break;
 		}
 	}
@@ -354,4 +353,44 @@ void CStoreBridge::SetState(void)
 	{
 		m_bState=FALSE;
 	}
+}
+void CStoreBridge::LoadData(void)
+{
+	HANDLE		hFile = NULL;
+	DWORD		dwByte = 0;
+
+	hFile = CreateFile(L"../Data/testitem.dat", 
+		GENERIC_READ, 
+		0, 
+		NULL, 
+		OPEN_EXISTING, 
+		FILE_ATTRIBUTE_NORMAL, 
+		NULL);
+
+	//vector<int> tileID;
+
+//	map<CString,ITEM*> mapItemData;
+
+	while(true)
+	{
+		//int tmpID=0;
+		ITEM*			pItemData = new ITEM;
+		//pUnitData->tDetail = new DETAILDATA;
+		ReadFile(hFile, pItemData, sizeof(ITEM), &dwByte, NULL);
+
+		if(dwByte == 0)
+		{
+			//::Safe_Delete(pUnitData->tDetail);
+			::Safe_Delete(pItemData);
+			break;
+		}
+		m_vecLoadItemData.push_back(pItemData);
+	}
+	for(vector<ITEM*>::size_type i=0;i<m_vecLoadItemData.size();i++)
+	{
+		AddItem(m_vecLoadItemData[i]->eType,i);
+		::Safe_Delete(m_vecLoadItemData[i]);
+	}
+	
+	CloseHandle(hFile);
 }

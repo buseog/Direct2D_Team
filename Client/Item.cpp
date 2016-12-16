@@ -14,7 +14,7 @@ CItem::~CItem(void)
 }
 
 
-const wstring& CItem::GetObjKey(void)
+const wstring CItem::GetObjKey(void)
 {
 	return m_wstrObjKey;
 }
@@ -49,11 +49,6 @@ RECT CItem::GetRect(void)
 	return rc;
 }
 
-wstring CItem::GetItemKey(void)
-{
-	
-	return m_wstrObjKey;
-}
 ITEM* CItem::GetItemInfo(void)
 {
 	return &m_tItem;
