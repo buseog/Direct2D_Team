@@ -592,6 +592,18 @@
 							>
 						</File>
 					</Filter>
+					<Filter
+						Name="05. ButtonBridge"
+						>
+						<File
+							RelativePath=".\ButtonBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\ButtonBridge.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 		</Filter>
@@ -771,6 +783,18 @@
 				</File>
 				<File
 					RelativePath=".\Store.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="04. Button"
+				>
+				<File
+					RelativePath=".\MyButton.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\MyButton.h"
 					>
 				</File>
 			</Filter>

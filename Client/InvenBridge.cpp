@@ -27,6 +27,7 @@ CInvenBridge::~CInvenBridge(void)
 
 HRESULT CInvenBridge::Initialize(void)
 {
+
 	m_wstrStateKey = L"Inventory";
 
 
@@ -36,6 +37,7 @@ HRESULT CInvenBridge::Initialize(void)
 		m_ItemSlot.push_back(CreateEmpty(m_tInfo.vPos));
 	
 	}
+
 	return S_OK;
 }
 

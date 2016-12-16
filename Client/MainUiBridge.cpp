@@ -14,8 +14,6 @@ CMainUiBridge::~CMainUiBridge(void)
 
 HRESULT CMainUiBridge::Initialize(void)
 {
-	m_wstrStateKey = L"MainUI";
-
 	return S_OK;
 }
 

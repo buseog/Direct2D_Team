@@ -89,7 +89,7 @@ void	CStart::Render(void)
 		fY = pLoading->tImgInfo.Height / 2.f;
 		
 		D3DXMatrixTranslation(&matTrans, 
-			230 + pLoading->tImgInfo.Width * i,
+			230 + (float)pLoading->tImgInfo.Width * i,
 			550, 0);
 
 		CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
