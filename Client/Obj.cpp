@@ -126,3 +126,9 @@ const UNITDATA* CObj::GetPlayerStat(void) const
 {
 	return &m_tUnitData;
 }
+
+void CObj::SetScroll(float fX, float fY)
+{
+	m_vScroll.x += fX;
+	m_vScroll.y += fY;
+}

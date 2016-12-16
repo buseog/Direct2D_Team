@@ -3,6 +3,7 @@
 #include "Bigheader.h"
 #include "Obj.h"
 #include "Ui.h"
+#include "SceneMgr.h"
 
 class CScene
 {

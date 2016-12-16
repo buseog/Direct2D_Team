@@ -44,18 +44,16 @@ HRESULT CTextureMgr::InsertTexture(const wstring& wstrFilePath,
 			return E_FAIL;
 		}
 		m_MapTexture.insert(map<wstring, CTexture*>::value_type(wstrObjKey, pTexture));
-
-		++m_iCounting;
 	}
 	else
 	{
 		if(TEX_MULTI == eTexType)
 		{
 			iter->second->InsertTexture(wstrFilePath, wstrStateKey, iCnt);
-
-			++m_iCounting;
 		}
 	}
+
+	++m_iCounting;
 
 	return 0;
 }

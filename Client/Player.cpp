@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "Player.h"
-#include "Bridge.h"
 
 CPlayer::CPlayer(void)
 {

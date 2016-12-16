@@ -4,7 +4,7 @@
 #include "SceneMgr.h"
 
 CStart::CStart(void)
-:m_iMaxLoad(50)
+:m_iMaxLoad(58)
 {
 }
 
@@ -19,9 +19,11 @@ unsigned int __stdcall CStart::ImgLoadThreadFunc(void* pArg)
 
 	EnterCriticalSection(&pStart->GetCrt());
 
-	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/PlayerPath.txt");
+	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/PlayerPath.txt");	// 21
 
-	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/EffectPath.txt");
+	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/EffectPath.txt");	// 27
+
+	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/MousePath.txt");	// 18
 
 	CTextureMgr::GetInstance()->SetString(L"Press Enter");
 
@@ -89,7 +91,7 @@ void	CStart::Render(void)
 		fY = pLoading->tImgInfo.Height / 2.f;
 		
 		D3DXMatrixTranslation(&matTrans, 
-			230 + pLoading->tImgInfo.Width * i,
+			230 + (float)pLoading->tImgInfo.Width * i,
 			550, 0);
 
 		CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
@@ -103,9 +105,6 @@ void	CStart::Render(void)
 		CTextureMgr::GetInstance()->GetString().c_str(),
 		CTextureMgr::GetInstance()->GetString().length(),
 		NULL, 0, D3DCOLOR_ARGB(255, 0, 0, 0));
-
-
-
 }
 
 void	CStart::Release(void)

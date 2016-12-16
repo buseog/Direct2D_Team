@@ -31,6 +31,7 @@ public:
 
 	void		SetString(wstring _wstrBuf);
 	const wstring&	GetString(void);
+
 	int			GetCounting(void);
 private:
 	CTextureMgr(void);

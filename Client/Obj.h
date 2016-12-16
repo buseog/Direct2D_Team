@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Bigheader.h"
+#include "Bridge.h"
 
-class CBridge;
 class CObj
 {
 protected:
@@ -31,6 +31,7 @@ public:
 	void	SetTargetPoint(D3DXVECTOR3 pTargetPoint);	// 목표 지점 좌표 셋
 	void	SetRevolution(float fAngle);				// 중점기준 공전좌표
 	void	SetOrder(ORDERID eOrder);					// 이동명령 타입셋
+	void	SetScroll(float fX, float fY);				// 스크롤 셋해주는함수
 
 public:
 	CBridge*			GetBridge(void);	// 브릿지 반환

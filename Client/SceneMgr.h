@@ -10,6 +10,12 @@ private:
 
 private:
 	CScene*		m_pScene;
+	
+	wstring		wstrMouse;
+	FRAME		m_tFrame;
+
+public:
+	void	SetMouse(const wstring& wstrMouseKey);
 
 public:
 	void	SetScene(SCENEID _eScene);
