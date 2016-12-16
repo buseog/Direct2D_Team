@@ -163,7 +163,6 @@ typedef struct tagStore
 typedef struct tagItem
 {
 	wstring			wstrName;
-	D3DXVECTOR3		vPos;
 	int				iOption;
 	int				iWeight;
 	int				iPrice;

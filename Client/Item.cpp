@@ -19,7 +19,7 @@ ITEM* CItem::GetItemInfo(void)
 }
 void CItem::SetPos(D3DXVECTOR3 _vPos)
 {
-	m_tItem.vPos=_vPos;
+	m_tInfo.vPos=_vPos;
 }
 void CItem::SetItemProperty(wstring _Name, ITEMID _eType,int _iOption,int _iPrice, int _iWeight)
 {
@@ -28,4 +28,9 @@ void CItem::SetItemProperty(wstring _Name, ITEMID _eType,int _iOption,int _iPric
 	m_tItem.iOption = _iOption;
 	m_tItem.iPrice = _iPrice;
 	m_tItem.iWeight = _iWeight;
+}
+
+INFO*	CItem::GetInfo(void)
+{
+	return &m_tInfo;
 }
