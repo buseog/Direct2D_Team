@@ -15,8 +15,8 @@ public:
 		pUI->Initialize();
 		pUI->SetPos(_fX, _fY);
 
-		pBridge->Initialize();
 		pBridge->SetUI(pUI);
+		pBridge->Initialize();
 		pBridge->SetKey(wstrState);
 
 		return pUI;	

@@ -25,8 +25,6 @@ CStoreBridge::~CStoreBridge(void)
 
 HRESULT CStoreBridge::Initialize(void)
 {
-
-	m_wstrStateKey = L"Store";
 	AddItem(IT_BELT);
 	AddItem(IT_ARMOR);
 	AddItem(IT_WEAPON);

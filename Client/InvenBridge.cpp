@@ -16,8 +16,6 @@ CInvenBridge::~CInvenBridge(void)
 
 HRESULT CInvenBridge::Initialize(void)
 {
-	m_wstrStateKey = L"Inventory";
-
 	return S_OK;
 }
 
