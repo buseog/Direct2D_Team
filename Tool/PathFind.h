@@ -28,4 +28,5 @@ public:
 	afx_msg void OnLoadButton();
 	afx_msg void OnDropFiles(HDROP hDropInfo);
 	CListBox m_ListBox;
+	afx_msg void OnClear();
 };

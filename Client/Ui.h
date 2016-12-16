@@ -1,10 +1,9 @@
 #pragma once
 
-
 #include "Bigheader.h"
+#include "Bridge.h"
 
 
-class CBridge;
 class CUi
 {
 protected:

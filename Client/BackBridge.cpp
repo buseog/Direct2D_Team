@@ -115,3 +115,8 @@ void CBackBridge::LoadTile(const wstring& wstrPath)
 		}
 	}
 }
+
+void	CBackBridge::Picking(void)
+{
+	return;
+}

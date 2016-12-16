@@ -17,7 +17,6 @@ CPlayerBridge::~CPlayerBridge(void)
 
 HRESULT CPlayerBridge::Initialize(void)
 {
-	//m_wstrStateKey = L"Walk_1";
 	Frame();
 
 	return S_OK;
@@ -76,4 +75,20 @@ void	CPlayerBridge::KeyInput(INFO& rInfo)
 		SetAstar(vMouse);
 
 	}
+}
+
+void	CPlayerBridge::Move(INFO& rInfo)
+{
+	// 오더명령을 받았을떄 작동
+	// 타겟지점과 나의 위치로 방향 벡터를 구해서 거리가 10 이상일때만 이동함
+	rInfo.vDir = m_pObj->GetTargetPoint() - rInfo.vPos;
+	
+	float	fDistance = D3DXVec3Length(&rInfo.vDir);
+	D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
+
+	if(fDistance > 10.f)
+	{
+		rInfo.vPos += rInfo.vDir * m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime();
+	}
+
 }

@@ -59,3 +59,15 @@ void	CBridge::Frame(void)
 	if(m_tFrame.fFrame > m_tFrame.fMax)
 		m_tFrame.fFrame = 0;
 }
+
+void	CBridge::SetObjSize(void)
+{
+	if (m_pObj->GetObjKey() != L"")
+	{
+		const TEXINFO*	pTexture = CTextureMgr::GetInstance()->GetTexture(m_pObj->GetObjKey(), m_wstrStateKey, 0);
+		float fX = pTexture->tImgInfo.Width / 5.f;
+		float fY = pTexture->tImgInfo.Height / 5.f;
+
+		m_pObj->SetSize(D3DXVECTOR3(fX, fY, 0.f));
+	}
+}

@@ -19,7 +19,7 @@ CBack::~CBack(void)
 
 HRESULT CBack::Initialize(void)
 {
-	m_fScrollSpeed = 500.f;
+	m_fSpeed = 500.f;
 
 	MouseLock();
 
@@ -35,6 +35,12 @@ void CBack::Progress(void)
 	{
 		D3DXVECTOR3 vPos = ::GetMouse() - m_vScroll;
 		CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Walk_1", vPos.x, vPos.y));
+	}
+
+	if (CKeyMgr::GetInstance()->KeyDown('2'))
+	{
+		D3DXVECTOR3 vPos = ::GetMouse() - m_vScroll;
+		CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Walk_1", vPos.x, vPos.y));
 	}
 
 	
@@ -61,16 +67,16 @@ void	CBack::MoveScroll(void)
 	D3DXVECTOR3		vMousePos = ::GetMouse();
 
 	if(vMousePos.x < 20)
-		m_vScroll.x += m_fScrollSpeed * CTimeMgr::GetInstance()->GetTime();
+		m_vScroll.x += m_fSpeed * CTimeMgr::GetInstance()->GetTime();
 
 	if(WINCX - 20 < vMousePos.x)
-		m_vScroll.x -= m_fScrollSpeed * CTimeMgr::GetInstance()->GetTime();
+		m_vScroll.x -= m_fSpeed * CTimeMgr::GetInstance()->GetTime();
 
 	if(20 > vMousePos.y)
-		m_vScroll.y += m_fScrollSpeed * CTimeMgr::GetInstance()->GetTime();
+		m_vScroll.y += m_fSpeed * CTimeMgr::GetInstance()->GetTime();
 
 	if(WINCY - 20 < vMousePos.y)
-		m_vScroll.y -= m_fScrollSpeed * CTimeMgr::GetInstance()->GetTime();
+		m_vScroll.y -= m_fSpeed * CTimeMgr::GetInstance()->GetTime();
 }
 
 void	CBack::MouseLock(void)

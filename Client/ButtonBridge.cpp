@@ -9,6 +9,7 @@ CButtonBridge::CButtonBridge(void)
 
 CButtonBridge::~CButtonBridge(void)
 {
+	Release();
 }
 
 HRESULT CButtonBridge::Initialize(void)
@@ -31,7 +32,7 @@ void CButtonBridge::Progress(INFO& rInfo)
 void CButtonBridge::Render(void)
 {
 	
-	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pUi->GetObjKey());
+	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_wstrStateKey);
 
 	if(pTexture == NULL)
 		return;

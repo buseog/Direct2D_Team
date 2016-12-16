@@ -33,6 +33,7 @@ BEGIN_MESSAGE_MAP(CPathFind, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON1, &CPathFind::OnSaveButton)
 	ON_BN_CLICKED(IDC_BUTTON5, &CPathFind::OnLoadButton)
 	ON_WM_DROPFILES()
+	ON_BN_CLICKED(IDC_BUTTON10, &CPathFind::OnClear)
 END_MESSAGE_MAP()
 
 
@@ -148,4 +149,11 @@ void CPathFind::OnDropFiles(HDROP hDropInfo)
 	}
 
 	UpdateData(FALSE);
+}
+
+void CPathFind::OnClear()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	m_ListBox.ResetContent();
 }

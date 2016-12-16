@@ -23,19 +23,19 @@ HRESULT CStatusBridge::Initialize(void)
 {
 	// 버튼 객체 생성
 
-	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"StrButton",
+	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"Button",
 		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y - 37.f));	
 	
 	
-	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"DexButton",
+	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"Button",
 		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y + 33.f));
 
 	
-	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"VirButton",
+	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"Button",
 		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y + 81.f));
 
 	
-	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"IntButton",
+	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"Button",
 		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y + 107.f));
 	return S_OK;
 }
@@ -48,7 +48,7 @@ void CStatusBridge::Progress(INFO& rInfo)
 void CStatusBridge::Render(void)
 {
 	
-	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pUi->GetObjKey());
+	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_wstrStateKey);
 
 	if(pTexture == NULL)
 		return;

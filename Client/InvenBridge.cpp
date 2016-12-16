@@ -21,7 +21,7 @@ CInvenBridge::CInvenBridge(void)
 
 CInvenBridge::~CInvenBridge(void)
 {
-		Release();
+	Release();
 }
 
 
@@ -62,7 +62,7 @@ void CInvenBridge::Progress(INFO& rInfo)
 void CInvenBridge::Render(void)
 {
 	
-	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pUi->GetObjKey());
+	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_wstrStateKey);
 	
 
 	if(pTexture == NULL)

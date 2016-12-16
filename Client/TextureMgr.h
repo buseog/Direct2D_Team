@@ -29,10 +29,10 @@ public:
 							const wstring& wstrStateKey = L"");
 
 
-	void		SetString(wstring _wstrBuf);
-	const wstring&	GetString(void);
+	void		SetString(wstring _wstrBuf);						//	로딩 완료후 폰트 출력하기위한함수
+	const wstring&	GetString(void);								//	세팅된 폰트를 불러오기위함
 
-	int			GetCounting(void);
+	int			GetCounting(void);									//	로딩을 퍼센티지로 나누기위해 몇개 로딩됬는지 확인해야함
 private:
 	CTextureMgr(void);
 	~CTextureMgr(void);

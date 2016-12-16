@@ -64,7 +64,7 @@ void	CMoveEffectBridge::Move(INFO& rInfo)
 
 	if(fDistance > 10.f)
 	{
-		rInfo.vPos += rInfo.vDir * 300 * CTimeMgr::GetInstance()->GetTime();
+		rInfo.vPos += rInfo.vDir * m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime();
 	}
 
 }

@@ -45,12 +45,6 @@ void CSceneMgr::SetScene(SCENEID _eScene)
 		break;
 	}
 
-	if(FAILED(m_pScene->Initialize()))
-	{
-		ERR_MSG(L"Scene Init Failed");
-		return;
-	}
-
 	CObjMgr::GetInstance()->SetSceneID(_eScene);
 	if(FAILED(CObjMgr::GetInstance()->Initialize()))
 	{
@@ -64,6 +58,12 @@ void CSceneMgr::SetScene(SCENEID _eScene)
 		ERR_MSG(L"UIMgr Init Failed");
 		return;
 	}
+
+	if(FAILED(m_pScene->Initialize()))
+	{
+		ERR_MSG(L"Scene Init Failed");
+		return;
+	}
 }
 
 void CSceneMgr::Progress(void)
@@ -71,10 +71,13 @@ void CSceneMgr::Progress(void)
 	m_pScene->Progress();
 
 	
-	m_tFrame.fFrame += m_tFrame.fCount * CTimeMgr::GetInstance()->GetTime();
+	m_tFrame.fFrame += m_tFrame.fCount * CTimeMgr::GetInstance()->GetTime() * 1.5f;
 
 	if(m_tFrame.fFrame > m_tFrame.fMax)
-		m_tFrame.fFrame = 0;
+	{
+		wstrMouse = L"Hand_Stand";
+		SetMouse(L"Hand_Stand");
+	}
 
 }
 
@@ -109,6 +112,9 @@ void CSceneMgr::Release(void)
 
 void CSceneMgr::SetMouse(const wstring& wstrMouseKey)
 {
+	if (wstrMouse == L"Sword_Click" || wstrMouse == L"Hand_Click")
+		return;
+
 	wstrMouse = wstrMouseKey;
 
 	m_tFrame.fFrame = 0.f;

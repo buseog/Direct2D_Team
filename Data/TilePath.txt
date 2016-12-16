@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 Back|Object|55|..\Texture\Back\Object\Back%d.png
 Town|Armor|3|..\Texture\Back\Town\Armor\Town%d.png
 Town|Bank|3|..\Texture\Back\Town\Bank\Town%d.png
@@ -12,4 +10,3 @@ Town|Middle|2|..\Texture\Back\Town\Middle\Town%d.png
 Town|Small|2|..\Texture\Back\Town\Small\Town%d.png
 Town|Whalf|3|..\Texture\Back\Town\Whalf\Town%d.png
 Town|WStore|3|..\Texture\Back\Town\WStore\Town%d.png
->>>>>>> e3e3c3b871a17dc64a33f3ee31f4ed7bb2609ea2
