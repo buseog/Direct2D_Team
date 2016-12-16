@@ -14,9 +14,9 @@ HRESULT CGlove::Initialize(void)
 	m_wstrObjKey = L"TestGlove";
 	return S_OK;
 }
-int CGlove::Progress(void)
+void CGlove::Progress(void)
 {
-	return 0;
+	
 }
 void CGlove::Render(void)
 {

@@ -14,9 +14,9 @@ HRESULT CFood::Initialize(void)
 	m_wstrObjKey = L"TestFood";
 	return S_OK;
 }
-int CFood::Progress(void)
+void CFood::Progress(void)
 {
-	return 0;
+
 }
 void CFood::Render(void)
 {

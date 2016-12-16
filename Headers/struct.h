@@ -9,6 +9,7 @@ typedef struct tagInfo
 	D3DXVECTOR3 vSize;
 
 	D3DXMATRIX	matWorld;
+	int			iCount;
 
 }INFO;
 

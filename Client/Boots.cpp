@@ -14,9 +14,9 @@ HRESULT CBoots::Initialize(void)
 	m_wstrObjKey = L"TestBoots";
 	return S_OK;
 }
-int CBoots::Progress(void)
+void CBoots::Progress(void)
 {
-	return 0;
+	
 }
 void CBoots::Render(void)
 {
