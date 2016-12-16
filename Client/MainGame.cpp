@@ -30,12 +30,22 @@ HRESULT CMainGame::Initialize(void)
 {
 	if(FAILED(m_pDevice->InitDevice()))
 	{
-		ERR_MSG(L"Client Device Create Failed");
+		ERR_MSG(L"Client Device Create Failed")
 		return E_FAIL;
 	}
 
+	/*if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/Hand_Stand/UI%d", L"UI", TEX_MULTI, L"Hand_Stand", 15)))
+	{
+		ERR_MSG(L"Mouse 멀티 텍스쳐 생성 실패")
+		return E_FAIL;
+	}	
+	*/
 	CTimeMgr::GetInstance()->InitTime();
 	m_pSceneMgr->SetScene(SC_START);
+	
+	m_tFrame.fFrame = 0.f;
+	m_tFrame.fCount = 15.f; 
+	m_tFrame.fMax = m_tFrame.fCount;
 
 	return S_OK;
 }
@@ -90,6 +100,20 @@ void CMainGame::Render(void)
 		lstrlen(m_szMOUSEPOS), 
 		NULL, NULL, 
 		D3DCOLOR_ARGB(255, 255, 255, 0));
+
+
+	//const TEXINFO* pTexture = CTextureMgr::GetInstance()->GetTexture(L"UI",  L"Hand_Stand", m_tFrame.fFrame);
+
+	//D3DXMatrixTranslation(&matTrans, ::GetMouse().x, ::GetMouse().y, 0.f);
+	//CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
+	//CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
+	//	NULL, &D3DXVECTOR3(pTexture->tImgInfo.Width / 2.f, pTexture->tImgInfo.Height / 2.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	//m_tFrame.fFrame += m_tFrame.fCount * CTimeMgr::GetInstance()->GetTime();
+
+	//if(m_tFrame.fFrame > m_tFrame.fMax)
+	//	m_tFrame.fFrame = 0;
+
 
 	m_pDevice->Render_End();
 	m_pDevice->GetDevice()->Present(NULL, NULL, NULL, NULL);

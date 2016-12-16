@@ -16,6 +16,7 @@ private:
 private:
 	INFO	m_tInfo;
 	int		m_iSelectIndex;
+	int		m_iFood;
 	bool	m_bSelect;
 	bool	m_bDrag;
 
@@ -28,6 +29,7 @@ public:
 	int Picking(INFO& rInfo);
 	CItem*	CreateWeapon(D3DXVECTOR3 vPos);
 	CItem*	CreateArmor(D3DXVECTOR3 vPos);
+	CItem*	CreateFood(D3DXVECTOR3 vPos);
 	CItem*	CreateEmpty(D3DXVECTOR3 vPos);
 	
 public:

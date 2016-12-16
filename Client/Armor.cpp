@@ -13,7 +13,7 @@ CArmor::~CArmor(void)
 }
 HRESULT CArmor::Initialize(void)
 {
-	m_wstrObjKey = L"Armor";
+	//m_wstrObjKey = L"Armor";
 	m_tInfo.vSize = D3DXVECTOR3(60.f,60.f,0.f);
 	
 	m_wstrObjKey = L"TestArmor";

@@ -5,7 +5,7 @@ CItem::CItem(void)
 : m_pBridge(NULL)
 {
 	ZeroMemory(&m_tInfo, sizeof(INFO));
-
+	
 }
 
 
@@ -68,3 +68,14 @@ INFO*	CItem::GetInfo(void)
 	return &m_tInfo;
 
 }
+
+void	CItem::SetFoodPlus(int iCount)
+{
+	m_tItem.iCount += iCount;
+}
+
+void	CItem::SetFoodZero(void)
+{
+	m_tItem.iCount = 0;
+}
+
