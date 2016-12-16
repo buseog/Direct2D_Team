@@ -20,14 +20,16 @@ private:
 	BOOL m_bToolTip;
 	unsigned int m_iToolTipIndex;
 	vector<CItem*> m_vecItem;
+	vector<ITEM*> m_vecLoadItemData;
 	const TEXINFO* pTexture;
 	const TEXINFO*  pItemTexture;
 	const TEXINFO*  pToolTipTexture;
 private:
-	void AddItem(ITEMID _itemid);
+	void AddItem(ITEMID _itemid,int _iIndex);
 	void DeleteContainedOverItem(void);
 	void Picking(void);
 	void ShowToolTip(/*int _iIndex,*/);
+	void LoadData(void);
 public :
 	void SetState(void);
 public:
