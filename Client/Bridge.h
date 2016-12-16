@@ -20,6 +20,7 @@ public:
 	void	SetFrame(const wstring& wstrStateKey);
 	void	SetKey(const wstring& wstrStateKey);
 
+
 public:
 	virtual HRESULT	Initialize(void) PURE;
 	virtual void	Progress(INFO& rInfo) PURE;

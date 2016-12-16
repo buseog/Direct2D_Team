@@ -1,18 +1,18 @@
 #pragma once
 
-#include "Obj.h"
+
 #include "Bigheader.h"
 
 
 class CBridge;
-class CUi :
-	public	CObj
+class CUi
 {
 protected:
 	static D3DXVECTOR3		m_vScroll;
 	INFO					m_tInfo;
 	wstring					m_wstrObjKey;
 	CBridge*				m_pBridge;
+	bool					m_bView;
 
 
 public:
@@ -22,7 +22,8 @@ public:
 	void			SetBridge(CBridge* pBridge);
 	const wstring&	GetObjKey(void);
 	const RECT		GetRect(void);
-	
+	int				Picking(void);
+
 public:
 	virtual HRESULT	Initialize(void)PURE;
 	virtual void	Progress(void)PURE;

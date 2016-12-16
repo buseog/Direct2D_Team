@@ -39,15 +39,15 @@ bool	CKeyMgr::KeyDown(int nKey)	// ÇÑ¹ø¸¸ µü ´­·¶À»¶§
 
 	return false;
 }
-bool	CKeyMgr::KeyUp(int nKey)	// ´­·¶´Ù°¡ ŒHÀ»¶§
+bool	CKeyMgr::KeyUp(int nKey, int iIndex)	// ´­·¶´Ù°¡ ŒHÀ»¶§
 {
 	if (GetAsyncKeyState(nKey) & 0x8000)
 	{
-		m_bKeyUp[nKey] = true;
+		m_bKeyUp[iIndex][nKey] = true;
 	}
-	else if (m_bKeyUp[nKey] == true)
+	else if (m_bKeyUp[iIndex][nKey] == true)
 	{
-		m_bKeyUp[nKey] = false;
+		m_bKeyUp[iIndex][nKey] = false;
 
 		return true;
 	}

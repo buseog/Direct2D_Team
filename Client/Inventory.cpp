@@ -2,6 +2,7 @@
 #include "Inventory.h"
 #include "Bridge.h"
 #include "Item.h"
+#include "KeyMgr.h"
 
 CInventory::CInventory(void)
 {
@@ -22,37 +23,29 @@ HRESULT	CInventory::Initialize(void)
 
 void	CInventory::Progress(void)
 {
-	m_pBridge->Progress(m_tInfo);	
+	if(CKeyMgr::GetInstance()->KeyDown('I'))
+	{
+
+		if (m_bView == true)
+			m_bView = false;
+		else
+			m_bView = true;
+
+		m_pBridge->Render();
+	}
+
+	if (m_bView)
+		m_pBridge->Progress(m_tInfo);	
 
 }
 
 void	CInventory::Render(void)
 {
-	if(GetKeyState('I') && 0x0001)
-	{
+	if (m_bView)
 		m_pBridge->Render();
-	}
-
 }
 
 void	CInventory::Release(void)
 {
 	::Safe_Delete(m_pBridge);
-}
-
-void	CInventory::AddItem(void)
-{
-
-}
-
-void	CInventory::Picking(void)
-{
-
-}
-
-
-CItem* CInventory::CreateItem(float _fX, float _fY,float _fCX, float _fCY, string strITName)
-{
-	CItem*	pItem = new CItem;
-	return pItem;
 }

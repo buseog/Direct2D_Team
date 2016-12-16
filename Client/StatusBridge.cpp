@@ -2,6 +2,7 @@
 #include "StatusBridge.h"
 #include "UIMgr.h"
 #include "Ui.h"
+#include "Obj.h"
 #include "ObjMgr.h"
 
 CStatusBridge::CStatusBridge(void)
@@ -50,7 +51,7 @@ void CStatusBridge::Render(void)
 	const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_PLAYER);
 
 	// 레벨
-	wsprintf(m_szPrint, L"레벨                %d", pPlayer->GetPlayerStat()->tDetail.iLevel);
+	wsprintf(m_szPrint, L"레벨 %d", pPlayer->GetPlayerStat()->tDetail.iLevel);
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x + 8.f, m_pUi->GetInfo()->vPos.y - 42.f, 0.f);
 	
@@ -62,7 +63,7 @@ void CStatusBridge::Render(void)
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	// 공격력
-	wsprintf(m_szPrint, L"공격력              %d", pPlayer->GetPlayerStat()->iAttack);
+	wsprintf(m_szPrint, L"공격력		%d", pPlayer->GetPlayerStat()->iAttack);
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x + 2.f, m_pUi->GetInfo()->vPos.y - 21.f, 0.f);
 	
@@ -159,4 +160,10 @@ void	CStatusBridge::WorldMatrix(INFO& rInfo)
 
 	rInfo.matWorld = matTrans;
 
+}
+
+
+int	CStatusBridge::Picking(void)
+{
+	return m_iPriority;
 }

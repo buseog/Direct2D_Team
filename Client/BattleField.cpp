@@ -61,6 +61,21 @@ void	CBattleField::LoadPNG(void)
 		return;
 	}
 
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Item/Weapon/0.png", 
+		L"Weapon", TEX_SINGLE)))
+	{
+		ERR_MSG(L"Weapon 싱글 텍스쳐 생성 실패");
+		return;
+	}
+
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Item/Armor/8.png", 
+		L"Armor", TEX_SINGLE)))
+	{
+		ERR_MSG(L"Armor 싱글 텍스쳐 생성 실패");
+		return;
+	}
+
+
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI21.png", 
 		L"Status", TEX_SINGLE)))
 	{

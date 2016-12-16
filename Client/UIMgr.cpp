@@ -89,3 +89,13 @@ void CUIMgr::SetSceneID(SCENEID	eID)
 {
 	m_eSceneID = eID;
 }
+
+void CUIMgr::AddSorting(CUi*	pUi)
+{
+	m_mapUiRender.insert(map<int, CUi*>::value_type());
+}
+
+void CUIMgr::MapClear(void)
+{
+	m_mapUiRender.clear();
+}

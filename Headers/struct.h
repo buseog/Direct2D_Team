@@ -9,6 +9,7 @@ typedef struct tagInfo
 	D3DXVECTOR3 vSize;
 
 	D3DXMATRIX	matWorld;
+	int			iCount;
 
 }INFO;
 
@@ -163,7 +164,6 @@ typedef struct tagStore
 typedef struct tagItem
 {
 	wstring			wstrName;
-	D3DXVECTOR3		vPos;
 	int				iOption;
 	int				iWeight;
 	int				iPrice;

@@ -22,7 +22,6 @@ enum OBJID
 	OBJ_PLAYER,
 	OBJ_MONSTER,
 	OBJ_EFFECT,
-	OBJ_UI,
 	OBJ_END
 };
 
@@ -33,7 +32,6 @@ enum UIID
 	UI_STAT,
 	UI_STORE,
 	UI_END
-
 };
 
 enum ITEMID

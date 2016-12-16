@@ -27,23 +27,6 @@ HRESULT CStoreBridge::Initialize(void)
 {
 
 	m_wstrStateKey = L"Store";
-	//AddItem(IT_BELT);
-	//AddItem(IT_ARMOR);
-	//AddItem(IT_WEAPON);
-	//AddItem(IT_FOOD);
-	//AddItem(IT_BOOTS);
-	//AddItem(IT_HELMET);
-	//AddItem(IT_FOOD);
-	//AddItem(IT_BOOTS);
-	//AddItem(IT_HELMET);
-	//AddItem(IT_FOOD);
-	//AddItem(IT_BOOTS);
-	//AddItem(IT_HELMET);
-	//AddItem(IT_HELMET);
-	//AddItem(IT_HELMET);
-	//AddItem(IT_HELMET);
-	//AddItem(IT_HELMET);
-	//AddItem(IT_HELMET);
 	LoadData();
 
 
@@ -106,7 +89,7 @@ void CStoreBridge::Render(void)
 	{
 		D3DXMATRIX matTrans;
 		pItemTexture = CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetItemKey());
-		D3DXMatrixTranslation(&matTrans,m_vecItem[i]->GetItemInfo()->vPos.x,m_vecItem[i]->GetItemInfo()->vPos.y,0.f);
+		D3DXMatrixTranslation(&matTrans,m_vecItem[i]->GetInfo()->vPos.x,m_vecItem[i]->GetInfo()->vPos.y,0.f);
 		CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
 		CDevice::GetInstance()->GetSprite()->Draw(pItemTexture->pTexture, 
 			NULL, &D3DXVECTOR3(pItemTexture->tImgInfo.Width / 2.f, pItemTexture->tImgInfo.Height / 2.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -130,10 +113,11 @@ void CStoreBridge::Render(void)
 
 }
 
-void CStoreBridge::Picking(void)
+int CStoreBridge::Picking(void)
 {
 	if(m_bState==FALSE)
-		return;
+		return -1;
+
 	D3DXVECTOR3 vecMousepos = ::GetMouse();
 	float fX = pTexture->tImgInfo.Width  / 2.f;
 	float fY = pTexture->tImgInfo.Height / 2.f;
@@ -147,8 +131,8 @@ void CStoreBridge::Picking(void)
 		{
 			float fIconX = (float)(CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetItemKey())->tImgInfo.Width)/2.f;
 			float fIconY = (float)(CTextureMgr::GetInstance()->GetTexture(m_vecItem[i]->GetItemKey())->tImgInfo.Height)/2.f;
-			float fItemX =m_vecItem[i]->GetItemInfo()->vPos.x;
-			float fItemY =m_vecItem[i]->GetItemInfo()->vPos.y;
+			float fItemX =m_vecItem[i]->GetInfo()->vPos.x;
+			float fItemY =m_vecItem[i]->GetInfo()->vPos.y;
 			if(vecMousepos.x >= fItemX-fIconX &&//오른쪽
 				vecMousepos.x <= fItemX+fIconX && //왼쪽
 				vecMousepos.y >= fItemY-fIconY &&//위
@@ -158,12 +142,16 @@ void CStoreBridge::Picking(void)
 				//showtooltip
 				m_bToolTip=TRUE;
 				m_iToolTipIndex=i;
-				return;
+				return 0;
 			}
 		}
 	}
+
 	m_bToolTip=FALSE;
 	m_iToolTipIndex=99;
+
+
+	return m_iPriority;
 }
 void CStoreBridge::ShowToolTip(/*int _iIndex,*/)
 {

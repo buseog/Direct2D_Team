@@ -221,7 +221,7 @@ void	CBack::Drag(void)
 {
 	D3DXVECTOR3	vMouse = ::GetMouse();
 
-	if(CKeyMgr::GetInstance()->KeyUp(VK_LBUTTON))
+	if(CKeyMgr::GetInstance()->KeyUp(VK_LBUTTON, 0))
 	{
 		m_rcDrag.right = long(vMouse.x);
 		m_rcDrag.bottom = long(vMouse.y);
