@@ -1,5 +1,7 @@
 #pragma once
 #include "uibridge.h"
+#include "StatusBridge.h"
+#include "Player.h"
 
 class CButtonBridge :
 	public CUiBridge
@@ -12,7 +14,7 @@ public:
 	virtual void	Progress(INFO& rInfo);
 	virtual void	Render(void);
 	virtual void	Release(void);
-	virtual int		Picking(void);
+
 public:
 	CButtonBridge(void);
 	~CButtonBridge(void);

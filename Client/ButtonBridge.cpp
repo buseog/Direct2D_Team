@@ -19,13 +19,6 @@ HRESULT CButtonBridge::Initialize(void)
 void CButtonBridge::Progress(INFO& rInfo)
 {
 	WorldMatrix(rInfo);
-	
-	if(CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON))
-	{
-		
-		
-	}
-
 }
 
 void CButtonBridge::Render(void)
@@ -62,9 +55,4 @@ void	CButtonBridge::WorldMatrix(INFO& rInfo)
 
 	rInfo.matWorld = matTrans;
 
-}
-
-int	CButtonBridge::Picking(void)
-{
-	return m_iPriority;
 }

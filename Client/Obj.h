@@ -32,6 +32,7 @@ public:
 	void	SetRevolution(float fAngle);				// 중점기준 공전좌표
 	void	SetOrder(ORDERID eOrder);					// 이동명령 타입셋
 
+
 public:
 	CBridge*			GetBridge(void);	// 브릿지 반환
 	const bool			GetDestroy(void);	// 파괴해야 될 객체인지 확인

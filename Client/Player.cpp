@@ -54,3 +54,8 @@ void CPlayer::Release(void)
 {
 	::Safe_Delete(m_pBridge);
 }
+
+void CPlayer::SetAttack(int _iAttack)
+{
+	m_tUnitData.iAttack -= _iAttack;
+}

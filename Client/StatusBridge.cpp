@@ -8,6 +8,7 @@
 #include "MyButton.h"
 #include "Ui.h"
 #include "ButtonBridge.h"
+#include "KeyMgr.h"
 
 CStatusBridge::CStatusBridge(void)
 
@@ -43,6 +44,8 @@ HRESULT CStatusBridge::Initialize(void)
 void CStatusBridge::Progress(INFO& rInfo)
 {
 	WorldMatrix(rInfo);
+
+	Picking(rInfo);
 }
 
 void CStatusBridge::Render(void)
@@ -266,7 +269,27 @@ void	CStatusBridge::WorldMatrix(INFO& rInfo)
 }
 
 
-int	CStatusBridge::Picking(void)
+int	CStatusBridge::Picking(INFO& rInfo)
 {
-	return m_iPriority;
+	POINT	Pt;
+		Pt.x = (long)GetMouse().x;
+		Pt.y = (long)GetMouse().y;
+
+	if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON))
+	{
+		for(size_t i = 0; i < m_vecButton.size(); ++i)
+		{
+			if(PtInRect(&m_vecButton[i]->GetRect(), Pt))
+			{
+				m_pPlayer->SetAttack(1);
+			}
+		}
+	}
+
+	return 3;
+}
+
+vector<CUi*>* CStatusBridge::GetButton(void)
+{
+	return &m_vecButton;
 }

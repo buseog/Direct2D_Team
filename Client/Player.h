@@ -10,6 +10,9 @@ public:
 	virtual void Render(void);
 	virtual void Release(void);
 
+public:
+	void	SetAttack(int _iAttack);
+
 
 public:
 	CPlayer(void);
