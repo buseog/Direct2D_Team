@@ -568,6 +568,18 @@
 							</File>
 						</Filter>
 					</Filter>
+					<Filter
+						Name="04. EnemyBridge"
+						>
+						<File
+							RelativePath=".\EnemyBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\EnemyBridge.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 				<Filter
 					Name="01. UiBridge"
@@ -784,6 +796,14 @@
 						RelativePath=".\EnemyUnit.h"
 						>
 					</File>
+					<Filter
+						Name="00. ShortAttack"
+						>
+					</Filter>
+					<Filter
+						Name="01. LongAttack"
+						>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter

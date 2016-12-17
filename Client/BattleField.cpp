@@ -83,6 +83,7 @@ void	CBattleField::LoadPNG(void)
 	{
 		ERR_MSG(L"MainUI 싱글 텍스쳐 생성 실패")
 		return;
+
 	}
 
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/Pannel/UI4.png", L"BattlePannel", TEX_SINGLE)))

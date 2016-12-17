@@ -14,6 +14,9 @@
 #include "Player.h"
 #include "PlayerBridge.h"
 
+#include "EnemyUnit.h"
+#include "EnemyBridge.h"
+
 #include "MainUi.h"
 #include "MainUiBridge.h"
 #include "Inventory.h"
@@ -39,6 +42,7 @@ HRESULT	CField::Initialize(void)
 
 	CObjMgr::GetInstance()->AddObject(OBJ_BACK, CObjFactory<CBack, CFieldBackBridge>::CreateObj(L"Field", 0, 0));
 	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CPlayerBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
+
 
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi,CMainUiBridge>::CreateUI(L"FieldMainUi",400.f,553.f));	
 	CUIMgr::GetInstance()->AddUI(UI_INVEN, CUIFactory<CInventory,CInvenBridge>::CreateUI(L"Inventory", 580.f,250.f));

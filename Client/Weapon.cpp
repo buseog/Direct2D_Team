@@ -26,6 +26,7 @@ HRESULT	CWeapon::Initialize(void)
 
 	m_wstrObjKey = L"TestWeapon";
 	//m_tItem.wstrName = L"¹«±â";
+	m_tItem.iOption = 100;
 	m_tItem.eType = IT_WEAPON;
 
 	return S_OK;

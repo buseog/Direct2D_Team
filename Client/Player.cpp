@@ -84,3 +84,24 @@ void CPlayer::SetStat(int _iIndex)
 	}
 }
  
+void CPlayer::SetPlusAttack(int _iAttack)
+{
+	m_tUnitData.iLAttack += _iAttack;
+	m_tUnitData.iSAttack += _iAttack;
+}
+
+void CPlayer::SetPlusDefence(int _iDefence)
+{
+	m_tUnitData.iDeffence += _iDefence;
+}
+
+void CPlayer::SetMinusAttack(int _iAttack)
+{
+	m_tUnitData.iLAttack -= _iAttack;
+	m_tUnitData.iSAttack -= _iAttack;
+}
+
+void CPlayer::SetMinusDefence(int _iDefence)
+{
+	m_tUnitData.iDeffence -= _iDefence;
+}

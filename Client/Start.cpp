@@ -27,6 +27,9 @@ unsigned int __stdcall CStart::ImgLoadThreadFunc(void* pArg)
 
 	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/PortraitPath.txt");	// 24
 
+//	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/EnemyUnitPath.txt");	// 24
+
+
 	CTextureMgr::GetInstance()->SetString(L"Press Enter");
 
 	LeaveCriticalSection(&pStart->GetCrt());

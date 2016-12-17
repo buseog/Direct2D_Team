@@ -12,6 +12,7 @@ CEnemyUnit::~CEnemyUnit(void)
 
 HRESULT CEnemyUnit::Initialize(void)
 {
+	m_wstrObjKey = L"EnemyUnit";
 	return S_OK;
 }
 
@@ -28,4 +29,9 @@ void CEnemyUnit::Render(void)
 void CEnemyUnit::Release(void)
 {
 	::Safe_Delete(m_pBridge);
+}
+
+void CEnemyUnit::Move(void)
+{
+
 }
