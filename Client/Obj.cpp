@@ -122,7 +122,7 @@ const RECT CObj::GetRect(void)
 }
 
 
-const UNITDATA* CObj::GetPlayerStat(void) const
+const UNITDATA* CObj::GetStat(void) const
 {
 	return &m_tUnitData;
 }

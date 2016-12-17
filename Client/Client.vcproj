@@ -641,17 +641,65 @@
 						</File>
 					</Filter>
 					<Filter
-						Name="06. BattlePannelBridge"
+						Name="06. PortraitBridge"
 						>
 						<File
-							RelativePath=".\BattlePannelBridge.cpp"
+							RelativePath=".\PortraitBridge.cpp"
 							>
 						</File>
 						<File
-							RelativePath=".\BattlePannelBridge.h"
+							RelativePath=".\PortraitBridge.h"
 							>
 						</File>
 					</Filter>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="02. Observer"
+				>
+				<File
+					RelativePath=".\Observer.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Observer.h"
+					>
+				</File>
+				<Filter
+					Name="00. Subject"
+					>
+					<File
+						RelativePath=".\Subject.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Subject.h"
+						>
+					</File>
+					<Filter
+						Name="00. DataSubject"
+						>
+						<File
+							RelativePath=".\DataSubject.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\DataSubject.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="01. UIObserver"
+					>
+					<File
+						RelativePath=".\UIObserver.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UIObserver.h"
+						>
+					</File>
 				</Filter>
 			</Filter>
 		</Filter>
@@ -871,14 +919,14 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="05. BattlePaneel"
+				Name="05. Portrait"
 				>
 				<File
-					RelativePath=".\BattlePannel.cpp"
+					RelativePath=".\Portrait.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\BattlePannel.h"
+					RelativePath=".\Portrait.h"
 					>
 				</File>
 			</Filter>

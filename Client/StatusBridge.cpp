@@ -69,7 +69,7 @@ void CStatusBridge::Render(void)
 	const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_PLAYER);
 
 	// 아이디
-	wsprintf(m_szPrint, L"%s", pPlayer->GetPlayerStat()->wstrName.c_str());
+	wsprintf(m_szPrint, L"%s", pPlayer->GetStat()->wstrName.c_str());
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x -120.f, m_pUi->GetInfo()->vPos.y - 172.f, 0.f);
 	
@@ -81,7 +81,7 @@ void CStatusBridge::Render(void)
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	// 레벨
-	wsprintf(m_szPrint, L"Lv. %d", pPlayer->GetPlayerStat()->tDetail.iLevel);
+	wsprintf(m_szPrint, L"Lv. %d", pPlayer->GetStat()->tDetail.iLevel);
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x + 22.f, m_pUi->GetInfo()->vPos.y - 172.f, 0.f);
 	
@@ -93,7 +93,7 @@ void CStatusBridge::Render(void)
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	// 경험치
-	wsprintf(m_szPrint, L"%d / 100", pPlayer->GetPlayerStat()->tDetail.iExperience);
+	wsprintf(m_szPrint, L"%d / 100", pPlayer->GetStat()->tDetail.iExperience);
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x + 32.f, m_pUi->GetInfo()->vPos.y - 150.f, 0.f);
 	
@@ -106,7 +106,7 @@ void CStatusBridge::Render(void)
 
 	// 공격력
 
-	wsprintf(m_szPrint, L"%d", pPlayer->GetPlayerStat()->iAttack);
+	wsprintf(m_szPrint, L"%d", pPlayer->GetStat()->iAttack);
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x + 90.f, m_pUi->GetInfo()->vPos.y - 42.f, 0.f);
 	
@@ -118,7 +118,7 @@ void CStatusBridge::Render(void)
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 	
 	// 방어력
-	wsprintf(m_szPrint, L"%d", pPlayer->GetPlayerStat()->iDeffence);
+	wsprintf(m_szPrint, L"%d", pPlayer->GetStat()->iDeffence);
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x + 90.f, m_pUi->GetInfo()->vPos.y - 21.f, 0.f);
 	
@@ -130,7 +130,7 @@ void CStatusBridge::Render(void)
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 	
 	// 무게
-	wsprintf(m_szPrint, L"%d", pPlayer->GetPlayerStat()->tDetail.iExperience);
+	wsprintf(m_szPrint, L"%d", pPlayer->GetStat()->tDetail.iExperience);
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x + 90.f, m_pUi->GetInfo()->vPos.y, 0.f);
 	
@@ -142,7 +142,7 @@ void CStatusBridge::Render(void)
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	// 체력
-	wsprintf(m_szPrint, L"%d", pPlayer->GetPlayerStat()->iHealthPoint);
+	wsprintf(m_szPrint, L"%d", pPlayer->GetStat()->iHealthPoint);
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x + 90.f, m_pUi->GetInfo()->vPos.y + 75.f, 0.f);
 	
@@ -154,7 +154,7 @@ void CStatusBridge::Render(void)
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	// 포인트
-	wsprintf(m_szPrint, L"%d", pPlayer->GetPlayerStat()->tDetail.iBonusPoint);
+	wsprintf(m_szPrint, L"%d", pPlayer->GetStat()->tDetail.iBonusPoint);
 
 	D3DXMatrixScaling(&matScale, 1.2f, 1.2f, 0.f);
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x + 95.f, m_pUi->GetInfo()->vPos.y + 128.f, 0.f);
@@ -169,7 +169,7 @@ void CStatusBridge::Render(void)
 
 	
 	// 힘
-	wsprintf(m_szPrint, L"%d", pPlayer->GetPlayerStat()->tDetail.iStr);
+	wsprintf(m_szPrint, L"%d", pPlayer->GetStat()->tDetail.iStr);
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x - 60.f, m_pUi->GetInfo()->vPos.y - 42.f, 0.f);
 	
@@ -182,7 +182,7 @@ void CStatusBridge::Render(void)
 
 
 	// 민첩성
-	wsprintf(m_szPrint, L"%d", pPlayer->GetPlayerStat()->tDetail.iDex);
+	wsprintf(m_szPrint, L"%d", pPlayer->GetStat()->tDetail.iDex);
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x - 60.f, m_pUi->GetInfo()->vPos.y + 27.f, 0.f);
 	
@@ -195,7 +195,7 @@ void CStatusBridge::Render(void)
 
 	
 	// 생명력
-	wsprintf(m_szPrint, L"%d", pPlayer->GetPlayerStat()->tDetail.iVital);
+	wsprintf(m_szPrint, L"%d", pPlayer->GetStat()->tDetail.iVital);
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x - 60.f, m_pUi->GetInfo()->vPos.y + 75.f, 0.f);
 	
@@ -207,7 +207,7 @@ void CStatusBridge::Render(void)
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	// 지력
-	wsprintf(m_szPrint, L"%d", pPlayer->GetPlayerStat()->tDetail.iInt);
+	wsprintf(m_szPrint, L"%d", pPlayer->GetStat()->tDetail.iInt);
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x - 60.f, m_pUi->GetInfo()->vPos.y + 102.f, 0.f);
 	
@@ -221,7 +221,7 @@ void CStatusBridge::Render(void)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 만약 보너스 포인트가 0이 아니라면
-	if(pPlayer->GetPlayerStat()->tDetail.iBonusPoint != 0)
+	if(pPlayer->GetStat()->tDetail.iBonusPoint != 0)
 	{
 		for (size_t i = 0; i < m_vecButton.size(); ++i)
 		{

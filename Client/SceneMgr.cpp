@@ -121,3 +121,8 @@ void CSceneMgr::SetMouse(const wstring& wstrMouseKey)
 	m_tFrame.fCount = (float)CTextureMgr::GetInstance()->GetImgCount(L"Mouse", wstrMouseKey); 
 	m_tFrame.fMax = m_tFrame.fCount;
 }
+
+const wstring	CSceneMgr::GetMouse(void)
+{
+	return wstrMouse;
+}

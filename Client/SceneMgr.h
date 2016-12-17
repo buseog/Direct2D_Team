@@ -15,6 +15,7 @@ private:
 
 public:
 	void	SetMouse(const wstring& wstrMouseKey);	//	여러곳에서 마우스 텍스쳐를 바꾸기 위해 필요한 함수. 싱글톤으로 여기저기서 불러다가 쓸 수 있음.
+	const wstring	GetMouse(void);
 
 public:
 	void	SetScene(SCENEID _eScene);

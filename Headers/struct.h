@@ -101,6 +101,7 @@ typedef struct tagUnitData
 	int iAttack;
 	int iDeffence;
 	int iHealthPoint;
+	int	iMaxHelathPoint; // 옵저버용 추가
 	float fAttackSpeed;
 	float fMoveSpeed;
 	float fRange;
@@ -179,4 +180,3 @@ typedef struct tagKey
 	CString		m_StateKey;
 
 }KEY;
-

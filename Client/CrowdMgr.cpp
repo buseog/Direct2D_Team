@@ -1,17 +1,22 @@
 #include "StdAfx.h"
 #include "CrowdMgr.h"
 
+#include "SceneMgr.h"
 #include "KeyMgr.h"
 #include "ObjMgr.h"
 #include "AStar.h"
+#include "DataSubject.h"
 
 #include "ObjFactory.h"
+#include "UiFactory.h"
 
 #include "Obj.h"
 #include "UnitBridge.h"
-
 #include "Effect.h"
 #include "StandEffectBridge.h"
+
+#include "Portrait.h"
+#include "PortraitBridge.h"
 
 IMPLEMENT_SINGLETON(CCrowdMgr)
 
@@ -20,6 +25,27 @@ CCrowdMgr::CCrowdMgr(void)
 ,m_iLimit(0)
 ,m_bStart(false)
 {
+	float fCX = 72;
+	float fCY = 26;
+
+	int iX = 1;
+	int iY = 0;
+
+	for (int i = 0; i < 10; ++i)
+	{
+		float fX = 215.f + (fCX * iX);
+		float fY = 540.f + ((fCY + 15) * iY);
+
+		if (iX == 5)
+		{
+			iX = 0;
+			++iY;
+		}
+
+		m_vecPortrait.push_back(CUIFactory<CPortrait, CPortraitBridge>::CreateUI(L"Player", fX, fY));
+
+		++iX;
+	}
 }
 
 CCrowdMgr::~CCrowdMgr(void)
@@ -29,18 +55,15 @@ CCrowdMgr::~CCrowdMgr(void)
 
 void CCrowdMgr::Release(void)
 {
-	for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
-	{
-		// 리스트안의 모든 유닛들을 선택되지않음 으로 바꾸고
-		m_vecSelectUnit[i]->SetSelect(false);
-	}
-	// 리스트를 클리어함
 	m_vecSelectUnit.clear();
+
+	for_each(m_vecPortrait.begin(), m_vecPortrait.end(), DeleteObj());
+	m_vecPortrait.clear();
 }
 
-vector<CObj*>*	CCrowdMgr::GetSelectList(void)
+int	CCrowdMgr::GetSelectList(void)
 {
-	return &m_vecSelectUnit;
+	return m_vecSelectUnit.size();
 }
 
 void	CCrowdMgr::Progress(void)
@@ -49,7 +72,8 @@ void	CCrowdMgr::Progress(void)
 	if (m_vecSelectUnit.empty())
 		return;
 
-	KeyInput();
+	if (CSceneMgr::GetInstance()->GetMouse() == L"Hand_Stand")
+		KeyInput();
 
 	
 }
@@ -59,6 +83,7 @@ void	CCrowdMgr::AddSelectList(CObj*	pObj)
 	// 입력된 유닛을 선택된 유닛으로 바꾸고 선택리스트에 추가함
 	pObj->SetSelect(true);
 	m_vecSelectUnit.push_back(pObj);
+
 }
 
 // 선택된 유닛 포트라이트
@@ -67,35 +92,17 @@ void	CCrowdMgr::RenderPortrait(void)
 	if (m_vecSelectUnit.empty())
 		return;
 
-	D3DXMATRIX matTrans;
-	int iX = 0;
-	int iY = 0;
-
 	for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
 	{
-		const TEXINFO*	pTexture = CTextureMgr::GetInstance()->GetTexture(L"Portrait", m_vecSelectUnit[i]->GetObjKey(), 0);
+		m_vecPortrait[i]->GetBridge()->SetKey(m_vecSelectUnit[i]->GetObjKey());
+		CDataSubject::GetInstance()->AddData(i, (void*)m_vecSelectUnit[i]->GetStat());
+		((CPortrait*)m_vecPortrait[i])->GetObserver()->Update(i, (void*)m_vecSelectUnit[i]->GetStat());
+	}
 
-		if (pTexture == NULL)
-			return;
-
-		float fX = pTexture->tImgInfo.Width;
-		float fY = pTexture->tImgInfo.Height;
-
-		if (iX >= 5)
-		{
-			iX = 0;
-			++iY;
-		}
-
-		
-		D3DXMatrixTranslation(&matTrans, 260.f + (fX * iX), 530.f + (fY * iY), 0.f);
-
-
-		CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
-		CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
-			NULL, &D3DXVECTOR3(fX / 2.f, fY / 2.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
-
-		++iX;
+	for (size_t i = 0; i < m_vecPortrait.size(); ++i)
+	{
+		m_vecPortrait[i]->Progress();
+		m_vecPortrait[i]->Render();
 	}
 }
 
@@ -188,5 +195,23 @@ void	CCrowdMgr::KeyInput(void)
 
 			}
 		}
+	}
+}
+
+void	CCrowdMgr::Clear(void)
+{
+	for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
+	{
+		// 리스트안의 모든 유닛들을 선택되지않음 으로 바꾸고
+		m_vecSelectUnit[i]->SetSelect(false);
+		CDataSubject::GetInstance()->RemoveData(i, (void*)m_vecSelectUnit[i]->GetStat());
+	}
+	// 리스트를 클리어함
+	m_vecSelectUnit.clear();
+
+	for (size_t i = 0; i < m_vecPortrait.size(); ++i)
+	{
+		// 리스트안의 모든 유닛들을 선택되지않음 으로 바꾸고
+		m_vecPortrait[i]->GetBridge()->SetKey(L"");
 	}
 }

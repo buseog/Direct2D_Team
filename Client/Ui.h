@@ -19,6 +19,7 @@ public:
 	void			SetPos(const D3DXVECTOR3& vPos);
 	void			SetPos(float fX, float fY);
 	void			SetBridge(CBridge* pBridge);
+	CBridge*		GetBridge(void);
 	const wstring&	GetObjKey(void);
 	const RECT		GetRect(void);
 	int				Picking(void);

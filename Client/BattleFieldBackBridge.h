@@ -10,6 +10,9 @@ private:
 	int					m_iDragState;
 
 public:
+	void	LoadTile(const wstring& wstrPath);
+
+public:
 	virtual HRESULT	Initialize(void);
 	virtual void	Progress(INFO& rInfo);
 	virtual void	Render(void);

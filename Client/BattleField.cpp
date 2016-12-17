@@ -18,8 +18,6 @@
 
 #include "MainUi.h"
 #include "MainUiBridge.h"
-#include "BattlePannel.h"
-#include "BattlePannelBridge.h"
 
 #include "Player.h"
 CBattleField::CBattleField(void)
@@ -36,11 +34,9 @@ HRESULT	CBattleField::Initialize(void)
 	CSceneMgr::GetInstance()->SetMouse(L"Hand_Stand");
 
 	CObjMgr::GetInstance()->AddObject(OBJ_BACK, CObjFactory<CBack, CBattleFieldBackBridge>::CreateObj(L"BattleField", 0, 0));
-	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
+	//CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
 
-	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi, CMainUiBridge>::CreateUI(L"BattleFieldMainUi",400.f,553.f));
-	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CBattlePannel, CBattlePannelBridge>::CreateUI(L"BattlePannel",400.f,542.f));	
-	
+	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi, CMainUiBridge>::CreateUI(L"BattleFieldMainUi",400.f,553.f));	
 	return S_OK;
 }
 
@@ -88,6 +84,20 @@ void	CBattleField::LoadPNG(void)
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/Pannel/UI4.png", L"BattlePannel", TEX_SINGLE)))
 	{
 		ERR_MSG (L"BattlePannel 싱글 텍스쳐 생성 실패")
+		return;
+	}
+
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI1.png", 
+		L"HpBar", TEX_SINGLE)))
+	{
+		ERR_MSG(L"HpBar 싱글 텍스쳐 생성 실패")
+		return;
+	}
+
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI12.png", 
+		L"MpBar", TEX_SINGLE)))
+	{
+		ERR_MSG(L"HpBar 싱글 텍스쳐 생성 실패")
 		return;
 	}
 

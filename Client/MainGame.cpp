@@ -7,6 +7,7 @@
 #include "UIMgr.h"
 #include "AStar.h"
 #include "CrowdMgr.h"
+#include "DataSubject.h"
 
 CMainGame::CMainGame(void)
 : m_pDevice(CDevice::GetInstance())
@@ -106,6 +107,7 @@ void CMainGame::Release(void)
 	CTextureMgr::GetInstance()->DestroyInstance();
 	CObjMgr::GetInstance()->DestroyInstance();
 	CUIMgr::GetInstance()->DestroyInstance();
+	CDataSubject::GetInstance()->DestroyInstance();
 	m_pSceneMgr->DestroyInstance();
 	m_pDevice->DestroyInstance();
 }

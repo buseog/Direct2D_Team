@@ -38,7 +38,7 @@ public:
 	CBridge*			GetBridge(void);	// 브릿지 반환
 	const bool			GetDestroy(void);	// 파괴해야 될 객체인지 확인
 	const INFO*			GetInfo(void) const;// 인포 반환
-	const UNITDATA*		GetPlayerStat(void) const; // 플레이어 스텟 반환
+	const UNITDATA*		GetStat(void) const; // 유닛 스텟 반환
 	const wstring&		GetObjKey(void);		// ObjKey반환
 	const D3DXVECTOR3	GetScroll(void);		// 스크롤값 반환
 	const D3DXVECTOR3	GetTargetPoint(void);	// 목표지점을 반환해줌

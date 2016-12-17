@@ -59,3 +59,8 @@ int CUi::Picking(void)
 {
 	return ((CUiBridge*)m_pBridge)->Picking();
 }
+
+CBridge* CUi::GetBridge(void)
+{
+	return m_pBridge;
+}
