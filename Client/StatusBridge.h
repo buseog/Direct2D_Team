@@ -1,6 +1,5 @@
 #pragma once
 #include "uibridge.h"
-#include "Player.h"
 
 class CUi;
 class CStatusBridge :
@@ -12,7 +11,6 @@ protected:
 
 public:
 	vector<CUi*>*		GetButton(void);
-	CPlayer*			m_pPlayer;
 
 public:
 	virtual HRESULT	Initialize(void);

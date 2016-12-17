@@ -27,7 +27,7 @@ HRESULT CMultiTexture::InsertTexture(const wstring& wstrFilePath,
 		if(FAILED(D3DXGetImageInfoFromFile(szPath, &pTexInfo->tImgInfo)))
 		{
 
-			ERR_MSG(wstrFilePath.c_str());
+			ERR_MSG(wstrFilePath.c_str())
 			return E_FAIL;
 		}
 
@@ -47,7 +47,7 @@ HRESULT CMultiTexture::InsertTexture(const wstring& wstrFilePath,
 			NULL,									// 팔레트 처리 방식
 			&pTexInfo->pTexture)))				// 이미지를 어디에 보관할 곳
 		{
-			ERR_MSG(L"Multi Texture Image Load Failed");
+			ERR_MSG(L"Multi Texture Image Load Failed")
 			return E_FAIL;
 		}
 

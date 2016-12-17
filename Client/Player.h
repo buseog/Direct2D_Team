@@ -10,9 +10,7 @@ public:
 	virtual void Render(void);
 	virtual void Release(void);
 
-public:
-	void	SetAttack(int _iAttack);
-
+	void	SetStat(int _iIndex);	// 플레이어 스텟 
 
 public:
 	CPlayer(void);

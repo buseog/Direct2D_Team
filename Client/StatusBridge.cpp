@@ -9,6 +9,7 @@
 #include "Ui.h"
 #include "ButtonBridge.h"
 #include "KeyMgr.h"
+#include "Player.h"
 
 CStatusBridge::CStatusBridge(void)
 
@@ -24,22 +25,22 @@ HRESULT CStatusBridge::Initialize(void)
 {
 	// 버튼 객체 생성
 
-	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"StrButton",
-		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y - 37.f));	
+	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"Button",
+		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y - 37.f, 0));	
 	
 	
-	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"DexButton",
-		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y + 33.f));
+	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"Button",
+		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y + 33.f, 1));
 
 	
-	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"VirButton",
-		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y + 81.f));
+	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"Button",
+		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y + 81.f, 2));
 
 	
-	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"IntButton",
-		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y + 107.f));
+	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"Button",
+		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y + 107.f, 3));
 	return S_OK;
-}
+} 
 
 void CStatusBridge::Progress(INFO& rInfo)
 {
@@ -51,7 +52,7 @@ void CStatusBridge::Progress(INFO& rInfo)
 void CStatusBridge::Render(void)
 {
 	
-	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pUi->GetObjKey());
+	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_wstrStateKey);
 
 	if(pTexture == NULL)
 		return;
@@ -107,8 +108,22 @@ void CStatusBridge::Render(void)
 		NULL, NULL, 
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	// 공격력
+	// 전투력
+	int iBattle = (pPlayer->GetPlayerStat()->iLAttack + pPlayer->GetPlayerStat()->iSAttack + 
+		pPlayer->GetPlayerStat()->tDetail.iDex + pPlayer->GetPlayerStat()->tDetail.iInt) / 3 *
+		pPlayer->GetPlayerStat()->iHealthPoint / 20;
+	wsprintf(m_szPrint, L"%d", iBattle);
 
+	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x + 32.f, m_pUi->GetInfo()->vPos.y - 75.f, 0.f);
+	
+	CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
+	CDevice::GetInstance()->GetUIFont()->DrawTextW(CDevice::GetInstance()->GetSprite(), 
+		m_szPrint, 
+		lstrlen(m_szPrint), 
+		NULL, NULL, 
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	// 공격력
 	wsprintf(m_szPrint, L"%d", pPlayer->GetPlayerStat()->iAttack);
 
 	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x + 90.f, m_pUi->GetInfo()->vPos.y - 42.f, 0.f);
@@ -224,7 +239,7 @@ void CStatusBridge::Render(void)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 만약 보너스 포인트가 0이 아니라면
-	if(pPlayer->GetPlayerStat()->tDetail.iBonusPoint != 0)
+	if(pPlayer->GetPlayerStat()->tDetail.iBonusPoint > 0)
 	{
 		for (size_t i = 0; i < m_vecButton.size(); ++i)
 		{
@@ -271,6 +286,8 @@ void	CStatusBridge::WorldMatrix(INFO& rInfo)
 
 int	CStatusBridge::Picking(INFO& rInfo)
 {
+	const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_PLAYER);
+
 	POINT	Pt;
 		Pt.x = (long)GetMouse().x;
 		Pt.y = (long)GetMouse().y;
@@ -281,7 +298,29 @@ int	CStatusBridge::Picking(INFO& rInfo)
 		{
 			if(PtInRect(&m_vecButton[i]->GetRect(), Pt))
 			{
-				m_pPlayer->SetAttack(1);
+				int iIndex = m_vecButton[i]->GetIndexKey();
+
+				if(pPlayer->GetPlayerStat()->tDetail.iBonusPoint > 0)
+				{
+					switch(iIndex)
+					{
+						case 0:
+							((CPlayer*)pPlayer)->SetStat(iIndex);
+							break;
+
+						case 1:
+							((CPlayer*)pPlayer)->SetStat(iIndex);
+							break;
+
+						case 2:
+							((CPlayer*)pPlayer)->SetStat(iIndex);
+							break;
+
+						case 3:
+							((CPlayer*)pPlayer)->SetStat(iIndex);
+							break;
+					}
+				}
 			}
 		}
 	}

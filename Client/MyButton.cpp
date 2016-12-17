@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "MyButton.h"
-#include "Bridge.h"
 
 CMyButton::CMyButton(void)
 {

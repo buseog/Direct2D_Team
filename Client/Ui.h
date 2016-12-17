@@ -1,10 +1,9 @@
 #pragma once
 
-
 #include "Bigheader.h"
+#include "Bridge.h"
 
 
-class CBridge;
 class CUi
 {
 protected:
@@ -13,7 +12,8 @@ protected:
 	wstring					m_wstrObjKey;
 	CBridge*				m_pBridge;
 	bool					m_bView;
-
+	int						m_iIndexKey; // 은지 추가
+		
 
 public:
 	const INFO*		GetInfo(void) const;
@@ -23,6 +23,11 @@ public:
 	const wstring&	GetObjKey(void);
 	const RECT		GetRect(void);
 	int				Picking(void);
+
+public:	// 은지 추가 - 피킹 관련 인덱스 추가
+	int				GetIndexKey(void);
+	void			SetIndexKey(int _iIndex);
+
 
 public:
 	virtual HRESULT	Initialize(void)PURE;

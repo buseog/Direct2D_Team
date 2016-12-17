@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "Inventory.h"
-#include "Bridge.h"
 #include "Item.h"
 #include "KeyMgr.h"
 

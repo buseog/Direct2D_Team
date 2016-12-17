@@ -55,7 +55,7 @@ BOOL CDlgTab1::OnInitDialog()
 	UpdateData(TRUE);
 
 	wifstream		LoadFile;
-	LoadFile.open("../Data/MapPath.txt", ios::in);
+	LoadFile.open("../Data/ToolMapPath.txt", ios::in);
 
 
 	TCHAR		szImgPath[MAX_PATH] = L"";

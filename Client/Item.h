@@ -20,6 +20,8 @@ public:
 	void				SetPos(float fX, float fY);
 	RECT				GetRect(void);
 	bool				GetEmpty(void);
+	void				SetFoodPlus(int iCount);
+	void				SetFoodZero(void);
 	ITEM*				GetItemInfo(void);
 	CBridge*			GetBridge(void);
 	const wstring		GetObjKey(void);

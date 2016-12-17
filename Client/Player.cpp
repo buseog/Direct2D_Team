@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "Player.h"
-#include "Bridge.h"
 
 CPlayer::CPlayer(void)
 {
@@ -27,7 +26,8 @@ HRESULT CPlayer::Initialize(void)
 	m_tUnitData.tDetail.iDex = 10;
 	m_tUnitData.tDetail.iVital = 10;
 	m_tUnitData.tDetail.iInt = 10;
-
+	m_tUnitData.iLAttack = 100;
+	m_tUnitData.iSAttack = 150;
 	
 	return S_OK;
 }
@@ -55,7 +55,32 @@ void CPlayer::Release(void)
 	::Safe_Delete(m_pBridge);
 }
 
-void CPlayer::SetAttack(int _iAttack)
+void CPlayer::SetStat(int _iIndex)
 {
-	m_tUnitData.iAttack -= _iAttack;
+	switch(_iIndex)
+	{
+	case 0: 
+		++m_tUnitData.tDetail.iStr;
+		--m_tUnitData.tDetail.iBonusPoint;
+		m_tUnitData.iAttack = m_tUnitData.iAttack + int(m_tUnitData.tDetail.iStr * 0.4f) + int(m_tUnitData.tDetail.iLevel * 0.6f);
+		break;
+
+	case 1: 
+		++m_tUnitData.tDetail.iDex;
+		--m_tUnitData.tDetail.iBonusPoint;
+		m_tUnitData.iDeffence = m_tUnitData.tDetail.iLevel * int(m_tUnitData.tDetail.iDex * 1.5f);
+		break;
+
+	case 2:
+		++m_tUnitData.tDetail.iVital;
+		--m_tUnitData.tDetail.iBonusPoint;
+		break;
+
+	case 3:
+		++m_tUnitData.tDetail.iInt;
+		--m_tUnitData.tDetail.iBonusPoint;
+		break;
+	
+	}
 }
+ 

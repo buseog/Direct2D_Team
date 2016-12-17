@@ -59,3 +59,13 @@ int CUi::Picking(void)
 {
 	return ((CUiBridge*)m_pBridge)->Picking();
 }
+
+int CUi::GetIndexKey(void)
+{
+	return m_iIndexKey;
+}
+
+void CUi::SetIndexKey(int _iIndex)
+{
+	m_iIndexKey = _iIndex;
+}

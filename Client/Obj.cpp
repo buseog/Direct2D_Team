@@ -126,3 +126,19 @@ const UNITDATA* CObj::GetPlayerStat(void) const
 {
 	return &m_tUnitData;
 }
+
+void CObj::SetScroll(float fX, float fY)
+{
+	m_vScroll.x += fX;
+	m_vScroll.y += fY;
+}
+
+void	CObj::SetSize(D3DXVECTOR3 vSize)
+{
+	m_tInfo.vSize = vSize;
+}
+
+const float CObj::GetSpeed(void)
+{
+	return m_fSpeed;
+}

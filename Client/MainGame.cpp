@@ -30,10 +30,12 @@ HRESULT CMainGame::Initialize(void)
 {
 	if(FAILED(m_pDevice->InitDevice()))
 	{
-		ERR_MSG(L"Client Device Create Failed");
+		ERR_MSG(L"Client Device Create Failed")
 		return E_FAIL;
 	}
 
+	ShowCursor(false);
+	
 	CTimeMgr::GetInstance()->InitTime();
 	m_pSceneMgr->SetScene(SC_START);
 
@@ -46,9 +48,7 @@ void CMainGame::Progress(void)
 
 	if (m_pSceneMgr)
 		m_pSceneMgr->Progress();
-	D3DXMatrixTranslation(&m_matTrans, 600.f, 50.f, 0.f);
-
-	
+	D3DXMatrixTranslation(&m_matTrans, 600.f, 50.f, 0.f);	
 }
 
 void CMainGame::Render(void)
@@ -84,12 +84,14 @@ void CMainGame::Render(void)
 		lstrlen(m_szFPS), 
 		NULL, NULL, 
 		D3DCOLOR_ARGB(255, 255, 255, 0));
+
 	m_pDevice->GetSprite()->SetTransform(&matTrans);
 	m_pDevice->GetFont()->DrawTextW(m_pDevice->GetSprite(), 
 		m_szMOUSEPOS, 
 		lstrlen(m_szMOUSEPOS), 
 		NULL, NULL, 
 		D3DCOLOR_ARGB(255, 255, 255, 0));
+
 
 	m_pDevice->Render_End();
 	m_pDevice->GetDevice()->Present(NULL, NULL, NULL, NULL);

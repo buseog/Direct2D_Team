@@ -83,6 +83,7 @@ void	CUnitBridge::WorldMatrix(INFO& rInfo)
 {
 	D3DXMATRIX	matScale, matTrans;
 
+	// 캐릭터 좌우 스케일링 계산
 	if (rInfo.vDir.x < 0)
 	{
 		D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
@@ -92,6 +93,7 @@ void	CUnitBridge::WorldMatrix(INFO& rInfo)
 		D3DXMatrixScaling(&matScale, -1.f, 1.f, 0.f);
 	}
 
+	// 캐릭터 y각도에 따라서 각도 전환
 	if (rInfo.vDir.y >= 0.75f)
 		m_wstrStateKey = L"Walk_5";
 
@@ -124,6 +126,8 @@ void	CUnitBridge::KeyInput(INFO& rInfo)
 
 void	CUnitBridge::Move(INFO& rInfo)
 {
+	// 무브 오더를 받았을때만 이 무브함수를 사용
+	// 목표지점까지 방향벡터를 구해서거리가 10이상일때만 움직임.
 	rInfo.vDir = m_pObj->GetTargetPoint() - rInfo.vPos;
 	
 	float	fDistance = D3DXVec3Length(&rInfo.vDir);
@@ -133,17 +137,24 @@ void	CUnitBridge::Move(INFO& rInfo)
 	{
 		rInfo.vPos += rInfo.vDir * 300 * CTimeMgr::GetInstance()->GetTime();
 	}
+	else
+	{
+		rInfo.vDir.x = cosf(m_pObj->GetRevolution());
+		rInfo.vDir.y = -sinf(m_pObj->GetRevolution());
+	}
 
 }
 
 void	CUnitBridge::SetAstar(D3DXVECTOR3 vMouse)
 {
+	// 에이스타 작동시작
 	m_vecBestList.clear();
 	CAStar::GetInstance()->StartPos(m_pObj->GetInfo()->vPos, vMouse, &m_vecBestList);
 }
 
 void	CUnitBridge::AStarMove(INFO& rInfo)
 {
+	// 에이스타 오더를 받았을때만 이 무브를 사용함
 	if(m_vecBestList.empty())
 		return;
 
@@ -159,7 +170,7 @@ void	CUnitBridge::AStarMove(INFO& rInfo)
 
 	D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
 
-	rInfo.vPos += rInfo.vDir * 300 * CTimeMgr::GetInstance()->GetTime();
+	rInfo.vPos += rInfo.vDir * m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime();
 
 	if(fDistance < 10.f)
 	{

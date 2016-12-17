@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "Store.h"
-#include "Bridge.h"
 #include "StoreBridge.h"
 //#include "Item.h"
 //#include "Armor.h"

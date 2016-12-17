@@ -1,8 +1,8 @@
 #pragma once
-#include "obj.h"
+#include "unit.h"
 
-class CMonster :
-	public CObj
+class CEnemyUnit :
+	public CUnit
 {
 public:
 	virtual HRESULT Initialize(void);
@@ -11,6 +11,6 @@ public:
 	virtual void Release(void);
 
 public:
-	CMonster(void);
-	~CMonster(void);
+	CEnemyUnit(void);
+	~CEnemyUnit(void);
 };

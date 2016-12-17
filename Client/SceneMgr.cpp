@@ -13,6 +13,7 @@ IMPLEMENT_SINGLETON(CSceneMgr)
 
 CSceneMgr::CSceneMgr(void)
 : m_pScene(NULL)
+
 {
 }
 
@@ -44,12 +45,6 @@ void CSceneMgr::SetScene(SCENEID _eScene)
 		break;
 	}
 
-	if(FAILED(m_pScene->Initialize()))
-	{
-		ERR_MSG(L"Scene Init Failed");
-		return;
-	}
-
 	CObjMgr::GetInstance()->SetSceneID(_eScene);
 	if(FAILED(CObjMgr::GetInstance()->Initialize()))
 	{
@@ -63,20 +58,66 @@ void CSceneMgr::SetScene(SCENEID _eScene)
 		ERR_MSG(L"UIMgr Init Failed");
 		return;
 	}
+
+	if(FAILED(m_pScene->Initialize()))
+	{
+		ERR_MSG(L"Scene Init Failed");
+		return;
+	}
 }
 
 void CSceneMgr::Progress(void)
 {
 	m_pScene->Progress();
+
+	
+	m_tFrame.fFrame += m_tFrame.fCount * CTimeMgr::GetInstance()->GetTime() * 1.5f;
+
+	if(m_tFrame.fFrame > m_tFrame.fMax)
+	{
+		wstrMouse = L"Hand_Stand";
+		SetMouse(L"Hand_Stand");
+	}
+
 }
 
 void CSceneMgr::Render(void)
 {
 	m_pScene->Render();
+
+	const TEXINFO*	pTexture = CTextureMgr::GetInstance()->GetTexture(L"Mouse",  wstrMouse, (const int)m_tFrame.fFrame);
+
+	if (pTexture == NULL)
+		return;
+		
+	D3DXMATRIX matTrans;
+
+	float fX = pTexture->tImgInfo.Width / 2.f;
+	float fY = pTexture->tImgInfo.Height / 2.f;
+
+	D3DXVECTOR3	vMouse = ::GetMouse();
+
+	D3DXMatrixTranslation(&matTrans, vMouse.x, vMouse.y, 0.f);
+	CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
+	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
+		NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+
 }
 
 void CSceneMgr::Release(void)
 {
 	if(m_pScene)
 		::Safe_Delete(m_pScene);
+}
+
+void CSceneMgr::SetMouse(const wstring& wstrMouseKey)
+{
+	if (wstrMouse == L"Sword_Click" || wstrMouse == L"Hand_Click")
+		return;
+
+	wstrMouse = wstrMouseKey;
+
+	m_tFrame.fFrame = 0.f;
+	m_tFrame.fCount = (float)CTextureMgr::GetInstance()->GetImgCount(L"Mouse", wstrMouseKey); 
+	m_tFrame.fMax = m_tFrame.fCount;
 }

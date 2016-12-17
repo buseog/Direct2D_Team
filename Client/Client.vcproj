@@ -531,6 +531,42 @@
 							RelativePath=".\BackBridge.h"
 							>
 						</File>
+						<Filter
+							Name="00. FieldBackBridge"
+							>
+							<File
+								RelativePath=".\FieldBackBridge.cpp"
+								>
+							</File>
+							<File
+								RelativePath=".\FieldBackBridge.h"
+								>
+							</File>
+						</Filter>
+						<Filter
+							Name="02. VillageBackBridge"
+							>
+							<File
+								RelativePath=".\VillageBackBridge.cpp"
+								>
+							</File>
+							<File
+								RelativePath=".\VillageBackBridge.h"
+								>
+							</File>
+						</Filter>
+						<Filter
+							Name="01. BattleFieldBackBridge"
+							>
+							<File
+								RelativePath=".\BattleFieldBackBridge.cpp"
+								>
+							</File>
+							<File
+								RelativePath=".\BattleFieldBackBridge.h"
+								>
+							</File>
+						</Filter>
 					</Filter>
 				</Filter>
 				<Filter
@@ -601,6 +637,18 @@
 						</File>
 						<File
 							RelativePath=".\ButtonBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="06. BattlePannelBridge"
+						>
+						<File
+							RelativePath=".\BattlePannelBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\BattlePannelBridge.h"
 							>
 						</File>
 					</Filter>
@@ -703,16 +751,40 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="03. Monster"
+				Name="03. Unit"
 				>
 				<File
-					RelativePath=".\Monster.cpp"
+					RelativePath=".\Unit.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Monster.h"
+					RelativePath=".\Unit.h"
 					>
 				</File>
+				<Filter
+					Name="00. AllyUnit"
+					>
+					<File
+						RelativePath=".\AllyUnit.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\AllyUnit.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="01. EnemyUnit"
+					>
+					<File
+						RelativePath=".\EnemyUnit.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\EnemyUnit.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="02. Effect"
@@ -795,6 +867,18 @@
 				</File>
 				<File
 					RelativePath=".\MyButton.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="05. BattlePaneel"
+				>
+				<File
+					RelativePath=".\BattlePannel.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\BattlePannel.h"
 					>
 				</File>
 			</Filter>
@@ -893,7 +977,6 @@
 					RelativePath=".\Food.h"
 					>
 				</File>
-
 			</Filter>
 			<Filter
 				Name="09. Empty"
@@ -906,7 +989,6 @@
 					RelativePath=".\EmptyItem.h"
 					>
 				</File>
-
 			</Filter>
 		</Filter>
 		<File
