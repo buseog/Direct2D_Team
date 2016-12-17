@@ -54,6 +54,7 @@ void	CField::Progress(void)
 {
 	CObjMgr::GetInstance()->Progress();
 	CUIMgr::GetInstance()->Progress();
+	CUIMgr::GetInstance()->Picking();
 
 	if (CKeyMgr::GetInstance()->KeyDown(VK_RETURN))
 		CSceneMgr::GetInstance()->SetScene(SC_BATTLEFIELD);

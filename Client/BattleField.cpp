@@ -45,6 +45,7 @@ void	CBattleField::Progress(void)
 {
 	CObjMgr::GetInstance()->Progress();
 	CUIMgr::GetInstance()->Progress();
+	CObjMgr::GetInstance()->Picking();
 
 }
 

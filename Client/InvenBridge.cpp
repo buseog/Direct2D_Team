@@ -207,7 +207,7 @@ void CInvenBridge::AddItem(INFO& rInfo)
 	
 }
 
-int CInvenBridge::Picking(INFO& rInfo)
+int CInvenBridge::Picking(void)
 {
 	POINT	Pt;
 		Pt.x = (long)GetMouse().x;
@@ -239,6 +239,8 @@ int CInvenBridge::Picking(INFO& rInfo)
 
 		m_bSelect = false;
 		m_iSelectIndex = -1;
+
+		return 1;
 	}
 
 
@@ -246,6 +248,8 @@ int CInvenBridge::Picking(INFO& rInfo)
 	if(CKeyMgr::GetInstance()->StayKeyDown(VK_LBUTTON) && m_iSelectIndex >= 0 && m_bSelect)
 	{
 		m_ItemSlot[m_iSelectIndex]->SetPos(GetMouse());
+
+		return 1;
 		
 	}	
 			
@@ -257,6 +261,8 @@ int CInvenBridge::Picking(INFO& rInfo)
 			{
 				m_bSelect = true;
 				m_iSelectIndex = i;
+
+				return 1;
 			}
 		}
 		
@@ -293,7 +299,7 @@ int CInvenBridge::Picking(INFO& rInfo)
 		
 	}
 	
-	return m_iPriority;
+	return -1;
 }
 
 CItem*	CInvenBridge::CreateWeapon(D3DXVECTOR3 vPos)
@@ -347,10 +353,3 @@ void CInvenBridge::SortItem(INFO& rInfo)
 	m_EquipSlot[IT_WEAPON]->SetPos(565.f, 170.f);
 	m_EquipSlot[IT_ARMOR]->SetPos(625.f, 170.f);
 }
-
-
-int	CInvenBridge::Picking(void)
-{
-	return m_iPriority;
-}
-

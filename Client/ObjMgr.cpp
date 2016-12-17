@@ -43,8 +43,6 @@ void CObjMgr::Progress(void)
 				++iter;
 		}
 	}
-
-	Picking();
 }
 
 void CObjMgr::Render(void)
@@ -63,7 +61,7 @@ void CObjMgr::Release()
 {
 	for (int id = 0; id < SC_END; ++id)
 	{
-		for(size_t i = 0; i < OBJ_END; ++i)
+		for(int i = 0; i < OBJ_END; ++i)
 		{
 			for(list<CObj*>::iterator	iter = m_ObjList[id][i].begin();
 				iter != m_ObjList[id][i].end(); ++iter)
@@ -104,7 +102,7 @@ int	CObjMgr::Picking(void)
 		return iResult;
 
 
-	for(size_t i = 0; i < OBJ_END; ++i)
+	for(int i = 0; i < OBJ_END; ++i)
 	{
 		for(list<CObj*>::iterator	iter = m_ObjList[m_eSceneID][i].begin();
 			iter != m_ObjList[m_eSceneID][i].end(); ++iter)
@@ -116,6 +114,5 @@ int	CObjMgr::Picking(void)
 		}
 	}
 
-	
 	return iResult;
 }

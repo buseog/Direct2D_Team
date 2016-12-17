@@ -14,11 +14,13 @@ private:
 	void	KeyInput(INFO& rInfo);
 	void	Move(INFO& rInfo);
 	void	AStarMove(INFO& rInfo);
+	void	Attack(INFO& rInfo);
+	void	Stop(INFO& rInfo);
+	void	Patrol(INFO& rInfo);
 
 public:
 	void	SetAstar(D3DXVECTOR3 vMouse);
-
-
+	
 public:
 	virtual HRESULT	Initialize(void);
 	virtual void	Progress(INFO& rInfo);

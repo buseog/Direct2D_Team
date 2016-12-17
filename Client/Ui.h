@@ -25,7 +25,6 @@ public:
 	const RECT		GetRect(void);
 	int				Picking(void);
 	void			SetSize(D3DXVECTOR3 vSize);					// 렉트 충돌하기위한 사이즈 지정함수
-
 public:	// 은지 추가 - 피킹 관련 인덱스 추가
 	int				GetIndexKey(void);
 	void			SetIndexKey(int _iIndex);

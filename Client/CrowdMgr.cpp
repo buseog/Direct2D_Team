@@ -76,6 +76,12 @@ int	CCrowdMgr::Progress(void)
 	if (CSceneMgr::GetInstance()->GetMouse() == L"Hand_Stand")
 		iResult = KeyInput();
 
+	for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
+	{
+		int iKey = (int)i;
+		CDataSubject::GetInstance()->Notify(iKey, (void*)m_vecSelectUnit[i]->GetStat());
+	}
+
 	return iResult;
 }
 
@@ -111,8 +117,8 @@ void	CCrowdMgr::RenderPortrait(void)
 int	CCrowdMgr::KeyInput(void)
 {
 	POINT pt;
-	pt.x = ::GetMouse().x;
-	pt.y = ::GetMouse().y;
+	pt.x = (long)::GetMouse().x;
+	pt.y = (long)::GetMouse().y;
 
 	for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
 	{
@@ -190,8 +196,8 @@ int	CCrowdMgr::KeyInput(void)
 				++iLine;
 			}
 			// 리스트를 순회할때마다 특정 각도 + 테두리의 위치를 지정해줌
-			float fX = vMouse.x + cosf(D3DXToRadian(fAngle)) * 80 * iLine;
-			float fY = vMouse.y - sinf(D3DXToRadian(fAngle)) * 80 * iLine;
+			float fX = vMouse.x + cosf(D3DXToRadian(fAngle)) * 60 * iLine;
+			float fY = vMouse.y - sinf(D3DXToRadian(fAngle)) * 60 * iLine;
 
 			/*((CUnitBridge*)m_vecSelectUnit[i]->GetBridge())->SetAstar(D3DXVECTOR3(fX, fY, 0.f));
 			m_vecSelectUnit[i]->SetOrder(OD_ASTAR);*/
@@ -216,6 +222,34 @@ int	CCrowdMgr::KeyInput(void)
 			{
 
 			}
+		}
+	}
+
+	if (CKeyMgr::GetInstance()->KeyDown('S'))
+	{
+		for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
+		{
+			m_vecSelectUnit[i]->SetOrder(OD_STAND);
+		}
+	}
+
+	if (CKeyMgr::GetInstance()->KeyDown('P'))
+	{
+		D3DXVECTOR3 vMouse = ::GetMouse();
+
+		for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
+		{
+			m_vecSelectUnit[i]->SetTargetPoint(D3DXVECTOR3(vMouse.x, vMouse.y, 0));
+			m_vecSelectUnit[i]->SetOriginPos(m_vecSelectUnit[i]->GetInfo()->vPos);
+			m_vecSelectUnit[i]->SetOrder(OD_PATROL);
+		}
+	}
+
+	if (CKeyMgr::GetInstance()->KeyDown('Q'))
+	{
+		for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
+		{
+			m_vecSelectUnit[i]->SetDamage(1);
 		}
 	}
 

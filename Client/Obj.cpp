@@ -147,3 +147,18 @@ int		CObj::Picking(void)
 {
 	return m_pBridge->Picking();
 }
+
+void	CObj::SetOriginPos(D3DXVECTOR3	OriginPos)
+{
+	m_vOriginPos = OriginPos;
+}
+
+const D3DXVECTOR3	CObj::GetOriginPos(void)
+{
+	return m_vOriginPos;
+}
+
+void	CObj::SetDamage(int iAttack)
+{
+	m_tUnitData.iHealthPoint -= iAttack;
+}

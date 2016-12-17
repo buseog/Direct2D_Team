@@ -6,7 +6,6 @@ class CUIObserver :
 {
 private:
 	UNITDATA			m_tData;
-	D3DXMATRIX			m_matPlayer;
 
 public:
 	CUIObserver(void);
@@ -17,6 +16,4 @@ public:
 
 public:
 	const UNITDATA*		GetData(void);
-	const D3DXMATRIX*	GetMatrix(void);
-
 };

@@ -54,8 +54,11 @@ enum ITEMID
 enum ORDERID
 {
 	OD_STAND,
+	OD_MOVE,
 	OD_ASTAR,
-	OD_MOVE
+	OD_PATROL,
+	OD_ATTACK
+	
 };
 
 enum DATAID		

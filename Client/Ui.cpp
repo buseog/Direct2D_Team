@@ -57,7 +57,7 @@ const RECT CUi::GetRect(void)
 
 int CUi::Picking(void)
 {
-	return ((CUiBridge*)m_pBridge)->Picking();
+	return m_pBridge->Picking();
 }
 
 CBridge* CUi::GetBridge(void)

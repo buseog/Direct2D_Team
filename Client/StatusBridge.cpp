@@ -28,10 +28,9 @@ HRESULT CStatusBridge::Initialize(void)
 	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"Button",
 		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y - 37.f, 0));	
 	
-	
 	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"Button",
 		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y + 33.f, 1));
-
+	
 	
 	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"Button",
 		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y + 81.f, 2));
@@ -39,6 +38,10 @@ HRESULT CStatusBridge::Initialize(void)
 	
 	m_vecButton.push_back(CUIFactory<CMyButton, CButtonBridge>::CreateUI(L"Button",
 		m_pUi->GetInfo()->vPos.x - 22.f, m_pUi->GetInfo()->vPos.y + 107.f, 3));
+
+	for (size_t i = 0; i < m_vecButton.size(); ++i)
+		m_vecButton[i]->SetSize(D3DXVECTOR3(16.f, 15.f, 0.f));
+
 	return S_OK;
 } 
 
@@ -283,7 +286,7 @@ void	CStatusBridge::WorldMatrix(INFO& rInfo)
 }
 
 
-int	CStatusBridge::Picking(INFO& rInfo)
+int	CStatusBridge::Picking(void)
 {
 	const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_PLAYER);
 
@@ -291,7 +294,7 @@ int	CStatusBridge::Picking(INFO& rInfo)
 		Pt.x = (long)GetMouse().x;
 		Pt.y = (long)GetMouse().y;
 
-	if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON))
+	if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON, 1))
 	{
 		for(size_t i = 0; i < m_vecButton.size(); ++i)
 		{
@@ -319,6 +322,8 @@ int	CStatusBridge::Picking(INFO& rInfo)
 							((CPlayer*)pPlayer)->SetStat(iIndex);
 							break;
 					}
+
+					return 1;
 				}
 			}
 		}

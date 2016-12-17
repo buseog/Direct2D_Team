@@ -20,7 +20,7 @@ public:
 
 	void		AddSorting(CUi*	pUi);
 	void		MapClear(void);
-	
+	int			Picking(void);
 
 public:
 	HRESULT			Initialize(void);

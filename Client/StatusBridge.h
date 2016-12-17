@@ -17,7 +17,7 @@ public:
 	virtual void	Progress(INFO& rInfo);
 	virtual void	Render(void);
 	virtual void	Release(void);
-	virtual int		Picking(INFO& rInfo);
+	virtual int		Picking(void);
 
 public:
 	CStatusBridge(void);

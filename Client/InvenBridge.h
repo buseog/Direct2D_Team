@@ -29,7 +29,7 @@ public:
 	void SortItem(INFO& rInfo);
 	void AddItem(INFO& rInfo);
 	void SetItem(INFO& rInfo);
-	int Picking(INFO& rInfo);
+	
 	CItem*	CreateWeapon(D3DXVECTOR3 vPos);
 	CItem*	CreateArmor(D3DXVECTOR3 vPos);
 	CItem*	CreateFood(D3DXVECTOR3 vPos);
@@ -40,7 +40,6 @@ public:
 	virtual void	Progress(INFO& rInfo);
 	virtual void	Render(void);
 	virtual void	Release(void);
-
 	virtual int		Picking(void);
 
 

@@ -47,9 +47,3 @@ void	CStore::Release(void)
 	::Safe_Delete(m_pBridge);
 
 }
-
-
-void	CStore::Picking(void)
-{
-
-}

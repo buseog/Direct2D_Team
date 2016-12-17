@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "PortraitBridge.h"
 #include "Ui.h"
+#include "Portrait.h"
+#include "UIObserver.h"
 
 CPortraitBridge::CPortraitBridge(void)
 {
@@ -26,6 +28,10 @@ void CPortraitBridge::Render(void)
 {
 	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pUi->GetObjKey(), m_wstrStateKey, 0);
 
+	const UNITDATA*	pData = ((CUIObserver*)((CPortrait*)m_pUi)->GetObserver())->GetData();
+
+	float fPercent = (float)pData->iHealthPoint / (float)pData->iMaxHelathPoint;
+
 	if(pTexture == NULL)
 		return;
 
@@ -41,16 +47,20 @@ void CPortraitBridge::Render(void)
 	if(pTexture == NULL)
 		return;
 
-	D3DXMATRIX matTrans;
+	D3DXMATRIX matScale, matTrans, matWorld;
 
 	fX = (float)pTexture->tImgInfo.Width;
 	fY = (float)pTexture->tImgInfo.Height;
 
-	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x - 10.f, m_pUi->GetInfo()->vPos.y + 8.f, 0.f); 
+	D3DXMatrixIdentity(&matWorld);
+	D3DXMatrixScaling(&matScale, fPercent, 1.f, 0.f);
+	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x - 75.f, m_pUi->GetInfo()->vPos.y + 2.5f, 0.f); 
 
-	CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
+	matWorld = matScale * matTrans;
+
+	CDevice::GetInstance()->GetSprite()->SetTransform(&matWorld);
 	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
-		NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+		NULL, &D3DXVECTOR3(0.f, 0.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	pTexture = CTextureMgr::GetInstance()->GetTexture(L"MpBar");
 

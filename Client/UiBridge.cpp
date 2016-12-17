@@ -52,6 +52,5 @@ void CUiBridge::Release(void)
 void	CUiBridge::WorldMatrix(INFO& rInfo)
 {
 	
-
 }
 
