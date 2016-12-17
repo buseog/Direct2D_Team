@@ -46,7 +46,7 @@ void CStoreBridge::Render(void)
 int CStoreBridge::Picking(void)
 {
 
-	return m_iPriority;
+	return -1;
 }
 void CStoreBridge::ShowToolTip(/*int _iIndex,*/)
 {

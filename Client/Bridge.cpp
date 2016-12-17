@@ -65,9 +65,34 @@ void	CBridge::SetObjSize(void)
 	if (m_pObj->GetObjKey() != L"")
 	{
 		const TEXINFO*	pTexture = CTextureMgr::GetInstance()->GetTexture(m_pObj->GetObjKey(), m_wstrStateKey, 0);
+
+		if (pTexture == NULL)
+			return;
+
 		float fX = pTexture->tImgInfo.Width / 5.f;
 		float fY = pTexture->tImgInfo.Height / 5.f;
 
 		m_pObj->SetSize(D3DXVECTOR3(fX, fY, 0.f));
 	}
+}
+
+void	CBridge::SetUiSize(void)
+{
+	if (m_pUi->GetObjKey() != L"")
+	{
+		const TEXINFO*	pTexture = CTextureMgr::GetInstance()->GetTexture(m_pUi->GetObjKey(), m_wstrStateKey, 0);
+
+		if (pTexture == NULL)
+			return;
+
+		float fX = pTexture->tImgInfo.Width / 2.f;
+		float fY = pTexture->tImgInfo.Height / 2.f;
+
+		m_pUi->SetSize(D3DXVECTOR3(fX, fY, 0.f));
+	}
+}
+
+int		CBridge::Picking(void)
+{
+	return -1;
 }

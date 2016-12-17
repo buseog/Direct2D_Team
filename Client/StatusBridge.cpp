@@ -46,7 +46,6 @@ void CStatusBridge::Progress(INFO& rInfo)
 {
 	WorldMatrix(rInfo);
 
-	Picking(rInfo);
 }
 
 void CStatusBridge::Render(void)
@@ -325,7 +324,7 @@ int	CStatusBridge::Picking(INFO& rInfo)
 		}
 	}
 
-	return 3;
+	return -1;
 }
 
 vector<CUi*>* CStatusBridge::GetButton(void)

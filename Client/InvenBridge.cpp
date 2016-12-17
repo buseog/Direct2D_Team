@@ -51,8 +51,6 @@ void CInvenBridge::Progress(INFO& rInfo)
 
 	AddItem(rInfo); // 인벤토리에 아이템 추가
 	
-	Picking(rInfo); // 드래그 및 장착
-
 
 	if (m_bSelect == false)
 		SortItem(rInfo); // 인벤토리 아이템 칸에 맞게 들어가는 정렬

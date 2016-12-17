@@ -50,6 +50,7 @@ public:
 	const float			GetSpeed(void);			// 스피드값 반환
 
 public:
+	virtual int		Picking(void);
 	virtual HRESULT	Initialize(void)PURE;
 	virtual void	Progress(void)PURE;
 	virtual void	Render(void)PURE;

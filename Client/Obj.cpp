@@ -142,3 +142,8 @@ const float CObj::GetSpeed(void)
 {
 	return m_fSpeed;
 }
+
+int		CObj::Picking(void)
+{
+	return m_pBridge->Picking();
+}

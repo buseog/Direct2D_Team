@@ -74,3 +74,8 @@ void CUi::SetIndexKey(int _iIndex)
 {
 	m_iIndexKey = _iIndex;
 }
+
+void	CUi::SetSize(D3DXVECTOR3 vSize)
+{
+	m_tInfo.vSize = vSize;
+}

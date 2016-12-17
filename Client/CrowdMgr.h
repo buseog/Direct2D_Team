@@ -19,12 +19,12 @@ public:
 	void	AddSelectList(CObj*	pObj);
 	int		GetSelectList(void);
 	void	RenderPortrait(void);
-	void	KeyInput(void);
+	int	KeyInput(void);
 	void	Clear(void);
 
 public:
 	void	Release(void);
-	void	Progress(void);
+	int		Progress(void);
 
 private:
 	CCrowdMgr(void);

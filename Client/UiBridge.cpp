@@ -55,7 +55,3 @@ void	CUiBridge::WorldMatrix(INFO& rInfo)
 
 }
 
-int		CUiBridge::Picking(void)
-{
-	return -1;
-}

@@ -24,7 +24,7 @@ HRESULT	CBattleFieldBackBridge::Initialize(void)
 
 void	CBattleFieldBackBridge::Progress(INFO& rInfo)
 {
-	Picking();
+
 }
 
 void	CBattleFieldBackBridge::Render(void)
@@ -97,7 +97,7 @@ void	CBattleFieldBackBridge::Release(void)
 	m_vecTile.clear();
 }
 
-void	CBattleFieldBackBridge::Picking(void)
+int	CBattleFieldBackBridge::Picking(void)
 {
 	// 배틀필드 아군 유닛 리스트를 받아옴
 	list<CObj*>*	plistUnit = CObjMgr::GetInstance()->GetObjList(OBJ_PLAYER);
@@ -138,7 +138,6 @@ void	CBattleFieldBackBridge::Picking(void)
 				if (CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON))
 				{
 					CSceneMgr::GetInstance()->SetMouse(L"Sword_Click");
-					return;
 				}
 			}
 		}
@@ -180,7 +179,6 @@ void	CBattleFieldBackBridge::Picking(void)
 					// 현재 피킹된 아군 유닛을 군중매니저의 선택리스트로 넣는다
 					CCrowdMgr::GetInstance()->AddSelectList(*iter);
 					// 드래그가 중복으로 입력받는걸 막기위해 바로 리턴
-					return;
 				}
 			}
 		}
@@ -210,6 +208,14 @@ void	CBattleFieldBackBridge::Picking(void)
 			m_rcDrag.bottom = TempY;
 		}
 
+		if ((m_rcDrag.right - m_rcDrag.left) < 20 ||
+			(m_rcDrag.bottom - m_rcDrag.top) < 20)
+		{
+			m_iDragState = 0;
+			ZeroMemory(&m_vDrag, sizeof(D3DXVECTOR2) * 5);
+			return -1;
+		}
+
 		// 사각형을 그려주는 5개의 점
 		m_vDrag[0] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.top);
 		m_vDrag[1] = D3DXVECTOR2((float)m_rcDrag.right, (float)m_rcDrag.top);
@@ -236,7 +242,6 @@ void	CBattleFieldBackBridge::Picking(void)
 				{
 					m_iDragState = 0;
 					ZeroMemory(&m_vDrag, sizeof(D3DXVECTOR2) * 5);
-					return;
 				}
 				// 조건에 부합하는 유닛을 선택리스트에 추가함
 				CCrowdMgr::GetInstance()->AddSelectList(*iter);
@@ -267,6 +272,8 @@ void	CBattleFieldBackBridge::Picking(void)
 		m_vDrag[3] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.bottom);
 		m_vDrag[4] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.top);
 	}
+
+	return -1;
 }
 
 void CBattleFieldBackBridge::LoadTile(const wstring& wstrPath)

@@ -10,6 +10,7 @@
 #include "ObjFactory.h"
 #include "UIFactory.h"
 
+#include "Obj.h"
 #include "Back.h"
 #include "BattleFieldBackBridge.h"
 #include "AllyUnit.h"
@@ -34,7 +35,7 @@ HRESULT	CBattleField::Initialize(void)
 	CSceneMgr::GetInstance()->SetMouse(L"Hand_Stand");
 
 	CObjMgr::GetInstance()->AddObject(OBJ_BACK, CObjFactory<CBack, CBattleFieldBackBridge>::CreateObj(L"BattleField", 0, 0));
-	//CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
+	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
 
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi, CMainUiBridge>::CreateUI(L"BattleFieldMainUi",400.f,553.f));	
 	return S_OK;
@@ -44,7 +45,7 @@ void	CBattleField::Progress(void)
 {
 	CObjMgr::GetInstance()->Progress();
 	CUIMgr::GetInstance()->Progress();
-	CCrowdMgr::GetInstance()->Progress();
+
 }
 
 void	CBattleField::Render(void)

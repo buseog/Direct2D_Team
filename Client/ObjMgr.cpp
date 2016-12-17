@@ -2,6 +2,7 @@
 #include "ObjMgr.h"
 #include "Obj.h"
 #include "Back.h"
+#include "CrowdMgr.h"
 
 IMPLEMENT_SINGLETON(CObjMgr)
 
@@ -42,6 +43,8 @@ void CObjMgr::Progress(void)
 				++iter;
 		}
 	}
+
+	Picking();
 }
 
 void CObjMgr::Render(void)
@@ -89,4 +92,30 @@ list<CObj*>* CObjMgr::GetObjList(OBJID _eID)
 void CObjMgr::SetSceneID(SCENEID	eID)
 {
 	m_eSceneID = eID;
+}
+
+int	CObjMgr::Picking(void)
+{
+	int iResult = -1;
+	
+	iResult = CCrowdMgr::GetInstance()->Progress();
+
+	if (iResult > 0)
+		return iResult;
+
+
+	for(size_t i = 0; i < OBJ_END; ++i)
+	{
+		for(list<CObj*>::iterator	iter = m_ObjList[m_eSceneID][i].begin();
+			iter != m_ObjList[m_eSceneID][i].end(); ++iter)
+		{
+			iResult = (*iter)->Picking();
+
+			if (iResult > 0)
+				return iResult;
+		}
+	}
+
+	
+	return iResult;
 }

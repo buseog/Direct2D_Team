@@ -21,20 +21,20 @@ bool	CKeyMgr::StayKeyDown(int nKey)	// 쭉 누르고있을때
 
 	return false;	// if문에서 입력된걸 감지하지 않았음으로 눌리지 않았음. 펄스를 반환
 }
-bool	CKeyMgr::KeyDown(int nKey)	// 한번만 딱 눌렀을때
+bool	CKeyMgr::KeyDown(int nKey, int iIndex)	// 한번만 딱 눌렀을때
 {
 	if (GetAsyncKeyState(nKey) & 0x8000)	// 키가 입력됬는지 확인하고
 	{
-		if (m_bKeyDown[nKey] == false)	// 다운 배열에서 입력된 키값이 폴스인지 확인(이전에 눌렸는지)
+		if (m_bKeyDown[iIndex][nKey] == false)	// 다운 배열에서 입력된 키값이 폴스인지 확인(이전에 눌렸는지)
 		{
-			m_bKeyDown[nKey] = true;	//	이전에 눌린적이 없으면 트루로 바꿔줌
+			m_bKeyDown[iIndex][nKey] = true;	//	이전에 눌린적이 없으면 트루로 바꿔줌
 
 			return true;				//	트루로 반환
 		}
 	}
 	else
 	{
-		m_bKeyDown[nKey] = false;		//	키가 입력되지 않았으므로 폴스 반환
+		m_bKeyDown[iIndex][nKey] = false;		//	키가 입력되지 않았으므로 폴스 반환
 	}
 
 	return false;						//	그냥 실패로간주

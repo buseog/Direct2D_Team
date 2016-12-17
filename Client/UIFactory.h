@@ -19,6 +19,7 @@ public:
 		pBridge->SetUI(pUI);
 		pBridge->Initialize();
 		pBridge->SetKey(wstrState);
+		pBridge->SetUiSize();
 
 
 		return pUI;	

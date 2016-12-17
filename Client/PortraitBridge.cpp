@@ -12,6 +12,7 @@ CPortraitBridge::~CPortraitBridge(void)
 
 HRESULT CPortraitBridge::Initialize(void)
 {
+	m_iIndex = -1;
 	return S_OK;
 }
 
@@ -82,4 +83,13 @@ void CPortraitBridge::WorldMatrix(INFO& rInfo)
 		0.f);
 
 	rInfo.matWorld = matTrans;
+}
+
+void	CPortraitBridge::SetIndex(int iIndex)
+{
+	m_iIndex = iIndex;
+}
+int		CPortraitBridge::GetIndex(void)
+{
+	return m_iIndex;
 }

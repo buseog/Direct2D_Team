@@ -66,16 +66,17 @@ int	CCrowdMgr::GetSelectList(void)
 	return m_vecSelectUnit.size();
 }
 
-void	CCrowdMgr::Progress(void)
+int	CCrowdMgr::Progress(void)
 {
+	int iResult = -1;
 	// 선택리스트가 비어있지 않을때만 작동
 	if (m_vecSelectUnit.empty())
-		return;
+		return -1;
 
 	if (CSceneMgr::GetInstance()->GetMouse() == L"Hand_Stand")
-		KeyInput();
+		iResult = KeyInput();
 
-	
+	return iResult;
 }
 
 void	CCrowdMgr::AddSelectList(CObj*	pObj)
@@ -97,6 +98,7 @@ void	CCrowdMgr::RenderPortrait(void)
 		m_vecPortrait[i]->GetBridge()->SetKey(m_vecSelectUnit[i]->GetObjKey());
 		CDataSubject::GetInstance()->AddData(i, (void*)m_vecSelectUnit[i]->GetStat());
 		((CPortrait*)m_vecPortrait[i])->GetObserver()->Update(i, (void*)m_vecSelectUnit[i]->GetStat());
+		((CPortraitBridge*)m_vecPortrait[i]->GetBridge())->SetIndex(i);
 	}
 
 	for (size_t i = 0; i < m_vecPortrait.size(); ++i)
@@ -106,8 +108,28 @@ void	CCrowdMgr::RenderPortrait(void)
 	}
 }
 
-void	CCrowdMgr::KeyInput(void)
+int	CCrowdMgr::KeyInput(void)
 {
+	POINT pt;
+	pt.x = ::GetMouse().x;
+	pt.y = ::GetMouse().y;
+
+	for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
+	{
+		if (PtInRect(&m_vecPortrait[i]->GetRect(), pt))
+		{
+			if (CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON, 1))
+			{
+				CObj*	pObj = m_vecSelectUnit[i];
+				Clear();
+				AddSelectList(pObj);
+
+				return 1;
+			}
+		}
+	}
+
+
 	if (CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON))
 	{
 		clock_t start = clock();
@@ -196,6 +218,8 @@ void	CCrowdMgr::KeyInput(void)
 			}
 		}
 	}
+
+	return -1;
 }
 
 void	CCrowdMgr::Clear(void)
@@ -205,6 +229,7 @@ void	CCrowdMgr::Clear(void)
 		// 리스트안의 모든 유닛들을 선택되지않음 으로 바꾸고
 		m_vecSelectUnit[i]->SetSelect(false);
 		CDataSubject::GetInstance()->RemoveData(i, (void*)m_vecSelectUnit[i]->GetStat());
+		((CPortraitBridge*)m_vecPortrait[i]->GetBridge())->SetIndex(-1);
 	}
 	// 리스트를 클리어함
 	m_vecSelectUnit.clear();
