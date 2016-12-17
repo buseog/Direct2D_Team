@@ -4,7 +4,7 @@
 #include "SceneMgr.h"
 
 CStart::CStart(void)
-:m_iMaxLoad(50)
+:m_iMaxLoad(82)
 {
 }
 
@@ -19,9 +19,13 @@ unsigned int __stdcall CStart::ImgLoadThreadFunc(void* pArg)
 
 	EnterCriticalSection(&pStart->GetCrt());
 
-	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/PlayerPath.txt");
+	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/PlayerPath.txt");	// 21
 
-	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/EffectPath.txt");
+	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/EffectPath.txt");	// 27
+
+	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/MousePath.txt");	// 18
+
+	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/PortraitPath.txt");	// 24
 
 	CTextureMgr::GetInstance()->SetString(L"Press Enter");
 
@@ -53,11 +57,14 @@ void	CStart::Progress(void)
 {
 	if(CKeyMgr::GetInstance()->KeyDown(VK_RETURN))
 	{
+		if (CTextureMgr::GetInstance()->GetCounting() < m_iMaxLoad)
+			return;
+
 		WaitForSingleObject(m_hThread, INFINITE);
 		CloseHandle(m_hThread);
 
 		DeleteCriticalSection(&m_Crt);
-		CSceneMgr::GetInstance()->SetScene(SC_BATTLEFIELD);
+		CSceneMgr::GetInstance()->SetScene(SC_FILED);
 	}
 }
 
@@ -103,9 +110,6 @@ void	CStart::Render(void)
 		CTextureMgr::GetInstance()->GetString().c_str(),
 		CTextureMgr::GetInstance()->GetString().length(),
 		NULL, 0, D3DCOLOR_ARGB(255, 0, 0, 0));
-
-
-
 }
 
 void	CStart::Release(void)

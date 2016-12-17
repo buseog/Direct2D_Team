@@ -3,12 +3,10 @@
 #include "Bigheader.h"
 #include "Obj.h"
 #include "Ui.h"
+#include "SceneMgr.h"
 
 class CScene
 {
-public:
-	void			CreateBridge();
-
 public:
 	virtual HRESULT	Initialize(void)PURE;
 	virtual void	Progress(void)PURE;

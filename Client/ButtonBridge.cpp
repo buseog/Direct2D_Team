@@ -9,6 +9,7 @@ CButtonBridge::CButtonBridge(void)
 
 CButtonBridge::~CButtonBridge(void)
 {
+	Release();
 }
 
 HRESULT CButtonBridge::Initialize(void)
@@ -19,19 +20,12 @@ HRESULT CButtonBridge::Initialize(void)
 void CButtonBridge::Progress(INFO& rInfo)
 {
 	WorldMatrix(rInfo);
-	
-	if(CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON))
-	{
-		
-		
-	}
-
 }
 
 void CButtonBridge::Render(void)
 {
 	
-	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pUi->GetObjKey());
+	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_wstrStateKey);
 
 	if(pTexture == NULL)
 		return;
@@ -62,9 +56,4 @@ void	CButtonBridge::WorldMatrix(INFO& rInfo)
 
 	rInfo.matWorld = matTrans;
 
-}
-
-int	CButtonBridge::Picking(void)
-{
-	return m_iPriority;
 }

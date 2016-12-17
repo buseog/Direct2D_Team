@@ -37,5 +37,5 @@ void	CVillage::Release(void)
 
 void	CVillage::LoadPNG(void)
 {
-
+		CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Map/Map02.png", L"Village", TEX_SINGLE);
 }

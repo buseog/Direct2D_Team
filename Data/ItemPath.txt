@@ -1,0 +1,9 @@
+Item|Armor|9|..\Texture\Item\Armor\%d.png
+Item|Belt|2|..\Texture\Item\Belt\%d.png
+Item|Food|20|..\Texture\Item\Food\%d.png
+Item|Glove|2|..\Texture\Item\Glove\%d.png
+Item|Helmet|3|..\Texture\Item\Helmet\%d.png
+Item|Medic|9|..\Texture\Item\Medic\%d.png
+Item|Ring|2|..\Texture\Item\Ring\%d.png
+Item|Shoes|2|..\Texture\Item\Shoes\%d.png
+Item|Weapon|14|..\Texture\Item\Weapon\%d.png

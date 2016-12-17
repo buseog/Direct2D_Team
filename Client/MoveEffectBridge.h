@@ -7,7 +7,7 @@ class CMoveEffectBridge :
 protected:
 	virtual void	WorldMatrix(INFO& rInfo);
 
-public:
+private:
 	void	Move(INFO& rInfo);
 
 public:

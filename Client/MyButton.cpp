@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "MyButton.h"
-#include "Bridge.h"
 
 CMyButton::CMyButton(void)
 {
@@ -14,6 +13,10 @@ CMyButton::~CMyButton(void)
 HRESULT	CMyButton::Initialize(void)
 {
 	m_wstrObjKey = L"Button";
+	m_tInfo.vSize.x = 16.f;
+	m_tInfo.vSize.y = 15.f;
+	m_tInfo.vSize.z = 0.f;
+
 
 	return S_OK;
 }

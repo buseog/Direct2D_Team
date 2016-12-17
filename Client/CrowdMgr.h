@@ -14,9 +14,14 @@ private:
 	bool			m_bStart;
 
 public:
+	void	AddSelectList(CObj*	pObj);
+	vector<CObj*>*	GetSelectList(void);
+	void	RenderPortrait(void);
+	void	KeyInput(void);
+
+public:
 	void	Release(void);
 	void	Progress(void);
-	vector<CObj*>*	GetSelectList(void);
 
 private:
 	CCrowdMgr(void);

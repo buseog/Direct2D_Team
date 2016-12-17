@@ -1,0 +1,8 @@
+Mouse|Hand_Click|5|..\Texture\Mouse\Hand_Click\UI%d.png
+Mouse|Hand_Enemy|2|..\Texture\Mouse\Hand_Enemy\UI%d.png
+Mouse|Hand_Stand|15|..\Texture\Mouse\Hand_Stand\UI%d.png
+Mouse|Hand_Unit|4|..\Texture\Mouse\Hand_Unit\UI%d.png
+Mouse|Sword_Click|5|..\Texture\Mouse\Sword_Click\UI%d.png
+Mouse|Sword_Stand|17|..\Texture\Mouse\Sword_Stand\UI%d.png
+Mouse|Wand_Click|5|..\Texture\Mouse\Wand_Click\UI%d.png
+Mouse|Wand_Stand|4|..\Texture\Mouse\Wand_Stand\UI%d.png

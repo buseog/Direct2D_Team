@@ -13,7 +13,7 @@ private:
 
 public:
 	void		AddObject(OBJID eObjID, CObj* pObj);
-	void		SetSceneID(SCENEID	dID);		// 해당하는 씬에 대한 리스트를 작동시키려는 용도
+	void		SetSceneID(SCENEID	dID);				// 해당하는 씬으로 옮길때마다 작동하는 리스트 배열을 바꾸기위함
 
 	const		vector<TILE2*>*		GetTile(void);
 	const		CObj*				GetObj(OBJID _eID);

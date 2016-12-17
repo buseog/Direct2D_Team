@@ -25,7 +25,7 @@ void CMainUiBridge::Progress(INFO& rInfo)
 void CMainUiBridge::Render(void)
 {
 	
-	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pUi->GetObjKey());
+	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_wstrStateKey);
 
 	if(pTexture == NULL)
 		return;

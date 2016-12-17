@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "Status.h"
-#include "Bridge.h"
 #include "KeyMgr.h"
 
 

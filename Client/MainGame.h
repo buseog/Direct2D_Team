@@ -15,9 +15,7 @@ private:
 	TCHAR			m_szFPS[MIN_STR];
 	TCHAR			m_szMOUSEPOS[MIN_STR];
 	D3DXMATRIX		m_matTrans;
-	FRAME			m_tFrame;
 	
-
 public:
 	HRESULT	Initialize(void);
 	void	Progress(void);

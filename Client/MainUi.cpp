@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "MainUi.h"
-#include "Bridge.h"
 
 CMainUi::CMainUi(void)
 {
