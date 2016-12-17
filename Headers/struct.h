@@ -102,6 +102,8 @@ typedef struct tagUnitData
 	int iDeffence;
 	int iHealthPoint;
 	int	iMaxHelathPoint; // 옵저버용 추가
+	int iLAttack;		// 최대 공격력
+	int iSAttack;		// 최소 공격력
 	float fAttackSpeed;
 	float fMoveSpeed;
 	float fRange;

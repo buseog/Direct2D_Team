@@ -46,6 +46,7 @@ enum ITEMID
 	IT_BELT,
 	IT_FOOD,
 	IT_TRADE,
+	IT_EMPTY,
 	IT_END
 };
 

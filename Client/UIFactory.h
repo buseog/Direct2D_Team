@@ -6,7 +6,7 @@ template <typename T, typename T2>
 class CUIFactory
 {
 public:
-	static CUi*	CreateUI(const wstring& wstrState, float _fX, float _fY)
+	static CUi*	CreateUI(const wstring& wstrState, float _fX, float _fY, int _iIndex = 0)
 	{
 		CUi*		pUI = new T;
 		CBridge* pBridge = new T2;
@@ -14,10 +14,12 @@ public:
 		pUI->SetBridge(pBridge);
 		pUI->Initialize();
 		pUI->SetPos(_fX, _fY);
+		pUI->SetIndexKey(_iIndex); // 은지 추가 - 피킹 시 인덱스 구분
 
 		pBridge->SetUI(pUI);
 		pBridge->Initialize();
 		pBridge->SetKey(wstrState);
+
 
 		return pUI;	
 	}

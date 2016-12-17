@@ -10,6 +10,8 @@ public:
 	virtual void Render(void);
 	virtual void Release(void);
 
+	void	SetStat(int _iIndex);	// 플레이어 스텟 
+
 public:
 	CPlayer(void);
 	~CPlayer(void);

@@ -11,6 +11,8 @@ protected:
 
 private:
 	vector<CItem*>	m_ItemSlot;
+	vector<CItem*>	m_EquipSlot;
+	vector<CItem*>	m_TempSlot;
 	
 
 private:
@@ -19,7 +21,8 @@ private:
 	int		m_iFood;
 	bool	m_bSelect;
 	bool	m_bDrag;
-
+	bool	m_bWeapon;
+	bool	m_bArmor;	
 
 
 public:

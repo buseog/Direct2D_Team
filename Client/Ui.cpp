@@ -64,3 +64,13 @@ CBridge* CUi::GetBridge(void)
 {
 	return m_pBridge;
 }
+
+int CUi::GetIndexKey(void)
+{
+	return m_iIndexKey;
+}
+
+void CUi::SetIndexKey(int _iIndex)
+{
+	m_iIndexKey = _iIndex;
+}

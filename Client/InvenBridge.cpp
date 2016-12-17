@@ -13,9 +13,10 @@
 CInvenBridge::CInvenBridge(void)
 : m_bSelect(false)
 , m_bDrag(false)
+, m_bWeapon(false)
+, m_bArmor(false)
 , m_iSelectIndex(-1)
 , m_iFood(-1)
-
 {
 }
 
@@ -30,13 +31,16 @@ HRESULT CInvenBridge::Initialize(void)
 
 	m_wstrStateKey = L"Inventory";
 
-
 	for(int i =0; i<10; ++i)
 	{
-	
 		m_ItemSlot.push_back(CreateEmpty(m_tInfo.vPos));
-	
 	}
+	
+	CItem*	pEquipWeapon = CItemFactory<CEmptyItem>::CreateItem(565.f,170.f);
+	m_EquipSlot.push_back(pEquipWeapon); // 무기슬롯 빈아이템으로 채우기
+	
+	CItem*	pEquipArmor = CItemFactory<CEmptyItem>::CreateItem(625.f, 170.f);
+	m_EquipSlot.push_back(pEquipArmor); // 방어구슬롯 빈아이템으로 채우기
 
 	return S_OK;
 }
@@ -47,8 +51,9 @@ void CInvenBridge::Progress(INFO& rInfo)
 
 	AddItem(rInfo); // 인벤토리에 아이템 추가
 	
-	Picking(rInfo); // 드래그
-	
+	Picking(rInfo); // 드래그 및 장착
+
+
 	if (m_bSelect == false)
 		SortItem(rInfo); // 인벤토리 아이템 칸에 맞게 들어가는 정렬
 
@@ -57,6 +62,9 @@ void CInvenBridge::Progress(INFO& rInfo)
 		m_ItemSlot[i]->Progress();
 	}
 	
+	
+	m_EquipSlot[IT_WEAPON]->Progress();
+	m_EquipSlot[IT_ARMOR]->Progress();
 }	
 
 void CInvenBridge::Render(void)
@@ -82,10 +90,12 @@ void CInvenBridge::Render(void)
 			(*iter)->Render();
 		}
 
+	for(vector<CItem*>::iterator iter = m_EquipSlot.begin();
+			iter != m_EquipSlot.end(); ++iter)
+		{
+			(*iter)->Render();
+		}
 	
-		
-
-
 	
 }
 
@@ -97,7 +107,13 @@ void CInvenBridge::Release(void)
 			::Safe_Delete(*iter);
 			
 		}
-	
+
+	for(vector<CItem*>::iterator iter = m_EquipSlot.begin();
+			iter != m_EquipSlot.end(); ++iter)
+		{
+			::Safe_Delete(*iter);
+			
+		}
 	
 	
 }
@@ -169,7 +185,6 @@ void CInvenBridge::AddItem(INFO& rInfo)
 						if(m_ItemSlot[j]->GetObjKey() == L"Empty")
 						{
 							CItem*	pTemp = m_ItemSlot[j]; 
-							//m_ItemSlot[j]->SetFoodZero();
 							m_ItemSlot[j] = CreateFood(rInfo.vPos);
 							m_ItemSlot[j]->SetFoodPlus(100);
 							::Safe_Delete(pTemp);
@@ -209,9 +224,26 @@ int CInvenBridge::Picking(INFO& rInfo)
 				swap(m_ItemSlot[m_iSelectIndex],m_ItemSlot[j]);
 			}			
 		}
+
+		if(PtInRect(&m_EquipSlot[IT_WEAPON]->GetRect(), Pt) &&
+					 m_ItemSlot[m_iSelectIndex]->GetItemInfo()->eType == IT_WEAPON )
+		{
+			swap(m_ItemSlot[m_iSelectIndex], m_EquipSlot[IT_WEAPON]);
+			m_bWeapon = true;
+		}
+		
+		if(PtInRect(&m_EquipSlot[IT_ARMOR]->GetRect(), Pt) &&
+					 m_ItemSlot[m_iSelectIndex]->GetItemInfo()->eType == IT_ARMOR )
+		{
+			swap(m_ItemSlot[m_iSelectIndex], m_EquipSlot[IT_ARMOR]);
+			m_bArmor = true;
+		}
+
 		m_bSelect = false;
 		m_iSelectIndex = -1;
 	}
+
+
 
 	if(CKeyMgr::GetInstance()->StayKeyDown(VK_LBUTTON) && m_iSelectIndex >= 0 && m_bSelect)
 	{
@@ -229,8 +261,41 @@ int CInvenBridge::Picking(INFO& rInfo)
 				m_iSelectIndex = i;
 			}
 		}
+		
 	}
-	return 2;
+
+	// 해제하는 부분
+	if(CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON))
+	{
+		if(PtInRect(&m_EquipSlot[IT_WEAPON]->GetRect(), Pt))
+		{
+			for(int i = 0; i < 10; ++i)
+			{
+				if(m_ItemSlot[i]->GetItemInfo()->eType == IT_EMPTY)
+				{
+					swap(m_ItemSlot[i], m_EquipSlot[IT_WEAPON]);
+					m_bWeapon = false;
+					break;
+				}
+			}
+		}	
+		if(PtInRect(&m_EquipSlot[IT_ARMOR]->GetRect(), Pt))
+		{
+			for(int i = 0; i < 10; ++i)
+			{
+				if(m_ItemSlot[i]->GetItemInfo()->eType == IT_EMPTY)
+				{
+					swap(m_ItemSlot[i], m_EquipSlot[IT_ARMOR]);
+					m_bArmor = false;
+					break;
+				}
+			}
+		}
+		
+		
+	}
+	
+	return m_iPriority;
 }
 
 CItem*	CInvenBridge::CreateWeapon(D3DXVECTOR3 vPos)
@@ -281,12 +346,10 @@ void CInvenBridge::SortItem(INFO& rInfo)
 										   (rInfo.vPos.y + 55) + (i * 65));
 		}
 	}
+	m_EquipSlot[IT_WEAPON]->SetPos(565.f, 170.f);
+	m_EquipSlot[IT_ARMOR]->SetPos(625.f, 170.f);
 }
 
-void CInvenBridge::SetItem(INFO& rInfo)
-{
-
-}
 
 int	CInvenBridge::Picking(void)
 {

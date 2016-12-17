@@ -34,6 +34,7 @@ public:
 	void	SetScroll(float fX, float fY);				// 스크롤 셋해주는함수
 	void	SetSize(D3DXVECTOR3 vSize);					// 렉트 충돌하기위한 사이즈 지정함수
 
+
 public:
 	CBridge*			GetBridge(void);	// 브릿지 반환
 	const bool			GetDestroy(void);	// 파괴해야 될 객체인지 확인

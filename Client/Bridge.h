@@ -9,6 +9,7 @@ protected:
 	CUi*		m_pUi;
 	wstring		m_wstrStateKey;
 	FRAME		m_tFrame;
+	int			m_iIndex;		// 은지 추가 - 피킹 처리 시 인덱스 값 구분
 
 protected:
 	virtual void	Frame(void);
@@ -20,7 +21,6 @@ public:
 	void	SetFrame(const wstring& wstrStateKey);		//StateKey와 프레임값을 지정해주기 위한함수
 	void	SetKey(const wstring& wstrStateKey);		//따로 셋키가 필요할때
 	void	SetObjSize(void);							//Obj에 렉트 사이즈를 지정해주기 위한 함수
-
 
 public:
 	virtual HRESULT	Initialize(void) PURE;
