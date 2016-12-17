@@ -893,7 +893,6 @@
 					RelativePath=".\Food.h"
 					>
 				</File>
-
 			</Filter>
 			<Filter
 				Name="09. Empty"
@@ -906,7 +905,6 @@
 					RelativePath=".\EmptyItem.h"
 					>
 				</File>
-
 			</Filter>
 		</Filter>
 		<File
