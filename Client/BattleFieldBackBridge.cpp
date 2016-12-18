@@ -8,6 +8,9 @@
 CBattleFieldBackBridge::CBattleFieldBackBridge(void)
 : m_iDragState(0)
 {
+	m_iX = 45;
+	m_iY = 80;
+	m_vSize = D3DXVECTOR3(1892.f, 780.f, 0.f);
 }
 
 CBattleFieldBackBridge::~CBattleFieldBackBridge(void)
@@ -17,7 +20,7 @@ CBattleFieldBackBridge::~CBattleFieldBackBridge(void)
 
 HRESULT	CBattleFieldBackBridge::Initialize(void)
 {
-	//LoadTile(L"../Data/map.dat");
+	//LoadTile(L"../Data/0.dat");
 
 	return S_OK;
 }
@@ -274,71 +277,4 @@ int	CBattleFieldBackBridge::Picking(void)
 	}
 
 	return -1;
-}
-
-void CBattleFieldBackBridge::LoadTile(const wstring& wstrPath)
-{
-	HANDLE  hFile = CreateFile(wstrPath.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-
-	DWORD	dwByte = 0;
-
-	int WIDTH = 60;
-	int HEIGHT = 80;
-
-	while(1)
-	{
-		TILE2*			pTile = new TILE2;
-
-		ReadFile(hFile, pTile, sizeof(TILE2), &dwByte, NULL);
-
-		if(dwByte == 0)
-		{
-			::Safe_Delete(pTile);
-			break;
-		}
-
-		m_vecTile.push_back(pTile);
-	}
-
-	CloseHandle(hFile);
-
-	for (int i = 0; i < WIDTH; ++i)
-	{
-		for (int j = 0; j < 80; ++j)
-		{
-			int iIndex = i * HEIGHT + j;
-
-			// 위
-			if (i > 1)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex - WIDTH * 2);
-
-			// 오른쪽위
-			if (i > 0 && j <= TILEX - 1)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex - WIDTH + 1);
-
-			// 오른쪽
-			if (j < TILEX -2)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex +1);
-
-			// 오른쪽 아래
-			if (i < TILEY - 1&& j <= TILEX - 1)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex + WIDTH);
-
-			// 아래
-			if (i < TILEY -2)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex + WIDTH * 2);
-
-			// 왼쪽 아래
-			if (i < TILEY - 1 && j >= 0)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex + WIDTH - 1);
-
-			// 왼쪽
-			if (j > 1)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex - 1);
-
-			// 왼쪽 위
-			if (j >= 0 && i > 0)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex - WIDTH);
-		}
-	}
 }

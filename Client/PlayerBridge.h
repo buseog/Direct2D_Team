@@ -15,6 +15,7 @@ private:
 	void	SetAstar(D3DXVECTOR3 vMouse);
 	void	KeyInput(INFO& rInfo);
 	void	Move(INFO& rInfo);
+	void	AStarMove(INFO& rInfo);
 
 public:
 	virtual HRESULT	Initialize(void);

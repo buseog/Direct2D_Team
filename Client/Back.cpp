@@ -33,6 +33,23 @@ void CBack::Progress(void)
 	m_pBridge->Progress(m_tInfo);
 	MoveScroll();
 
+	float MaxX = -(((CBackBridge*)m_pBridge)->GetSize()->x - (float)WINCX / 2.f);
+	float MaxY = -(((CBackBridge*)m_pBridge)->GetSize()->y - (float)WINCY);
+
+	if (m_vScroll.x > 0.f)
+		m_vScroll.x = 0.f;
+
+	if (m_vScroll.x < MaxX)
+		m_vScroll.x = MaxX;
+
+	if (m_vScroll.y > 0.f)
+		m_vScroll.y = 0.f;
+
+	if (m_vScroll.y < MaxY)
+		m_vScroll.y = MaxY;
+
+
+
 	if (CKeyMgr::GetInstance()->KeyDown('1'))
 	{
 		D3DXVECTOR3 vPos = ::GetMouse() - m_vScroll;
@@ -73,8 +90,10 @@ void	CBack::MoveScroll(void)
 	if(vMousePos.x < 20)
 		m_vScroll.x += m_fSpeed * CTimeMgr::GetInstance()->GetTime();
 
+
 	if(WINCX - 20 < vMousePos.x)
 		m_vScroll.x -= m_fSpeed * CTimeMgr::GetInstance()->GetTime();
+
 
 	if(20 > vMousePos.y)
 		m_vScroll.y += m_fSpeed * CTimeMgr::GetInstance()->GetTime();
@@ -88,7 +107,7 @@ void	CBack::MouseLock(void)
 	RECT rc;
 	GetWindowRect(g_hWnd, &rc);
 	rc.left += 20;
-	rc.top += 30;
+	rc.top += 40;
 	rc.right -= 20;
 	rc.bottom -= 20;
 	ClipCursor(&rc);

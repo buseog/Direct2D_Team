@@ -15,5 +15,5 @@ const int MAX_KEY = 255;
 const int MAX_KEYUP = 10;
 
 
-static int TILEX = 40;
-static int TILEY = 60;
+static int TILEX = 45;
+static int TILEY = 80;

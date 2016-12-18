@@ -1,4 +1,5 @@
 #pragma once
+#include "BigHeader.h"
 
 class CObj;
 class CUi;

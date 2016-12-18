@@ -35,6 +35,11 @@
 #include "MercenaryStore.h"
 #include "MercenaryStoreBridge.h"
 
+#include "MercenaryDisplay.h"
+#include "MercenaryDisplayBridge.h"
+
+
+
 CField::CField(void)
 : m_bStage(false)
 {
@@ -64,6 +69,7 @@ HRESULT	CField::Initialize(void)
 	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CBasicStore,CBasicStoreBridge>::CreateUI(L"Store",200.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CDrugStore,CDrugStoreBridge>::CreateUI(L"Store",200.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CMercenaryStore,CMercenaryStoreBridge>::CreateUI(L"Store",200.f,250.f));
+	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CMercenaryDisplay,CMercenaryDisplayBridge>::CreateUI(L"Store",0.f,250.f));
 
 
 
@@ -95,13 +101,19 @@ void	CField::LoadPNG(void)
 {
 	CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Map/Map00.png", L"Field", TEX_SINGLE);
 
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Tile/Tile/Tile%d.png", 
+	/*if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Tile/Tile/Tile%d.png", 
 		L"TILE", TEX_MULTI, L"Tile", 216)))
 	{
 		ERR_MSG(L"Tile 멀티 텍스쳐 생성 실패")
 		return;
+	}*/
+
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/TILEMAP/TILE0%d.png", 
+		L"TILE", TEX_MULTI, L"Tile", 4)))
+	{
+		ERR_MSG(L"TILE 멀티 텍스쳐 생성 실패")
+		return;
 	}
-	
 	
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/Pannel/UI0.png", 
 		L"FieldMainUi", TEX_SINGLE)))
@@ -208,6 +220,12 @@ void	CField::LoadPNG(void)
 	/////////////////////////////////////////////////용병창 테스트
 	if(FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Portrait/ArcherK/UI1.png", 
 		L"TestUnit", TEX_SINGLE)))
+	{
+		ERR_MSG(L"TestUnit 싱글 텍스쳐 생성 실패");
+		return;
+	}
+	if(FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Portrait/ArcherK/UI0.png", 
+		L"TestUnit2", TEX_SINGLE)))
 	{
 		ERR_MSG(L"TestUnit 싱글 텍스쳐 생성 실패");
 		return;

@@ -20,8 +20,6 @@ CPlayerBridge::~CPlayerBridge(void)
 
 HRESULT CPlayerBridge::Initialize(void)
 {
-	Frame();
-
 	return S_OK;
 }
 
@@ -29,6 +27,23 @@ void CPlayerBridge::Progress(INFO& rInfo)
 {
 	WorldMatrix(rInfo);
 
+	Frame();
+
+	switch (m_pObj->GetOrder())
+	{
+	case OD_STAND:
+		break;
+
+	case OD_MOVE:
+		Move(rInfo);
+		break;
+
+	case OD_ASTAR:
+		AStarMove(rInfo);
+		break;
+	}
+
+	KeyInput(rInfo);
 }
 
 void CPlayerBridge::Render(void)
@@ -40,7 +55,7 @@ void CPlayerBridge::Render(void)
 		return;
 
 	float fX = pTexture->tImgInfo.Width / 2.f;
-	float fY = pTexture->tImgInfo.Height / 2.f;
+	float fY = pTexture->tImgInfo.Height / 2.f + 30.f;
 
 	CDevice::GetInstance()->GetSprite()->SetTransform(&m_pObj->GetInfo()->matWorld);
 	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
@@ -54,14 +69,24 @@ void CPlayerBridge::Release(void)
 
 void	CPlayerBridge::WorldMatrix(INFO& rInfo)
 {
-	D3DXMATRIX	matTrans;
+	D3DXMATRIX	matScale, matTrans;
+
+	// 캐릭터 좌우 스케일링 계산
+	if (rInfo.vDir.x < 0)
+	{
+		D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
+	}
+	else
+	{
+		D3DXMatrixScaling(&matScale, -1.f, 1.f, 0.f);
+	}
 
 	D3DXMatrixTranslation(&matTrans, 
 		rInfo.vPos.x + m_pObj->GetScroll().x, 
 		rInfo.vPos.y + m_pObj->GetScroll().y, 
 		0.f);
 
-	rInfo.matWorld = matTrans;
+	rInfo.matWorld = matScale * matTrans;
 }
 
 void	CPlayerBridge::SetAstar(D3DXVECTOR3 vMouse)
@@ -75,24 +100,92 @@ void	CPlayerBridge::KeyInput(INFO& rInfo)
 	if (CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON))
 	{
 		D3DXVECTOR3 vMouse = ::GetMouse();
-		vMouse += m_pObj->GetScroll();
+		vMouse -= m_pObj->GetScroll();
 		SetAstar(vMouse);
+		m_pObj->SetOrder(OD_ASTAR);
 
 	}
 }
 
 void	CPlayerBridge::Move(INFO& rInfo)
 {
-	// 오더명령을 받았을떄 작동
-	// 타겟지점과 나의 위치로 방향 벡터를 구해서 거리가 10 이상일때만 이동함
+	// 무브 오더를 받았을때만 이 무브함수를 사용
+	// 목표지점까지 방향벡터를 구해서거리가 10이상일때만 움직임.
 	rInfo.vDir = m_pObj->GetTargetPoint() - rInfo.vPos;
 	
 	float	fDistance = D3DXVec3Length(&rInfo.vDir);
 	D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
 
-	if(fDistance > 10.f)
+	// 캐릭터 y각도에 따라서 각도 전환
+	if (rInfo.vDir.y >= 0.75f)
+		m_wstrStateKey = L"Walk_5";
+
+	else if (rInfo.vDir.y >= 0.25f)
+		m_wstrStateKey = L"Walk_1";
+
+	else if (rInfo.vDir.y >= -0.25f)
+		m_wstrStateKey = L"Walk_2";
+
+	else if (rInfo.vDir.y >= -0.75f)
+		m_wstrStateKey = L"Walk_3";
+
+	else
+		m_wstrStateKey = L"Walk_4";
+
+	if(fDistance > 10)
 	{
 		rInfo.vPos += rInfo.vDir * m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime();
 	}
+	else
+	{
+		m_pObj->SetOrder(OD_STAND);
+	}
+}
 
+
+void	CPlayerBridge::AStarMove(INFO& rInfo)
+{
+	// 에이스타 오더를 받았을때만 이 무브를 사용함
+	if(m_vecBestList.empty())
+		return;
+
+	const vector<TILE2*>*	pVecTile = CObjMgr::GetInstance()->GetTile();
+	
+	if(pVecTile == NULL)
+		return;
+
+	int		iMoveIndex = m_vecBestList.front();
+
+	rInfo.vDir = (*pVecTile)[iMoveIndex]->vPos - rInfo.vPos;
+	float	fDistance = D3DXVec3Length(&rInfo.vDir);
+
+	D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
+
+	// 캐릭터 y각도에 따라서 각도 전환
+	if (rInfo.vDir.y >= 0.75f)
+		m_wstrStateKey = L"Walk_5";
+
+	else if (rInfo.vDir.y >= 0.25f)
+		m_wstrStateKey = L"Walk_1";
+
+	else if (rInfo.vDir.y >= -0.25f)
+		m_wstrStateKey = L"Walk_2";
+
+	else if (rInfo.vDir.y >= -0.75f)
+		m_wstrStateKey = L"Walk_3";
+
+	else
+		m_wstrStateKey = L"Walk_4";
+
+	
+
+	if(fDistance > 10)
+	{
+		rInfo.vPos += rInfo.vDir * m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime();
+	}
+	else
+		m_vecBestList.pop_front();
+
+	if (m_vecBestList.empty())
+		m_pObj->SetOrder(OD_STAND);
 }

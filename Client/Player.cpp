@@ -29,6 +29,8 @@ HRESULT CPlayer::Initialize(void)
 	m_tUnitData.tDetail.iInt = 10;
 	m_tUnitData.iLAttack = 100;
 	m_tUnitData.iSAttack = 150;
+
+	m_fSpeed = 300.f;
 	
 	return S_OK;
 }

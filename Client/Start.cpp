@@ -4,7 +4,7 @@
 #include "SceneMgr.h"
 
 CStart::CStart(void)
-:m_iMaxLoad(209)
+:m_iMaxLoad(210)
 {
 }
 
@@ -28,6 +28,10 @@ unsigned int __stdcall CStart::ImgLoadThreadFunc(void* pArg)
 	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/PortraitPath.txt");// 24
 
 	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/EnemyUnitPath.txt");	// 127
+
+	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/BackPath.txt");	// 1
+
+	
 
 
 	CTextureMgr::GetInstance()->SetString(L"Press Enter");

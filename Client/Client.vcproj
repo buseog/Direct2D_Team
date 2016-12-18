@@ -658,6 +658,18 @@
 							>
 						</File>
 					</Filter>
+					<Filter
+						Name="07. MercenaryDisplayBridge"
+						>
+						<File
+							RelativePath=".\MercenaryDisplayBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\MercenaryDisplayBridge.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter
@@ -1009,6 +1021,18 @@
 				</File>
 				<File
 					RelativePath=".\Portrait.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="06. MercenaryDisplay"
+				>
+				<File
+					RelativePath=".\MercenaryDisplay.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\MercenaryDisplay.h"
 					>
 				</File>
 			</Filter>

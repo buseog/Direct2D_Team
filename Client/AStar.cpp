@@ -128,9 +128,11 @@ void CAStar::StartPos(const D3DXVECTOR3& vStartPos, const D3DXVECTOR3& vGoalPos,
 	m_iStartIndex = GetTileIndex(vStartPos);
 	m_iGoalIndex = GetTileIndex(vGoalPos);
 	m_pBestList = pBestList;
+	const vector<TILE2*>*	pvecTile = CObjMgr::GetInstance()->GetTile();
 
 	if (m_iGoalIndex < 0 || m_iGoalIndex >= TILEX * TILEY ||
-		m_iStartIndex < 0 || m_iStartIndex >= TILEX * TILEY)
+		m_iStartIndex < 0 || m_iStartIndex >= TILEX * TILEY ||
+		(*pvecTile)[m_iGoalIndex]->byOption != 0)
 		return;
 
 	AStarStart(m_iStartIndex, m_iGoalIndex);

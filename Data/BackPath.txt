@@ -1,0 +1,1 @@
+Back|Object|55|..\Texture\Back\Object\Back%d.png
