@@ -42,7 +42,7 @@ HRESULT	CField::Initialize(void)
 
 	CObjMgr::GetInstance()->AddObject(OBJ_BACK, CObjFactory<CBack, CFieldBackBridge>::CreateObj(L"Field", 0, 0));
 	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CPlayerBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
-	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"GoniSh", L"Walk_1", D3DXVECTOR3(400.f, 300.f, 0.f)));
+	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"GoniSh", L"Walk_1", D3DXVECTOR3(500.f, 200.f, 0.f)));
 
 
 
@@ -60,9 +60,12 @@ void	CField::Progress(void)
 {
 	CObjMgr::GetInstance()->Progress();
 	CUIMgr::GetInstance()->Progress();
+	CUIMgr::GetInstance()->Picking();
 
 	if (CKeyMgr::GetInstance()->KeyDown(VK_RETURN))
 		CSceneMgr::GetInstance()->SetScene(SC_BATTLEFIELD);
+
+	
 }
 
 void	CField::Render(void)

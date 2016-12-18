@@ -122,7 +122,7 @@ const RECT CObj::GetRect(void)
 }
 
 
-const UNITDATA* CObj::GetPlayerStat(void) const
+const UNITDATA* CObj::GetStat(void) const
 {
 	return &m_tUnitData;
 }
@@ -143,8 +143,31 @@ const float CObj::GetSpeed(void)
 	return m_fSpeed;
 }
 
+
 void CObj::SetObjKey(const wstring& wstrObjKey)
 {
 
 	m_wstrObjKey = wstrObjKey;
+
+}	
+
+int		CObj::Picking(void)
+{
+	return m_pBridge->Picking();
+}
+
+void	CObj::SetOriginPos(D3DXVECTOR3	OriginPos)
+{
+	m_vOriginPos = OriginPos;
+}
+
+const D3DXVECTOR3	CObj::GetOriginPos(void)
+{
+	return m_vOriginPos;
+}
+
+void	CObj::SetDamage(int iAttack)
+{
+	m_tUnitData.iHealthPoint -= iAttack;
+
 }

@@ -53,8 +53,6 @@ void CInvenBridge::Progress(INFO& rInfo)
 
 	AddItem(rInfo); // 인벤토리에 아이템 추가
 	
-	Picking(rInfo); // 드래그 및 장착
-
 
 	if (m_bSelect == false)
 		SortItem(rInfo); // 인벤토리 아이템 칸에 맞게 들어가는 정렬
@@ -211,7 +209,7 @@ void CInvenBridge::AddItem(INFO& rInfo)
 	
 }
 
-int CInvenBridge::Picking(INFO& rInfo)
+int CInvenBridge::Picking(void)
 {
 	POINT	Pt;
 		Pt.x = (long)GetMouse().x;
@@ -251,6 +249,8 @@ int CInvenBridge::Picking(INFO& rInfo)
 
 		m_bSelect = false;
 		m_iSelectIndex = -1;
+
+		return 1;
 	}
 
 
@@ -258,6 +258,8 @@ int CInvenBridge::Picking(INFO& rInfo)
 	if(CKeyMgr::GetInstance()->StayKeyDown(VK_LBUTTON) && m_iSelectIndex >= 0 && m_bSelect)
 	{
 		m_ItemSlot[m_iSelectIndex]->SetPos(GetMouse());
+
+		return 1;
 		
 	}	
 			
@@ -269,6 +271,8 @@ int CInvenBridge::Picking(INFO& rInfo)
 			{
 				m_bSelect = true;
 				m_iSelectIndex = i;
+
+				return 1;
 			}
 		}
 		
@@ -362,11 +366,11 @@ void CInvenBridge::SortItem(INFO& rInfo)
 	m_EquipSlot[IT_ARMOR]->SetPos(625.f, 170.f);
 }
 
-
-int	CInvenBridge::Picking(void)
-{
-	return m_iPriority;
-}
+//
+//int	CInvenBridge::Picking(void)
+//{
+//	return m_iPriority;
+//}
 
 bool CInvenBridge::EquipWeapon(void)
 {
@@ -376,4 +380,5 @@ bool CInvenBridge::EquipWeapon(void)
 bool CInvenBridge::EquipArmor(void)
 {
 	return m_bArmor;
+
 }

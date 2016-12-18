@@ -17,6 +17,7 @@ protected:
 private:
 	void	SetAstar(D3DXVECTOR3 vMouse);
 	void	Move(INFO& rInfo);
+	void	Patrol(INFO& rInfo);
 
 public:
 	virtual HRESULT	Initialize(void);

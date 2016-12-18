@@ -24,8 +24,10 @@ HRESULT	CEnemyBridge::Initialize(void)
 void	CEnemyBridge::Progress(INFO& rInfo)
 {
 	WorldMatrix(rInfo);
-	Move(rInfo);
+	//Move(rInfo);
 	Frame();
+	Patrol(rInfo);
+	
 }
 
 void	CEnemyBridge::Render(void)
@@ -94,7 +96,7 @@ void CEnemyBridge::WorldMatrix(INFO& rInfo)
 void	CEnemyBridge::Move(INFO& rInfo)
 {
 	
-	m_vOriginPoint = D3DXVECTOR3(400.f, 300.f, 0.f); 
+	/*m_vOriginPoint = D3DXVECTOR3(400.f, 300.f, 0.f); 
 	m_vTargetPoint = D3DXVECTOR3(500.f, 200.f, 0.f);
 	
 	if(m_bArrive == false)
@@ -129,8 +131,46 @@ void	CEnemyBridge::Move(INFO& rInfo)
 						m_bArrive = false;
 			}		
 	}
+	*/
+
+
+
+}
+
+
+void	CEnemyBridge::Patrol(INFO& rInfo)
+{
 	
 
+	rInfo.vDir = m_pObj->GetTargetPoint() - rInfo.vPos;
+	
+	float	fDistance = D3DXVec3Length(&rInfo.vDir);
+	D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
 
+	// 캐릭터 y각도에 따라서 각도 전환
+	if (rInfo.vDir.y >= 0.75f)
+		m_wstrStateKey = L"Walk_5";
 
+	else if (rInfo.vDir.y >= 0.25f)
+		m_wstrStateKey = L"Walk_1";
+
+	else if (rInfo.vDir.y >= -0.25f)
+		m_wstrStateKey = L"Walk_2";
+
+	else if (rInfo.vDir.y >= -0.75f)
+		m_wstrStateKey = L"Walk_3";
+
+	else
+		m_wstrStateKey = L"Walk_4";
+
+	if(fDistance > 10.f)
+	{
+		rInfo.vPos += rInfo.vDir * m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime();
+	}
+	else
+	{
+		D3DXVECTOR3 vSwap = m_pObj->GetTargetPoint();
+		m_pObj->SetTargetPoint(m_pObj->GetOriginPos());
+		m_pObj->SetOriginPos(vSwap);
+	}
 }

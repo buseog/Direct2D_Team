@@ -24,6 +24,7 @@ public:
 	void			Progress(void);
 	void			Render(void);
 	void			Release();
+	int				Picking(void);
 
 private:
 	CObjMgr(void);

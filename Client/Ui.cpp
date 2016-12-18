@@ -57,7 +57,12 @@ const RECT CUi::GetRect(void)
 
 int CUi::Picking(void)
 {
-	return ((CUiBridge*)m_pBridge)->Picking();
+	return m_pBridge->Picking();
+}
+
+CBridge* CUi::GetBridge(void)
+{
+	return m_pBridge;
 }
 
 int CUi::GetIndexKey(void)
@@ -68,4 +73,9 @@ int CUi::GetIndexKey(void)
 void CUi::SetIndexKey(int _iIndex)
 {
 	m_iIndexKey = _iIndex;
+}
+
+void	CUi::SetSize(D3DXVECTOR3 vSize)
+{
+	m_tInfo.vSize = vSize;
 }

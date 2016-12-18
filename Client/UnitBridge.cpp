@@ -30,11 +30,24 @@ void CUnitBridge::Progress(INFO& rInfo)
 
 	switch (m_pObj->GetOrder())
 	{
+	case OD_STAND:
+		Stop(rInfo);
+		break;
+
+	case OD_MOVE:
+		Move(rInfo);
+		break;
+
 	case OD_ASTAR:
 		AStarMove(rInfo);
 		break;
-	case OD_MOVE:
-		Move(rInfo);
+
+	case OD_PATROL:
+		Patrol(rInfo);
+		break;
+
+	case OD_ATTACK:
+		Attack(rInfo);
 		break;
 	}
 
@@ -93,24 +106,6 @@ void	CUnitBridge::WorldMatrix(INFO& rInfo)
 		D3DXMatrixScaling(&matScale, -1.f, 1.f, 0.f);
 	}
 
-	// 캐릭터 y각도에 따라서 각도 전환
-	if (rInfo.vDir.y >= 0.75f)
-		m_wstrStateKey = L"Walk_5";
-
-	else if (rInfo.vDir.y >= 0.25f)
-		m_wstrStateKey = L"Walk_1";
-
-	else if (rInfo.vDir.y >= -0.25f)
-		m_wstrStateKey = L"Walk_2";
-
-	else if (rInfo.vDir.y >= -0.75f)
-		m_wstrStateKey = L"Walk_3";
-
-	else
-		m_wstrStateKey = L"Walk_4";
-
-
-
 	D3DXMatrixTranslation(&matTrans, 
 		rInfo.vPos.x + m_pObj->GetScroll().x, 
 		rInfo.vPos.y + m_pObj->GetScroll().y, 
@@ -133,6 +128,22 @@ void	CUnitBridge::Move(INFO& rInfo)
 	float	fDistance = D3DXVec3Length(&rInfo.vDir);
 	D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
 
+	// 캐릭터 y각도에 따라서 각도 전환
+	if (rInfo.vDir.y >= 0.75f)
+		m_wstrStateKey = L"Walk_5";
+
+	else if (rInfo.vDir.y >= 0.25f)
+		m_wstrStateKey = L"Walk_1";
+
+	else if (rInfo.vDir.y >= -0.25f)
+		m_wstrStateKey = L"Walk_2";
+
+	else if (rInfo.vDir.y >= -0.75f)
+		m_wstrStateKey = L"Walk_3";
+
+	else
+		m_wstrStateKey = L"Walk_4";
+
 	if(fDistance > 10.f)
 	{
 		rInfo.vPos += rInfo.vDir * 300 * CTimeMgr::GetInstance()->GetTime();
@@ -141,6 +152,7 @@ void	CUnitBridge::Move(INFO& rInfo)
 	{
 		rInfo.vDir.x = cosf(m_pObj->GetRevolution());
 		rInfo.vDir.y = -sinf(m_pObj->GetRevolution());
+		m_pObj->SetOrder(OD_STAND);
 	}
 
 }
@@ -175,5 +187,65 @@ void	CUnitBridge::AStarMove(INFO& rInfo)
 	if(fDistance < 10.f)
 	{
 		m_vecBestList.pop_front();
+	}
+	if (m_vecBestList.empty())
+		m_pObj->SetOrder(OD_STAND);
+}
+
+void	CUnitBridge::Attack(INFO& rInfo)
+{
+	
+}
+void	CUnitBridge::Stop(INFO& rInfo)
+{
+	// 캐릭터 y각도에 따라서 각도 전환
+	if (rInfo.vDir.y >= 0.75f)
+		m_wstrStateKey = L"Stand_5";
+
+	else if (rInfo.vDir.y >= 0.25f)
+		m_wstrStateKey = L"Stand_1";
+
+	else if (rInfo.vDir.y >= -0.25f)
+		m_wstrStateKey = L"Stand_2";
+
+	else if (rInfo.vDir.y >= -0.75f)
+		m_wstrStateKey = L"Stand_3";
+
+	else
+		m_wstrStateKey = L"Stand_4";
+}
+
+void	CUnitBridge::Patrol(INFO& rInfo)
+{
+	rInfo.vDir = m_pObj->GetTargetPoint() - rInfo.vPos;
+	
+	float	fDistance = D3DXVec3Length(&rInfo.vDir);
+	D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
+
+	// 캐릭터 y각도에 따라서 각도 전환
+	if (rInfo.vDir.y >= 0.75f)
+		m_wstrStateKey = L"Walk_5";
+
+	else if (rInfo.vDir.y >= 0.25f)
+		m_wstrStateKey = L"Walk_1";
+
+	else if (rInfo.vDir.y >= -0.25f)
+		m_wstrStateKey = L"Walk_2";
+
+	else if (rInfo.vDir.y >= -0.75f)
+		m_wstrStateKey = L"Walk_3";
+
+	else
+		m_wstrStateKey = L"Walk_4";
+
+	if(fDistance > 10.f)
+	{
+		rInfo.vPos += rInfo.vDir * 300 * CTimeMgr::GetInstance()->GetTime();
+	}
+	else
+	{
+		D3DXVECTOR3 vSwap = m_pObj->GetTargetPoint();
+		m_pObj->SetTargetPoint(m_pObj->GetOriginPos());
+		m_pObj->SetOriginPos(vSwap);
 	}
 }

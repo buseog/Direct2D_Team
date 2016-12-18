@@ -41,9 +41,16 @@
 
 #include <atlimage.h>
 
+#ifdef _DEBUG
+#define new new(_CLIENT_BLOCK, __FILE__, __LINE__)
+#endif
+
+//#include "vld.h"
+
 #include "Device.h"
 #include "TextureMgr.h"
 #include "TimeMgr.h"
 
 
 using namespace std;
+

@@ -56,7 +56,7 @@ void CUIMgr::Release()
 {
 	for (int id = 0; id < SC_END; ++id)
 	{
-		for(size_t i = 0; i < UI_END; ++i)
+		for(int i = 0; i < UI_END; ++i)
 		{
 			for(list<CUi*>::iterator	iter = m_UiList[id][i].begin();
 				iter != m_UiList[id][i].end(); ++iter)
@@ -81,4 +81,23 @@ void CUIMgr::AddSorting(CUi*	pUi)
 void CUIMgr::MapClear(void)
 {
 	m_mapUiRender.clear();
+}
+
+int	CUIMgr::Picking(void)
+{
+	int iResult = -1;
+
+	for(int i = 0; i < UI_END; ++i)
+	{
+		for(list<CUi*>::iterator	iter = m_UiList[m_eSceneID][i].begin();
+			iter != m_UiList[m_eSceneID][i].end(); ++iter)
+		{
+			iResult = (*iter)->Picking();
+
+			if (iResult > 0)
+				return iResult;
+		}
+	}
+
+	return iResult;
 }

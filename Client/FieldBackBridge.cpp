@@ -45,7 +45,7 @@ void	CFieldBackBridge::Release(void)
 	m_vecTile.clear();
 }
 
-void	CFieldBackBridge::Picking(void)
+int	CFieldBackBridge::Picking(void)
 {
-	return;
+	return -1;
 }

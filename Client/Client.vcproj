@@ -169,80 +169,6 @@
 	</References>
 	<Files>
 		<Filter
-			Name="99. Default"
-			>
-			<Filter
-				Name="리소스 파일"
-				Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-				UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-				>
-				<File
-					RelativePath=".\Client.ico"
-					>
-				</File>
-				<File
-					RelativePath=".\Client.rc"
-					>
-				</File>
-				<File
-					RelativePath=".\small.ico"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="소스 파일"
-				Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
-				UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
-				>
-				<File
-					RelativePath=".\Client.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\stdafx.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							UsePrecompiledHeader="1"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							UsePrecompiledHeader="1"
-						/>
-					</FileConfiguration>
-				</File>
-			</Filter>
-			<Filter
-				Name="헤더 파일"
-				Filter="h;hpp;hxx;hm;inl;inc;xsd"
-				UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
-				>
-				<File
-					RelativePath=".\Client.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Resource.h"
-					>
-				</File>
-				<File
-					RelativePath=".\stdafx.h"
-					>
-				</File>
-				<File
-					RelativePath=".\targetver.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
 			Name="00. MainGame"
 			>
 			<File
@@ -653,17 +579,65 @@
 						</File>
 					</Filter>
 					<Filter
-						Name="06. BattlePannelBridge"
+						Name="06. PortraitBridge"
 						>
 						<File
-							RelativePath=".\BattlePannelBridge.cpp"
+							RelativePath=".\PortraitBridge.cpp"
 							>
 						</File>
 						<File
-							RelativePath=".\BattlePannelBridge.h"
+							RelativePath=".\PortraitBridge.h"
 							>
 						</File>
 					</Filter>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="02. Observer"
+				>
+				<File
+					RelativePath=".\Observer.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Observer.h"
+					>
+				</File>
+				<Filter
+					Name="00. Subject"
+					>
+					<File
+						RelativePath=".\Subject.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Subject.h"
+						>
+					</File>
+					<Filter
+						Name="00. DataSubject"
+						>
+						<File
+							RelativePath=".\DataSubject.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\DataSubject.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="01. UIObserver"
+					>
+					<File
+						RelativePath=".\UIObserver.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UIObserver.h"
+						>
+					</File>
 				</Filter>
 			</Filter>
 		</Filter>
@@ -891,14 +865,14 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="05. BattlePaneel"
+				Name="05. Portrait"
 				>
 				<File
-					RelativePath=".\BattlePannel.cpp"
+					RelativePath=".\Portrait.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\BattlePannel.h"
+					RelativePath=".\Portrait.h"
 					>
 				</File>
 			</Filter>
@@ -1007,6 +981,80 @@
 				</File>
 				<File
 					RelativePath=".\EmptyItem.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="99. Default"
+			>
+			<Filter
+				Name="리소스 파일"
+				Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
+				UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+				>
+				<File
+					RelativePath=".\Client.ico"
+					>
+				</File>
+				<File
+					RelativePath=".\Client.rc"
+					>
+				</File>
+				<File
+					RelativePath=".\small.ico"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="소스 파일"
+				Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
+				UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+				>
+				<File
+					RelativePath=".\Client.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\stdafx.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="1"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="1"
+						/>
+					</FileConfiguration>
+				</File>
+			</Filter>
+			<Filter
+				Name="헤더 파일"
+				Filter="h;hpp;hxx;hm;inl;inc;xsd"
+				UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+				>
+				<File
+					RelativePath=".\Client.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Resource.h"
+					>
+				</File>
+				<File
+					RelativePath=".\stdafx.h"
+					>
+				</File>
+				<File
+					RelativePath=".\targetver.h"
 					>
 				</File>
 			</Filter>

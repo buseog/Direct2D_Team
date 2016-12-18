@@ -24,12 +24,46 @@ HRESULT	CBattleFieldBackBridge::Initialize(void)
 
 void	CBattleFieldBackBridge::Progress(INFO& rInfo)
 {
-	Picking();
+
 }
 
 void	CBattleFieldBackBridge::Render(void)
 {
 	D3DXMATRIX	matTrans;
+	TCHAR		szBuf[MIN_STR] = L"";
+
+	/*m_iTileRenderX = WINCX / TILECX + 1;
+	m_iTileRenderY = WINCY / (TILECY / 2) + 1;
+
+	int iCullX, iCullY;
+
+	for(int i = 0; i < m_iTileRenderY; ++i)
+	{
+		for(int j = 0; j < m_iTileRenderX; ++j)
+		{
+			iCullX = int(-m_vScroll.x) / TILECX;
+			iCullY = int((-m_vScroll.y) / (TILECY / 2));
+
+
+			int	iIndex = (i + iCullY) * TILEX + (j + iCullX);
+
+			if(iIndex < 0 || iIndex >= TILEX * TILEY)
+				continue;
+
+			const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(L"TILE", L"Tile", m_vecTile[iIndex]->byDrawID);
+
+			D3DXMatrixTranslation(&matTrans, 
+				m_vecTile[iIndex]->vPos.x + m_vScroll.x,
+				m_vecTile[iIndex]->vPos.y + m_vScroll.y,
+				0.f);
+
+
+			CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
+			CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
+				NULL, &D3DXVECTOR3(TILECX / 2.f, TILECY / 2.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+		}
+	}*/
 
 	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_wstrStateKey);
 
@@ -63,7 +97,7 @@ void	CBattleFieldBackBridge::Release(void)
 	m_vecTile.clear();
 }
 
-void	CBattleFieldBackBridge::Picking(void)
+int	CBattleFieldBackBridge::Picking(void)
 {
 	// 배틀필드 아군 유닛 리스트를 받아옴
 	list<CObj*>*	plistUnit = CObjMgr::GetInstance()->GetObjList(OBJ_PLAYER);
@@ -104,7 +138,6 @@ void	CBattleFieldBackBridge::Picking(void)
 				if (CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON))
 				{
 					CSceneMgr::GetInstance()->SetMouse(L"Sword_Click");
-					return;
 				}
 			}
 		}
@@ -142,11 +175,10 @@ void	CBattleFieldBackBridge::Picking(void)
 				{
 					CSceneMgr::GetInstance()->SetMouse(L"Hand_Click");
 					// 군중매니저의 리스트를 비워준다
-					CCrowdMgr::GetInstance()->Release();
+					CCrowdMgr::GetInstance()->Clear();
 					// 현재 피킹된 아군 유닛을 군중매니저의 선택리스트로 넣는다
 					CCrowdMgr::GetInstance()->AddSelectList(*iter);
 					// 드래그가 중복으로 입력받는걸 막기위해 바로 리턴
-					return;
 				}
 			}
 		}
@@ -176,6 +208,14 @@ void	CBattleFieldBackBridge::Picking(void)
 			m_rcDrag.bottom = TempY;
 		}
 
+		if ((m_rcDrag.right - m_rcDrag.left) < 20 ||
+			(m_rcDrag.bottom - m_rcDrag.top) < 20)
+		{
+			m_iDragState = 0;
+			ZeroMemory(&m_vDrag, sizeof(D3DXVECTOR2) * 5);
+			return -1;
+		}
+
 		// 사각형을 그려주는 5개의 점
 		m_vDrag[0] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.top);
 		m_vDrag[1] = D3DXVECTOR2((float)m_rcDrag.right, (float)m_rcDrag.top);
@@ -186,7 +226,7 @@ void	CBattleFieldBackBridge::Picking(void)
 		// 배틀필드 아군 유닛리스트를 얻어온다
 		list<CObj*>* pUnitList = CObjMgr::GetInstance()->GetObjList(OBJ_PLAYER);
 		// 유닛리스트를 비워준다
-		CCrowdMgr::GetInstance()->Release();
+		CCrowdMgr::GetInstance()->Clear();
 
 		// 리스트를 순회한다
 		for (list<CObj*>::iterator iter = pUnitList->begin(); iter != pUnitList->end(); ++iter)
@@ -197,6 +237,12 @@ void	CBattleFieldBackBridge::Picking(void)
 				(*iter)->GetInfo()->vPos.y + m_pObj->GetScroll().y > m_rcDrag.top &&
 				(*iter)->GetInfo()->vPos.y + m_pObj->GetScroll().y < m_rcDrag.bottom)
 			{
+				// 10마리 이상이 선택되면 리턴함
+				if (CCrowdMgr::GetInstance()->GetSelectList() >= 10)
+				{
+					m_iDragState = 0;
+					ZeroMemory(&m_vDrag, sizeof(D3DXVECTOR2) * 5);
+				}
 				// 조건에 부합하는 유닛을 선택리스트에 추가함
 				CCrowdMgr::GetInstance()->AddSelectList(*iter);
 			}
@@ -225,5 +271,86 @@ void	CBattleFieldBackBridge::Picking(void)
 		m_vDrag[2] = D3DXVECTOR2((float)m_rcDrag.right, (float)m_rcDrag.bottom);
 		m_vDrag[3] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.bottom);
 		m_vDrag[4] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.top);
+	}
+
+	return -1;
+}
+
+void CBattleFieldBackBridge::LoadTile(const wstring& wstrPath)
+{
+	HANDLE  hFile = CreateFile(wstrPath.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	DWORD	dwByte = 0;
+
+	while(1)
+	{
+		TILE2*			pTile = new TILE2;
+
+		ReadFile(hFile, pTile, sizeof(TILE2), &dwByte, NULL);
+
+		if(dwByte == 0)
+		{
+			::Safe_Delete(pTile);
+			break;
+		}
+
+		m_vecTile.push_back(pTile);
+	}
+
+	CloseHandle(hFile);
+
+	if (m_vecTile.empty())
+	{
+
+		for (int i = 0; i < TILEY; ++i)
+		{
+			for (int j = 0; j < TILEX; ++j)
+			{
+				TILE2*	pTile = new TILE2;
+
+				float fX = float(j * TILECX) + ((i % 2) * (TILECX / 2.f));
+				float fY = (float)i * (TILECY / 2.f);
+				pTile->vPos = D3DXVECTOR3(fX, fY, 0.f);
+				pTile->vSize = D3DXVECTOR3((float)TILECX, (float)TILECY, 0.f);
+				pTile->byDrawID = 0;
+				pTile->byOption = 0;
+
+				int iIndex = i * TILEX + j;
+
+				// 위
+				if (i > 1)
+					pTile->Connectlist.push_back(iIndex - TILEX * 2);
+
+				// 오른쪽위
+				if (i > 0 && j <= TILEX - 1)
+					pTile->Connectlist.push_back(iIndex - TILEX + 1);
+
+				// 오른쪽
+				if (j < TILEX -2)
+					pTile->Connectlist.push_back(iIndex +1);
+
+				// 오른쪽 아래
+				if (i < TILEY - 1&& j <= TILEX - 1)
+					pTile->Connectlist.push_back(iIndex + TILEX);
+
+				// 아래
+				if (i < TILEY -2)
+					pTile->Connectlist.push_back(iIndex + TILEX * 2);
+
+				// 왼쪽 아래
+				if (i < TILEY - 1 && j >= 0)
+					pTile->Connectlist.push_back(iIndex + TILEX - 1);
+
+				// 왼쪽
+				if (j > 1)
+					pTile->Connectlist.push_back(iIndex - 1);
+
+				// 왼쪽 위
+				if (j >= 0 && i > 0)
+					pTile->Connectlist.push_back(iIndex - TILEX);
+
+				m_vecTile.push_back(pTile);
+			}
+		}
 	}
 }
