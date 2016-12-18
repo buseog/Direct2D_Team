@@ -4,6 +4,7 @@
 #include "AStar.h"
 #include "EnemyBridge.h"
 
+
 CEnemyBridge::CEnemyBridge(void)
 : m_bArrive(false)
 {
@@ -27,6 +28,7 @@ void	CEnemyBridge::Progress(INFO& rInfo)
 	//Move(rInfo);
 	Frame();
 	Patrol(rInfo);
+	
 	
 }
 
@@ -174,3 +176,4 @@ void	CEnemyBridge::Patrol(INFO& rInfo)
 		m_pObj->SetOriginPos(vSwap);
 	}
 }
+

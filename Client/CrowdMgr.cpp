@@ -158,6 +158,7 @@ int	CCrowdMgr::KeyInput(void)
 		OutputDebugString(str);
 	}
 
+
 	if (CKeyMgr::GetInstance()->KeyDown(VK_F1))
 	{
 		// 마우스는 화면에 갇혀있음으로 스크롤값을 계산해줌

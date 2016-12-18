@@ -3,6 +3,9 @@
 #include "Obj.h"
 #include "AStar.h"
 #include "TimeMgr.h"
+#include "EnemyBridge.h"
+#include "EnemyUnit.h"
+#include "SceneMgr.h"
 #include "ObjMgr.h"
 #include "KeyMgr.h"
 
@@ -25,6 +28,7 @@ HRESULT CPlayerBridge::Initialize(void)
 void CPlayerBridge::Progress(INFO& rInfo)
 {
 	WorldMatrix(rInfo);
+
 }
 
 void CPlayerBridge::Render(void)

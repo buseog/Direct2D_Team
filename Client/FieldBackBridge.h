@@ -4,6 +4,9 @@
 class CFieldBackBridge :
 	public CBackBridge
 {
+private:
+	bool	m_bStage;
+
 public:
 	virtual HRESULT	Initialize(void);
 	virtual void	Progress(INFO& rInfo);

@@ -1,6 +1,7 @@
 #pragma once
 #include "objbridge.h"
 
+
 class CPlayerBridge :
 	public CObjBridge
 {
