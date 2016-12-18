@@ -69,7 +69,7 @@ void	CStart::Progress(void)
 		CloseHandle(m_hThread);
 
 		DeleteCriticalSection(&m_Crt);
-		CSceneMgr::GetInstance()->SetScene(SC_FILED);
+		CSceneMgr::GetInstance()->SetScene(SC_BATTLEFIELD);
 	}
 }
 
