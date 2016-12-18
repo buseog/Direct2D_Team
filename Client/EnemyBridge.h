@@ -6,13 +6,16 @@ class CEnemyBridge :
 {
 private:
 	list<int>		m_vecBestList;
+	
+	D3DXVECTOR3		m_vTargetPoint;
+	D3DXVECTOR3		m_vOriginPoint;
+	bool			m_bArrive;
 
 protected:
 	virtual void	WorldMatrix(INFO& rInfo);
 
 private:
 	void	SetAstar(D3DXVECTOR3 vMouse);
-	void	KeyInput(INFO& rInfo);
 	void	Move(INFO& rInfo);
 
 public:

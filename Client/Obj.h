@@ -33,7 +33,7 @@ public:
 	void	SetOrder(ORDERID eOrder);					// 이동명령 타입셋
 	void	SetScroll(float fX, float fY);				// 스크롤 셋해주는함수
 	void	SetSize(D3DXVECTOR3 vSize);					// 렉트 충돌하기위한 사이즈 지정함수
-
+	void	SetObjKey(const wstring& wstrObjKey);
 
 public:
 	CBridge*			GetBridge(void);	// 브릿지 반환

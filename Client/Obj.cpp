@@ -142,3 +142,9 @@ const float CObj::GetSpeed(void)
 {
 	return m_fSpeed;
 }
+
+void CObj::SetObjKey(const wstring& wstrObjKey)
+{
+
+	m_wstrObjKey = wstrObjKey;
+}

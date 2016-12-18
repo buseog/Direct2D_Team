@@ -5,8 +5,10 @@
 #include "KeyMgr.h"
 #include "ObjMgr.h"
 #include "Player.h"
+#include "EnemyUnit.h"
 #include "UnitBridge.h"
 #include "BackBridge.h"
+#include "EnemyBridge.h"
 
 CBack::CBack(void)
 {
@@ -42,6 +44,8 @@ void CBack::Progress(void)
 		D3DXVECTOR3 vPos = ::GetMouse() - m_vScroll;
 		CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Walk_1", vPos.x, vPos.y));
 	}
+
+
 
 	
 }
