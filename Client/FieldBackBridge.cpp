@@ -102,8 +102,8 @@ int	CFieldBackBridge::Picking(void)
 			const CObj*	pMonster = CObjMgr::GetInstance()->GetObj(OBJ_MONSTER);
 			
 			POINT	Pt;
-			Pt.x = (long)GetMouse().x + (long)m_pObj->GetScroll().x;
-			Pt.y = (long)GetMouse().y + (long)m_pObj->GetScroll().y ;
+			Pt.x = (long)GetMouse().x - (long)m_pObj->GetScroll().x;
+			Pt.y = (long)GetMouse().y - (long)m_pObj->GetScroll().y ;
 
 			if(PtInRect(&((CEnemyUnit*)pMonster)->GetRect(),Pt))
 			{

@@ -35,7 +35,7 @@ HRESULT	CBattleField::Initialize(void)
 	CSceneMgr::GetInstance()->SetMouse(L"Hand_Stand");
 
 	CObjMgr::GetInstance()->AddObject(OBJ_BACK, CObjFactory<CBack, CBattleFieldBackBridge>::CreateObj(L"BattleField", 0, 0));
-	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
+	CObjMgr::GetInstance()->AddObject(OBJ_UNIT, CObjFactory<CAllyUnit, CUnitBridge>::CreateObj(L"YiSunshin", L"Walk_1", D3DXVECTOR3(300.f, 300.f, 0.f)));
 
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi, CMainUiBridge>::CreateUI(L"Minimap", 100.f, 550.f));	
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi, CMainUiBridge>::CreateUI(L"BattleFieldMainUi",400.f,553.f));	

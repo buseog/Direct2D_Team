@@ -103,7 +103,7 @@ void	CBattleFieldBackBridge::Release(void)
 int	CBattleFieldBackBridge::Picking(void)
 {
 	// 배틀필드 아군 유닛 리스트를 받아옴
-	list<CObj*>*	plistUnit = CObjMgr::GetInstance()->GetObjList(OBJ_PLAYER);
+	list<CObj*>*	plistUnit = CObjMgr::GetInstance()->GetObjList(OBJ_UNIT);
 	list<CObj*>*	plistMonster = CObjMgr::GetInstance()->GetObjList(OBJ_MONSTER);
 	POINT pt;
 	pt.x = (long)::GetMouse().x - (long)m_pObj->GetScroll().x;
@@ -227,7 +227,7 @@ int	CBattleFieldBackBridge::Picking(void)
 		m_vDrag[4] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.top);
 		
 		// 배틀필드 아군 유닛리스트를 얻어온다
-		list<CObj*>* pUnitList = CObjMgr::GetInstance()->GetObjList(OBJ_PLAYER);
+		list<CObj*>* pUnitList = CObjMgr::GetInstance()->GetObjList(OBJ_UNIT);
 		// 유닛리스트를 비워준다
 		CCrowdMgr::GetInstance()->Clear();
 

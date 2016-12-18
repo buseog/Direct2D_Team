@@ -19,6 +19,8 @@
 #include "Portrait.h"
 #include "PortraitBridge.h"
 
+#include "SKillMgr.h"
+
 IMPLEMENT_SINGLETON(CCrowdMgr)
 
 CCrowdMgr::CCrowdMgr(void)
@@ -242,7 +244,7 @@ int	CCrowdMgr::KeyInput(void)
 
 	if (CKeyMgr::GetInstance()->KeyDown('P'))
 	{
-		D3DXVECTOR3 vMouse = ::GetMouse();
+		D3DXVECTOR3 vMouse = ::GetMouse() - m_vecSelectUnit.front()->GetScroll();
 
 		for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
 		{
@@ -254,9 +256,11 @@ int	CCrowdMgr::KeyInput(void)
 
 	if (CKeyMgr::GetInstance()->KeyDown('Q'))
 	{
+		D3DXVECTOR3 vMouse = ::GetMouse() - m_vecSelectUnit.front()->GetScroll();
 		for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
 		{
 			m_vecSelectUnit[i]->SetDamage(3);
+			CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CSKillMgr::Skill(m_vecSelectUnit[i]->GetInfo()->vPos, vMouse, m_vecSelectUnit[i]->GetObjKey()));
 		}
 	}
 

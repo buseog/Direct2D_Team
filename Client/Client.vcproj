@@ -330,6 +330,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="09. SkillMgr"
+				>
+				<File
+					RelativePath=".\SKillMgr.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SKillMgr.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="98. Design"

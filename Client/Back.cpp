@@ -9,6 +9,7 @@
 #include "UnitBridge.h"
 #include "BackBridge.h"
 #include "EnemyBridge.h"
+#include "AllyUnit.h"
 
 CBack::CBack(void)
 {
@@ -33,8 +34,8 @@ void CBack::Progress(void)
 	m_pBridge->Progress(m_tInfo);
 	MoveScroll();
 
-	float MaxX = -(((CBackBridge*)m_pBridge)->GetSize()->x - (float)WINCX / 2.f);
-	float MaxY = -(((CBackBridge*)m_pBridge)->GetSize()->y - (float)WINCY);
+	float MaxX = -(((CBackBridge*)m_pBridge)->GetSize()->x - (float)WINCX - 40);
+	float MaxY = -(((CBackBridge*)m_pBridge)->GetSize()->y - (float)WINCY - 20);
 
 	if (m_vScroll.x > 0.f)
 		m_vScroll.x = 0.f;
@@ -53,7 +54,7 @@ void CBack::Progress(void)
 	if (CKeyMgr::GetInstance()->KeyDown('1'))
 	{
 		D3DXVECTOR3 vPos = ::GetMouse() - m_vScroll;
-		CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Walk_1", vPos.x, vPos.y));
+		CObjMgr::GetInstance()->AddObject(OBJ_UNIT, CObjFactory<CAllyUnit, CUnitBridge>::CreateObj(L"YiSunshin", L"Walk_1", D3DXVECTOR3(vPos.x, vPos.y, 0.f)));
 	}
 
 	if (CKeyMgr::GetInstance()->KeyDown('2'))

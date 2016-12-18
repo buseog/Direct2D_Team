@@ -4,7 +4,7 @@
 #include "SceneMgr.h"
 
 CStart::CStart(void)
-:m_iMaxLoad(210)
+:m_iMaxLoad(306)
 {
 }
 
@@ -21,19 +21,17 @@ unsigned int __stdcall CStart::ImgLoadThreadFunc(void* pArg)
 
 	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/PlayerPath.txt");	// 21
 
-	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/EffectPath.txt");	// 27
+	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/EffectPath.txt");	// 30
 
 	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/MousePath.txt");	// 8
 
 	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/PortraitPath.txt");// 24
 
-	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/EnemyUnitPath.txt");	// 127
+	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/UnitPath.txt");	// 127
 
 	CTextureMgr::GetInstance()->ReadImgPath(L"../Data/BackPath.txt");	// 1
 
 	
-
-
 	CTextureMgr::GetInstance()->SetString(L"Press Enter");
 
 	LeaveCriticalSection(&pStart->GetCrt());
