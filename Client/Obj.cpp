@@ -8,6 +8,7 @@ CObj::CObj(void)
 , m_pBridge(NULL)
 , m_bDestroy(false)
 , m_bSelect(false)
+, m_bHit(false)
 , m_fRotation(0.f)
 , m_fRevolution(0.f)
 , m_iOrder(0)
@@ -175,4 +176,20 @@ void	CObj::SetDamage(int iAttack)
 {
 	m_tUnitData.iHealthPoint -= iAttack;
 
+}
+
+const wstring&	CObj::GetStateKey(void)
+{
+	return m_wstrStateKey;
+}
+
+bool CObj::GetHit(void)
+{
+
+	return m_bHit;
+}
+
+void CObj::SetHit(bool  bHit)
+{
+	m_bHit = bHit;
 }

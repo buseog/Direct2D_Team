@@ -20,6 +20,7 @@ HRESULT	CShortAttack::Initialize(void)
 {
 	m_fSpeed = 75.f;
 	m_iOrder = OD_MOVE;
+	m_tUnitData.iHealthPoint = 100;
 	return S_OK;
 }
 

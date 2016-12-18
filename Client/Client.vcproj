@@ -342,6 +342,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="10. CollisionMgr"
+				>
+				<File
+					RelativePath=".\CollisionMgr.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CollisionMgr.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="98. Design"

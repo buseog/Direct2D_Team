@@ -4,9 +4,11 @@
 #include "ObjMgr.h"
 #include "CrowdMgr.h"
 #include "SceneMgr.h"
+#include "CollisionMgr.h"
 
 CBattleFieldBackBridge::CBattleFieldBackBridge(void)
 : m_iDragState(0)
+, m_bStage(false)
 {
 	m_iX = 45;
 	m_iY = 80;
@@ -27,7 +29,16 @@ HRESULT	CBattleFieldBackBridge::Initialize(void)
 
 void	CBattleFieldBackBridge::Progress(INFO& rInfo)
 {
+	m_ObjList[OBJ_MONSTER] =  CObjMgr::GetInstance()->GetObjList(OBJ_MONSTER);
+	m_ObjList[OBJ_EFFECT]  = CObjMgr::GetInstance()->GetObjList(OBJ_EFFECT);
+	
+	CCollisionMgr::SkillCollision(m_ObjList[OBJ_EFFECT], m_ObjList[OBJ_MONSTER]);
 
+	if(m_ObjList[OBJ_MONSTER]->empty() && m_bStage == false)
+	{
+		m_bStage = true;
+		m_fTime = 5.f;
+	}
 }
 
 void	CBattleFieldBackBridge::Render(void)
@@ -273,6 +284,14 @@ int	CBattleFieldBackBridge::Picking(void)
 		m_vDrag[2] = D3DXVECTOR2((float)m_rcDrag.right, (float)m_rcDrag.bottom);
 		m_vDrag[3] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.bottom);
 		m_vDrag[4] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.top);
+	}
+	if (m_bStage)
+		m_fTime -= CTimeMgr::GetInstance()->GetTime();
+
+	if (m_bStage && m_fTime <= 0)
+	{
+		CSceneMgr::GetInstance()->SetScene(SC_FILED);
+		return 1;
 	}
 
 	return -1;

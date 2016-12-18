@@ -129,6 +129,8 @@ int	CFieldBackBridge::Picking(void)
 			CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CObjFactory<CEffect, CTimerEffectBridge>::CreateObj(L"BattleWait", pMonster->GetInfo()->vPos, m_fTime));
 			m_fTime = 3.f;
 			((CEnemyUnit*)pMonster)->SetOrder(OD_STAND);
+			CSceneMgr::GetInstance()->SetScene(SC_BATTLEFIELD);
+		
 			m_bStage = true;
 
 			if(!m_bStage)		

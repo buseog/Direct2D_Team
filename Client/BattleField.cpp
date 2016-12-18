@@ -22,6 +22,8 @@
 #include "LongAttackBridge.h"
 
 #include "UnitBridge.h"
+#include "CollisionMgr.h"
+
 
 #include "MainUi.h"
 #include "MainUiBridge.h"
@@ -76,6 +78,7 @@ void	CBattleField::Progress(void)
 	CObjMgr::GetInstance()->Progress();
 	CUIMgr::GetInstance()->Progress();
 	CObjMgr::GetInstance()->Picking();
+	
 
 }
 

@@ -4,6 +4,9 @@
 class CBattleField :
 	public CScene
 {
+private:
+	list<CObj*>*		m_ObjList[OBJ_END];
+
 public:
 	virtual HRESULT	Initialize(void);
 	virtual void	Progress(void);

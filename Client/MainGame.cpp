@@ -49,6 +49,7 @@ void CMainGame::Progress(void)
 
 	if (m_pSceneMgr)
 		m_pSceneMgr->Progress();
+
 	D3DXMatrixTranslation(&m_matTrans, 600.f, 50.f, 0.f);	
 }
 
