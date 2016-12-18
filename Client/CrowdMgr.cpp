@@ -204,8 +204,9 @@ int	CCrowdMgr::KeyInput(void)
 			float fX = vMouse.x + cosf(D3DXToRadian(fAngle)) * 60 * iLine;
 			float fY = vMouse.y - sinf(D3DXToRadian(fAngle)) * 60 * iLine;
 
-			/*((CUnitBridge*)m_vecSelectUnit[i]->GetBridge())->SetAstar(D3DXVECTOR3(fX, fY, 0.f));
-			m_vecSelectUnit[i]->SetOrder(OD_ASTAR);*/
+			//((CUnitBridge*)m_vecSelectUnit[i]->GetBridge())->SetAstar(D3DXVECTOR3(fX, fY, 0.f));
+			//m_vecSelectUnit[i]->SetRevolution(D3DXToRadian(fAngle));
+			//m_vecSelectUnit[i]->SetOrder(OD_ASTAR);
 
 			// 구해진 값으로 유닛들에게 순차적으로 타겟포인트를 지정해줌
 			m_vecSelectUnit[i]->SetTargetPoint(D3DXVECTOR3(fX, fY, 0));

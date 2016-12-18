@@ -47,71 +47,57 @@ void CBackBridge::LoadTile(const wstring& wstrPath)
 	{
 		TILE2*			pTile = new TILE2;
 
-		ReadFile(hFile, pTile, sizeof(TILE2), &dwByte, NULL);
+		ReadFile(hFile, pTile, sizeof(TILE), &dwByte, NULL);
 
 		if(dwByte == 0)
 		{
 			::Safe_Delete(pTile);
 			break;
 		}
-
+		//pTile->Connectlist.clear();
 		m_vecTile.push_back(pTile);
 	}
 
 	CloseHandle(hFile);
 
-	if (m_vecTile.empty())
+	
+	for (int i = 0; i < m_iY; ++i)
 	{
-
-		for (int i = 0; i < TILEY; ++i)
+		for (int j = 0; j < m_iX; ++j)
 		{
-			for (int j = 0; j < TILEX; ++j)
-			{
-				TILE2*	pTile = new TILE2;
+			int iIndex = i * m_iX + j;
 
-				float fX = float(j * TILECX) + ((i % 2) * (TILECX / 2.f));
-				float fY = (float)i * (TILECY / 2.f);
-				pTile->vPos = D3DXVECTOR3(fX, fY, 0.f);
-				pTile->vSize = D3DXVECTOR3((float)TILECX, (float)TILECY, 0.f);
-				pTile->byDrawID = 0;
-				pTile->byOption = 0;
+			// 위
+			if (i > 1)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex - m_iX * 2);
 
-				int iIndex = i * TILEX + j;
+			// 오른쪽위
+			if (i > 0 && j <= m_iX - 1)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex - m_iX + 1);
 
-				// 위
-				if (i > 1)
-					pTile->Connectlist.push_back(iIndex - TILEX * 2);
+			// 오른쪽
+			if (j < m_iX -2)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex +1);
 
-				// 오른쪽위
-				if (i > 0 && j <= TILEX - 1)
-					pTile->Connectlist.push_back(iIndex - TILEX + 1);
+			// 오른쪽 아래
+			if (i < TILEY - 1&& j <= m_iX - 1)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex + m_iX);
 
-				// 오른쪽
-				if (j < TILEX -2)
-					pTile->Connectlist.push_back(iIndex +1);
+			// 아래
+			if (i < TILEY -2)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex + m_iX * 2);
 
-				// 오른쪽 아래
-				if (i < TILEY - 1&& j <= TILEX - 1)
-					pTile->Connectlist.push_back(iIndex + TILEX);
+			// 왼쪽 아래
+			if (i < TILEY - 1 && j >= 0)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex + m_iX - 1);
 
-				// 아래
-				if (i < TILEY -2)
-					pTile->Connectlist.push_back(iIndex + TILEX * 2);
+			// 왼쪽
+			if (j > 1)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex - 1);
 
-				// 왼쪽 아래
-				if (i < TILEY - 1 && j >= 0)
-					pTile->Connectlist.push_back(iIndex + TILEX - 1);
-
-				// 왼쪽
-				if (j > 1)
-					pTile->Connectlist.push_back(iIndex - 1);
-
-				// 왼쪽 위
-				if (j >= 0 && i > 0)
-					pTile->Connectlist.push_back(iIndex - TILEX);
-
-				m_vecTile.push_back(pTile);
-			}
+			// 왼쪽 위
+			if (j >= 0 && i > 0)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex - m_iX);
 		}
 	}
 }
@@ -119,4 +105,34 @@ void CBackBridge::LoadTile(const wstring& wstrPath)
 int	CBackBridge::Picking(void)
 {
 	return -1;
+}
+
+void	CBackBridge::LoadBack(const wstring&	wstrPath)
+{
+	
+	HANDLE  hFile = CreateFile(wstrPath.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	DWORD	dwByte = 0;
+
+	while(1)
+	{
+		BACK*			pBack = new BACK;
+
+		ReadFile(hFile, pBack, sizeof(BACK), &dwByte, NULL);
+
+		if(dwByte == 0)
+		{
+			::Safe_Delete(pBack);
+			break;
+		}
+
+		m_vecBack.push_back(pBack);
+	}
+
+	CloseHandle(hFile);
+}
+
+const D3DXVECTOR3* CBackBridge::GetSize(void)
+{
+	return &m_vSize;
 }

@@ -83,21 +83,20 @@ void	CField::LoadPNG(void)
 {
 	CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Map/Map00.png", L"Field", TEX_SINGLE);
 
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Tile/Tile/Tile%d.png", 
+	/*if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Tile/Tile/Tile%d.png", 
 		L"TILE", TEX_MULTI, L"Tile", 216)))
 	{
 		ERR_MSG(L"Tile 멀티 텍스쳐 생성 실패")
 		return;
-	}
-	
+	}*/
 	
 
-	/*if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/EnemyUnit/Gonish/Walk_1/Gonish%d.png", 
-		L"EnemyUnit", TEX_MULTI, L"GoniSh", 8)))
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/TILEMAP/TILE0%d.png", 
+		L"TILE", TEX_MULTI, L"Tile", 4)))
 	{
-		ERR_MSG(L"GoniSh 멀티 텍스쳐 생성 실패")
+		ERR_MSG(L"TILE 멀티 텍스쳐 생성 실패")
 		return;
-	}*/
+	}
 	
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/Pannel/UI0.png", 
 		L"FieldMainUi", TEX_SINGLE)))
