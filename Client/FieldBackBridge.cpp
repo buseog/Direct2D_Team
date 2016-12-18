@@ -107,7 +107,7 @@ int	CFieldBackBridge::Picking(void)
 
 			if(PtInRect(&((CEnemyUnit*)pMonster)->GetRect(),Pt))
 			{
-				CSceneMgr::GetInstance()->SetScene(SC_BATTLEFIELD);
+				CSceneMgr::GetInstance()->SetScene(SC_VILLAGE);
 				return 1;	
 			}
 		}

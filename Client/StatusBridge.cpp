@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "StatusBridge.h"
+#include "SceneMgr.h"
 #include "UIMgr.h"
 #include "Ui.h"
 #include "Obj.h"
@@ -296,6 +297,8 @@ int	CStatusBridge::Picking(void)
 
 	if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON, 1))
 	{
+		CSceneMgr::GetInstance()->SetMouse(L"Hand_Click");
+
 		for(size_t i = 0; i < m_vecButton.size(); ++i)
 		{
 			if(PtInRect(&m_vecButton[i]->GetRect(), Pt))

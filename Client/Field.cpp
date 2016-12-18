@@ -37,6 +37,9 @@
 #include "MercenaryDisplay.h"
 #include "MercenaryDisplayBridge.h"
 
+#include "TownButton.h"
+#include "TownBridge.h"
+
 
 
 CField::CField(void)
@@ -69,8 +72,9 @@ HRESULT	CField::Initialize(void)
 	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CMercenaryStore,CMercenaryStoreBridge>::CreateUI(L"Store",200.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CMercenaryDisplay,CMercenaryDisplayBridge>::CreateUI(L"Store",0.f,250.f));
 
+	CUIMgr::GetInstance()->AddUI(UI_BUTTON, CUIFactory<CTownButton,CTownBridge>::CreateUI(L"BigTown", 1720.f, 320.f));
 
-
+	
 	return S_OK;
 }
 
@@ -228,4 +232,14 @@ void	CField::LoadPNG(void)
 		ERR_MSG(L"TestUnit 싱글 텍스쳐 생성 실패");
 		return;
 	}
+
+
+	// 마을 버튼 - 은지 추가
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Town/Big/Town%d.png", 
+		L"BIGTOWN", TEX_MULTI, L"BigTown", 2)))
+	{
+		ERR_MSG(L"BIGTOWN 멀티 텍스쳐 생성 실패")
+		return;
+	}
+
 }
