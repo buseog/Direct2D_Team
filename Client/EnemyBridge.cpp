@@ -6,7 +6,6 @@
 
 
 CEnemyBridge::CEnemyBridge(void)
-: m_bArrive(false)
 {
 }
 
@@ -24,8 +23,8 @@ HRESULT	CEnemyBridge::Initialize(void)
 
 void	CEnemyBridge::Progress(INFO& rInfo)
 {
+
 	WorldMatrix(rInfo);
-	//Move(rInfo);
 	Frame();
 	Patrol(rInfo);
 	
@@ -94,51 +93,6 @@ void CEnemyBridge::WorldMatrix(INFO& rInfo)
 
 	rInfo.matWorld = matScale * matTrans;
 }
-
-void	CEnemyBridge::Move(INFO& rInfo)
-{
-	
-	/*m_vOriginPoint = D3DXVECTOR3(400.f, 300.f, 0.f); 
-	m_vTargetPoint = D3DXVECTOR3(500.f, 200.f, 0.f);
-	
-	if(m_bArrive == false)
-	{
-		rInfo.vDir = m_vTargetPoint - rInfo.vPos;
-		float	fDistance = D3DXVec3Length(&rInfo.vDir);
-		D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
-
-			if(fDistance > 10.f)
-			{
-				rInfo.vPos += rInfo.vDir * m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime();
-				
-				if(rInfo.vPos == m_vTargetPoint)
-				{
-					m_bArrive = true;
-					
-				}
-			}			
-	}
-
-	else if(m_bArrive == true)
-	{
-		rInfo.vDir = m_vOriginPoint - rInfo.vPos;
-		float fDistance = D3DXVec3Length(&rInfo.vDir);
-		D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
-
-			if(fDistance > 10.f)
-			{
-				rInfo.vPos += rInfo.vDir * m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime();
-				
-				if(rInfo.vPos == m_vOriginPoint)
-						m_bArrive = false;
-			}		
-	}
-	*/
-
-
-
-}
-
 
 void	CEnemyBridge::Patrol(INFO& rInfo)
 {

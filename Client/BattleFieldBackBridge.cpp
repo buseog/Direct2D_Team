@@ -8,6 +8,9 @@
 CBattleFieldBackBridge::CBattleFieldBackBridge(void)
 : m_iDragState(0)
 {
+	m_iX = 45;
+	m_iY = 80;
+	m_vSize = D3DXVECTOR3(1892.f, 780.f, 0.f);
 }
 
 CBattleFieldBackBridge::~CBattleFieldBackBridge(void)
@@ -17,7 +20,7 @@ CBattleFieldBackBridge::~CBattleFieldBackBridge(void)
 
 HRESULT	CBattleFieldBackBridge::Initialize(void)
 {
-	//LoadTile(L"../Data/map.dat");
+	//LoadTile(L"../Data/0.dat");
 
 	return S_OK;
 }
@@ -100,7 +103,7 @@ void	CBattleFieldBackBridge::Release(void)
 int	CBattleFieldBackBridge::Picking(void)
 {
 	// 배틀필드 아군 유닛 리스트를 받아옴
-	list<CObj*>*	plistUnit = CObjMgr::GetInstance()->GetObjList(OBJ_PLAYER);
+	list<CObj*>*	plistUnit = CObjMgr::GetInstance()->GetObjList(OBJ_UNIT);
 	list<CObj*>*	plistMonster = CObjMgr::GetInstance()->GetObjList(OBJ_MONSTER);
 	POINT pt;
 	pt.x = (long)::GetMouse().x - (long)m_pObj->GetScroll().x;
@@ -135,7 +138,7 @@ int	CBattleFieldBackBridge::Picking(void)
 				CSceneMgr::GetInstance()->SetMouse(L"Sword_Stand");
 
 				// 충돌된상태에서 왼쪽버튼을 누르면
-				if (CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON))
+				if (CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON, 5))
 				{
 					CSceneMgr::GetInstance()->SetMouse(L"Sword_Click");
 				}
@@ -171,7 +174,7 @@ int	CBattleFieldBackBridge::Picking(void)
 				// 충돌이 됬다면 마우스를 유닛핸드로 바꿔줌
 				CSceneMgr::GetInstance()->SetMouse(L"Hand_Unit");
 				// 충돌된상태에서 왼쪽버튼을 누르면
-				if (CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON))
+				if (CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON, 5))
 				{
 					CSceneMgr::GetInstance()->SetMouse(L"Hand_Click");
 					// 군중매니저의 리스트를 비워준다
@@ -188,7 +191,7 @@ int	CBattleFieldBackBridge::Picking(void)
 	D3DXVECTOR3	vMouse = ::GetMouse();
 
 	// 버튼이 뗐을떄, 중복되는 함수방지를 위해 인덱스로 사용처를 구분함.
-	if(CKeyMgr::GetInstance()->KeyUp(VK_LBUTTON, 0) && m_iDragState == 1)
+	if(CKeyMgr::GetInstance()->KeyUp(VK_LBUTTON, 5) && m_iDragState == 1)
 	{
 		// 드래그되는 사각형을 그려주기 위한 구조체. 끝나는점을 라이트 바텀으로 설정
 		m_rcDrag.right = long(vMouse.x);
@@ -224,7 +227,7 @@ int	CBattleFieldBackBridge::Picking(void)
 		m_vDrag[4] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.top);
 		
 		// 배틀필드 아군 유닛리스트를 얻어온다
-		list<CObj*>* pUnitList = CObjMgr::GetInstance()->GetObjList(OBJ_PLAYER);
+		list<CObj*>* pUnitList = CObjMgr::GetInstance()->GetObjList(OBJ_UNIT);
 		// 유닛리스트를 비워준다
 		CCrowdMgr::GetInstance()->Clear();
 
@@ -250,10 +253,9 @@ int	CBattleFieldBackBridge::Picking(void)
 		// 드래그 이벤트가 끝났으니 0으로 초기화시킴, 드래그 렉트도 마찬가지
 		m_iDragState = 0;
 		ZeroMemory(&m_vDrag, sizeof(D3DXVECTOR2) * 5);
-
 	}
 	// 왼쪽 키입력이 됬을때
-	else if (CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON) && m_iDragState == 0)
+	else if (CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON, 5) && m_iDragState == 0)
 	{
 		// 드래그를 시작하면서 그리기 시작함
 		m_iDragState = 1;
@@ -274,71 +276,4 @@ int	CBattleFieldBackBridge::Picking(void)
 	}
 
 	return -1;
-}
-
-void CBattleFieldBackBridge::LoadTile(const wstring& wstrPath)
-{
-	HANDLE  hFile = CreateFile(wstrPath.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-
-	DWORD	dwByte = 0;
-
-	int WIDTH = 60;
-	int HEIGHT = 80;
-
-	while(1)
-	{
-		TILE2*			pTile = new TILE2;
-
-		ReadFile(hFile, pTile, sizeof(TILE2), &dwByte, NULL);
-
-		if(dwByte == 0)
-		{
-			::Safe_Delete(pTile);
-			break;
-		}
-
-		m_vecTile.push_back(pTile);
-	}
-
-	CloseHandle(hFile);
-
-	for (int i = 0; i < WIDTH; ++i)
-	{
-		for (int j = 0; j < 80; ++j)
-		{
-			int iIndex = i * HEIGHT + j;
-
-			// 위
-			if (i > 1)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex - WIDTH * 2);
-
-			// 오른쪽위
-			if (i > 0 && j <= TILEX - 1)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex - WIDTH + 1);
-
-			// 오른쪽
-			if (j < TILEX -2)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex +1);
-
-			// 오른쪽 아래
-			if (i < TILEY - 1&& j <= TILEX - 1)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex + WIDTH);
-
-			// 아래
-			if (i < TILEY -2)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex + WIDTH * 2);
-
-			// 왼쪽 아래
-			if (i < TILEY - 1 && j >= 0)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex + WIDTH - 1);
-
-			// 왼쪽
-			if (j > 1)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex - 1);
-
-			// 왼쪽 위
-			if (j >= 0 && i > 0)
-				m_vecTile[iIndex]->Connectlist.push_back(iIndex - WIDTH);
-		}
-	}
 }

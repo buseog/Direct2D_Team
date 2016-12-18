@@ -208,7 +208,7 @@ void CToolView::OnInitialUpdate()
 		return;
 	}
 
-	if(FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Back/Object/Back00%d.png",  // 지형 오브젝트 텍스쳐 - 은지 추가
+	if(FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Back/Object2/Back00%d.png",  // 지형 오브젝트 텍스쳐 - 은지 추가
 		L"OBJECT", TEX_MULTI, L"Object", 55)))
 	{
 		AfxMessageBox(L"지형 오브젝트 텍스쳐 생성 실패");

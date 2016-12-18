@@ -243,7 +243,6 @@ int CInvenBridge::Picking(void)
 		{
 			swap(m_ItemSlot[m_iSelectIndex], m_EquipSlot[IT_ARMOR]);
 			((CPlayer*)pPlayer)->SetPlusDefence(m_EquipSlot[IT_ARMOR]->GetItemInfo()->iOption);		
-			m_bWeapon = true;
 			m_bArmor = true;
 		}
 
@@ -279,7 +278,7 @@ int CInvenBridge::Picking(void)
 	}
 
 	// 해제하는 부분
-	if(CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON))
+	if(CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON, 2))
 	{
 		if(PtInRect(&m_EquipSlot[IT_WEAPON]->GetRect(), Pt))
 		{
@@ -290,7 +289,7 @@ int CInvenBridge::Picking(void)
 					((CPlayer*)pPlayer)->SetMinusAttack(m_EquipSlot[IT_WEAPON]->GetItemInfo()->iOption);	
 					swap(m_ItemSlot[i], m_EquipSlot[IT_WEAPON]);
 					m_bWeapon = false;
-					break;
+					return 1;
 				}
 			}
 		}	
@@ -303,15 +302,13 @@ int CInvenBridge::Picking(void)
 					((CPlayer*)pPlayer)->SetMinusDefence(m_EquipSlot[IT_ARMOR]->GetItemInfo()->iOption);	
 					swap(m_ItemSlot[i], m_EquipSlot[IT_ARMOR]);
 					m_bArmor = false;
-					break;
+					return 1;
 				}
 			}
-		}
-		
-		
+		}		
 	}
 	
-	return m_iPriority;
+	return -1;
 }
 
 CItem*	CInvenBridge::CreateWeapon(D3DXVECTOR3 vPos)
@@ -366,11 +363,6 @@ void CInvenBridge::SortItem(INFO& rInfo)
 	m_EquipSlot[IT_ARMOR]->SetPos(625.f, 170.f);
 }
 
-//
-//int	CInvenBridge::Picking(void)
-//{
-//	return m_iPriority;
-//}
 
 bool CInvenBridge::EquipWeapon(void)
 {

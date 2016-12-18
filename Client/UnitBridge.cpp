@@ -146,7 +146,7 @@ void	CUnitBridge::Move(INFO& rInfo)
 
 	if(fDistance > 10.f)
 	{
-		rInfo.vPos += rInfo.vDir * 300 * CTimeMgr::GetInstance()->GetTime();
+		rInfo.vPos += rInfo.vDir * m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime();
 	}
 	else
 	{
@@ -182,9 +182,25 @@ void	CUnitBridge::AStarMove(INFO& rInfo)
 
 	D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
 
+	// 캐릭터 y각도에 따라서 각도 전환
+	if (rInfo.vDir.y >= 0.75f)
+		m_wstrStateKey = L"Stand_5";
+
+	else if (rInfo.vDir.y >= 0.25f)
+		m_wstrStateKey = L"Stand_1";
+
+	else if (rInfo.vDir.y >= -0.25f)
+		m_wstrStateKey = L"Stand_2";
+
+	else if (rInfo.vDir.y >= -0.75f)
+		m_wstrStateKey = L"Stand_3";
+
+	else
+		m_wstrStateKey = L"Stand_4";
+
 	rInfo.vPos += rInfo.vDir * m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime();
 
-	if(fDistance < 10.f)
+	if(fDistance < m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime())
 	{
 		m_vecBestList.pop_front();
 	}
@@ -238,9 +254,9 @@ void	CUnitBridge::Patrol(INFO& rInfo)
 	else
 		m_wstrStateKey = L"Walk_4";
 
-	if(fDistance > 10.f)
+	if(fDistance > m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime())
 	{
-		rInfo.vPos += rInfo.vDir * 300 * CTimeMgr::GetInstance()->GetTime();
+		rInfo.vPos += rInfo.vDir * m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime();
 	}
 	else
 	{

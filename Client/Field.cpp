@@ -14,6 +14,7 @@
 #include "Player.h"
 #include "PlayerBridge.h"
 
+
 #include "Obj.h"
 
 #include "EnemyUnit.h"
@@ -58,6 +59,7 @@ HRESULT	CField::Initialize(void)
 	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CPlayerBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
 	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"GoniSh", L"Walk_1", D3DXVECTOR3(500.f, 200.f, 0.f)));
 
+	
 
 
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi,CMainUiBridge>::CreateUI(L"FieldMainUi",400.f,553.f));	
@@ -71,7 +73,7 @@ HRESULT	CField::Initialize(void)
 
 
 
-	return S_OK;
+	return S_OK;	
 }
 
 void	CField::Progress(void)
@@ -99,13 +101,19 @@ void	CField::LoadPNG(void)
 {
 	CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Map/Map00.png", L"Field", TEX_SINGLE);
 
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Tile/Tile/Tile%d.png", 
+	/*if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Tile/Tile/Tile%d.png", 
 		L"TILE", TEX_MULTI, L"Tile", 216)))
 	{
 		ERR_MSG(L"Tile 멀티 텍스쳐 생성 실패")
 		return;
+	}*/
+
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/TILEMAP/TILE0%d.png", 
+		L"TILE", TEX_MULTI, L"Tile", 4)))
+	{
+		ERR_MSG(L"TILE 멀티 텍스쳐 생성 실패")
+		return;
 	}
-	
 	
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/Pannel/UI0.png", 
 		L"FieldMainUi", TEX_SINGLE)))

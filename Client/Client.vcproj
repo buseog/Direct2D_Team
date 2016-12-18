@@ -330,6 +330,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="09. SkillMgr"
+				>
+				<File
+					RelativePath=".\SKillMgr.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SKillMgr.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="98. Design"
@@ -501,14 +513,42 @@
 					<Filter
 						Name="04. EnemyBridge"
 						>
-						<File
-							RelativePath=".\EnemyBridge.cpp"
+						<Filter
+							Name="00. ShortAttackBridge"
 							>
-						</File>
-						<File
-							RelativePath=".\EnemyBridge.h"
+							<File
+								RelativePath=".\ShortAttackBridge.cpp"
+								>
+							</File>
+							<File
+								RelativePath=".\ShortAttackBridge.h"
+								>
+							</File>
+						</Filter>
+						<Filter
+							Name="01. LongAttackBridge"
 							>
-						</File>
+							<File
+								RelativePath=".\LongAttackBridge.cpp"
+								>
+							</File>
+							<File
+								RelativePath=".\LongAttackBridge.h"
+								>
+							</File>
+						</Filter>
+						<Filter
+							Name="02. FieldEnemyBridge"
+							>
+							<File
+								RelativePath=".\EnemyBridge.cpp"
+								>
+							</File>
+							<File
+								RelativePath=".\EnemyBridge.h"
+								>
+							</File>
+						</Filter>
 					</Filter>
 				</Filter>
 				<Filter
@@ -618,8 +658,16 @@
 							>
 						</File>
 						<Filter
-							Name="00. BuyButtonBridge"
+							Name="00. HotKeyBridge"
 							>
+							<File
+								RelativePath=".\HotKeyBridge.cpp"
+								>
+							</File>
+							<File
+								RelativePath=".\HotKeyBridge.h"
+								>
+							</File>
 						</Filter>
 					</Filter>
 					<Filter
@@ -818,21 +866,41 @@
 				<Filter
 					Name="01. EnemyUnit"
 					>
-					<File
-						RelativePath=".\EnemyUnit.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\EnemyUnit.h"
-						>
-					</File>
 					<Filter
 						Name="00. ShortAttack"
 						>
+						<File
+							RelativePath=".\ShortAttack.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\ShortAttack.h"
+							>
+						</File>
 					</Filter>
 					<Filter
 						Name="01. LongAttack"
 						>
+						<File
+							RelativePath=".\LongAttack.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\LongAttack.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="02. FieldUnit"
+						>
+						<File
+							RelativePath=".\EnemyUnit.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\EnemyUnit.h"
+							>
+						</File>
 					</Filter>
 				</Filter>
 				<Filter
@@ -968,7 +1036,43 @@
 					>
 				</File>
 				<Filter
-					Name="00. StoreButton"
+					Name="00. HotKeyStop"
+					>
+					<File
+						RelativePath=".\HotKeyStop.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\HotKeyStop.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="01. HotKeyMove"
+					>
+					<File
+						RelativePath=".\HotKeyMove.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\HotKeyMove.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="02. HotKeyAttack"
+					>
+					<File
+						RelativePath=".\HotKeyAttack.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\HotKeyAttack.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="03. StoreButton"
 					>
 					<File
 						RelativePath=".\StoreButton.cpp"
