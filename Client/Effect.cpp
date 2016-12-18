@@ -14,6 +14,7 @@ CEffect::~CEffect(void)
 HRESULT CEffect::Initialize(void)
 {
 	m_wstrObjKey = L"Effect";
+	m_fSpeed = 300.f;
 	return S_OK;
 }
 

@@ -19,7 +19,7 @@ public:
 	void	AddSelectList(CObj*	pObj);
 	int		GetSelectList(void);
 	void	RenderPortrait(void);
-	int	KeyInput(void);
+	int		KeyInput(void);
 	void	Clear(void);
 
 public:
@@ -28,7 +28,7 @@ public:
 
 public: // 단축키 관련 - 은지 추가
 	void	HotKeyCheck(void);
-	void	Picking(void);
+	int	Picking(void);
 
 	int		m_iPButtonCheck;;
 	vector<CUi*>	m_HotButton;

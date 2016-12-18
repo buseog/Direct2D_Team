@@ -114,7 +114,7 @@ void CShortAttackBridge::WorldMatrix(INFO& rInfo)
 void CShortAttackBridge::Move(INFO &rInfo)
 {
 
-	const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_PLAYER);
+	const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_UNIT);
 	m_pObj->SetTargetPoint(((CPlayer*)pPlayer)->GetInfo()->vPos);
 
 	rInfo.vDir = m_pObj->GetTargetPoint() - rInfo.vPos;

@@ -116,9 +116,9 @@ void	CBackBridge::LoadBack(const wstring&	wstrPath)
 
 	while(1)
 	{
-		BACK*			pBack = new BACK;
+		BACK2*			pBack = new BACK2;
 
-		ReadFile(hFile, pBack, sizeof(BACK), &dwByte, NULL);
+		ReadFile(hFile, pBack, sizeof(BACK2), &dwByte, NULL);
 
 		if(dwByte == 0)
 		{

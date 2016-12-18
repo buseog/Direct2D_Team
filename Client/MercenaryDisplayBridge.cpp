@@ -25,9 +25,6 @@ CMercenaryDisplayBridge::~CMercenaryDisplayBridge(void)
 
 HRESULT CMercenaryDisplayBridge::Initialize(void)
 {
-
-	//m_wstrStateKey = L"Inventory";
-
 	for(int i =0; i<MAX_UNIT; ++i)
 	{
 		m_UnitSlot.push_back(CreateEmptyUnit(m_tInfo.vPos));
@@ -123,7 +120,6 @@ void CMercenaryDisplayBridge::LoadData(void)
 	DWORD		dwByte = 0;
 
 	hFile = CreateFile(L"../Data/TestUnit.dat",
-	//hFile = CreateFile(L"../Data/DrugStore.dat",
 		GENERIC_READ, 
 		0, 
 		NULL, 

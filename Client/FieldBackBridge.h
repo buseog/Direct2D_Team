@@ -6,7 +6,10 @@ class CFieldBackBridge :
 {
 private:
 	bool	m_bStage;
-	DWORD	m_dwTime;
+	float	m_fTime;
+
+public:
+	void	BattleWait(void);
 
 
 

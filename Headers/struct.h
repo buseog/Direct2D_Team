@@ -40,6 +40,12 @@ typedef	struct	tagBackObj
 
 }BACK;
 
+typedef	struct	tagBackObj2
+{
+	D3DXVECTOR3			vPos;
+	int					iIndex;
+}BACK2;
+
 // 클라에서 사용될타일. AStar용 인접리스트 가지고있음
 typedef struct tagClilTile
 {

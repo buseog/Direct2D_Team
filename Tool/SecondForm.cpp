@@ -277,7 +277,12 @@ void CSecondForm::OnSaveButton()
 	for(vector<BACK*>::iterator	iter = pvecBack->begin();
 		iter != pvecBack->end(); ++iter)
 	{
-		WriteFile(hFile2, (*iter), sizeof(BACK), &dwByte2, NULL);
+		BACK2*	pBack = new BACK2;
+
+		pBack->iIndex = (*iter)->iIndex;
+		pBack->vPos = (*iter)->vPos;
+
+		WriteFile(hFile2, pBack, sizeof(BACK2), &dwByte2, NULL);
 	}
 
 	CloseHandle(hFile2);

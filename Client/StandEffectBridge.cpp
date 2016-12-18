@@ -32,9 +32,20 @@ void CStandEffectBridge::Render(void)
 	float fX = pTexture->tImgInfo.Width / 2.f;
 	float fY = pTexture->tImgInfo.Height / 2.f;
 
+	CDevice::GetInstance()->Render_End();
+	CDevice::GetInstance()->Render_Begin();
+
+	CDevice::GetInstance()->GetDevice()->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+	CDevice::GetInstance()->GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_ONE);
+	CDevice::GetInstance()->GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+
+
 	CDevice::GetInstance()->GetSprite()->SetTransform(&m_pObj->GetInfo()->matWorld);
 	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
 		NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	CDevice::GetInstance()->Render_End();
+	CDevice::GetInstance()->Render_Begin();
 }
 
 void CStandEffectBridge::Release(void)
@@ -48,7 +59,7 @@ void CStandEffectBridge::WorldMatrix(INFO& rInfo)
 
 	D3DXMatrixTranslation(&matTrans, 
 		rInfo.vPos.x + m_pObj->GetScroll().x, 
-		rInfo.vPos.y + m_pObj->GetScroll().y, 
+		rInfo.vPos.y + m_pObj->GetScroll().y + 30, 
 		0.f);
 
 	rInfo.matWorld = matTrans;

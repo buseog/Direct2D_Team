@@ -19,6 +19,8 @@
 #include "Portrait.h"
 #include "PortraitBridge.h"
 
+
+#include "SKillMgr.h"
 #include "HotKeyBridge.h"
 #include "HotKeyStop.h"
 #include "HotKeyMove.h"
@@ -52,6 +54,19 @@ CCrowdMgr::CCrowdMgr(void)
 
 		++iX;
 	}
+
+	m_HotButton.push_back(CUIFactory<CHotKeyStop, CHotKeyBridge>::CreateUI(L"HotKeyStop",
+		(int)632.f, (int)538.f, 0));
+
+	m_HotButton.push_back(CUIFactory<CHotKeyMove, CHotKeyBridge>::CreateUI(L"HotKeyMove",
+		(int)668.f, (int)538.f, 1));
+
+	m_HotButton.push_back(CUIFactory<CHotKeyAttack, CHotKeyBridge>::CreateUI(L"HotKeyAttack",
+		(int)704.f, (int)538.f, 2));
+
+	
+	for (size_t i = 0; i < m_HotButton.size(); ++i)
+		m_HotButton[i]->SetSize(D3DXVECTOR3(34.f, 34.f, 0.f));
 }
 
 CCrowdMgr::~CCrowdMgr(void)
@@ -123,19 +138,6 @@ void	CCrowdMgr::RenderPortrait(void)
 	}
 
 	HotKeyCheck();
-
-	m_HotButton.push_back(CUIFactory<CHotKeyStop, CHotKeyBridge>::CreateUI(L"HotKeyStop",
-		(int)632.f, (int)538.f, 0));
-
-	m_HotButton.push_back(CUIFactory<CHotKeyMove, CHotKeyBridge>::CreateUI(L"HotKeyMove",
-		(int)668.f, (int)538.f, 1));
-
-	m_HotButton.push_back(CUIFactory<CHotKeyAttack, CHotKeyBridge>::CreateUI(L"HotKeyAttack",
-		(int)704.f, (int)538.f, 2));
-
-	
-	for (size_t i = 0; i < m_HotButton.size(); ++i)
-		m_HotButton[i]->SetSize(D3DXVECTOR3(34.f, 34.f, 0.f));
 }
 
 int	CCrowdMgr::KeyInput(void)
@@ -143,6 +145,9 @@ int	CCrowdMgr::KeyInput(void)
 	POINT pt;
 	pt.x = (long)::GetMouse().x;
 	pt.y = (long)::GetMouse().y;
+
+	if (Picking() > 0)
+		return 1;
 
 
 	for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
@@ -164,8 +169,6 @@ int	CCrowdMgr::KeyInput(void)
 		}
 	}
 
-	Picking();
-
 	if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON))
 	{
 
@@ -186,6 +189,8 @@ int	CCrowdMgr::KeyInput(void)
 		case OD_ATTACK:
 			break;
 		}
+
+		return 1;
 
 	}
 			
@@ -209,6 +214,7 @@ int	CCrowdMgr::KeyInput(void)
 		TCHAR str[256];
 		wsprintf(str, TEXT("Creature count : %d, Elapsed Time : %d(ms)\n"), m_vecSelectUnit.size(), end - start);
 		OutputDebugString(str);
+		return 1;
 	}
 
 
@@ -289,6 +295,7 @@ int	CCrowdMgr::KeyInput(void)
 
 	if (CKeyMgr::GetInstance()->KeyDown('S'))
 	{
+		D3DXVECTOR3 vMouse = ::GetMouse() - m_vecSelectUnit.front()->GetScroll();
 		m_iPButtonCheck = OD_PATROL;
 	}
 
@@ -299,9 +306,11 @@ int	CCrowdMgr::KeyInput(void)
 
 	if (CKeyMgr::GetInstance()->KeyDown('Q'))
 	{
+		D3DXVECTOR3 vMouse = ::GetMouse() - m_vecSelectUnit.front()->GetScroll();
 		for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
 		{
 			m_vecSelectUnit[i]->SetDamage(3);
+			CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CSKillMgr::Skill(m_vecSelectUnit[i]->GetInfo()->vPos, vMouse, m_vecSelectUnit[i]->GetObjKey()));
 		}
 	}
 
@@ -337,7 +346,7 @@ void CCrowdMgr::HotKeyCheck(void)
 		const TEXINFO* pHotButtonTexture = CTextureMgr::GetInstance()->GetTexture(m_HotButton[i]->GetObjKey());
 
 		if(pHotButtonTexture == NULL)
-		return;
+			return;
 
 		D3DXMatrixTranslation(&matTrans, m_HotButton[i]->GetInfo()->vPos.x, 
 			m_HotButton[i]->GetInfo()->vPos.y, 0.f);
@@ -354,7 +363,7 @@ void CCrowdMgr::HotKeyCheck(void)
 	
 }
 
-void CCrowdMgr::Picking(void)
+int CCrowdMgr::Picking(void)
 {
 	POINT	Pt;
 		Pt.x = (long)GetMouse().x;
@@ -384,9 +393,11 @@ void CCrowdMgr::Picking(void)
 				case 2:
 					
 					break;
+
+					return 1;
 				}
 			}
 		}
 	}
-	
+	return -1;
 }

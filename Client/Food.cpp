@@ -47,6 +47,14 @@ void CFood::Render(void)
 	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
 		NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
+	D3DXMATRIX	matTrans;
+
+	D3DXMatrixTranslation(&matTrans, 
+		m_tInfo.vPos.x + 10 , 
+		m_tInfo.vPos.y + 15 , 
+		0.f);
+
+	CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
 	CDevice::GetInstance()->GetUIFont()->DrawTextW(CDevice::GetInstance()->GetSprite(), 
 		szCount, 
 		lstrlen(szCount), 
