@@ -35,7 +35,16 @@ void CAllyUnit::Progress(void)
 	m_pBridge->Progress(m_tInfo);
 	}
 	//WorldMatrix();
-	ScaleSync();
+	if(m_wstrObjKey==L"TestUnit")
+	{
+		ScaleSync();
+		return;
+	}
+	else
+	{
+		WorldMatrix();
+		return;
+	}
 }
 
 void CAllyUnit::Render(void)

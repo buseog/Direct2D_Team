@@ -27,7 +27,6 @@ void	CMercenaryStore::Progress(void)
 		else
 			m_bView = true;
 
-		m_pBridge->Render();
 	}
 
 	if (m_bView)
