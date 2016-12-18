@@ -10,6 +10,12 @@ CWeapon::CWeapon(void)
 {
 }
 
+CWeapon::CWeapon(ITEM*	tItem) :CItem(tItem)
+{
+
+}
+
+
 CWeapon::~CWeapon(void)
 {
 	Release();
@@ -18,10 +24,9 @@ CWeapon::~CWeapon(void)
 HRESULT	CWeapon::Initialize(void)
 {
 
-	m_wstrObjKey = L"Weapon";
+	//m_wstrObjKey = L"Weapon";
 	
-	//m_tInfo.vPos = D3DXVECTOR3(0.f,0.f,0.f);
-	//m_tInfo.vDir = D3DXVECTOR3(1.f,0.f,0.f);
+
 	m_tInfo.vSize = D3DXVECTOR3(60.f,60.f,0.f);
 
 	m_wstrObjKey = L"TestWeapon";
@@ -40,38 +45,8 @@ void CWeapon::Progress(void)
 
 }
 
-void CWeapon::Render(void)
-{
-	
-	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(L"Weapon");
-	
-
-	if(pTexture == NULL)
-		return;
-
-	float fX = pTexture->tImgInfo.Width  / 2.f;
-	float fY = pTexture->tImgInfo.Height / 2.f;
-
-	CDevice::GetInstance()->GetSprite()->SetTransform(&m_tInfo.matWorld);
-	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
-		NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
-
-}
-
 void CWeapon::Release(void)
 {
 	
 	
-}
-
-void CWeapon::WorldMatrix(void)
-{
-	D3DXMATRIX	matTrans;
-
-	D3DXMatrixTranslation(&matTrans, 
-		m_tInfo.vPos.x , 
-		m_tInfo.vPos.y , 
-		0.f);
-
-	m_tInfo.matWorld = matTrans;
 }

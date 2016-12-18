@@ -31,12 +31,15 @@ public:
 public:
 	virtual HRESULT	Initialize(void)PURE;
 	virtual void	Progress(void)PURE;
-	virtual void	Render(void)PURE;
+	virtual void	Render(void);
 	virtual void	Release(void)PURE;
+public:
+	void    WorldMatrix(void);
 
 
 public:
 	CItem(void);
+	CItem(ITEM*	tItem);
 	virtual ~CItem(void);
 
 

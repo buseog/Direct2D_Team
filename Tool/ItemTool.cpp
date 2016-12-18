@@ -212,7 +212,7 @@ void CItemTool::SaveItemSet()
 		WriteFile(hFile, iter->second, sizeof(ITEM), &dwByte, NULL);
 	}
 	CloseHandle(hFile);
-
+	AfxMessageBox(L"Save Complete");
 	// c:\Users\Administrator\Desktop\FrameKor02\ToolKor02\ // 절대 경로
 	// L"..\\Data";	// 상대 경로
 }
@@ -283,6 +283,7 @@ void CItemTool::LoadItemSet()
 	CloseHandle(hFile);
 
 	UpdateData(FALSE);
+	AfxMessageBox(L"Load Complete");
 }
 
 void CItemTool::SetItemDetail(ITEM* _pItem)

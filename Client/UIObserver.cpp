@@ -3,6 +3,7 @@
 #include "DataSubject.h"
 
 CUIObserver::CUIObserver(void)
+:m_iIndex(-1)
 {
 	ZeroMemory(&m_tData, sizeof(UNITDATA));
 }
@@ -11,19 +12,25 @@ CUIObserver::~CUIObserver(void)
 {
 }
 
-void CUIObserver::Update(int iFlag, void* pData)
+void CUIObserver::Update(void)
 {
-	list<void*>*	pDataList = CDataSubject::GetInstance()->GetDataList(iFlag);
-
-	if(pDataList == NULL)
+	if (m_iIndex < 0)
 		return;
 
-	list<void*>::iterator	iter = find(pDataList->begin(), pDataList->end(), pData);
+	const UNITDATA* pData = CDataSubject::GetInstance()->GetData(m_iIndex);
 
-	m_tData = *((UNITDATA*)(*iter));
+	if(pData == NULL)
+		return;
+
+	m_tData = *pData;
 }
 
 const UNITDATA* CUIObserver::GetData(void)
 {
 	return &m_tData;
+}
+
+void	CUIObserver::SetIndex(int iIndex)
+{
+	m_iIndex = iIndex;
 }

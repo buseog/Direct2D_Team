@@ -3,6 +3,12 @@
 
 CEnemyUnit::CEnemyUnit(void)
 {
+	ZeroMemory(&m_tInfo, sizeof(INFO));
+}
+CEnemyUnit::CEnemyUnit(UNITDATA*	tUnit) :CUnit(tUnit)
+{
+	ZeroMemory(&m_tInfo, sizeof(INFO));
+	m_tUnitData = *tUnit;
 }
 
 CEnemyUnit::~CEnemyUnit(void)

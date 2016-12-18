@@ -14,5 +14,6 @@ public:
 
 public:
 	CEnemyUnit(void);
+	CEnemyUnit(UNITDATA*	tUnit);
 	~CEnemyUnit(void);
 };
