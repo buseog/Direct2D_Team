@@ -22,7 +22,8 @@ private:
 	bool	m_bSelect;
 	bool	m_bDrag;
 	bool	m_bWeapon;
-	bool	m_bArmor;	
+	bool	m_bArmor;
+	bool	m_bBelt;
 
 
 public:
@@ -32,6 +33,8 @@ public:
 	
 	CItem*	CreateWeapon(D3DXVECTOR3 vPos);
 	CItem*	CreateArmor(D3DXVECTOR3 vPos);
+	CItem*	CreateBelt(D3DXVECTOR3 vPos);
+	CItem*	CreateGlove(D3DXVECTOR3 vPos);
 	CItem*	CreateFood(D3DXVECTOR3 vPos);
 	CItem*	CreateEmpty(D3DXVECTOR3 vPos);
 

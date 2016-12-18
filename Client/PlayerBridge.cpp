@@ -97,7 +97,7 @@ void	CPlayerBridge::SetAstar(D3DXVECTOR3 vMouse)
 
 void	CPlayerBridge::KeyInput(INFO& rInfo)
 {
-	if (CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON))
+	if (CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON,0))
 	{
 		D3DXVECTOR3 vMouse = ::GetMouse();
 		vMouse -= m_pObj->GetScroll();

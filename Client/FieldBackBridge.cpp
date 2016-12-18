@@ -7,6 +7,7 @@
 #include "ObjFactory.h"
 #include "Effect.h"
 #include "StandEffectBridge.h"
+#include "Player.h"
 
 CFieldBackBridge::CFieldBackBridge(void)
 : m_bStage(false)
@@ -32,7 +33,11 @@ HRESULT	CFieldBackBridge::Initialize(void)
 
 void	CFieldBackBridge::Progress(INFO& rInfo)
 {
-
+	if(CKeyMgr::GetInstance()->KeyDown('5'))
+	{
+		const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_PLAYER);
+		((CPlayer*)pPlayer)->SetDamage(50);
+	}
 }
 
 void	CFieldBackBridge::Render(void)

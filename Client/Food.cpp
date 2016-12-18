@@ -18,6 +18,7 @@ HRESULT CFood::Initialize(void)
 	m_tInfo.vSize = D3DXVECTOR3(60.f,60.f,0.f);
 	m_tItem.iCount = 0;
 	m_tItem.eType = IT_FOOD;
+	m_tItem.iOption = 40;
 
 	return S_OK;
 }
