@@ -19,6 +19,11 @@
 #include "Portrait.h"
 #include "PortraitBridge.h"
 
+#include "HotKeyBridge.h"
+#include "HotKeyStop.h"
+#include "HotKeyMove.h"
+#include "HotKeyAttack.h"
+
 IMPLEMENT_SINGLETON(CCrowdMgr)
 
 CCrowdMgr::CCrowdMgr(void)
@@ -60,6 +65,9 @@ void CCrowdMgr::Release(void)
 
 	for_each(m_vecPortrait.begin(), m_vecPortrait.end(), DeleteObj());
 	m_vecPortrait.clear();
+
+	for_each(m_HotButton.begin(), m_HotButton.end(), DeleteObj());
+	m_HotButton.clear();
 }
 
 int	CCrowdMgr::GetSelectList(void)
@@ -113,6 +121,21 @@ void	CCrowdMgr::RenderPortrait(void)
 		m_vecPortrait[i]->Progress();
 		m_vecPortrait[i]->Render();
 	}
+
+	HotKeyCheck();
+
+	m_HotButton.push_back(CUIFactory<CHotKeyStop, CHotKeyBridge>::CreateUI(L"HotKeyStop",
+		(int)632.f, (int)538.f, 0));
+
+	m_HotButton.push_back(CUIFactory<CHotKeyMove, CHotKeyBridge>::CreateUI(L"HotKeyMove",
+		(int)668.f, (int)538.f, 1));
+
+	m_HotButton.push_back(CUIFactory<CHotKeyAttack, CHotKeyBridge>::CreateUI(L"HotKeyAttack",
+		(int)704.f, (int)538.f, 2));
+
+	
+	for (size_t i = 0; i < m_HotButton.size(); ++i)
+		m_HotButton[i]->SetSize(D3DXVECTOR3(34.f, 34.f, 0.f));
 }
 
 int	CCrowdMgr::KeyInput(void)
@@ -120,6 +143,7 @@ int	CCrowdMgr::KeyInput(void)
 	POINT pt;
 	pt.x = (long)::GetMouse().x;
 	pt.y = (long)::GetMouse().y;
+
 
 	for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
 	{
@@ -140,7 +164,31 @@ int	CCrowdMgr::KeyInput(void)
 		}
 	}
 
+	Picking();
 
+	if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON))
+	{
+
+		D3DXVECTOR3 vMouse = ::GetMouse() - m_vecSelectUnit.front()->GetScroll();
+	
+		switch(m_iPButtonCheck)
+		{
+		case OD_PATROL:
+			for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
+			{
+				m_vecSelectUnit[i]->SetTargetPoint(D3DXVECTOR3(vMouse));
+				m_vecSelectUnit[i]->SetOriginPos(m_vecSelectUnit[i]->GetInfo()->vPos);
+				m_vecSelectUnit[i]->SetOrder(OD_PATROL);
+				CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CObjFactory<CEffect, CStandEffectBridge>::CreateObj(L"MoveMark", vMouse));
+			}
+			break;
+
+		case OD_ATTACK:
+			break;
+		}
+
+	}
+			
 	if (CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON))
 	{
 		clock_t start = clock();
@@ -205,9 +253,8 @@ int	CCrowdMgr::KeyInput(void)
 			float fX = vMouse.x + cosf(D3DXToRadian(fAngle)) * 60 * iLine;
 			float fY = vMouse.y - sinf(D3DXToRadian(fAngle)) * 60 * iLine;
 
-			//((CUnitBridge*)m_vecSelectUnit[i]->GetBridge())->SetAstar(D3DXVECTOR3(fX, fY, 0.f));
-			//m_vecSelectUnit[i]->SetRevolution(D3DXToRadian(fAngle));
-			//m_vecSelectUnit[i]->SetOrder(OD_ASTAR);
+			/*((CUnitBridge*)m_vecSelectUnit[i]->GetBridge())->SetAstar(D3DXVECTOR3(fX, fY, 0.f));
+			m_vecSelectUnit[i]->SetOrder(OD_ASTAR);*/
 
 			// 구해진 값으로 유닛들에게 순차적으로 타겟포인트를 지정해줌
 			m_vecSelectUnit[i]->SetTargetPoint(D3DXVECTOR3(fX, fY, 0));
@@ -231,8 +278,8 @@ int	CCrowdMgr::KeyInput(void)
 			}
 		}
 	}
-
-	if (CKeyMgr::GetInstance()->KeyDown('S'))
+	
+	if (CKeyMgr::GetInstance()->KeyDown('A'))
 	{
 		for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
 		{
@@ -240,16 +287,14 @@ int	CCrowdMgr::KeyInput(void)
 		}
 	}
 
-	if (CKeyMgr::GetInstance()->KeyDown('P'))
+	if (CKeyMgr::GetInstance()->KeyDown('S'))
 	{
-		D3DXVECTOR3 vMouse = ::GetMouse();
+		m_iPButtonCheck = OD_PATROL;
+	}
 
-		for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
-		{
-			m_vecSelectUnit[i]->SetTargetPoint(D3DXVECTOR3(vMouse.x, vMouse.y, 0));
-			m_vecSelectUnit[i]->SetOriginPos(m_vecSelectUnit[i]->GetInfo()->vPos);
-			m_vecSelectUnit[i]->SetOrder(OD_PATROL);
-		}
+	if (CKeyMgr::GetInstance()->KeyDown('D'))
+	{
+		m_iPButtonCheck = OD_ATTACK;
 	}
 
 	if (CKeyMgr::GetInstance()->KeyDown('Q'))
@@ -281,4 +326,67 @@ void	CCrowdMgr::Clear(void)
 		// 리스트안의 모든 유닛들을 선택되지않음 으로 바꾸고
 		m_vecPortrait[i]->GetBridge()->SetKey(L"");
 	}
+}
+
+void CCrowdMgr::HotKeyCheck(void)
+{
+	D3DXMATRIX		matTrans;
+
+	for (size_t i = 0; i < m_HotButton.size(); ++i)
+	{
+		const TEXINFO* pHotButtonTexture = CTextureMgr::GetInstance()->GetTexture(m_HotButton[i]->GetObjKey());
+
+		if(pHotButtonTexture == NULL)
+		return;
+
+		D3DXMatrixTranslation(&matTrans, m_HotButton[i]->GetInfo()->vPos.x, 
+			m_HotButton[i]->GetInfo()->vPos.y, 0.f);
+
+		float fX = pHotButtonTexture->tImgInfo.Width  / 2.f;
+		float fY = pHotButtonTexture->tImgInfo.Height / 2.f;
+
+		CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
+		CDevice::GetInstance()->GetSprite()->Draw(pHotButtonTexture->pTexture, 
+			NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+
+
+	
+}
+
+void CCrowdMgr::Picking(void)
+{
+	POINT	Pt;
+		Pt.x = (long)GetMouse().x;
+		Pt.y = (long)GetMouse().y;
+
+	if(CKeyMgr::GetInstance()->KeyDown(VK_MBUTTON, 1))
+	{
+		CSceneMgr::GetInstance()->SetMouse(L"Hand_Click");
+
+		for(size_t i = 0; i < m_HotButton.size(); ++i)
+		{
+			if(PtInRect(&m_HotButton[i]->GetRect(), Pt))
+			{
+				int iIndex = m_HotButton[i]->GetIndexKey();
+
+				switch(iIndex)
+				{
+				case 0:
+					for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
+						m_vecSelectUnit[i]->SetOrder(OD_STAND);
+					break;
+
+				case 1:
+					m_iPButtonCheck = OD_PATROL;
+					break;
+
+				case 2:
+					
+					break;
+				}
+			}
+		}
+	}
+	
 }
