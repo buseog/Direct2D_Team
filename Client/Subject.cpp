@@ -31,12 +31,12 @@ void CSubject::UnSubscribe(CObserver* pObserver)
 	}
 }
 
-void CSubject::Notify(int iFlag, void* pData /*= NULL*/)
+void CSubject::Notify(void)
 {
 	for(list<CObserver*>::iterator iter = m_ObserverList.begin();
 		iter != m_ObserverList.end(); ++iter)
 	{
-		(*iter)->Update(iFlag, pData);		
+		(*iter)->Update();		
 	}
 }
 

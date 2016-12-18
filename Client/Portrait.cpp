@@ -27,7 +27,6 @@ HRESULT	CPortrait::Initialize(void)
 
 void CPortrait::Progress(void)
 {
-	m_tData = *((CUIObserver*)m_pObserver)->GetData();
 	m_pBridge->Progress(m_tInfo);	
 
 }
@@ -40,6 +39,8 @@ void CPortrait::Render(void)
 
 void CPortrait::Release(void)
 {
+	CDataSubject::GetInstance()->UnSubscribe(m_pObserver);
+
 	::Safe_Delete(m_pBridge);
 	::Safe_Delete(m_pObserver);
 }
