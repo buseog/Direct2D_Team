@@ -4,7 +4,7 @@
 #include "SceneMgr.h"
 
 CStart::CStart(void)
-:m_iMaxLoad(306)
+:m_iMaxLoad(288)
 {
 }
 

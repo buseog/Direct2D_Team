@@ -11,6 +11,7 @@ CStandEffectBridge::~CStandEffectBridge(void)
 
 HRESULT CStandEffectBridge::Initialize(void)
 {
+
 	return S_OK;
 }
 

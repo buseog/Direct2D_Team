@@ -4,8 +4,6 @@
 class CEnemyUnit :
 	public CUnit
 {
-
-
 public:
 	virtual HRESULT Initialize(void);
 	virtual void Progress(void);
