@@ -33,6 +33,14 @@ public:
 		return pItem;
 	}
 
+	static CItem* CreateItem(ITEM*	_pItem,D3DXVECTOR3 vPos)	
+	{
+		CItem*		pItem = new T(_pItem);
+		pItem->Initialize();
+		pItem->SetPos(vPos);
+		return pItem;
+	}
+
 
 public:
 	CItemFactory(void){ }

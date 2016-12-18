@@ -1,7 +1,12 @@
 #include "StdAfx.h"
 #include "FieldBackBridge.h"
+#include "EnemyUnit.h"
+#include "SceneMgr.h"
+#include "ObjMgr.h"
+#include "KeyMgr.h"
 
 CFieldBackBridge::CFieldBackBridge(void)
+: m_bStage(false)
 {
 	m_iX = 45;
 	m_iY = 80;
@@ -88,5 +93,24 @@ void	CFieldBackBridge::Release(void)
 
 int	CFieldBackBridge::Picking(void)
 {
+	if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON,5))
+	{
+		m_bStage = true;
+		
+		if(m_bStage)
+		{
+			const CObj*	pMonster = CObjMgr::GetInstance()->GetObj(OBJ_MONSTER);
+			
+			POINT	Pt;
+			Pt.x = (long)GetMouse().x + (long)m_pObj->GetScroll().x;
+			Pt.y = (long)GetMouse().y + (long)m_pObj->GetScroll().y ;
+
+			if(PtInRect(&((CEnemyUnit*)pMonster)->GetRect(),Pt))
+			{
+				CSceneMgr::GetInstance()->SetScene(SC_BATTLEFIELD);
+				return 1;	
+			}
+		}
+	}
 	return -1;
 }

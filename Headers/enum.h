@@ -73,5 +73,6 @@ enum UNITID
    UNIT_PLAYER,
    UNIT_ALLY,
    UNIT_ENEMY,
+   UNIT_EMPTY,
    UNIT_END
 };

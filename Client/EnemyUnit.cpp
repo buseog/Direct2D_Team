@@ -3,6 +3,12 @@
 
 CEnemyUnit::CEnemyUnit(void)
 {
+	ZeroMemory(&m_tInfo, sizeof(INFO));
+}
+CEnemyUnit::CEnemyUnit(UNITDATA*	tUnit) :CUnit(tUnit)
+{
+	ZeroMemory(&m_tInfo, sizeof(INFO));
+	m_tUnitData = *tUnit;
 }
 
 CEnemyUnit::~CEnemyUnit(void)
@@ -16,6 +22,8 @@ HRESULT CEnemyUnit::Initialize(void)
 	m_fSpeed = 30.f;
 	m_vTargetPoint = D3DXVECTOR3(500.f, 200.f, 0.f);
 	m_vOriginPos   = D3DXVECTOR3(400.f, 300.f, 0.f);
+	m_tInfo.vSize = D3DXVECTOR3(130.f,140.f,0.f);
+
 	return S_OK;
 }
 

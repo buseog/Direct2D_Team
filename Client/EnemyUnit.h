@@ -4,8 +4,7 @@
 class CEnemyUnit :
 	public CUnit
 {
-public:
-	void	Move(void);
+
 
 public:
 	virtual HRESULT Initialize(void);
@@ -15,5 +14,6 @@ public:
 
 public:
 	CEnemyUnit(void);
+	CEnemyUnit(UNITDATA*	tUnit);
 	~CEnemyUnit(void);
 };

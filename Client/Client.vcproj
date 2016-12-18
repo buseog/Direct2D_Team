@@ -349,6 +349,10 @@
 					RelativePath=".\UIFactory.h"
 					>
 				</File>
+				<File
+					RelativePath=".\UnitFactory.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="01. Bridge"
@@ -565,6 +569,42 @@
 							RelativePath=".\StoreBridge.h"
 							>
 						</File>
+						<Filter
+							Name="00. BasicStoreBridge"
+							>
+							<File
+								RelativePath=".\BasicStoreBridge.cpp"
+								>
+							</File>
+							<File
+								RelativePath=".\BasicStoreBridge.h"
+								>
+							</File>
+						</Filter>
+						<Filter
+							Name="01. DrugStoreBridge"
+							>
+							<File
+								RelativePath=".\DrugStoreBridge.cpp"
+								>
+							</File>
+							<File
+								RelativePath=".\DrugStoreBridge.h"
+								>
+							</File>
+						</Filter>
+						<Filter
+							Name="02. MercenaryStoreBridge"
+							>
+							<File
+								RelativePath=".\MercenaryStoreBridge.cpp"
+								>
+							</File>
+							<File
+								RelativePath=".\MercenaryStoreBridge.h"
+								>
+							</File>
+						</Filter>
 					</Filter>
 					<Filter
 						Name="05. ButtonBridge"
@@ -587,6 +627,18 @@
 						</File>
 						<File
 							RelativePath=".\PortraitBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="07. MercenaryDisplayBridge"
+						>
+						<File
+							RelativePath=".\MercenaryDisplayBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\MercenaryDisplayBridge.h"
 							>
 						</File>
 					</Filter>
@@ -779,6 +831,18 @@
 						>
 					</Filter>
 				</Filter>
+				<Filter
+					Name="99. EmptyUnit"
+					>
+					<File
+						RelativePath=".\EmptyUnit.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\EmptyUnit.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="02. Effect"
@@ -851,6 +915,42 @@
 					RelativePath=".\Store.h"
 					>
 				</File>
+				<Filter
+					Name="00. BasicStore"
+					>
+					<File
+						RelativePath=".\BasicStore.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\BasicStore.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="01. DrugStore"
+					>
+					<File
+						RelativePath=".\DrugStore.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\DrugStore.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="02. MercenaryStore"
+					>
+					<File
+						RelativePath=".\MercenaryStore.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\MercenaryStore.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="04. Button"
@@ -873,6 +973,18 @@
 				</File>
 				<File
 					RelativePath=".\Portrait.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="06. MercenaryDisplay"
+				>
+				<File
+					RelativePath=".\MercenaryDisplay.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\MercenaryDisplay.h"
 					>
 				</File>
 			</Filter>

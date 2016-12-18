@@ -3,6 +3,9 @@
 #include "Obj.h"
 #include "AStar.h"
 #include "TimeMgr.h"
+#include "EnemyBridge.h"
+#include "EnemyUnit.h"
+#include "SceneMgr.h"
 #include "ObjMgr.h"
 #include "KeyMgr.h"
 

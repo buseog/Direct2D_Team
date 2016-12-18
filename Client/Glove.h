@@ -6,10 +6,11 @@ class CGlove :
 {
 public:
 	CGlove(void);
+	CGlove(ITEM*	tItem);
 	~CGlove(void);
 public:
 	virtual HRESULT Initialize(void);
 	virtual void Progress(void);
-	virtual void Render(void);
+//	virtual void Render(void);
 	virtual void Release(void);
 };

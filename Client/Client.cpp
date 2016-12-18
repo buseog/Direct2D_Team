@@ -43,6 +43,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 	CMainGame*		pMainGame = new CMainGame;
 
+
+
 	if (FAILED(pMainGame->Initialize()))
 	{
 		ERR_MSG(L"MainGame Init Error");

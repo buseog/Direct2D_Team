@@ -7,16 +7,13 @@ class CArmor :
 
 private:
 	wstring			m_wstrStateKey;	
-	
-public:
-	void WorldMatrix(void);
 
 public:
 	CArmor(void);
+	CArmor(ITEM*	tItem);
 	~CArmor(void);
 public:
 	virtual HRESULT Initialize(void);
 	virtual void Progress(void);
-	virtual void Render(void);
 	virtual void Release(void);
 };

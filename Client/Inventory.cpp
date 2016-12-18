@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "Inventory.h"
-#include "Item.h"
+//#include "Item.h"
 #include "KeyMgr.h"
 
 CInventory::CInventory(void)

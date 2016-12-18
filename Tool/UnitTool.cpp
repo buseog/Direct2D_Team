@@ -497,6 +497,8 @@ void CUnitTool::OnBnClickedButtonSave()
 		WriteFile(hFile, iter->second, sizeof(UNITDATA), &dwByte, NULL);
 	}
 	CloseHandle(hFile);
+	AfxMessageBox(L"Save Complete");
+	
 
 	// c:\Users\Administrator\Desktop\FrameKor02\ToolKor02\ // 절대 경로
 	// L"..\\Data";	// 상대 경로
@@ -566,8 +568,9 @@ void CUnitTool::OnBnClickedButtonLoad()
 	}
 
 	CloseHandle(hFile);
-
+	
 	UpdateData(FALSE);
+	AfxMessageBox(L"Load Complete");
 }
 void CUnitTool::test(CString _Path)
 {

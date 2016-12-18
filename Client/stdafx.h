@@ -51,6 +51,7 @@
 #include "TextureMgr.h"
 #include "TimeMgr.h"
 
+#include <crtdbg.h>
 
 using namespace std;
 

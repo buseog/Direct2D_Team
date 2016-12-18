@@ -14,6 +14,8 @@
 #include "Player.h"
 #include "PlayerBridge.h"
 
+#include "Obj.h"
+
 #include "EnemyUnit.h"
 #include "EnemyBridge.h"
 
@@ -25,8 +27,20 @@
 #include "StatusBridge.h"
 #include "Store.h"
 #include "StoreBridge.h"
+#include "BasicStore.h"
+#include "BasicStoreBridge.h"
+#include "DrugStore.h"
+#include "DrugStoreBridge.h"
+#include "MercenaryStore.h"
+#include "MercenaryStoreBridge.h"
+
+#include "MercenaryDisplay.h"
+#include "MercenaryDisplayBridge.h"
+
+
 
 CField::CField(void)
+: m_bStage(false)
 {
 }
 
@@ -49,7 +63,11 @@ HRESULT	CField::Initialize(void)
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi,CMainUiBridge>::CreateUI(L"FieldMainUi",400.f,553.f));	
 	CUIMgr::GetInstance()->AddUI(UI_INVEN, CUIFactory<CInventory,CInvenBridge>::CreateUI(L"Inventory", 580.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STAT, CUIFactory<CStatus,CStatusBridge>::CreateUI(L"Status", 180.f, 250.f));
-	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CStore,CStoreBridge>::CreateUI(L"Store", 180.f,250.f));
+	//CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CStore,CStoreBridge>::CreateUI(L"Store", 180.f,250.f));
+	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CBasicStore,CBasicStoreBridge>::CreateUI(L"Store",200.f,250.f));
+	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CDrugStore,CDrugStoreBridge>::CreateUI(L"Store",200.f,250.f));
+	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CMercenaryStore,CMercenaryStoreBridge>::CreateUI(L"Store",200.f,250.f));
+	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CMercenaryDisplay,CMercenaryDisplayBridge>::CreateUI(L"Store",0.f,250.f));
 
 
 
@@ -61,11 +79,9 @@ void	CField::Progress(void)
 	CObjMgr::GetInstance()->Progress();
 	CUIMgr::GetInstance()->Progress();
 	CUIMgr::GetInstance()->Picking();
-
-	if (CKeyMgr::GetInstance()->KeyDown(VK_RETURN))
-		CSceneMgr::GetInstance()->SetScene(SC_BATTLEFIELD);
-
+	CObjMgr::GetInstance()->Picking();
 	
+
 }
 
 void	CField::Render(void)
@@ -89,7 +105,6 @@ void	CField::LoadPNG(void)
 		ERR_MSG(L"Tile 멀티 텍스쳐 생성 실패")
 		return;
 	}*/
-	
 
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/TILEMAP/TILE0%d.png", 
 		L"TILE", TEX_MULTI, L"Tile", 4)))
@@ -198,6 +213,19 @@ void	CField::LoadPNG(void)
 		L"Button", TEX_SINGLE)))
 	{
 		ERR_MSG(L"Button 싱글 텍스쳐 생성 실패");
+		return;
+	}
+	/////////////////////////////////////////////////용병창 테스트
+	if(FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Portrait/ArcherK/UI1.png", 
+		L"TestUnit", TEX_SINGLE)))
+	{
+		ERR_MSG(L"TestUnit 싱글 텍스쳐 생성 실패");
+		return;
+	}
+	if(FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Portrait/ArcherK/UI0.png", 
+		L"TestUnit2", TEX_SINGLE)))
+	{
+		ERR_MSG(L"TestUnit 싱글 텍스쳐 생성 실패");
 		return;
 	}
 }
