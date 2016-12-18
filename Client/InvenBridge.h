@@ -29,6 +29,7 @@ public:
 	void SortItem(INFO& rInfo);
 	void AddItem(INFO& rInfo);
 	void SetItem(INFO& rInfo);
+	vector<CItem*>* GetItemSlot(void);
 	
 	CItem*	CreateWeapon(D3DXVECTOR3 vPos);
 	CItem*	CreateArmor(D3DXVECTOR3 vPos);

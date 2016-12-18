@@ -222,4 +222,13 @@ void	CField::LoadPNG(void)
 		ERR_MSG(L"TestUnit 싱글 텍스쳐 생성 실패");
 		return;
 	}
+
+
+	/////////////////////////////////////////툴팁버튼
+	if(FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/TownButton/UI0.png", 
+		L"StoreButton", TEX_SINGLE)))
+	{
+		ERR_MSG(L"TestUnit 싱글 텍스쳐 생성 실패");
+		return;
+	}
 }

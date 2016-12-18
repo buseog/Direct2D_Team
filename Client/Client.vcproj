@@ -617,6 +617,10 @@
 							RelativePath=".\ButtonBridge.h"
 							>
 						</File>
+						<Filter
+							Name="00. BuyButtonBridge"
+							>
+						</Filter>
 					</Filter>
 					<Filter
 						Name="06. PortraitBridge"
@@ -963,6 +967,18 @@
 					RelativePath=".\MyButton.h"
 					>
 				</File>
+				<Filter
+					Name="00. StoreButton"
+					>
+					<File
+						RelativePath=".\StoreButton.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\StoreButton.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="05. Portrait"

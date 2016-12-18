@@ -382,3 +382,8 @@ bool CInvenBridge::EquipArmor(void)
 	return m_bArmor;
 
 }
+
+vector<CItem*>* CInvenBridge::GetItemSlot(void)
+{
+	return &m_ItemSlot;
+}

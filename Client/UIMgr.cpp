@@ -101,3 +101,8 @@ int	CUIMgr::Picking(void)
 
 	return iResult;
 }
+CUi*	CUIMgr::GetUi(SCENEID _eScene,UIID _eUI)
+{
+	
+	return m_UiList[_eScene][_eUI].front();
+}
