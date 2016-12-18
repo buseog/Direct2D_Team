@@ -5,11 +5,10 @@ class CEnemyBridge :
 	public CObjBridge
 {
 private:
-	list<int>		m_vecBestList;
-	
-	D3DXVECTOR3		m_vTargetPoint;
-	D3DXVECTOR3		m_vOriginPoint;
-	bool			m_bArrive;
+	list<int>		m_vecBestList;	
+
+
+
 
 protected:
 	virtual void	WorldMatrix(INFO& rInfo);

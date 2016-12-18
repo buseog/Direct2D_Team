@@ -9,7 +9,7 @@ protected:
 	int					m_iY;
 	D3DXVECTOR3			m_vSize;
 	vector<TILE2*>		m_vecTile;
-	vector<BACK*>		m_vecBack;
+	vector<BACK2*>		m_vecBack;
 
 protected:
 	void	LoadTile(const wstring& wstrPath);

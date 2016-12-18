@@ -6,6 +6,9 @@ class CFieldBackBridge :
 {
 private:
 	bool	m_bStage;
+	DWORD	m_dwTime;
+
+
 
 public:
 	virtual HRESULT	Initialize(void);

@@ -14,6 +14,7 @@
 #include "Player.h"
 #include "PlayerBridge.h"
 
+
 #include "Obj.h"
 
 #include "EnemyUnit.h"
@@ -61,6 +62,7 @@ HRESULT	CField::Initialize(void)
 	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CPlayerBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
 	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"GoniSh", L"Walk_1", D3DXVECTOR3(500.f, 200.f, 0.f)));
 
+	
 
 
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi,CMainUiBridge>::CreateUI(L"FieldMainUi",400.f,553.f));	
@@ -74,8 +76,8 @@ HRESULT	CField::Initialize(void)
 
 	CUIMgr::GetInstance()->AddUI(UI_BUTTON, CUIFactory<CTownButton,CTownBridge>::CreateUI(L"BigTown", 1720.f, 320.f));
 
-	
-	return S_OK;
+	return S_OK;	
+
 }
 
 void	CField::Progress(void)
