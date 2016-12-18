@@ -20,7 +20,7 @@ CBattleFieldBackBridge::~CBattleFieldBackBridge(void)
 
 HRESULT	CBattleFieldBackBridge::Initialize(void)
 {
-	LoadTile(L"../Data/0.dat");
+	//LoadTile(L"../Data/0.dat");
 
 	return S_OK;
 }
