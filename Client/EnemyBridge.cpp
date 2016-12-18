@@ -110,7 +110,7 @@ void	CEnemyBridge::Move(INFO& rInfo)
 				if(rInfo.vPos == m_vTargetPoint)
 				{
 					m_bArrive = true;
-					return;
+					
 				}
 			}			
 	}
@@ -127,8 +127,7 @@ void	CEnemyBridge::Move(INFO& rInfo)
 				
 				if(rInfo.vPos == m_vOriginPoint)
 						m_bArrive = false;
-			}
-		
+			}		
 	}
 	
 
