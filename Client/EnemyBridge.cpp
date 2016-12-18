@@ -53,7 +53,7 @@ void	CEnemyBridge::Render(void)
 		return;
 
 	float fX = pTexture->tImgInfo.Width / 2.f;
-	float fY = pTexture->tImgInfo.Height / 2.f;
+	float fY = pTexture->tImgInfo.Height / 2.f + 30.f;
 
 	CDevice::GetInstance()->GetSprite()->SetTransform(&m_pObj->GetInfo()->matWorld);
 	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 

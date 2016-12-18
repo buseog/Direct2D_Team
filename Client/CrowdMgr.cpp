@@ -317,12 +317,9 @@ int	CCrowdMgr::KeyInput(void)
 	if (CKeyMgr::GetInstance()->KeyDown('Q'))
 	{
 		D3DXVECTOR3 vMouse = ::GetMouse() - m_vecSelectUnit.front()->GetScroll();
-		for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
-		{
-			//CSKillMgr::ThunderField(m_vecSelectUnit.front()->GetInfo()->vPos);
-			m_vecSelectUnit[i]->SetDamage(3);
-			CSKillMgr::Skill(m_vecSelectUnit.front()->GetInfo()->vPos, vMouse, m_vecSelectUnit.front()->GetObjKey());
-		}
+		
+		CSKillMgr::Skill(m_vecSelectUnit.front()->GetInfo()->vPos, vMouse, m_vecSelectUnit.front()->GetObjKey());
+		m_vecSelectUnit.front()->SetOrder(OD_SKILL);
 	}
 
 	return -1;

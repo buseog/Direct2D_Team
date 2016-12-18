@@ -49,6 +49,10 @@ void CUnitBridge::Progress(INFO& rInfo)
 	case OD_ATTACK:
 		Attack(rInfo);
 		break;
+
+	case OD_SKILL:
+		Skill(rInfo);
+		break;
 	}
 
 	KeyInput(rInfo);
@@ -327,4 +331,25 @@ void	CUnitBridge::Patrol(INFO& rInfo)
 		m_pObj->SetTargetPoint(m_pObj->GetOriginPos());
 		m_pObj->SetOriginPos(vSwap);
 	}
+}
+
+void	CUnitBridge::Skill(INFO&	rInfo)
+{
+	if (rInfo.vDir.y >= 0.75f)
+		m_wstrStateKey = L"Skill_5";
+
+	else if (rInfo.vDir.y >= 0.25f)
+		m_wstrStateKey = L"Skill_1";
+
+	else if (rInfo.vDir.y >= -0.25f)
+		m_wstrStateKey = L"Skill_2";
+
+	else if (rInfo.vDir.y >= -0.75f)
+		m_wstrStateKey = L"Skill_3";
+
+	else
+		m_wstrStateKey = L"Skill_4";
+
+	if (m_tFrame.fFrame >= m_tFrame.fMax - 1)
+		m_pObj->SetOrder(OD_STAND);
 }

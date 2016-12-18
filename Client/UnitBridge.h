@@ -17,6 +17,7 @@ private:
 	void	Attack(INFO& rInfo);
 	void	Stop(INFO& rInfo);
 	void	Patrol(INFO& rInfo);
+	void	Skill(INFO&	rInfo);
 
 public:
 	void	SetAstar(D3DXVECTOR3 vMouse);

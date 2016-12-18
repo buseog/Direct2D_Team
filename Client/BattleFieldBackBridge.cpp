@@ -119,6 +119,9 @@ void	CBattleFieldBackBridge::Release(void)
 {
 	for_each(m_vecTile.begin(), m_vecTile.end(), DeleteObj());
 	m_vecTile.clear();
+
+	for_each(m_vecBack.begin(), m_vecBack.end(), DeleteObj());
+	m_vecBack.clear();
 }
 
 int	CBattleFieldBackBridge::Picking(void)
