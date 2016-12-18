@@ -4,9 +4,13 @@
 #include "SceneMgr.h"
 #include "ObjMgr.h"
 #include "KeyMgr.h"
+#include "ObjFactory.h"
+#include "Effect.h"
+#include "StandEffectBridge.h"
 
 CFieldBackBridge::CFieldBackBridge(void)
 : m_bStage(false)
+, m_dwTime(CTimeMgr::GetInstance()->GetTime())
 {
 }
 
@@ -55,21 +59,26 @@ int	CFieldBackBridge::Picking(void)
 	if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON,5))
 	{
 		m_bStage = true;
-		
 		if(m_bStage)
 		{
-		const CObj*	pMonster = CObjMgr::GetInstance()->GetObj(OBJ_MONSTER);
-		
-		POINT	Pt;
-		Pt.x = (long)GetMouse().x ;
-		Pt.y = (long)GetMouse().y ;
+			const CObj*	pMonster = CObjMgr::GetInstance()->GetObj(OBJ_MONSTER);
 
-		if(PtInRect(&((CEnemyUnit*)pMonster)->GetRect(),Pt))
-		{
-			CSceneMgr::GetInstance()->SetScene(SC_BATTLEFIELD);
-			return 1;	
-		}
+			POINT	Pt;
+			Pt.x = (long)GetMouse().x + ((CEnemyUnit*)pMonster)->GetScroll().x ;
+			Pt.y = (long)GetMouse().y + ((CEnemyUnit*)pMonster)->GetScroll().y ;
+			
+				
+			
+			if(PtInRect(&((CEnemyUnit*)pMonster)->GetRect(),Pt))
+			{
+				CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CObjFactory<CEffect, CStandEffectBridge>::CreateObj(L"BattleWait", pMonster->GetInfo()->vPos));
+				((CEnemyUnit*)pMonster)->SetSpeed(0.f);
+				CSceneMgr::GetInstance()->SetScene(SC_BATTLEFIELD);
+				return 1;	
+		
+			}
 		}
 	}
 	return -1;
 }
+
