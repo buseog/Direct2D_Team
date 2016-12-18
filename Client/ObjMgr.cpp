@@ -104,6 +104,9 @@ int	CObjMgr::Picking(void)
 
 	for(int i = 0; i < OBJ_END; ++i)
 	{
+		if (i == OBJ_EFFECT)
+			continue;
+
 		for(list<CObj*>::iterator	iter = m_ObjList[m_eSceneID][i].begin();
 			iter != m_ObjList[m_eSceneID][i].end(); ++iter)
 		{

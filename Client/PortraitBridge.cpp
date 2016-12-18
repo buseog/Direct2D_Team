@@ -37,6 +37,9 @@ void CPortraitBridge::Render(void)
 
 	float fPercent = (float)pData->iHealthPoint / (float)pData->iMaxHelathPoint;
 
+	if (fPercent <= 0)
+		fPercent = 0.f;
+
 	if(pTexture == NULL)
 		return;
 

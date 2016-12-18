@@ -8,8 +8,8 @@
 CBattleFieldBackBridge::CBattleFieldBackBridge(void)
 : m_iDragState(0)
 {
-	m_iX = 45;
-	m_iY = 80;
+	m_iX = 30;
+	m_iY = 50;
 	m_vSize = D3DXVECTOR3(1892.f, 780.f, 0.f);
 }
 
@@ -20,7 +20,8 @@ CBattleFieldBackBridge::~CBattleFieldBackBridge(void)
 
 HRESULT	CBattleFieldBackBridge::Initialize(void)
 {
-	//LoadTile(L"../Data/0.dat");
+	LoadTile(L"../Data/BattleTile.dat");
+	LoadBack(L"../Data/BattleObject.dat");
 
 	return S_OK;
 }
@@ -78,6 +79,26 @@ void	CBattleFieldBackBridge::Render(void)
 	CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
 	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
 		NULL, &D3DXVECTOR3(TILECX / 2.f, TILECY / 2.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	for (size_t i = 0; i < m_vecBack.size(); ++i)
+	{ 
+		pTexture = CTextureMgr::GetInstance()->GetTexture(L"Back", L"Object", m_vecBack[i]->iIndex);
+
+		if (pTexture == NULL)
+			return;
+
+		D3DXMatrixTranslation(&matTrans, 
+			m_vecBack[i]->vPos.x + m_pObj->GetScroll().x,
+			m_vecBack[i]->vPos.y + m_pObj->GetScroll().y,
+			0.f);
+
+		float fX = pTexture->tImgInfo.Width / 2.f;
+		float fY = pTexture->tImgInfo.Height / 2.f;
+
+		CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
+		CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
+			NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
 	// 드래그값이 1이면 화면을 그리시작함.
 	if (m_iDragState == 1)

@@ -25,6 +25,7 @@
 #include "HotKeyStop.h"
 #include "HotKeyMove.h"
 #include "HotKeyAttack.h"
+#include "SkillMgr.h"
 
 IMPLEMENT_SINGLETON(CCrowdMgr)
 
@@ -309,8 +310,9 @@ int	CCrowdMgr::KeyInput(void)
 		D3DXVECTOR3 vMouse = ::GetMouse() - m_vecSelectUnit.front()->GetScroll();
 		for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
 		{
+			//CSKillMgr::ThunderField(m_vecSelectUnit.front()->GetInfo()->vPos);
 			m_vecSelectUnit[i]->SetDamage(3);
-			CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CSKillMgr::Skill(m_vecSelectUnit[i]->GetInfo()->vPos, vMouse, m_vecSelectUnit[i]->GetObjKey()));
+			CSKillMgr::Skill(m_vecSelectUnit.front()->GetInfo()->vPos, vMouse, m_vecSelectUnit.front()->GetObjKey());
 		}
 	}
 

@@ -24,8 +24,8 @@ CFieldBackBridge::~CFieldBackBridge(void)
 
 HRESULT	CFieldBackBridge::Initialize(void)
 {
-	LoadTile(L"../Data/FieldTile2.dat");
-	LoadBack(L"../Data/1.dat");
+	LoadTile(L"../Data/FieldTile.dat");
+	LoadBack(L"../Data/FieldObject.dat");
 
 	return S_OK;
 }

@@ -3,7 +3,6 @@
 
 CAllyUnit::CAllyUnit(void)
 {
-	m_fSpeed = 200.f;
 	ZeroMemory(&m_tInfo, sizeof(INFO));
 }
 CAllyUnit::CAllyUnit(UNITDATA*	tUnit) :CUnit(tUnit)
@@ -21,8 +20,25 @@ HRESULT CAllyUnit::Initialize(void)
 	m_tInfo.vSize = D3DXVECTOR3(60.f,60.f,0.f);
 
 	m_wstrObjKey = L"TestUnit";
+
+	m_tUnitData.wstrName = L"ÀÌ¼ø½Å";
+	m_tUnitData.tDetail.iLevel = 2;
+	m_tUnitData.iAttack = 10;
+	m_tUnitData.iDeffence = 5;
+	m_tUnitData.iHealthPoint = 100;
+	m_tUnitData.iMaxHelathPoint = 100;
+	m_tUnitData.tDetail.iExperience = 0;
+	m_tUnitData.tDetail.iBonusPoint = 5;
+	m_tUnitData.tDetail.iWeight = 0;
+	m_tUnitData.tDetail.iStr = 10;
+	m_tUnitData.tDetail.iDex = 10;
+	m_tUnitData.tDetail.iVital = 10;
+	m_tUnitData.tDetail.iInt = 10;
+	m_tUnitData.iLAttack = 100;
+	m_tUnitData.iSAttack = 150;
 	m_tUnitData.tDetail.UnitType = UNIT_ALLY;
 
+	m_fSpeed = 200.f;
 
 	return S_OK;
 }
