@@ -33,9 +33,13 @@ public:
 	void	SetOrder(ORDERID eOrder);					// 이동명령 타입셋
 	void	SetScroll(float fX, float fY);				// 스크롤 셋해주는함수
 	void	SetSize(D3DXVECTOR3 vSize);					// 렉트 충돌하기위한 사이즈 지정함수
+
+	void	SetObjKey(const wstring& wstrObjKey);
+
 	void	SetTargetPoint(D3DXVECTOR3 pTargetPoint);	// 이동 목표 지점 좌표 셋
 	void	SetOriginPos(D3DXVECTOR3 OriginPos);		// 패트롤용 본래 좌표지정
 	void	SetDamage(int iAttack);						// 충돌처리 대미지 셋
+
 
 public:
 	int					Picking(void);

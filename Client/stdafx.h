@@ -45,7 +45,7 @@
 #define new new(_CLIENT_BLOCK, __FILE__, __LINE__)
 #endif
 
-#include "vld.h"
+//#include "vld.h"
 
 #include "Device.h"
 #include "TextureMgr.h"

@@ -143,6 +143,14 @@ const float CObj::GetSpeed(void)
 	return m_fSpeed;
 }
 
+
+void CObj::SetObjKey(const wstring& wstrObjKey)
+{
+
+	m_wstrObjKey = wstrObjKey;
+
+}	
+
 int		CObj::Picking(void)
 {
 	return m_pBridge->Picking();
@@ -161,4 +169,5 @@ const D3DXVECTOR3	CObj::GetOriginPos(void)
 void	CObj::SetDamage(int iAttack)
 {
 	m_tUnitData.iHealthPoint -= iAttack;
+
 }
