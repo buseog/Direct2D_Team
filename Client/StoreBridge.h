@@ -21,8 +21,8 @@ protected:
 	int		m_iSelectIndex;
 	int		m_iFood;
 	bool	m_bSelect;
-	bool	m_bDrag;
-	bool	m_bWeapon;
+	bool	m_bTooltip;
+	bool	m_bPick;
 	bool	m_bArmor;	
 
 
@@ -30,6 +30,7 @@ public:
 	virtual void SortItem(INFO& rInfo);
 	virtual void AddItem(INFO& rInfo);
 	virtual void LoadData(void);
+	virtual void ShowTooltip(void);
 	//virtual void SetItem(INFO& rInfo);
 	
 	CItem*	CreateWeapon(ITEM* _pItem,D3DXVECTOR3 vPos);

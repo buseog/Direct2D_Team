@@ -8,6 +8,9 @@
 #include "SceneMgr.h"
 #include "ObjMgr.h"
 #include "KeyMgr.h"
+#include "Effect.h"
+#include "StandEffectBridge.h"
+#include "ObjFactory.h"
 
 CPlayerBridge::CPlayerBridge(void)
 {
@@ -97,10 +100,12 @@ void	CPlayerBridge::SetAstar(D3DXVECTOR3 vMouse)
 
 void	CPlayerBridge::KeyInput(INFO& rInfo)
 {
-	if (CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON))
+	if (CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON,0))
 	{
 		D3DXVECTOR3 vMouse = ::GetMouse();
 		vMouse -= m_pObj->GetScroll();
+		CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CObjFactory<CEffect, CStandEffectBridge>::CreateObj(L"MoveMark", vMouse));
+
 		SetAstar(vMouse);
 		m_pObj->SetOrder(OD_ASTAR);
 

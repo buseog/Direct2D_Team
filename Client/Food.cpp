@@ -18,6 +18,7 @@ HRESULT CFood::Initialize(void)
 	m_tInfo.vSize = D3DXVECTOR3(60.f,60.f,0.f);
 	m_tItem.iCount = 0;
 	m_tItem.eType = IT_FOOD;
+	m_tItem.iOption = 40;
 
 	return S_OK;
 }
@@ -46,6 +47,14 @@ void CFood::Render(void)
 	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
 		NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
+	D3DXMATRIX	matTrans;
+
+	D3DXMatrixTranslation(&matTrans, 
+		m_tInfo.vPos.x + 10 , 
+		m_tInfo.vPos.y + 15 , 
+		0.f);
+
+	CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
 	CDevice::GetInstance()->GetUIFont()->DrawTextW(CDevice::GetInstance()->GetSprite(), 
 		szCount, 
 		lstrlen(szCount), 

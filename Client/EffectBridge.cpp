@@ -2,6 +2,7 @@
 #include "EffectBridge.h"
 
 CEffectBridge::CEffectBridge(void)
+
 {
 }
 

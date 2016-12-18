@@ -58,7 +58,7 @@ void CStandEffectBridge::WorldMatrix(INFO& rInfo)
 
 	D3DXMatrixTranslation(&matTrans, 
 		rInfo.vPos.x + m_pObj->GetScroll().x, 
-		rInfo.vPos.y + m_pObj->GetScroll().y, 
+		rInfo.vPos.y + m_pObj->GetScroll().y + 30, 
 		0.f);
 
 	rInfo.matWorld = matTrans;

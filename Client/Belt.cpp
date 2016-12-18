@@ -17,6 +17,7 @@ HRESULT CBelt::Initialize(void)
 	m_wstrObjKey = L"TestBelt";
 	m_tInfo.vSize = D3DXVECTOR3(60.f,60.f,0.f);
 	m_tItem.eType = IT_BELT;
+	m_tItem.iOption = 30;
 	return S_OK;
 }
 void CBelt::Progress(void)

@@ -5,6 +5,7 @@
 #include "Client.h"
 #include "MainGame.h"
 
+
 #define MAX_LOADSTRING 100
 
 // 전역 변수:

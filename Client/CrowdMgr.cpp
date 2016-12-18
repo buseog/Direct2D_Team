@@ -33,6 +33,7 @@ CCrowdMgr::CCrowdMgr(void)
 :m_iAstarCount(0)
 ,m_iLimit(0)
 ,m_bStart(false)
+,m_iPButtonCheck(0)
 {
 	float fCX = 72;
 	float fCY = 26;
@@ -184,6 +185,7 @@ int	CCrowdMgr::KeyInput(void)
 				m_vecSelectUnit[i]->SetOriginPos(m_vecSelectUnit[i]->GetInfo()->vPos);
 				m_vecSelectUnit[i]->SetOrder(OD_PATROL);
 				CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CObjFactory<CEffect, CStandEffectBridge>::CreateObj(L"MoveMark", vMouse));
+				m_iPButtonCheck = 0;
 			}
 			break;
 
@@ -368,8 +370,8 @@ void CCrowdMgr::HotKeyCheck(void)
 int CCrowdMgr::Picking(void)
 {
 	POINT	Pt;
-		Pt.x = (long)GetMouse().x;
-		Pt.y = (long)GetMouse().y;
+	Pt.x = (long)GetMouse().x;
+	Pt.y = (long)GetMouse().y;
 
 	if(CKeyMgr::GetInstance()->KeyDown(VK_MBUTTON, 1))
 	{

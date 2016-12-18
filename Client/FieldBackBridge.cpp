@@ -7,10 +7,13 @@
 #include "ObjFactory.h"
 #include "Effect.h"
 #include "StandEffectBridge.h"
+#include "Player.h"
+#include "TimeMgr.h"
+#include "TimerEffectBridge.h"
 
 CFieldBackBridge::CFieldBackBridge(void)
 : m_bStage(false)
-, m_dwTime((DWORD)CTimeMgr::GetInstance()->GetTime())
+, m_fTime(-1.f)
 {
 	m_iX = 45;
 	m_iY = 80;
@@ -32,7 +35,19 @@ HRESULT	CFieldBackBridge::Initialize(void)
 
 void	CFieldBackBridge::Progress(INFO& rInfo)
 {
+	if(CKeyMgr::GetInstance()->KeyDown('5'))
+	{
+		const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_PLAYER);
+		((CPlayer*)pPlayer)->SetDamage(50);
+	}
+		
+	if (m_bStage)
+	{
+		BattleWait();		
+	}
 
+	if(m_fTime <= 0)
+		m_bStage = false;
 }
 
 void	CFieldBackBridge::Render(void)
@@ -102,24 +117,38 @@ int	CFieldBackBridge::Picking(void)
 {
 	if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON,5))
 	{
-		m_bStage = true;
-		if(m_bStage)
-		{
-			const CObj*	pMonster = CObjMgr::GetInstance()->GetObj(OBJ_MONSTER);
-			
-			POINT	Pt;
-			Pt.x = (long)GetMouse().x - (long)m_pObj->GetScroll().x;
-			Pt.y = (long)GetMouse().y - (long)m_pObj->GetScroll().y ;
+		const CObj*	pMonster = CObjMgr::GetInstance()->GetObj(OBJ_MONSTER);
+		
+		POINT	Pt;
+		Pt.x = (long)GetMouse().x - (long)m_pObj->GetScroll().x;
+		Pt.y = (long)GetMouse().y - (long)m_pObj->GetScroll().y ;
 
-			if(PtInRect(&((CEnemyUnit*)pMonster)->GetRect(),Pt))
-			{
-				CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CObjFactory<CEffect, CStandEffectBridge>::CreateObj(L"BattleWait", pMonster->GetInfo()->vPos));
-				((CEnemyUnit*)pMonster)->SetSpeed(0.f);
+		if(PtInRect(&((CEnemyUnit*)pMonster)->GetRect(),Pt))
+		{
+			
+			CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CObjFactory<CEffect, CTimerEffectBridge>::CreateObj(L"BattleWait", pMonster->GetInfo()->vPos, m_fTime));
+			m_fTime = 3.f;
+			((CEnemyUnit*)pMonster)->SetOrder(OD_STAND);
+			m_bStage = true;
+
+			if(!m_bStage)		
 				CSceneMgr::GetInstance()->SetScene(SC_BATTLEFIELD);
-				return 1;	
-			}
+		
+
+			return 1;	
 		}
 	}
+	
 
+
+	
 	return -1;
+}
+
+void	CFieldBackBridge::BattleWait(void)
+{
+	if(m_fTime > 0)
+		m_fTime -= CTimeMgr::GetInstance()->GetTime();
+	
+	
 }

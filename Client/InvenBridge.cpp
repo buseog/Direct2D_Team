@@ -7,6 +7,8 @@
 #include "KeyMgr.h"
 #include "Weapon.h"
 #include "Armor.h"
+#include "Belt.h"
+#include "Glove.h"
 #include "Food.h"
 #include "EmptyItem.h"
 #include "Player.h"
@@ -17,6 +19,7 @@ CInvenBridge::CInvenBridge(void)
 , m_bDrag(false)
 , m_bWeapon(false)
 , m_bArmor(false)
+, m_bBelt(false)
 , m_iSelectIndex(-1)
 , m_iFood(-1)
 {
@@ -43,6 +46,10 @@ HRESULT CInvenBridge::Initialize(void)
 	
 	CItem*	pEquipArmor = CItemFactory<CEmptyItem>::CreateItem(625.f, 170.f);
 	m_EquipSlot.push_back(pEquipArmor); // ¹æ¾î±¸½½·Ô ºó¾ÆÀÌÅÛÀ¸·Î Ã¤¿ì±â
+	
+	CItem*	pEquipGlove = CItemFactory<CEmptyItem>::CreateItem(685.f, 110.f);
+	m_EquipSlot.push_back(pEquipGlove);  //Àå°©½½·Ô ºó¾ÆÀÌÅÛÀ¸·Î ¾ÖÃß±â
+	
 
 	return S_OK;
 }
@@ -65,6 +72,7 @@ void CInvenBridge::Progress(INFO& rInfo)
 	
 	m_EquipSlot[IT_WEAPON]->Progress();
 	m_EquipSlot[IT_ARMOR]->Progress();
+	m_EquipSlot[IT_GLOVE]->Progress();
 }	
 
 void CInvenBridge::Render(void)
@@ -114,8 +122,6 @@ void CInvenBridge::Release(void)
 			::Safe_Delete(*iter);
 			
 		}
-	
-	
 }
 
 void	CInvenBridge::WorldMatrix(INFO& rInfo)
@@ -136,7 +142,7 @@ void	CInvenBridge::WorldMatrix(INFO& rInfo)
 void CInvenBridge::AddItem(INFO& rInfo)
 {
 
-	if(CKeyMgr::GetInstance()->KeyDown('P'))
+	if(CKeyMgr::GetInstance()->KeyDown('P')) // ¹«±â»ý¼º
 	{	
 		for(size_t i =0; i < 10; ++i)
 		{
@@ -151,7 +157,7 @@ void CInvenBridge::AddItem(INFO& rInfo)
 		}
 	}
 
-	if(CKeyMgr::GetInstance()->KeyDown('O'))
+	if(CKeyMgr::GetInstance()->KeyDown('O')) // °©¿Ê»ý¼º
 	{
 		for(size_t i =0; i < 10; ++i)
 		{
@@ -160,6 +166,22 @@ void CInvenBridge::AddItem(INFO& rInfo)
 				CItem*	pTemp = m_ItemSlot[i]; 
 
 				m_ItemSlot[i] = CreateArmor(rInfo.vPos);
+				::Safe_Delete(pTemp);
+				break;
+			}
+		}
+	}
+
+	
+	if(CKeyMgr::GetInstance()->KeyDown('Y')) //Àå°© »ý¼º
+	{
+		for(size_t i =0; i < 10; ++i)
+		{
+			if(m_ItemSlot[i]->GetObjKey() == L"Empty")
+			{
+				CItem*	pTemp = m_ItemSlot[i]; 
+
+				m_ItemSlot[i] = CreateGlove(rInfo.vPos);
 				::Safe_Delete(pTemp);
 				break;
 			}
@@ -217,6 +239,8 @@ int CInvenBridge::Picking(void)
 
 	const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_PLAYER);
 
+	
+
 	if(CKeyMgr::GetInstance()->KeyUp(VK_LBUTTON, 1) && m_iSelectIndex >= 0)
 	{
 		for(size_t j =0; j<10; ++j)
@@ -226,7 +250,7 @@ int CInvenBridge::Picking(void)
 				swap(m_ItemSlot[m_iSelectIndex],m_ItemSlot[j]);
 			}			
 		}
-	
+
 	
 		// ¹«±â ÀåÂø
 		if(PtInRect(&m_EquipSlot[IT_WEAPON]->GetRect(), Pt) &&
@@ -234,7 +258,7 @@ int CInvenBridge::Picking(void)
 		{
 			swap(m_ItemSlot[m_iSelectIndex], m_EquipSlot[IT_WEAPON]);
 			((CPlayer*)pPlayer)->SetPlusAttack(m_EquipSlot[IT_WEAPON]->GetItemInfo()->iOption);		
-			m_bWeapon = true;
+			
 		}
 		
 		// ¹æ¾î±¸ ÀåÂø
@@ -243,7 +267,17 @@ int CInvenBridge::Picking(void)
 		{
 			swap(m_ItemSlot[m_iSelectIndex], m_EquipSlot[IT_ARMOR]);
 			((CPlayer*)pPlayer)->SetPlusDefence(m_EquipSlot[IT_ARMOR]->GetItemInfo()->iOption);		
-			m_bArmor = true;
+		
+		}
+
+		
+		// Àå°© ÀåÂø
+		if(PtInRect(&m_EquipSlot[IT_GLOVE]->GetRect(), Pt) &&
+					 m_ItemSlot[m_iSelectIndex]->GetItemInfo()->eType == IT_GLOVE )
+		{
+			swap(m_ItemSlot[m_iSelectIndex], m_EquipSlot[IT_GLOVE]);
+			((CPlayer*)pPlayer)->SetPlusHP(m_EquipSlot[IT_GLOVE]->GetItemInfo()->iOption);		
+			;
 		}
 
 		m_bSelect = false;
@@ -278,7 +312,7 @@ int CInvenBridge::Picking(void)
 	}
 
 	// ÇØÁ¦ÇÏ´Â ºÎºÐ
-	if(CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON, 2))
+	if(CKeyMgr::GetInstance()->KeyDown(VK_RBUTTON, 1))
 	{
 		if(PtInRect(&m_EquipSlot[IT_WEAPON]->GetRect(), Pt))
 		{
@@ -288,7 +322,7 @@ int CInvenBridge::Picking(void)
 				{
 					((CPlayer*)pPlayer)->SetMinusAttack(m_EquipSlot[IT_WEAPON]->GetItemInfo()->iOption);	
 					swap(m_ItemSlot[i], m_EquipSlot[IT_WEAPON]);
-					m_bWeapon = false;
+				
 					return 1;
 				}
 			}
@@ -301,11 +335,47 @@ int CInvenBridge::Picking(void)
 				{
 					((CPlayer*)pPlayer)->SetMinusDefence(m_EquipSlot[IT_ARMOR]->GetItemInfo()->iOption);	
 					swap(m_ItemSlot[i], m_EquipSlot[IT_ARMOR]);
-					m_bArmor = false;
+			
 					return 1;
 				}
 			}
 		}		
+		
+		if(PtInRect(&m_EquipSlot[IT_GLOVE]->GetRect(), Pt))
+		{
+			for(int i = 0; i < 10; ++i)
+			{
+				if(m_ItemSlot[i]->GetItemInfo()->eType == IT_EMPTY)
+				{
+					((CPlayer*)pPlayer)->SetMinusHP(m_EquipSlot[IT_GLOVE]->GetItemInfo()->iOption);	
+					swap(m_ItemSlot[i], m_EquipSlot[IT_GLOVE]);
+				
+					return 1;
+				}
+			}
+		}		
+
+		// ¹°¾à ¸Ô±â
+		for(int j = 0; j < 10; ++j)
+		{
+			if(PtInRect(&m_ItemSlot[j]->GetRect(), Pt))
+			{
+				m_iSelectIndex = j;
+
+				if(m_ItemSlot[m_iSelectIndex]->GetItemInfo()->eType == IT_FOOD)
+				{
+					if(((CPlayer*)pPlayer)->GetHP() >= ((CPlayer*)pPlayer)->GetMaxHP())
+					{
+						return 1;
+					}
+
+					((CPlayer*)pPlayer)->SetRecoveryHP(m_ItemSlot[m_iSelectIndex]->GetItemInfo()->iOption);		
+					m_ItemSlot[m_iSelectIndex]->SetFoodMinus(1);
+					return 1;
+				}
+			}
+		}
+
 	}
 	
 	return -1;
@@ -328,6 +398,20 @@ CItem*	CInvenBridge::CreateArmor(D3DXVECTOR3 vPos)
 CItem*	CInvenBridge::CreateFood(D3DXVECTOR3 vPos)
 {
 	CItem*	pItem = CItemFactory<CFood>::CreateItem(vPos);
+	
+	return pItem;
+}
+
+CItem*	CInvenBridge::CreateGlove(D3DXVECTOR3 vPos)
+{
+	CItem*	pItem = CItemFactory<CGlove>::CreateItem(vPos);
+	
+	return pItem;
+}
+
+CItem*	CInvenBridge::CreateBelt(D3DXVECTOR3 vPos)
+{
+	CItem*	pItem = CItemFactory<CBelt>::CreateItem(vPos);
 	
 	return pItem;
 }
@@ -361,6 +445,7 @@ void CInvenBridge::SortItem(INFO& rInfo)
 	}
 	m_EquipSlot[IT_WEAPON]->SetPos(565.f, 170.f);
 	m_EquipSlot[IT_ARMOR]->SetPos(625.f, 170.f);
+	m_EquipSlot[IT_GLOVE]->SetPos(685.f , 110.f);
 }
 
 
@@ -373,4 +458,9 @@ bool CInvenBridge::EquipArmor(void)
 {
 	return m_bArmor;
 
+}
+
+vector<CItem*>* CInvenBridge::GetItemSlot(void)
+{
+	return &m_ItemSlot;
 }

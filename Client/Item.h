@@ -21,6 +21,7 @@ public:
 	RECT				GetRect(void);
 	bool				GetEmpty(void);
 	void				SetFoodPlus(int iCount);
+	void				SetFoodMinus(int iCount);
 	void				SetFoodZero(void);
 	ITEM*				GetItemInfo(void);
 	CBridge*			GetBridge(void);
