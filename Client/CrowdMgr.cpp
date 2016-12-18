@@ -6,6 +6,7 @@
 #include "ObjMgr.h"
 #include "AStar.h"
 #include "DataSubject.h"
+#include "UiObserver.h"
 
 #include "ObjFactory.h"
 #include "UiFactory.h"
@@ -79,7 +80,7 @@ int	CCrowdMgr::Progress(void)
 	for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
 	{
 		int iKey = (int)i;
-		CDataSubject::GetInstance()->Notify(iKey, (void*)m_vecSelectUnit[i]->GetStat());
+		CDataSubject::GetInstance()->Notify();
 	}
 
 	return iResult;
@@ -102,9 +103,9 @@ void	CCrowdMgr::RenderPortrait(void)
 	for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
 	{
 		m_vecPortrait[i]->GetBridge()->SetKey(m_vecSelectUnit[i]->GetObjKey());
-		CDataSubject::GetInstance()->AddData(i, (void*)m_vecSelectUnit[i]->GetStat());
-		((CPortrait*)m_vecPortrait[i])->GetObserver()->Update(i, (void*)m_vecSelectUnit[i]->GetStat());
-		((CPortraitBridge*)m_vecPortrait[i]->GetBridge())->SetIndex(i);
+		CDataSubject::GetInstance()->AddData((int)i, m_vecSelectUnit[i]->GetStat());
+		((CUIObserver*)((CPortrait*)m_vecPortrait[i])->GetObserver())->SetIndex((int)i);
+		//((CPortraitBridge*)m_vecPortrait[i]->GetBridge())->SetIndex(i);
 	}
 
 	for (size_t i = 0; i < m_vecPortrait.size(); ++i)
@@ -129,6 +130,10 @@ int	CCrowdMgr::KeyInput(void)
 				CObj*	pObj = m_vecSelectUnit[i];
 				Clear();
 				AddSelectList(pObj);
+
+				m_vecPortrait.front()->GetBridge()->SetKey(m_vecSelectUnit.front()->GetObjKey());
+				CDataSubject::GetInstance()->AddData(0, m_vecSelectUnit.front()->GetStat());
+				((CUIObserver*)((CPortrait*)m_vecPortrait.front())->GetObserver())->SetIndex(0);
 
 				return 1;
 			}
@@ -249,7 +254,7 @@ int	CCrowdMgr::KeyInput(void)
 	{
 		for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
 		{
-			m_vecSelectUnit[i]->SetDamage(1);
+			m_vecSelectUnit[i]->SetDamage(3);
 		}
 	}
 
@@ -262,9 +267,10 @@ void	CCrowdMgr::Clear(void)
 	{
 		// 리스트안의 모든 유닛들을 선택되지않음 으로 바꾸고
 		m_vecSelectUnit[i]->SetSelect(false);
-		CDataSubject::GetInstance()->RemoveData(i, (void*)m_vecSelectUnit[i]->GetStat());
-		((CPortraitBridge*)m_vecPortrait[i]->GetBridge())->SetIndex(-1);
+		CDataSubject::GetInstance()->RemoveData(i, m_vecSelectUnit[i]->GetStat());
+		((CUIObserver*)((CPortrait*)m_vecPortrait[i])->GetObserver())->SetIndex(-1);
 	}
+	CDataSubject::GetInstance()->Release();
 	// 리스트를 클리어함
 	m_vecSelectUnit.clear();
 

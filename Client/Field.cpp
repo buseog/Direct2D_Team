@@ -14,6 +14,9 @@
 #include "Player.h"
 #include "PlayerBridge.h"
 
+#include "EnemyUnit.h"
+#include "EnemyBridge.h"
+
 #include "MainUi.h"
 #include "MainUiBridge.h"
 #include "Inventory.h"
@@ -45,6 +48,9 @@ HRESULT	CField::Initialize(void)
 
 	CObjMgr::GetInstance()->AddObject(OBJ_BACK, CObjFactory<CBack, CFieldBackBridge>::CreateObj(L"Field", 0, 0));
 	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CPlayerBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
+	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"GoniSh", L"Walk_1", D3DXVECTOR3(500.f, 200.f, 0.f)));
+
+
 
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi,CMainUiBridge>::CreateUI(L"FieldMainUi",400.f,553.f));	
 	CUIMgr::GetInstance()->AddUI(UI_INVEN, CUIFactory<CInventory,CInvenBridge>::CreateUI(L"Inventory", 580.f,250.f));
@@ -67,6 +73,8 @@ void	CField::Progress(void)
 
 	if (CKeyMgr::GetInstance()->KeyDown(VK_RETURN))
 		CSceneMgr::GetInstance()->SetScene(SC_BATTLEFIELD);
+
+	
 }
 
 void	CField::Render(void)
@@ -90,7 +98,16 @@ void	CField::LoadPNG(void)
 		ERR_MSG(L"Tile 멀티 텍스쳐 생성 실패")
 		return;
 	}
+	
+	
 
+	/*if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/EnemyUnit/Gonish/Walk_1/Gonish%d.png", 
+		L"EnemyUnit", TEX_MULTI, L"GoniSh", 8)))
+	{
+		ERR_MSG(L"GoniSh 멀티 텍스쳐 생성 실패")
+		return;
+	}*/
+	
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/Pannel/UI0.png", 
 		L"FieldMainUi", TEX_SINGLE)))
 	{

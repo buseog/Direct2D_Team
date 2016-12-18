@@ -6,13 +6,15 @@ class CUIObserver :
 {
 private:
 	UNITDATA			m_tData;
+	int					m_iIndex;
 
 public:
 	CUIObserver(void);
 	virtual ~CUIObserver(void);
 
 public:
-	virtual void Update(int iFlag, void* pData);
+	virtual void Update(void);
+	void	SetIndex(int iIndex);
 
 public:
 	const UNITDATA*		GetData(void);

@@ -42,9 +42,6 @@ void CFood::Render(void)
 	float fY = pTexture->tImgInfo.Height / 2.f;
 
 	
-	
-	
-	
 	CDevice::GetInstance()->GetSprite()->SetTransform(&m_tInfo.matWorld);
 	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
 		NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -64,8 +61,8 @@ void CFood::WorldMatrix(void)
 	D3DXMATRIX	matTrans;
 
 	D3DXMatrixTranslation(&matTrans, 
-		m_tInfo.vPos.x , 
-		m_tInfo.vPos.y , 
+		m_tInfo.vPos.x  , 
+		m_tInfo.vPos.y  , 
 		0.f);
 
 	m_tInfo.matWorld = matTrans;

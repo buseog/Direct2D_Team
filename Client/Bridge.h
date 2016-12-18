@@ -22,6 +22,7 @@ public:
 	void	SetKey(const wstring& wstrStateKey);		//따로 셋키가 필요할때
 	void	SetObjSize(void);							//Obj에 렉트 사이즈를 지정해주기 위한 함수
 	void	SetUiSize(void);							//Ui에 렉트 사이즈를 지정해주기 위한 함수
+	const	wstring&	GetStateKey(void);
 
 public:
 	virtual HRESULT	Initialize(void) PURE;

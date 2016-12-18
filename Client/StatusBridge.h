@@ -12,6 +12,7 @@ protected:
 public:
 	vector<CUi*>*		GetButton(void);
 
+
 public:
 	virtual HRESULT	Initialize(void);
 	virtual void	Progress(INFO& rInfo);

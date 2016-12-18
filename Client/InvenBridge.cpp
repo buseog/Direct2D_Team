@@ -9,6 +9,8 @@
 #include "Armor.h"
 #include "Food.h"
 #include "EmptyItem.h"
+#include "Player.h"
+#include "ObjMgr.h"
 
 CInvenBridge::CInvenBridge(void)
 : m_bSelect(false)
@@ -213,6 +215,8 @@ int CInvenBridge::Picking(void)
 		Pt.x = (long)GetMouse().x;
 		Pt.y = (long)GetMouse().y;
 
+	const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_PLAYER);
+
 	if(CKeyMgr::GetInstance()->KeyUp(VK_LBUTTON, 1) && m_iSelectIndex >= 0)
 	{
 		for(size_t j =0; j<10; ++j)
@@ -222,18 +226,24 @@ int CInvenBridge::Picking(void)
 				swap(m_ItemSlot[m_iSelectIndex],m_ItemSlot[j]);
 			}			
 		}
-
+	
+	
+		// ¹«±â ÀåÂø
 		if(PtInRect(&m_EquipSlot[IT_WEAPON]->GetRect(), Pt) &&
 					 m_ItemSlot[m_iSelectIndex]->GetItemInfo()->eType == IT_WEAPON )
 		{
 			swap(m_ItemSlot[m_iSelectIndex], m_EquipSlot[IT_WEAPON]);
+			((CPlayer*)pPlayer)->SetPlusAttack(m_EquipSlot[IT_WEAPON]->GetItemInfo()->iOption);		
 			m_bWeapon = true;
 		}
 		
+		// ¹æ¾î±¸ ÀåÂø
 		if(PtInRect(&m_EquipSlot[IT_ARMOR]->GetRect(), Pt) &&
 					 m_ItemSlot[m_iSelectIndex]->GetItemInfo()->eType == IT_ARMOR )
 		{
 			swap(m_ItemSlot[m_iSelectIndex], m_EquipSlot[IT_ARMOR]);
+			((CPlayer*)pPlayer)->SetPlusDefence(m_EquipSlot[IT_ARMOR]->GetItemInfo()->iOption);		
+			m_bWeapon = true;
 			m_bArmor = true;
 		}
 
@@ -277,6 +287,7 @@ int CInvenBridge::Picking(void)
 			{
 				if(m_ItemSlot[i]->GetItemInfo()->eType == IT_EMPTY)
 				{
+					((CPlayer*)pPlayer)->SetMinusAttack(m_EquipSlot[IT_WEAPON]->GetItemInfo()->iOption);	
 					swap(m_ItemSlot[i], m_EquipSlot[IT_WEAPON]);
 					m_bWeapon = false;
 					break;
@@ -289,6 +300,7 @@ int CInvenBridge::Picking(void)
 			{
 				if(m_ItemSlot[i]->GetItemInfo()->eType == IT_EMPTY)
 				{
+					((CPlayer*)pPlayer)->SetMinusDefence(m_EquipSlot[IT_ARMOR]->GetItemInfo()->iOption);	
 					swap(m_ItemSlot[i], m_EquipSlot[IT_ARMOR]);
 					m_bArmor = false;
 					break;
@@ -299,7 +311,7 @@ int CInvenBridge::Picking(void)
 		
 	}
 	
-	return -1;
+	return m_iPriority;
 }
 
 CItem*	CInvenBridge::CreateWeapon(D3DXVECTOR3 vPos)
@@ -352,4 +364,21 @@ void CInvenBridge::SortItem(INFO& rInfo)
 	}
 	m_EquipSlot[IT_WEAPON]->SetPos(565.f, 170.f);
 	m_EquipSlot[IT_ARMOR]->SetPos(625.f, 170.f);
+}
+
+//
+//int	CInvenBridge::Picking(void)
+//{
+//	return m_iPriority;
+//}
+
+bool CInvenBridge::EquipWeapon(void)
+{
+	return m_bWeapon;
+}
+
+bool CInvenBridge::EquipArmor(void)
+{
+	return m_bArmor;
+
 }

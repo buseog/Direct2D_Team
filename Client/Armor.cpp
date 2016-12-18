@@ -22,6 +22,7 @@ HRESULT CArmor::Initialize(void)
 	
 	m_wstrObjKey = L"TestArmor";
 	m_tItem.eType = IT_ARMOR;
+	m_tItem.iOption = 50;
 
 	return S_OK;
 }

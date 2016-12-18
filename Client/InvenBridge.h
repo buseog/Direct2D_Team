@@ -34,6 +34,10 @@ public:
 	CItem*	CreateArmor(D3DXVECTOR3 vPos);
 	CItem*	CreateFood(D3DXVECTOR3 vPos);
 	CItem*	CreateEmpty(D3DXVECTOR3 vPos);
+
+public:
+	bool	EquipWeapon(void);
+	bool	EquipArmor(void);
 	
 public:
 	virtual HRESULT	Initialize(void);

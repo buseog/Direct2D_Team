@@ -194,8 +194,8 @@ void	CUnitBridge::AStarMove(INFO& rInfo)
 
 void	CUnitBridge::Attack(INFO& rInfo)
 {
-	
 }
+
 void	CUnitBridge::Stop(INFO& rInfo)
 {
 	// 캐릭터 y각도에 따라서 각도 전환

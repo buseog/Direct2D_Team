@@ -282,6 +282,9 @@ void CBattleFieldBackBridge::LoadTile(const wstring& wstrPath)
 
 	DWORD	dwByte = 0;
 
+	int WIDTH = 60;
+	int HEIGHT = 80;
+
 	while(1)
 	{
 		TILE2*			pTile = new TILE2;
@@ -299,58 +302,43 @@ void CBattleFieldBackBridge::LoadTile(const wstring& wstrPath)
 
 	CloseHandle(hFile);
 
-	if (m_vecTile.empty())
+	for (int i = 0; i < WIDTH; ++i)
 	{
-
-		for (int i = 0; i < TILEY; ++i)
+		for (int j = 0; j < 80; ++j)
 		{
-			for (int j = 0; j < TILEX; ++j)
-			{
-				TILE2*	pTile = new TILE2;
+			int iIndex = i * HEIGHT + j;
 
-				float fX = float(j * TILECX) + ((i % 2) * (TILECX / 2.f));
-				float fY = (float)i * (TILECY / 2.f);
-				pTile->vPos = D3DXVECTOR3(fX, fY, 0.f);
-				pTile->vSize = D3DXVECTOR3((float)TILECX, (float)TILECY, 0.f);
-				pTile->byDrawID = 0;
-				pTile->byOption = 0;
+			// 위
+			if (i > 1)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex - WIDTH * 2);
 
-				int iIndex = i * TILEX + j;
+			// 오른쪽위
+			if (i > 0 && j <= TILEX - 1)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex - WIDTH + 1);
 
-				// 위
-				if (i > 1)
-					pTile->Connectlist.push_back(iIndex - TILEX * 2);
+			// 오른쪽
+			if (j < TILEX -2)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex +1);
 
-				// 오른쪽위
-				if (i > 0 && j <= TILEX - 1)
-					pTile->Connectlist.push_back(iIndex - TILEX + 1);
+			// 오른쪽 아래
+			if (i < TILEY - 1&& j <= TILEX - 1)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex + WIDTH);
 
-				// 오른쪽
-				if (j < TILEX -2)
-					pTile->Connectlist.push_back(iIndex +1);
+			// 아래
+			if (i < TILEY -2)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex + WIDTH * 2);
 
-				// 오른쪽 아래
-				if (i < TILEY - 1&& j <= TILEX - 1)
-					pTile->Connectlist.push_back(iIndex + TILEX);
+			// 왼쪽 아래
+			if (i < TILEY - 1 && j >= 0)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex + WIDTH - 1);
 
-				// 아래
-				if (i < TILEY -2)
-					pTile->Connectlist.push_back(iIndex + TILEX * 2);
+			// 왼쪽
+			if (j > 1)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex - 1);
 
-				// 왼쪽 아래
-				if (i < TILEY - 1 && j >= 0)
-					pTile->Connectlist.push_back(iIndex + TILEX - 1);
-
-				// 왼쪽
-				if (j > 1)
-					pTile->Connectlist.push_back(iIndex - 1);
-
-				// 왼쪽 위
-				if (j >= 0 && i > 0)
-					pTile->Connectlist.push_back(iIndex - TILEX);
-
-				m_vecTile.push_back(pTile);
-			}
+			// 왼쪽 위
+			if (j >= 0 && i > 0)
+				m_vecTile[iIndex]->Connectlist.push_back(iIndex - WIDTH);
 		}
 	}
 }

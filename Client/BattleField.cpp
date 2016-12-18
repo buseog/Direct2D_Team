@@ -37,6 +37,7 @@ HRESULT	CBattleField::Initialize(void)
 	CObjMgr::GetInstance()->AddObject(OBJ_BACK, CObjFactory<CBack, CBattleFieldBackBridge>::CreateObj(L"BattleField", 0, 0));
 	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
 
+	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi, CMainUiBridge>::CreateUI(L"Minimap", 100.f, 550.f));	
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi, CMainUiBridge>::CreateUI(L"BattleFieldMainUi",400.f,553.f));	
 	return S_OK;
 }
@@ -71,6 +72,12 @@ void	CBattleField::LoadPNG(void)
 		return;
 	}
 
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Map/Map03.png", L"Minimap", TEX_SINGLE)))
+	{
+		ERR_MSG (L"Minimap 싱글 텍스쳐 생성 실패")
+		return;
+	}
+
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/SelectEffect/SelectEffect.png", L"SelectEffect", TEX_SINGLE)))
 	{
 		ERR_MSG(L"SelectEffect 싱글 텍스쳐 생성 실패")
@@ -81,6 +88,7 @@ void	CBattleField::LoadPNG(void)
 	{
 		ERR_MSG(L"MainUI 싱글 텍스쳐 생성 실패")
 		return;
+
 	}
 
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/Pannel/UI4.png", L"BattlePannel", TEX_SINGLE)))

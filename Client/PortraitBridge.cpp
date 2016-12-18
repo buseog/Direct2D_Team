@@ -26,7 +26,12 @@ void CPortraitBridge::Progress(INFO& rInfo)
 
 void CPortraitBridge::Render(void)
 {
+	D3DXMATRIX matScale, matTrans, matWorld;
+
 	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pUi->GetObjKey(), m_wstrStateKey, 0);
+
+	if(pTexture == NULL)
+		return;
 
 	const UNITDATA*	pData = ((CUIObserver*)((CPortrait*)m_pUi)->GetObserver())->GetData();
 
@@ -38,17 +43,18 @@ void CPortraitBridge::Render(void)
 	float fX = (float)pTexture->tImgInfo.Width;
 	float fY = (float)pTexture->tImgInfo.Height;
 
-	CDevice::GetInstance()->GetSprite()->SetTransform(&m_pUi->GetInfo()->matWorld);
+	D3DXMatrixTranslation(&matTrans, m_pUi->GetInfo()->vPos.x - fX, m_pUi->GetInfo()->vPos.y - fY, 0.f); 
+
+	CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
 	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
-		NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+		NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	pTexture = CTextureMgr::GetInstance()->GetTexture(L"HpBar");
 
 	if(pTexture == NULL)
 		return;
 
-	D3DXMATRIX matScale, matTrans, matWorld;
-
+	
 	fX = (float)pTexture->tImgInfo.Width;
 	fY = (float)pTexture->tImgInfo.Height;
 

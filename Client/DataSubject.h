@@ -7,13 +7,13 @@ class CDataSubject :
 	DECLARE_SINGLETON(CDataSubject)
 
 private:
-	map<int, list<void*>>		m_MapData;
+	map<int, const UNITDATA*>		m_MapData;
 	
 public:
-	void	AddData(int iFlag, void* pData);
-	void	RemoveData(int iFlag, void* pData);
-	void	Release(void);
-	list<void*>*	GetDataList(int iFlag);
+	void	AddData(int iFlag, const UNITDATA* pData);
+	void	RemoveData(int iFlag, const UNITDATA* pData);
+	virtual void	Release(void);
+	const UNITDATA*	GetData(int iFlag);
 
 public:
 	CDataSubject(void);

@@ -5,7 +5,7 @@
 class CObserver
 {
 public:
-	virtual void Update(int iFlag, void* pData)PURE;
+	virtual void Update(void)PURE;
 
 public:
 	CObserver(void);
