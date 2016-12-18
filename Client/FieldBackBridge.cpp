@@ -107,9 +107,7 @@ int	CFieldBackBridge::Picking(void)
 			POINT	Pt;
 			Pt.x = (long)GetMouse().x - (long)m_pObj->GetScroll().x;
 			Pt.y = (long)GetMouse().y - (long)m_pObj->GetScroll().y ;
-
-				
-			
+	
 			if(PtInRect(&((CEnemyUnit*)pMonster)->GetRect(),Pt))
 			{
 				CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CObjFactory<CEffect, CStandEffectBridge>::CreateObj(L"BattleWait", pMonster->GetInfo()->vPos));

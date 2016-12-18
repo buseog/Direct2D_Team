@@ -136,7 +136,26 @@ void	CBattleField::LoadPNG(void)
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI12.png", 
 		L"MpBar", TEX_SINGLE)))
 	{
-		ERR_MSG(L"HpBar 싱글 텍스쳐 생성 실패")
+		ERR_MSG(L"MpBar 싱글 텍스쳐 생성 실패")
+		return;
+	}
+
+	// 단축키 버튼 (은지 추가)
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI2.png", L"HotKeyStop", TEX_SINGLE)))
+	{
+		ERR_MSG (L"HotKeyStop 싱글 텍스쳐 생성 실패")
+		return;
+	}
+
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI3.png", L"HotKeyAttack", TEX_SINGLE)))
+	{
+		ERR_MSG (L"HotKeyAttack 싱글 텍스쳐 생성 실패")
+		return;
+	}
+
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI4.png", L"HotKeyMove", TEX_SINGLE)))
+	{
+		ERR_MSG (L"HotKeyMove 싱글 텍스쳐 생성 실패")
 		return;
 	}
 

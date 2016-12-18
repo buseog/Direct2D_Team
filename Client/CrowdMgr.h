@@ -26,6 +26,13 @@ public:
 	void	Release(void);
 	int		Progress(void);
 
+public: // 단축키 관련 - 은지 추가
+	void	HotKeyCheck(void);
+	void	Picking(void);
+
+	int		m_iPButtonCheck;;
+	vector<CUi*>	m_HotButton;
+
 private:
 	CCrowdMgr(void);
 	~CCrowdMgr(void);

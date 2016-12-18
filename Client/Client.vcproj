@@ -645,6 +645,18 @@
 							RelativePath=".\ButtonBridge.h"
 							>
 						</File>
+						<Filter
+							Name="00. HotKeyBridge"
+							>
+							<File
+								RelativePath=".\HotKeyBridge.cpp"
+								>
+							</File>
+							<File
+								RelativePath=".\HotKeyBridge.h"
+								>
+							</File>
+						</Filter>
 					</Filter>
 					<Filter
 						Name="06. PortraitBridge"
@@ -1011,6 +1023,42 @@
 					RelativePath=".\MyButton.h"
 					>
 				</File>
+				<Filter
+					Name="00. HotKeyStop"
+					>
+					<File
+						RelativePath=".\HotKeyStop.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\HotKeyStop.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="01. HotKeyMove"
+					>
+					<File
+						RelativePath=".\HotKeyMove.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\HotKeyMove.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="02. HotKeyAttack"
+					>
+					<File
+						RelativePath=".\HotKeyAttack.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\HotKeyAttack.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="05. Portrait"
