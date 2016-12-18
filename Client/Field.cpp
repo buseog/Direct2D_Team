@@ -14,6 +14,8 @@
 #include "Player.h"
 #include "PlayerBridge.h"
 
+#include "Obj.h"
+
 #include "EnemyUnit.h"
 #include "EnemyBridge.h"
 
@@ -38,6 +40,7 @@
 
 
 CField::CField(void)
+: m_bStage(false)
 {
 }
 
@@ -76,11 +79,9 @@ void	CField::Progress(void)
 	CObjMgr::GetInstance()->Progress();
 	CUIMgr::GetInstance()->Progress();
 	CUIMgr::GetInstance()->Picking();
-
-	if (CKeyMgr::GetInstance()->KeyDown(VK_RETURN))
-		CSceneMgr::GetInstance()->SetScene(SC_BATTLEFIELD);
-
+	CObjMgr::GetInstance()->Picking();
 	
+
 }
 
 void	CField::Render(void)
@@ -105,14 +106,6 @@ void	CField::LoadPNG(void)
 		return;
 	}
 	
-	
-
-	/*if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/EnemyUnit/Gonish/Walk_1/Gonish%d.png", 
-		L"EnemyUnit", TEX_MULTI, L"GoniSh", 8)))
-	{
-		ERR_MSG(L"GoniSh 멀티 텍스쳐 생성 실패")
-		return;
-	}*/
 	
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/Pannel/UI0.png", 
 		L"FieldMainUi", TEX_SINGLE)))
