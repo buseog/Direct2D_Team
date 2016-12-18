@@ -4,7 +4,10 @@
 CFood::CFood(void)
 {
 }
+CFood::CFood(ITEM*	tItem) :CItem(tItem)
+{
 
+}
 CFood::~CFood(void)
 {
 	Release();

@@ -12,5 +12,6 @@ public:
 
 public:
 	CAllyUnit(void);
+	CAllyUnit(UNITDATA*	tUnit);
 	~CAllyUnit(void);
 };

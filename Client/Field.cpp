@@ -22,6 +22,12 @@
 #include "StatusBridge.h"
 #include "Store.h"
 #include "StoreBridge.h"
+#include "BasicStore.h"
+#include "BasicStoreBridge.h"
+#include "DrugStore.h"
+#include "DrugStoreBridge.h"
+#include "MercenaryStore.h"
+#include "MercenaryStoreBridge.h"
 
 CField::CField(void)
 {
@@ -43,7 +49,10 @@ HRESULT	CField::Initialize(void)
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi,CMainUiBridge>::CreateUI(L"FieldMainUi",400.f,553.f));	
 	CUIMgr::GetInstance()->AddUI(UI_INVEN, CUIFactory<CInventory,CInvenBridge>::CreateUI(L"Inventory", 580.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STAT, CUIFactory<CStatus,CStatusBridge>::CreateUI(L"Status", 180.f, 250.f));
-	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CStore,CStoreBridge>::CreateUI(L"Store", 180.f,250.f));
+	//CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CStore,CStoreBridge>::CreateUI(L"Store", 180.f,250.f));
+	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CBasicStore,CBasicStoreBridge>::CreateUI(L"Store",200.f,250.f));
+	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CDrugStore,CDrugStoreBridge>::CreateUI(L"Store",200.f,250.f));
+	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CMercenaryStore,CMercenaryStoreBridge>::CreateUI(L"Store",200.f,250.f));
 
 
 
@@ -182,6 +191,13 @@ void	CField::LoadPNG(void)
 		L"Button", TEX_SINGLE)))
 	{
 		ERR_MSG(L"Button 싱글 텍스쳐 생성 실패");
+		return;
+	}
+	/////////////////////////////////////////////////용병창 테스트
+	if(FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Portrait/ArcherK/UI1.png", 
+		L"TestUnit", TEX_SINGLE)))
+	{
+		ERR_MSG(L"TestUnit 싱글 텍스쳐 생성 실패");
 		return;
 	}
 }

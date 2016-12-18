@@ -5,6 +5,10 @@
 CArmor::CArmor(void)
 {
 }
+CArmor::CArmor(ITEM*	tItem) :CItem(tItem)
+{
+
+}
 
 CArmor::~CArmor(void)
 {
@@ -26,33 +30,7 @@ void CArmor::Progress(void)
 	WorldMatrix();
 	
 }
-void CArmor::Render(void)
-{
-	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(L"Armor");
-	
 
-	if(pTexture == NULL)
-		return;
-
-	float fX = pTexture->tImgInfo.Width  / 2.f;
-	float fY = pTexture->tImgInfo.Height / 2.f;
-
-	CDevice::GetInstance()->GetSprite()->SetTransform(&m_tInfo.matWorld);
-	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
-		NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
-}
 void CArmor::Release(void)
 {
-}
-
-void CArmor::WorldMatrix(void)
-{
-	D3DXMATRIX	matTrans;
-
-	D3DXMatrixTranslation(&matTrans, 
-		m_tInfo.vPos.x , 
-		m_tInfo.vPos.y , 
-		0.f);
-
-	m_tInfo.matWorld = matTrans;
 }

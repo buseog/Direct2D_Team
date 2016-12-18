@@ -13,6 +13,7 @@ public:
 
 public:
 	CFood(void);
+	CFood(ITEM*	tItem);
 	~CFood(void);
 public:
 	virtual HRESULT Initialize(void);

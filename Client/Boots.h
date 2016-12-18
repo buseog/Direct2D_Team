@@ -6,10 +6,11 @@ class CBoots :
 {
 public:
 	CBoots(void);
+	CBoots(ITEM*	tItem);
 	~CBoots(void);
 public:
 	virtual HRESULT Initialize(void);
 	virtual void Progress(void);
-	virtual void Render(void);
+//	virtual void Render(void);
 	virtual void Release(void);
 };

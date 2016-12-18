@@ -4,7 +4,10 @@
 CHelmet::CHelmet(void)
 {
 }
+CHelmet::CHelmet(ITEM*	tItem) :CItem(tItem)
+{
 
+}
 CHelmet::~CHelmet(void)
 {
 	Release();
@@ -12,16 +15,15 @@ CHelmet::~CHelmet(void)
 HRESULT CHelmet::Initialize(void)
 {
 	m_wstrObjKey = L"TestHelmet";
-	m_tItem.wstrName = L"Head";
+	m_tInfo.vSize = D3DXVECTOR3(60.f,60.f,0.f);
+	m_tItem.eType = IT_HELMET;
 	return S_OK;
 }
 void CHelmet::Progress(void)
 {
-	
+	WorldMatrix();
 }
-void CHelmet::Render(void)
-{
-}
+
 void CHelmet::Release(void)
 {
 }

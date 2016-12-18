@@ -1,8 +1,7 @@
 #include "StdAfx.h"
 #include "Store.h"
-#include "StoreBridge.h"
 //#include "Item.h"
-//#include "Armor.h"
+#include "KeyMgr.h"
 
 CStore::CStore(void)
 {
@@ -16,34 +15,36 @@ CStore::~CStore(void)
 
 HRESULT	CStore::Initialize(void)
 {
-	m_wstrObjKey = L"Store";	
-	//m_pBridge->Initialize();
-	
+//	m_wstrObjKey = L"Inventory";	
+		
 	return S_OK;
-	
 }
 
 void	CStore::Progress(void)
 {
-	
-	m_pBridge->Progress(m_tInfo);	
-	
+	if(CKeyMgr::GetInstance()->KeyDown('I'))
+	{
 
+		if (m_bView == true)
+			m_bView = false;
+		else
+			m_bView = true;
+
+		m_pBridge->Render();
+	}
+
+	if (m_bView)
+		m_pBridge->Progress(m_tInfo);	
 
 }
 
 void	CStore::Render(void)
 {
-	if(GetKeyState('L') && 0x0001)
-	{
-		((CStoreBridge*)m_pBridge)->SetState();
+	if (m_bView)
 		m_pBridge->Render();
-	}
-
 }
 
 void	CStore::Release(void)
 {
 	::Safe_Delete(m_pBridge);
-
 }
