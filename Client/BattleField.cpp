@@ -46,24 +46,24 @@ HRESULT	CBattleField::Initialize(void)
 	for(int i = 0; i < 3; ++i)
 	{
 		CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CShortAttack, CShortAttackBridge>::CreateObj(L"DocuGawa", L"Walk_1", 
-					D3DXVECTOR3(1700.f + (i*100), 100.f  + (i*30), 0.f)));
+					D3DXVECTOR3(1400.f + (i*100), 100.f  + (i*30), 0.f)));
 	}
 	for(int i = 0; i< 2; ++ i)
 	{	
 		CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CShortAttack, CShortAttackBridge>::CreateObj(L"DocuGawa", L"Walk_1", 
-					D3DXVECTOR3(1800.f + (i*120), 70.f  + (i*30), 0.f)));
+					D3DXVECTOR3(1300.f + (i*120), 70.f  + (i*30), 0.f)));
 	}
 
 	for(int i = 0; i < 3; ++i )
 	{
 		CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CLongAttack, CLongAttackBridge>::CreateObj(L"Waki", L"Walk_1", 
-					D3DXVECTOR3(1800.f + (i*120), 500.f  - (i*30), 0.f)));
+					D3DXVECTOR3(1300.f + (i*120), 500.f  - (i*30), 0.f)));
 	}
 
 	for(int i = 0; i < 2; ++i )
 	{
 		CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CLongAttack, CLongAttackBridge>::CreateObj(L"Waki", L"Walk_1", 
-					D3DXVECTOR3(1850.f + (i*120), 450.f  - (i*30), 0.f)));
+					D3DXVECTOR3(1350.f + (i*120), 450.f  - (i*30), 0.f)));
 	}
 
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi, CMainUiBridge>::CreateUI(L"Minimap", 100.f, 550.f));	

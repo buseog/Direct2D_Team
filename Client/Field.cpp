@@ -61,6 +61,11 @@ HRESULT	CField::Initialize(void)
 	CObjMgr::GetInstance()->AddObject(OBJ_BACK, CObjFactory<CBack, CFieldBackBridge>::CreateObj(L"Field", 0, 0));
 	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CPlayerBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
 	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"GoniSh", L"Walk_1", D3DXVECTOR3(500.f, 200.f, 0.f)));
+	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"DocuGawa", L"Walk_1", D3DXVECTOR3(200.f, 300.f, 0.f)));
+	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"BlueDragon", L"Walk_1", D3DXVECTOR3(600.f, 100.f, 0.f)));
+	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"HonGanji", L"Walk_1", D3DXVECTOR3(1200.f, 400.f, 0.f)));
+	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"KimYuSin", L"Walk_1", D3DXVECTOR3(1500.f, 700.f, 0.f)));
+	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"Waki", L"Walk_1", D3DXVECTOR3(900.f, 300.f, 0.f)));
 
 	
 

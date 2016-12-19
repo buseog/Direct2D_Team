@@ -19,6 +19,7 @@ CShortAttack::~CShortAttack(void)
 HRESULT	CShortAttack::Initialize(void)
 {
 	m_fSpeed = 75.f;
+	m_tUnitData.fRange=20.f;
 	m_iOrder = OD_MOVE;
 	return S_OK;
 }

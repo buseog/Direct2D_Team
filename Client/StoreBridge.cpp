@@ -23,7 +23,7 @@ CStoreBridge::CStoreBridge(void)
 : m_bSelect(false)
 , m_bTooltip(false)
 , m_bPick(false)
-, m_bArmor(false)
+, m_bMove(false)
 , m_iSelectIndex(-1)
 , m_iFood(-1)
 {

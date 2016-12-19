@@ -20,6 +20,7 @@ CLongAttack::~CLongAttack(void)
 HRESULT CLongAttack::Initialize(void)
 {
 	m_fSpeed = 65.f;
+	m_tUnitData.fRange=200.f;
 	m_iOrder = OD_MOVE;
 	return S_OK;
 }

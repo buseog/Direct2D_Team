@@ -16,6 +16,7 @@ private:
 	void	Stop(INFO& rInfo);
 	void	Attack(INFO& rInfo);
 	void	AStarMove(INFO& rInfo);
+	void	ArtificiaIintelligence(INFO& rInfo);
 
 public:
 	virtual HRESULT	Initialize(void);
