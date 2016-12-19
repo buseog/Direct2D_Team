@@ -6,12 +6,14 @@ class CPortraitBridge :
 {
 protected:
 	int		m_iIndex;
+	int		m_iType;
 
 protected:
 	virtual void	WorldMatrix(INFO& rInfo);
 
 public:
 	void	SetIndex(int iIndex);
+	void	SetType(int iType);
 
 public:
 	int		GetIndex(void);

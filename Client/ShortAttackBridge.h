@@ -16,6 +16,7 @@ private:
 	void	Stop(INFO& rInfo);
 	void	Attack(INFO& rInfo);
 	void	AStarMove(INFO& rInfo);
+	virtual	void	Frame(void);
 
 public:
 	virtual HRESULT	Initialize(void);

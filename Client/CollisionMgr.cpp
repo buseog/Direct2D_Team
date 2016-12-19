@@ -36,7 +36,8 @@ void CCollisionMgr::SkillCollision(list<CObj*>* pSkill, list<CObj*>* pEnemyUnit)
 							
 								if((*Enemyiter)->GetStat()->iHealthPoint <=0)
 								{
-									(*Enemyiter)->SetDestroy(true);
+									(*Enemyiter)->SetOrder(OD_DIE);
+									(*Enemyiter)->GetBridge()->SetFrame(L"Die");
 								}
 							}
 						}
@@ -54,7 +55,8 @@ void CCollisionMgr::SkillCollision(list<CObj*>* pSkill, list<CObj*>* pEnemyUnit)
 							
 								if((*Enemyiter)->GetStat()->iHealthPoint <=0)
 								{
-									(*Enemyiter)->SetDestroy(true);
+									(*Enemyiter)->SetOrder(OD_DIE);
+									(*Enemyiter)->GetBridge()->SetFrame(L"Die");
 								}
 							}
 						}

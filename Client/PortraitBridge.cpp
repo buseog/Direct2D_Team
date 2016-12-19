@@ -14,6 +14,7 @@ CPortraitBridge::~CPortraitBridge(void)
 
 HRESULT CPortraitBridge::Initialize(void)
 {
+	m_iType = 0;
 	m_iIndex = -1;
 	return S_OK;
 }
@@ -28,7 +29,7 @@ void CPortraitBridge::Render(void)
 {
 	D3DXMATRIX matScale, matTrans, matWorld;
 
-	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pUi->GetObjKey(), m_wstrStateKey, 0);
+	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_pUi->GetObjKey(), m_wstrStateKey, m_iType);
 
 	if(pTexture == NULL)
 		return;
@@ -36,6 +37,9 @@ void CPortraitBridge::Render(void)
 	const UNITDATA*	pData = ((CUIObserver*)((CPortrait*)m_pUi)->GetObserver())->GetData();
 
 	float fPercent = (float)pData->iHealthPoint / (float)pData->iMaxHelathPoint;
+
+	if (fPercent <= 0)
+		fPercent = 0.f;
 
 	if(pTexture == NULL)
 		return;
@@ -108,4 +112,9 @@ void	CPortraitBridge::SetIndex(int iIndex)
 int		CPortraitBridge::GetIndex(void)
 {
 	return m_iIndex;
+}
+
+void	CPortraitBridge::SetType(int iType)
+{
+	m_iType = iType;
 }

@@ -43,6 +43,9 @@ void	CShortAttackBridge::Progress(INFO& rInfo)
 		case OD_ATTACK:
 			Attack(rInfo);
 			break;
+
+		case OD_DIE:
+			break;
 	}
 
 }
@@ -147,6 +150,7 @@ void CShortAttackBridge::Move(INFO &rInfo)
 	if(rInfo.vPos == m_pObj->GetTargetPoint())
 	{
 		m_pObj->SetOrder(OD_STAND);
+		SetFrame(L"Stand_1");
 	}
 }
 
@@ -176,7 +180,10 @@ void	CShortAttackBridge::AStarMove(INFO& rInfo)
 		m_vecBestList.pop_front();
 	}
 	if (m_vecBestList.empty())
+	{
 		m_pObj->SetOrder(OD_STAND);
+		SetFrame(L"Stand_1");
+	}
 }
 
 
@@ -201,4 +208,47 @@ void	CShortAttackBridge::Stop(INFO& rInfo)
 
 void	CShortAttackBridge::Attack(INFO& rInfo)
 {
+}
+
+void	CShortAttackBridge::Frame(void)
+{
+	m_tFrame.fFrame += m_tFrame.fCount * CTimeMgr::GetInstance()->GetTime();
+
+	if(m_tFrame.fFrame > m_tFrame.fMax)
+	{
+		switch (m_pObj->GetOrder())
+		{
+		case OD_STAND:
+			SetFrame(L"Stand_1");
+			break;
+
+		case OD_MOVE:
+			SetFrame(L"Walk_1");
+			break;
+
+		case OD_ASTAR:
+			SetFrame(L"Walk_1");
+			break;
+
+		case OD_PATROL:
+			SetFrame(L"Walk_1");
+			break;
+
+		case OD_ATTACK:
+			SetFrame(L"Stand_1");
+			m_pObj->SetOrder(OD_STAND);
+			break;
+
+		case OD_SKILL:
+			SetFrame(L"Stand_1");
+			m_pObj->SetOrder(OD_STAND);
+			break;
+
+		case OD_DIE:
+			m_pObj->SetDestroy(true);
+			break;
+
+		}
+	}
+		
 }

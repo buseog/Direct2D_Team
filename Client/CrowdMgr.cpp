@@ -25,6 +25,7 @@
 #include "HotKeyStop.h"
 #include "HotKeyMove.h"
 #include "HotKeyAttack.h"
+#include "SkillMgr.h"
 
 IMPLEMENT_SINGLETON(CCrowdMgr)
 
@@ -32,7 +33,7 @@ CCrowdMgr::CCrowdMgr(void)
 :m_iAstarCount(0)
 ,m_iLimit(0)
 ,m_bStart(false)
-,m_iPButtonCheck(0)
+,m_iPButtonCheck(-1)
 {
 	float fCX = 72;
 	float fCY = 26;
@@ -184,14 +185,21 @@ int	CCrowdMgr::KeyInput(void)
 				m_vecSelectUnit[i]->SetOriginPos(m_vecSelectUnit[i]->GetInfo()->vPos);
 				m_vecSelectUnit[i]->SetOrder(OD_PATROL);
 				CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CObjFactory<CEffect, CStandEffectBridge>::CreateObj(L"MoveMark", vMouse));
-				m_iPButtonCheck = 0;
+				m_iPButtonCheck = -1;
 			}
 			break;
 
 		case OD_ATTACK:
+			for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
+			{
+				m_vecSelectUnit[i]->SetTargetPoint(D3DXVECTOR3(vMouse));
+				m_vecSelectUnit[i]->SetOrder(OD_ATTACK);
+				CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CObjFactory<CEffect, CStandEffectBridge>::CreateObj(L"MoveMark", vMouse));
+				m_iPButtonCheck = -1;
+			}
 			break;
 		}
-
+		CSceneMgr::GetInstance()->SetMouse(L"Sword_Click");
 		return 1;
 
 	}
@@ -309,11 +317,9 @@ int	CCrowdMgr::KeyInput(void)
 	if (CKeyMgr::GetInstance()->KeyDown('Q'))
 	{
 		D3DXVECTOR3 vMouse = ::GetMouse() - m_vecSelectUnit.front()->GetScroll();
-		for (size_t i = 0; i < m_vecSelectUnit.size(); ++i)
-		{
-			m_vecSelectUnit[i]->SetDamage(3);
-			CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CSKillMgr::Skill(m_vecSelectUnit[i]->GetInfo()->vPos, vMouse, m_vecSelectUnit[i]->GetObjKey()));
-		}
+		m_vecSelectUnit.front()->GetBridge()->SetFrame(L"Skill_1");
+		CSKillMgr::Skill(m_vecSelectUnit.front()->GetInfo()->vPos, vMouse, m_vecSelectUnit.front()->GetObjKey());
+		m_vecSelectUnit.front()->SetOrder(OD_SKILL);	
 	}
 
 	return -1;
@@ -373,7 +379,7 @@ int CCrowdMgr::Picking(void)
 
 	if(CKeyMgr::GetInstance()->KeyDown(VK_MBUTTON, 1))
 	{
-		CSceneMgr::GetInstance()->SetMouse(L"Hand_Click");
+		CSceneMgr::GetInstance()->SetMouse(L"Sword_Stand");
 
 		for(size_t i = 0; i < m_HotButton.size(); ++i)
 		{
@@ -393,11 +399,11 @@ int CCrowdMgr::Picking(void)
 					break;
 
 				case 2:
-					
+					m_iPButtonCheck = OD_ATTACK;
 					break;
-
-					return 1;
 				}
+				
+				return 1;
 			}
 		}
 	}

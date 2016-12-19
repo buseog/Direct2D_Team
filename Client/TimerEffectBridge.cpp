@@ -33,7 +33,7 @@ void CTimerEffectBridge::Render(void)
 		return;
 
 	float fX = pTexture->tImgInfo.Width / 2.f;
-	float fY = pTexture->tImgInfo.Height / 2.f;
+	float fY = pTexture->tImgInfo.Height;
 
 	CDevice::GetInstance()->Render_End();
 	CDevice::GetInstance()->Render_Begin();
@@ -63,7 +63,7 @@ void CTimerEffectBridge::WorldMatrix(INFO& rInfo)
 
 	D3DXMatrixTranslation(&matTrans, 
 		rInfo.vPos.x + m_pObj->GetScroll().x, 
-		rInfo.vPos.y + m_pObj->GetScroll().y + 30, 
+		rInfo.vPos.y + m_pObj->GetScroll().y + 20.f, 
 		0.f);
 
 	rInfo.matWorld = matTrans;

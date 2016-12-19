@@ -17,6 +17,7 @@ private:
 	void	Attack(INFO& rInfo);
 	void	Stop(INFO& rInfo);
 	void	Patrol(INFO& rInfo);
+	void	Skill(INFO&	rInfo);
 
 public:
 	void	SetAstar(D3DXVECTOR3 vMouse);
@@ -26,6 +27,7 @@ public:
 	virtual void	Progress(INFO& rInfo);
 	virtual void	Render(void);
 	virtual void	Release(void);
+	virtual	void	Frame(void);
 
 public:
 	CUnitBridge(void);

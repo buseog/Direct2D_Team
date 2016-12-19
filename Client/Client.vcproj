@@ -766,6 +766,10 @@
 							>
 						</File>
 					</Filter>
+					<Filter
+						Name="08. EndUIBridge"
+						>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter

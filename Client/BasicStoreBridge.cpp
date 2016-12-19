@@ -190,9 +190,9 @@ int CBasicStoreBridge::Picking(void) ///툴팁기능 추가해야함
 						//const CUi* pUi = CUIMgr::GetInstance()->GetUi(UI_INVEN);
 						//m_pUi
 						//= NULL;
-						CUi* pUi = CUIMgr::GetInstance()->GetUi(SC_FILED,UI_INVEN);
+						CUi* pUi = CUIMgr::GetInstance()->GetUi(SC_FIELD,UI_INVEN);
 						vector<CItem*>* pInven  =  ((CInvenBridge*)pUi->GetBridge())->GetItemSlot();
-						//pInven = ((CInvenBridge*)CUIMgr::GetInstance()->GetUi(SC_FILED,UI_INVEN))->GetItemSlot();
+						//pInven = ((CInvenBridge*)CUIMgr::GetInstance()->GetUi(SC_FIELD,UI_INVEN))->GetItemSlot();
 					//	vector<CItem*>* pInven = ((CInvenBridge*)pUi)->GetItemSlot();
 						//(*pInven)[0]->
 						for(size_t i =0; i < (*pInven).size(); ++i)

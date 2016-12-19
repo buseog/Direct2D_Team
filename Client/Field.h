@@ -1,7 +1,7 @@
 #pragma once
 #include "scene.h"
 
-
+class CUI;
 class CObj;
 class CField :
 	public CScene

@@ -7,6 +7,7 @@ class CBattleFieldBackBridge :
 private:
 	RECT				m_rcDrag;
 	D3DXVECTOR2			m_vDrag[5];
+	D3DXVECTOR3			m_vScore;
 	int					m_iDragState;
 	list<CObj*>*		m_ObjList[OBJ_END];
 	bool	m_bStage;

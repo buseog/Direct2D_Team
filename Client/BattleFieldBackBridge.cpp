@@ -5,14 +5,18 @@
 #include "CrowdMgr.h"
 #include "SceneMgr.h"
 #include "CollisionMgr.h"
+#include "Effect.h"
+#include "TimerEffectBridge.h"
+#include "ObjFactory.h"
 
 CBattleFieldBackBridge::CBattleFieldBackBridge(void)
 : m_iDragState(0)
 , m_bStage(false)
 {
-	m_iX = 45;
-	m_iY = 80;
+	m_iX = 30;
+	m_iY = 50;
 	m_vSize = D3DXVECTOR3(1892.f, 780.f, 0.f);
+	m_vScore = D3DXVECTOR3(400.f,300.f,0.f);
 }
 
 CBattleFieldBackBridge::~CBattleFieldBackBridge(void)
@@ -22,7 +26,9 @@ CBattleFieldBackBridge::~CBattleFieldBackBridge(void)
 
 HRESULT	CBattleFieldBackBridge::Initialize(void)
 {
-	//LoadTile(L"../Data/0.dat");
+	LoadTile(L"../Data/BattleTile.dat");
+	LoadBack(L"../Data/BattleObject.dat");
+
 
 	return S_OK;
 }
@@ -34,11 +40,15 @@ void	CBattleFieldBackBridge::Progress(INFO& rInfo)
 	
 	CCollisionMgr::SkillCollision(m_ObjList[OBJ_EFFECT], m_ObjList[OBJ_MONSTER]);
 
+
 	if(m_ObjList[OBJ_MONSTER]->empty() && m_bStage == false)
-	{
+	{	
+
 		m_bStage = true;
 		m_fTime = 5.f;
+		
 	}
+		
 }
 
 void	CBattleFieldBackBridge::Render(void)
@@ -46,38 +56,7 @@ void	CBattleFieldBackBridge::Render(void)
 	D3DXMATRIX	matTrans;
 	TCHAR		szBuf[MIN_STR] = L"";
 
-	/*m_iTileRenderX = WINCX / TILECX + 1;
-	m_iTileRenderY = WINCY / (TILECY / 2) + 1;
-
-	int iCullX, iCullY;
-
-	for(int i = 0; i < m_iTileRenderY; ++i)
-	{
-		for(int j = 0; j < m_iTileRenderX; ++j)
-		{
-			iCullX = int(-m_vScroll.x) / TILECX;
-			iCullY = int((-m_vScroll.y) / (TILECY / 2));
-
-
-			int	iIndex = (i + iCullY) * TILEX + (j + iCullX);
-
-			if(iIndex < 0 || iIndex >= TILEX * TILEY)
-				continue;
-
-			const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(L"TILE", L"Tile", m_vecTile[iIndex]->byDrawID);
-
-			D3DXMatrixTranslation(&matTrans, 
-				m_vecTile[iIndex]->vPos.x + m_vScroll.x,
-				m_vecTile[iIndex]->vPos.y + m_vScroll.y,
-				0.f);
-
-
-			CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
-			CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
-				NULL, &D3DXVECTOR3(TILECX / 2.f, TILECY / 2.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
-
-		}
-	}*/
+	
 
 	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_wstrStateKey);
 
@@ -86,9 +65,32 @@ void	CBattleFieldBackBridge::Render(void)
 		0 + m_pObj->GetScroll().y,
 		0.f);
 
+	
+	
+
 	CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
 	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
 		NULL, &D3DXVECTOR3(TILECX / 2.f, TILECY / 2.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	for (size_t i = 0; i < m_vecBack.size(); ++i)
+	{ 
+		pTexture = CTextureMgr::GetInstance()->GetTexture(L"Back", L"Object", m_vecBack[i]->iIndex);
+
+		if (pTexture == NULL)
+			return;
+
+		D3DXMatrixTranslation(&matTrans, 
+			m_vecBack[i]->vPos.x + m_pObj->GetScroll().x,
+			m_vecBack[i]->vPos.y + m_pObj->GetScroll().y,
+			0.f);
+
+		float fX = pTexture->tImgInfo.Width / 2.f;
+		float fY = pTexture->tImgInfo.Height / 2.f;
+
+		CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
+		CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
+			NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
 	// 드래그값이 1이면 화면을 그리시작함.
 	if (m_iDragState == 1)
@@ -109,6 +111,9 @@ void	CBattleFieldBackBridge::Release(void)
 {
 	for_each(m_vecTile.begin(), m_vecTile.end(), DeleteObj());
 	m_vecTile.clear();
+
+	for_each(m_vecBack.begin(), m_vecBack.end(), DeleteObj());
+	m_vecBack.clear();
 }
 
 int	CBattleFieldBackBridge::Picking(void)
@@ -286,11 +291,14 @@ int	CBattleFieldBackBridge::Picking(void)
 		m_vDrag[4] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.top);
 	}
 	if (m_bStage)
+	{
+		//CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CObjFactory<CEffect, CTimerEffectBridge>::CreateObj(L"Victory", m_vScore , m_fTime));
 		m_fTime -= CTimeMgr::GetInstance()->GetTime();
+	}
 
 	if (m_bStage && m_fTime <= 0)
 	{
-		CSceneMgr::GetInstance()->SetScene(SC_FILED);
+		CSceneMgr::GetInstance()->SetScene(SC_FIELD);
 		return 1;
 	}
 

@@ -81,6 +81,9 @@ public:
 		return pObj;
 	}
 
+	
+
+
 public:
 	CObjFactory(void){	}
 	~CObjFactory(void){	}
