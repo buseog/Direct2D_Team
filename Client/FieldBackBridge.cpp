@@ -84,7 +84,7 @@ void	CFieldBackBridge::Render(void)
 			NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 
-	list<CObj*>* pvecUnit = CObjMgr::GetInstance()->GetObjList(OBJ_UNIT);
+	list<CObj*>* pvecUnit = CObjMgr::GetInstance()->GetObjList(SC_FIELD ,OBJ_UNIT);
 
 	int iCount = 0;
 
@@ -127,7 +127,7 @@ int	CFieldBackBridge::Picking(void)
 {
 	if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON,5))
 	{
-		list<CObj*>* pMonster = CObjMgr::GetInstance()->GetObjList(OBJ_MONSTER);
+		list<CObj*>* pMonster = CObjMgr::GetInstance()->GetObjList(SC_FIELD, OBJ_MONSTER);
 		const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_PLAYER);
 		
 		POINT	Pt;
