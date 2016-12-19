@@ -31,6 +31,7 @@ public:
 	virtual void AddItem(INFO& rInfo);
 	virtual void LoadData(void);
 	virtual void ShowTooltip(void);
+	virtual void BuyItem(void);
 	//virtual void SetItem(INFO& rInfo);
 	
 	CItem*	CreateWeapon(ITEM* _pItem,D3DXVECTOR3 vPos);

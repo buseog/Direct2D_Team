@@ -397,3 +397,6 @@ void CStoreBridge::LoadData(void)
 void CStoreBridge::ShowTooltip(void)
 {
 }
+void CStoreBridge::BuyItem(void)
+{
+}
