@@ -23,7 +23,8 @@ protected:
 	bool	m_bSelect;
 	bool	m_bTooltip;
 	bool	m_bPick;
-	bool	m_bMove;	
+	bool	m_bMove;
+	bool	m_bOut;
 
 
 public:

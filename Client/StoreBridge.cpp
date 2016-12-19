@@ -26,6 +26,7 @@ CStoreBridge::CStoreBridge(void)
 , m_bMove(false)
 , m_iSelectIndex(-1)
 , m_iFood(-1)
+, m_bOut(false)
 {
 }
 

@@ -117,7 +117,7 @@ void CInvenBridge::Render(void)
 	{
 		(*iter)->Render();
 	}
-	if(m_bTooltip)
+	if(m_bTooltip&&!m_bDrag)
 	{
 		ShowTooltip();
 	}
@@ -312,11 +312,16 @@ int CInvenBridge::Picking(void)
 
 	if(CKeyMgr::GetInstance()->StayKeyDown(VK_LBUTTON) && m_iSelectIndex >= 0 && m_bSelect)
 	{
+		m_bDrag=true;
 		m_ItemSlot[m_iSelectIndex]->SetPos(GetMouse());
 
 		return 1;
 
-	}	
+	}
+	else
+	{
+		m_bDrag=false;
+	}
 
 	if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON) && !m_ItemSlot.empty() && m_bSelect == false)
 	{
@@ -576,21 +581,22 @@ vector<CItem*>* CInvenBridge::GetItemSlot(void)
 }
 void CInvenBridge::ShowTooltip()
 {
-
+	if(m_bDrag)
+		return;
 	D3DXMATRIX matTrans;
 	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(L"ToolTip");
 	float TPosX =0.f;
 	float TPosY = 0.f;
-	if(m_bPick)
+	/*if(m_bPick)
 	{
 		TPosX = m_ItemSlot[m_iIndex]->GetInfo()->vPos.x;
 		TPosY = m_ItemSlot[m_iIndex]->GetInfo()->vPos.y;
 	}
 	else
-	{
+	{*/
 		TPosX = 	::GetMouse().x;
 		TPosY = 	::GetMouse().y;
-	}
+	/*}*/
 
 	float fX = pTexture->tImgInfo.Width  / 2.f;
 	float fY = pTexture->tImgInfo.Height / 2.f;
