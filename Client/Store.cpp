@@ -33,7 +33,7 @@ void	CStore::Progress(void)
 	}
 
 	if (m_bView)
-		m_pBridge->Progress(m_tInfo);	
+	m_pBridge->Progress(m_tInfo);	
 
 }
 

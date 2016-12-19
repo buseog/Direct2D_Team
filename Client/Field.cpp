@@ -42,6 +42,13 @@
 #include "TownBridge.h"
 
 
+#include "SoundMgr.h"
+
+#include "AllyUnit.h"
+#include "UnitBridge.h"
+#include "ObjFactory.h"
+
+
 
 CField::CField(void)
 : m_bStage(false)
@@ -67,18 +74,28 @@ HRESULT	CField::Initialize(void)
 	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"KimYuSin", L"Walk_1", D3DXVECTOR3(1500.f, 700.f, 0.f)));
 	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"Waki", L"Walk_1", D3DXVECTOR3(900.f, 300.f, 0.f)));
 
-	
-
-
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi,CMainUiBridge>::CreateUI(L"FieldMainUi",400.f,553.f));	
 	CUIMgr::GetInstance()->AddUI(UI_INVEN, CUIFactory<CInventory,CInvenBridge>::CreateUI(L"Inventory", 580.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STAT, CUIFactory<CStatus,CStatusBridge>::CreateUI(L"Status", 180.f, 250.f));
 
-	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CBasicStore,CBasicStoreBridge>::CreateUI(L"Store",200.f,250.f));
+	//CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CStore,CStoreBridge>::CreateUI(L"Store", 180.f,250.f));
+	/*CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CBasicStore,CBasicStoreBridge>::CreateUI(L"Store",200.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CDrugStore,CDrugStoreBridge>::CreateUI(L"Store",200.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CMercenaryStore,CMercenaryStoreBridge>::CreateUI(L"Store",200.f,250.f));
+	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CMercenaryDisplay,CMercenaryDisplayBridge>::CreateUI(L"Store",0.f,250.f));*/
 
 	CUIMgr::GetInstance()->AddUI(UI_BUTTON, CUIFactory<CTownButton,CTownBridge>::CreateUI(L"BigTown", 1720.f, 320.f));
+
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/FieldBGM.wav");		// 필드 - 0
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/Battleground.wav");	// 배틀존 - 1
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/Town.wav");			// 마을 - 2
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/BuyItem.wav");		// 클릭 시 - 3
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/IceWall.wav");		// 아이스 월 - 4
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/storm.wav");			// 스톰 - 5
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/lightning.wav");		// 라이트닝 - 6
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/Boom.wav");			// 폭발 - 7
+
+	CSoundMgr::GetInstance()->SoundPlay(0, 1);
 
 	return S_OK;	
 
@@ -90,8 +107,6 @@ void	CField::Progress(void)
 	CUIMgr::GetInstance()->Progress();
 	CUIMgr::GetInstance()->Picking();
 	CObjMgr::GetInstance()->Picking();
-	
-
 }
 
 void	CField::Render(void)
@@ -109,17 +124,17 @@ void	CField::LoadPNG(void)
 {
 	CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Map/Map00.png", L"Field", TEX_SINGLE);
 
-	/*if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Tile/Tile/Tile%d.png", 
-		L"TILE", TEX_MULTI, L"Tile", 216)))
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI1.png", 
+		L"HpBar", TEX_SINGLE)))
 	{
-		ERR_MSG(L"Tile 멀티 텍스쳐 생성 실패")
+		ERR_MSG(L"HpBar 싱글 텍스쳐 생성 실패")
 		return;
-	}*/
+	}
 
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/TILEMAP/TILE0%d.png", 
-		L"TILE", TEX_MULTI, L"Tile", 4)))
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI12.png", 
+		L"MpBar", TEX_SINGLE)))
 	{
-		ERR_MSG(L"TILE 멀티 텍스쳐 생성 실패")
+		ERR_MSG(L"MpBar 싱글 텍스쳐 생성 실패")
 		return;
 	}
 	
@@ -258,3 +273,4 @@ void	CField::LoadPNG(void)
 
 
 }
+

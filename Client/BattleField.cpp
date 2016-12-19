@@ -27,6 +27,9 @@
 #include "MainUiBridge.h"
 
 #include "Player.h"
+
+#include "SoundMgr.h"
+
 CBattleField::CBattleField(void)
 {
 }
@@ -68,6 +71,12 @@ HRESULT	CBattleField::Initialize(void)
 
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi, CMainUiBridge>::CreateUI(L"Minimap", 100.f, 550.f));	
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi, CMainUiBridge>::CreateUI(L"BattleFieldMainUi",400.f,553.f));	
+
+	
+
+	CSoundMgr::GetInstance()->SoundStop(0);
+	CSoundMgr::GetInstance()->SoundPlay(1, 1);
+
 	return S_OK;
 }
 
@@ -126,19 +135,6 @@ void	CBattleField::LoadPNG(void)
 		return;
 	}
 
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI1.png", 
-		L"HpBar", TEX_SINGLE)))
-	{
-		ERR_MSG(L"HpBar 싱글 텍스쳐 생성 실패")
-		return;
-	}
-
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI12.png", 
-		L"MpBar", TEX_SINGLE)))
-	{
-		ERR_MSG(L"MpBar 싱글 텍스쳐 생성 실패")
-		return;
-	}
 
 	// 단축키 버튼 (은지 추가)
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI2.png", L"HotKeyStop", TEX_SINGLE)))

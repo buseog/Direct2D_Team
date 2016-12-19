@@ -33,6 +33,8 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 
+
+
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 
@@ -52,6 +54,12 @@
 #include "TimeMgr.h"
 
 #include <crtdbg.h>
+
+// »ç¿îµå
+#include <MMSystem.h>
+#include <dsound.h>
+#pragma comment (lib, "winmm.lib")
+#pragma comment (lib, "dsound.lib")
 
 using namespace std;
 

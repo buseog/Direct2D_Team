@@ -40,7 +40,7 @@ void	CSKillMgr::Skill(D3DXVECTOR3 vPos, D3DXVECTOR3 vTarget, const wstring&	wstr
 void	CSKillMgr::ThunderField(D3DXVECTOR3 vPos)
 {
 	float fAngle = 90.f;
-	float fDistance = 100.f;
+	float fDistance = 120.f;
 
 	for (int i = 0; i < 40; ++i)
 	{

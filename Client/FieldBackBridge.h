@@ -1,15 +1,18 @@
 #pragma once
 #include "backbridge.h"
 
+class CUi;
 class CFieldBackBridge :
 	public CBackBridge
 {
 private:
+	vector<CUi*>	m_vecPortrait;
 	bool	m_bStage;
 	float	m_fTime;
 
 public:
 	void	BattleWait(void);
+	void	InitPortrait(void);
 
 
 

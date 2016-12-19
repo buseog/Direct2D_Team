@@ -7,14 +7,15 @@
 #include "Field.h"
 #include "Village.h"
 #include "BattleField.h"
+#include "InVillage.h"
 
 
 IMPLEMENT_SINGLETON(CSceneMgr)
 
 CSceneMgr::CSceneMgr(void)
 : m_pScene(NULL)
-
 {
+	ZeroMemory(&m_arScene, sizeof(CScene) * SC_END);
 }
 
 CSceneMgr::~CSceneMgr(void)
@@ -23,25 +24,42 @@ CSceneMgr::~CSceneMgr(void)
 }
 void CSceneMgr::SetScene(SCENEID _eScene)
 {
-	if(m_pScene)
-		::Safe_Delete(m_pScene);
-
 	switch(_eScene)
 	{
 	case SC_START:
-		m_pScene = new CStart;
+		if (m_arScene[SC_START] == NULL)
+			m_pScene = new CStart;
+
+		else
+			m_pScene = m_arScene[SC_START];
 		break;
 
-	case SC_FILED:
-		m_pScene = new CField;
+	case SC_FIELD:
+		if (m_arScene[SC_FIELD] == NULL)
+			m_pScene = new CField;
+
+		else
+			m_pScene = m_arScene[SC_FIELD];
 		break;
 	
 	case SC_VILLAGE:
-		m_pScene = new CVillage;
+		if (m_arScene[SC_VILLAGE] == NULL)
+			m_pScene = new CVillage;
+
+		else
+			m_pScene = m_arScene[SC_VILLAGE];
 		break;
 
 	case SC_BATTLEFIELD:
-		m_pScene = new CBattleField;
+		if (m_arScene[SC_BATTLEFIELD] == NULL)
+			m_pScene = new CBattleField;
+
+		else
+			m_pScene = m_arScene[SC_BATTLEFIELD];
+		break;
+
+	case SC_INVILLAGE:
+		m_pScene = new CInVillage;
 		break;
 	}
 
@@ -106,8 +124,11 @@ void CSceneMgr::Render(void)
 
 void CSceneMgr::Release(void)
 {
-	if(m_pScene)
-		::Safe_Delete(m_pScene);
+	for (int i = 0; i < SC_END; ++i)
+	{
+		::Safe_Delete(m_arScene[i]);
+	}
+	m_pScene = NULL;
 }
 
 void CSceneMgr::SetMouse(const wstring& wstrMouseKey)

@@ -187,7 +187,9 @@ int CBasicStoreBridge::Picking(void) ///툴팁기능 추가해야함
 				{
 				case 0://구매버튼
 					{
+
 						BuyItem();
+
 					break;
 					}
 				case 1://취소버튼
@@ -450,7 +452,7 @@ void CBasicStoreBridge::ShowTooltip(void)
 
 void CBasicStoreBridge::BuyItem(void)
 {
-	CUi* pUi = CUIMgr::GetInstance()->GetUi(SC_FILED,UI_INVEN);
+	CUi* pUi = CUIMgr::GetInstance()->GetUi(SC_FIELD,UI_INVEN);
 	vector<CItem*>* pInven  =  ((CInvenBridge*)pUi->GetBridge())->GetItemSlot();
 	for(size_t i =0; i < (*pInven).size(); ++i)
 	{
