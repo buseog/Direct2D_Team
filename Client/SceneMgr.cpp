@@ -7,6 +7,7 @@
 #include "Field.h"
 #include "Village.h"
 #include "BattleField.h"
+#include "InVillage.h"
 
 
 IMPLEMENT_SINGLETON(CSceneMgr)
@@ -42,6 +43,10 @@ void CSceneMgr::SetScene(SCENEID _eScene)
 
 	case SC_BATTLEFIELD:
 		m_pScene = new CBattleField;
+		break;
+
+	case SC_INVILLAGE:
+		m_pScene = new CInVillage;
 		break;
 	}
 

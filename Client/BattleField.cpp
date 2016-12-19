@@ -27,6 +27,9 @@
 #include "MainUiBridge.h"
 
 #include "Player.h"
+
+#include "SoundMgr.h"
+
 CBattleField::CBattleField(void)
 {
 }
@@ -68,6 +71,12 @@ HRESULT	CBattleField::Initialize(void)
 
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi, CMainUiBridge>::CreateUI(L"Minimap", 100.f, 550.f));	
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi, CMainUiBridge>::CreateUI(L"BattleFieldMainUi",400.f,553.f));	
+
+	
+
+	CSoundMgr::GetInstance()->SoundStop(0);
+	CSoundMgr::GetInstance()->SoundPlay(1, 1);
+
 	return S_OK;
 }
 

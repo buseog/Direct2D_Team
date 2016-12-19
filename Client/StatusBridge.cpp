@@ -11,6 +11,7 @@
 #include "ButtonBridge.h"
 #include "KeyMgr.h"
 #include "Player.h"
+#include "SoundMgr.h"
 
 CStatusBridge::CStatusBridge(void)
 
@@ -310,18 +311,22 @@ int	CStatusBridge::Picking(void)
 					switch(iIndex)
 					{
 						case 0:
+							CSoundMgr::GetInstance()->SoundPlay(3, 0);
 							((CPlayer*)pPlayer)->SetStat(iIndex);
 							break;
 
 						case 1:
+							CSoundMgr::GetInstance()->SoundPlay(3, 0);
 							((CPlayer*)pPlayer)->SetStat(iIndex);
 							break;
 
 						case 2:
+							CSoundMgr::GetInstance()->SoundPlay(3, 0);
 							((CPlayer*)pPlayer)->SetStat(iIndex);
 							break;
 
 						case 3:
+							CSoundMgr::GetInstance()->SoundPlay(3, 0);
 							((CPlayer*)pPlayer)->SetStat(iIndex);
 							break;
 					}

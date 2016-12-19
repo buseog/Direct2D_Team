@@ -216,7 +216,7 @@ int CInvenBridge::Picking(void)
 		Pt.y = (long)GetMouse().y;
 
 	const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_PLAYER);
-
+ 
 	if(CKeyMgr::GetInstance()->KeyUp(VK_LBUTTON, 1) && m_iSelectIndex >= 0)
 	{
 		for(size_t j =0; j<10; ++j)

@@ -342,6 +342,10 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="10. SoundMgr"
+				>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="98. Design"
@@ -506,6 +510,18 @@
 							</File>
 							<File
 								RelativePath=".\BattleFieldBackBridge.h"
+								>
+							</File>
+						</Filter>
+						<Filter
+							Name="03. InVillageBackBridge"
+							>
+							<File
+								RelativePath=".\InVillageBackBridge.cpp"
+								>
+							</File>
+							<File
+								RelativePath=".\InVillageBackBridge.h"
 								>
 							</File>
 						</Filter>
@@ -849,6 +865,18 @@
 				</File>
 				<File
 					RelativePath=".\BattleField.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="04. InVillage"
+				>
+				<File
+					RelativePath=".\InVillage.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\InVillage.h"
 					>
 				</File>
 			</Filter>
@@ -1332,6 +1360,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\SoundMgr.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\stdafx.cpp"
 					>
 					<FileConfiguration
@@ -1363,6 +1395,10 @@
 				</File>
 				<File
 					RelativePath=".\Resource.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SoundMgr.h"
 					>
 				</File>
 				<File
