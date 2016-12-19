@@ -220,7 +220,7 @@ void	CUnitBridge::Attack(INFO& rInfo)
 {
 	// 무브 오더를 받았을때만 이 무브함수를 사용
 	// 목표지점까지 방향벡터를 구해서거리가 10이상일때만 움직임.
-	list<CObj*>* pMonList = CObjMgr::GetInstance()->GetObjList(OBJ_MONSTER);
+	list<CObj*>* pMonList = CObjMgr::GetInstance()->GetObjList(SC_BATTLEFIELD, OBJ_MONSTER);
 	RECT rc;
 
 

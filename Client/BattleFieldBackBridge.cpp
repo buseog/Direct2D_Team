@@ -35,15 +35,15 @@ HRESULT	CBattleFieldBackBridge::Initialize(void)
 
 void	CBattleFieldBackBridge::Progress(INFO& rInfo)
 {
-	m_ObjList[OBJ_MONSTER] =  CObjMgr::GetInstance()->GetObjList(OBJ_MONSTER);
-	m_ObjList[OBJ_EFFECT]  = CObjMgr::GetInstance()->GetObjList(OBJ_EFFECT);
+
+	m_ObjList[OBJ_MONSTER] =  CObjMgr::GetInstance()->GetObjList(SC_BATTLEFIELD, OBJ_MONSTER);
+	m_ObjList[OBJ_EFFECT]  = CObjMgr::GetInstance()->GetObjList(SC_BATTLEFIELD, OBJ_EFFECT);
 	
 	CCollisionMgr::SkillCollision(m_ObjList[OBJ_EFFECT], m_ObjList[OBJ_MONSTER]);
 
 
 	if(m_ObjList[OBJ_MONSTER]->empty() && m_bStage == false)
 	{	
-
 		m_bStage = true;
 		m_fTime = 5.f;
 		
@@ -119,8 +119,8 @@ void	CBattleFieldBackBridge::Release(void)
 int	CBattleFieldBackBridge::Picking(void)
 {
 	// 배틀필드 아군 유닛 리스트를 받아옴
-	list<CObj*>*	plistUnit = CObjMgr::GetInstance()->GetObjList(OBJ_UNIT);
-	list<CObj*>*	plistMonster = CObjMgr::GetInstance()->GetObjList(OBJ_MONSTER);
+	list<CObj*>*	plistUnit = CObjMgr::GetInstance()->GetObjList(SC_BATTLEFIELD, OBJ_UNIT);
+	list<CObj*>*	plistMonster = CObjMgr::GetInstance()->GetObjList(SC_BATTLEFIELD, OBJ_MONSTER);
 	POINT pt;
 	pt.x = (long)::GetMouse().x - (long)m_pObj->GetScroll().x;
 	pt.y = (long)::GetMouse().y - (long)m_pObj->GetScroll().y;
@@ -243,7 +243,7 @@ int	CBattleFieldBackBridge::Picking(void)
 		m_vDrag[4] = D3DXVECTOR2((float)m_rcDrag.left, (float)m_rcDrag.top);
 		
 		// 배틀필드 아군 유닛리스트를 얻어온다
-		list<CObj*>* pUnitList = CObjMgr::GetInstance()->GetObjList(OBJ_UNIT);
+		list<CObj*>* pUnitList = CObjMgr::GetInstance()->GetObjList(SC_BATTLEFIELD, OBJ_UNIT);
 		// 유닛리스트를 비워준다
 		CCrowdMgr::GetInstance()->Clear();
 

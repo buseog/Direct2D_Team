@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "CollisionMgr.h"
 #include "EnemyUnit.h"
+#include "Effect.h"
 
 CCollisionMgr::CCollisionMgr(void)
 {
@@ -20,50 +21,22 @@ void CCollisionMgr::SkillCollision(list<CObj*>* pSkill, list<CObj*>* pEnemyUnit)
 			for(list<CObj*>::iterator	Enemyiter = pEnemyUnit->begin();
 				Enemyiter != pEnemyUnit->end(); ++Enemyiter)
 			{
-				if(IntersectRect(&rcCol, &((*Skilliter))->GetRect(), &((*Enemyiter)->GetRect())))
+				if(IntersectRect(&rcCol, &((CEffect*)(*Skilliter))->GetRect(), &((*Enemyiter)->GetRect())))
 				{
-					int iHeight = rcCol.bottom  - rcCol.top ;
-					int iWidth  = rcCol.right  - rcCol.left ; 
-					
-					if(iWidth > iHeight) // 상하충돌
+					if(!(*Skilliter)->GetHit())
 					{
-						if(!(*Skilliter)->GetHit())
+						(*Enemyiter)->SetDamage(50);
+						(*Skilliter)->SetHit(true);
+					
+						if((*Enemyiter)->GetStat()->iHealthPoint <=0)
 						{
-							if((*Skilliter)->GetObjKey() == L"Effect")
-							{
-								(*Enemyiter)->SetDamage(50);
-								(*Skilliter)->SetHit(true);
-							
-								if((*Enemyiter)->GetStat()->iHealthPoint <=0)
-								{
-									(*Enemyiter)->SetOrder(OD_DIE);
-									(*Enemyiter)->GetBridge()->SetFrame(L"Die");
-								}
-							}
+							(*Enemyiter)->SetDestroy(true);
+							/*(*Enemyiter)->SetOrder(OD_DIE);
+							(*Enemyiter)->GetBridge()->SetFrame(L"Die");*/
 						}
-
 					}
-					
-					else
-					{
-						if(!(*Skilliter)->GetHit())
-						{
-							if((*Skilliter)->GetObjKey() == L"Effect")
-							{
-								(*Skilliter)->SetHit(true);
-								(*Enemyiter)->SetDamage(50);
-							
-								if((*Enemyiter)->GetStat()->iHealthPoint <=0)
-								{
-									(*Enemyiter)->SetOrder(OD_DIE);
-									(*Enemyiter)->GetBridge()->SetFrame(L"Die");
-								}
-							}
-						}
-					}	
 				}
 			}
-	
 		}
 
 }

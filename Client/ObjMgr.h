@@ -17,7 +17,7 @@ public:
 
 	const		vector<TILE2*>*		GetTile(void);
 	const		CObj*				GetObj(OBJID _eID);
-	list<CObj*>*	GetObjList(OBJID _eID);
+	list<CObj*>*	GetObjList(SCENEID eSCID, OBJID _eID);
 
 public:
 	HRESULT			Initialize(void);

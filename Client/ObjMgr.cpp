@@ -112,9 +112,9 @@ const CObj* CObjMgr::GetObj(OBJID _eID)
 	return m_ObjList[m_eSceneID][_eID].front();
 }
 
-list<CObj*>* CObjMgr::GetObjList(OBJID _eID)
+list<CObj*>* CObjMgr::GetObjList(SCENEID eSCID, OBJID _eID)
 {
-	return &m_ObjList[m_eSceneID][_eID];
+	return &m_ObjList[eSCID][_eID];
 }
 void CObjMgr::SetSceneID(SCENEID	eID)
 {

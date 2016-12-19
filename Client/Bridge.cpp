@@ -58,7 +58,12 @@ void	CBridge::Frame(void)
 	m_tFrame.fFrame += m_tFrame.fCount * CTimeMgr::GetInstance()->GetTime();
 
 	if(m_tFrame.fFrame > m_tFrame.fMax)
-		m_tFrame.fFrame = 0;
+	{
+		if (m_pObj != NULL && m_pObj->GetOrder() == OD_DIE)
+			m_pObj->SetDestroy(true);
+		else
+			m_tFrame.fFrame = 0;
+	}
 }
 
 void	CBridge::SetObjSize(void)

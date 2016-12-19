@@ -57,7 +57,7 @@ public:
 	const float			GetRevolution(void);	// 공전(목표 주변으로의 각도) 각도를 반환해줌
 	const float			GetSpeed(void);			// 스피드값 반환
 	const int			GetOrder(void);			// 오더상태를 반환함(0// 스탠드, 1//에이스타, 2// 무브)
-	const RECT			GetRect(void);			// 렉트 사이즈 반환 충돌용.
+	virtual const RECT			GetRect(void);			// 렉트 사이즈 반환 충돌용.
 	bool				GetHit(void);
 	const D3DXVECTOR3	GetOriginPos(void);
 	const D3DXVECTOR3	GetScroll(void);		// 스크롤값 반환

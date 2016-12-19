@@ -13,9 +13,16 @@ protected:
 private:
 	void	Move(INFO& rInfo);
 	void	Stop(INFO& rInfo);
+	void    Back(INFO& rInfo);
 	void	Attack(INFO& rInfo);
 	void	AStarMove(INFO& rInfo);
-	virtual	void	Frame(void);
+
+	//virtual	void	Frame(void);
+
+	void	SetAstar(D3DXVECTOR3 vTarget);
+
+	void    ArtificiaIintelligence(INFO& rInfo);
+
 
 public:	
 	virtual HRESULT	Initialize(void);
