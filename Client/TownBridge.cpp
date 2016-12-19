@@ -5,6 +5,8 @@
 #include "Ui.h"
 #include "SceneMgr.h"
 #include "KeyMgr.h"
+#include "SoundMgr.h"
+#include "TimeMgr.h"
 
 CTownBridge::CTownBridge(void)
 {
@@ -79,6 +81,7 @@ int CTownBridge::Picking(void)
 		SetMapKey(1);
 		if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON, 6))
 		{
+			CSoundMgr::GetInstance()->SoundPlay(3, 0);
 			CSceneMgr::GetInstance()->SetScene(SC_VILLAGE);
 			return 1;	
 		}
