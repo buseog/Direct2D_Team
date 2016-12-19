@@ -4,7 +4,6 @@
 #include "Ui.h"
 #include "SceneMgr.h"
 #include "KeyMgr.h"
-#include "SoundMgr.h"
 
 CBasicBridge::CBasicBridge(void)
 {
@@ -79,8 +78,6 @@ int CBasicBridge::Picking(void)
 		SetMapKey(1);
 		if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON, 7))
 		{
-			CSoundMgr::GetInstance()->SoundPlay(3, 0);
-			CSceneMgr::GetInstance()->SetScene(SC_INVILLAGE);
 			return 1;	
 				
 		}

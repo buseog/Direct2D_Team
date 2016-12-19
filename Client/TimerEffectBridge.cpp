@@ -32,8 +32,8 @@ void CTimerEffectBridge::Render(void)
 	if(pTexture == NULL)
 		return;
 
-	float fX = (float)pTexture->tImgInfo.Width / 2.f;
-	float fY = (float)pTexture->tImgInfo.Height;
+	float fX = pTexture->tImgInfo.Width / 2.f;
+	float fY = pTexture->tImgInfo.Height;
 
 	CDevice::GetInstance()->Render_End();
 	CDevice::GetInstance()->Render_Begin();

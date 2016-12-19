@@ -60,9 +60,6 @@ void CBackGround::Render(void)
 	m_pDevice->GetSprite()->Draw(pBackTexture->pTexture, 
 				NULL, &D3DXVECTOR3((float)pBackTexture->tImgInfo.Width, (float)pBackTexture->tImgInfo.Height, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
-
-	ObjRender();
-
 	if(m_bTileCheck)
 	{
 		for (int i = 0; i < TILEY; ++i)
@@ -87,14 +84,16 @@ void CBackGround::Render(void)
 					NULL, &D3DXVECTOR3(32.f, 16.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 				// ÆùÆ®
-			/*wsprintf(szBuf, L"%d", iIndex);
+			wsprintf(szBuf, L"%d", iIndex);
 			m_pDevice->GetFont()->DrawTextW(m_pDevice->GetSprite(), 
 				szBuf, lstrlen(szBuf), 
 				NULL, NULL, 
-				D3DCOLOR_ARGB(255, 255, 255, 255));*/
+				D3DCOLOR_ARGB(255, 255, 255, 255));
 			}
 		}
 	}
+
+	ObjRender();
 
 }	
 
