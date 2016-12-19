@@ -78,12 +78,12 @@ HRESULT	CField::Initialize(void)
 	CUIMgr::GetInstance()->AddUI(UI_INVEN, CUIFactory<CInventory,CInvenBridge>::CreateUI(L"Inventory", 580.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STAT, CUIFactory<CStatus,CStatusBridge>::CreateUI(L"Status", 180.f, 250.f));
 
-	//CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CStore,CStoreBridge>::CreateUI(L"Store", 180.f,250.f));
-	/*CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CBasicStore,CBasicStoreBridge>::CreateUI(L"Store",200.f,250.f));
+	////////////
+	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CBasicStore,CBasicStoreBridge>::CreateUI(L"Store",200.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CDrugStore,CDrugStoreBridge>::CreateUI(L"Store",200.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CMercenaryStore,CMercenaryStoreBridge>::CreateUI(L"Store",200.f,250.f));
-	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CMercenaryDisplay,CMercenaryDisplayBridge>::CreateUI(L"Store",0.f,250.f));*/
-
+	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CMercenaryDisplay,CMercenaryDisplayBridge>::CreateUI(L"Store",0.f,250.f));
+/////////////
 	CUIMgr::GetInstance()->AddUI(UI_BUTTON, CUIFactory<CTownButton,CTownBridge>::CreateUI(L"BigTown", 1720.f, 320.f));
 
 	CSoundMgr::GetInstance()->LoadWave(L"../Sound/FieldBGM.wav");		// ÇÊµå - 0

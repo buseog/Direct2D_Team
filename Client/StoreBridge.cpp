@@ -26,6 +26,7 @@ CStoreBridge::CStoreBridge(void)
 , m_bMove(false)
 , m_iSelectIndex(-1)
 , m_iFood(-1)
+, m_bOut(false)
 {
 }
 
@@ -395,5 +396,8 @@ void CStoreBridge::LoadData(void)
 }
 
 void CStoreBridge::ShowTooltip(void)
+{
+}
+void CStoreBridge::BuyItem(void)
 {
 }

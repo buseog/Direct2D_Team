@@ -4,6 +4,8 @@
 class CDrugStoreBridge :
 	public CStoreBridge
 {
+private:
+	vector<CUi*>		m_vecButton;
 protected:
 	virtual void	WorldMatrix(INFO& rInfo);
 
@@ -11,6 +13,8 @@ public:
 	//virtual void SortItem(INFO& rInfo);
 	virtual void AddItem(INFO& rInfo);
 	virtual void LoadData(void);
+	virtual void ShowTooltip(void);
+	virtual void BuyItem(void);
 	//virtual void SetItem(INFO& rInfo);
 
 	/*virtual CItem*	CreateWeapon(D3DXVECTOR3 vPos);

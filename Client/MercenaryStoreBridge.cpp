@@ -104,52 +104,93 @@ void CMercenaryStoreBridge::AddItem(INFO& rInfo)///수정 필요 안씀!
 
 int CMercenaryStoreBridge::Picking(void) ///툴팁기능 추가해야함
 {
-	/*POINT	Pt;
-		Pt.x = (long)GetMouse().x;
-		Pt.y = (long)GetMouse().y;
-
-	if(CKeyMgr::GetInstance()->KeyUp(VK_LBUTTON, 1) && m_iSelectIndex >= 0)
-	{
-		for(size_t j =0; j<20; ++j)
-		{
-			if(PtInRect(&m_UnitSlot[j]->GetRect(), Pt))
-			{
-				swap(m_UnitSlot[m_iSelectIndex],m_UnitSlot[j]); 
-			}			
-		}
-
-		m_bSelect = false;
-		m_iSelectIndex = -1;
-
-		return 1;
-	}
+	//POINT	Pt;
+	//Pt.x = (long)GetMouse().x;
+	//Pt.y = (long)GetMouse().y;
 
 
 
-	if(CKeyMgr::GetInstance()->StayKeyDown(VK_LBUTTON) && m_iSelectIndex >= 0 && m_bSelect)
-	{
-		m_UnitSlot[m_iSelectIndex]->SetPos(GetMouse());
+	//if(PtInRect(&m_pUi->GetRect(),Pt))
+	//{
+	//	for(size_t j =0; j<20; ++j)
+	//	{
+	//		if(PtInRect(&m_ItemSlot[j]->GetRect(), Pt) && m_ItemSlot[j]->GetObjKey() != L"Empty")
+	//		{
+	//			m_bTooltip=true;
+	//			if(!m_bPick)
+	//				m_iIndex = j;
+	//			if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON,4))
+	//			{
+	//				if(!m_bPick)//flase
+	//					m_bPick=true;
+	//				else
+	//					m_bPick=false;
+	//				break;
+	//			}
+	//			//m_bPick=false;
+	//			break;
+	//		}
+	//		if(!m_bPick)
+	//		{
+	//			m_bTooltip=false;
+	//		}
+	//	}
 
-		return 1;
-		
-	}	
-			
-	if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON) && !m_ItemSlot.empty() && m_bSelect == false)
-	{
-		for(size_t i =0 ; i < 10; ++i)
-		{
-			if(PtInRect(&m_UnitSlot[i]->GetRect(), Pt))
-			{
-				m_bSelect = true;
-				m_iSelectIndex = i;
+	//}
+	//if(m_bPick&&m_bTooltip)//툴팁 버튼 클릭
+	//{
+	//	for(size_t i =0; i<m_vecButton.size(); ++i)
+	//	{
+	//		if(PtInRect(&m_vecButton[i]->GetRect(), Pt)&&CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON,4))
+	//		{
+	//			switch(m_vecButton[i]->GetIndexKey())
+	//			{
+	//			case 0://구매버튼
+	//				{
 
-				return 1;
-			}
-		}
-		
-	}*/
+	//					BuyItem();
 
-	
+	//				break;
+	//				}
+	//			case 1://취소버튼
+	//				{
+	//					m_bPick=false;
+	//				break;
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
+
+	//
+	//if(PtInRect(&m_pUi->GetRect(),Pt))
+	//{
+	//	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_wstrStateKey);
+	//	float fX = (float)(pTexture->tImgInfo.Width/2);
+	//	float fY = (float)(pTexture->tImgInfo.Height/2);
+	//	if(m_pUi->GetInfo()->vPos.x+fX >= Pt.x &&
+	//		m_pUi->GetInfo()->vPos.x-fX <= Pt.x &&
+	//		m_pUi->GetInfo()->vPos.y -fY <=Pt.y &&
+	//		m_pUi->GetInfo()->vPos.y -fY+40 >=Pt.y )
+	//	{ 
+	//		//float tmpx = Pt.x;
+	//		//float tmpy = Pt.y;
+	//		if(!m_bMove)
+	//		{
+	//			m_bMove=true;
+	//		}
+	//		else
+	//		{
+	//			m_bMove=false;
+	//		}
+	//		if(CKeyMgr::GetInstance()->StayKeyDown(VK_LBUTTON))
+	//		{
+	//			m_pUi->SetPos(D3DXVECTOR3((float)Pt.x/*+fX-20*/,(float)Pt.y+fY-20,0.f));
+	//		}
+	//		
+	//	}
+	//}
+	//
 	return -1;
 }
 
@@ -238,4 +279,10 @@ void CMercenaryStoreBridge::SortItem(INFO& rInfo)
 		}
 	}
 
+}
+void CMercenaryStoreBridge::ShowTooltip(void)
+{
+}
+void CMercenaryStoreBridge::BuyItem(void)
+{
 }
