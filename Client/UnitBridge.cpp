@@ -49,6 +49,10 @@ void CUnitBridge::Progress(INFO& rInfo)
 	case OD_ATTACK:
 		Attack(rInfo);
 		break;
+
+	case OD_SKILL:
+		Skill(rInfo);
+		break;
 	}
 
 	KeyInput(rInfo);
@@ -184,19 +188,19 @@ void	CUnitBridge::AStarMove(INFO& rInfo)
 
 	// 캐릭터 y각도에 따라서 각도 전환
 	if (rInfo.vDir.y >= 0.75f)
-		m_wstrStateKey = L"Stand_5";
+		m_wstrStateKey = L"Walk_5";
 
 	else if (rInfo.vDir.y >= 0.25f)
-		m_wstrStateKey = L"Stand_1";
+		m_wstrStateKey = L"Walk_1";
 
 	else if (rInfo.vDir.y >= -0.25f)
-		m_wstrStateKey = L"Stand_2";
+		m_wstrStateKey = L"Walk_2";
 
 	else if (rInfo.vDir.y >= -0.75f)
-		m_wstrStateKey = L"Stand_3";
+		m_wstrStateKey = L"Walk_3";
 
 	else
-		m_wstrStateKey = L"Stand_4";
+		m_wstrStateKey = L"Walk_4";
 
 	rInfo.vPos += rInfo.vDir * m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime();
 
@@ -210,6 +214,69 @@ void	CUnitBridge::AStarMove(INFO& rInfo)
 
 void	CUnitBridge::Attack(INFO& rInfo)
 {
+	// 무브 오더를 받았을때만 이 무브함수를 사용
+	// 목표지점까지 방향벡터를 구해서거리가 10이상일때만 움직임.
+	list<CObj*>* pMonList = CObjMgr::GetInstance()->GetObjList(OBJ_MONSTER);
+	RECT rc;
+
+
+	for (list<CObj*>::iterator iter = pMonList->begin(); iter != pMonList->end(); ++iter)
+	{
+		if (IntersectRect(&rc, &(*iter)->GetRect(), &m_pObj->GetRect()))
+		{
+			rInfo.vDir = (*iter)->GetInfo()->vPos - rInfo.vPos;
+
+			float	fDistance = D3DXVec3Length(&rInfo.vDir);
+			D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
+
+			// 캐릭터 y각도에 따라서 각도 전환
+			if (rInfo.vDir.y >= 0.75f)
+				m_wstrStateKey = L"Attack_5";
+
+			else if (rInfo.vDir.y >= 0.25f)
+				m_wstrStateKey = L"Attack_1";
+
+			else if (rInfo.vDir.y >= -0.25f)
+				m_wstrStateKey = L"Attack_2";
+
+			else if (rInfo.vDir.y >= -0.75f)
+				m_wstrStateKey = L"Attack_3";
+
+			else
+				m_wstrStateKey = L"Attack_4";
+
+			return;
+		}
+	}
+
+	rInfo.vDir = m_pObj->GetTargetPoint() - rInfo.vPos;
+	
+	float	fDistance = D3DXVec3Length(&rInfo.vDir);
+	D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
+
+	// 캐릭터 y각도에 따라서 각도 전환
+	if (rInfo.vDir.y >= 0.75f)
+		m_wstrStateKey = L"Walk_5";
+
+	else if (rInfo.vDir.y >= 0.25f)
+		m_wstrStateKey = L"Walk_1";
+
+	else if (rInfo.vDir.y >= -0.25f)
+		m_wstrStateKey = L"Walk_2";
+
+	else if (rInfo.vDir.y >= -0.75f)
+		m_wstrStateKey = L"Walk_3";
+
+	else
+		m_wstrStateKey = L"Walk_4";
+
+	if(fDistance > 10.f)
+	{
+		rInfo.vPos += rInfo.vDir * m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime();
+	}
+	
+	
+	
 }
 
 void	CUnitBridge::Stop(INFO& rInfo)
@@ -264,4 +331,25 @@ void	CUnitBridge::Patrol(INFO& rInfo)
 		m_pObj->SetTargetPoint(m_pObj->GetOriginPos());
 		m_pObj->SetOriginPos(vSwap);
 	}
+}
+
+void	CUnitBridge::Skill(INFO&	rInfo)
+{
+	if (rInfo.vDir.y >= 0.75f)
+		m_wstrStateKey = L"Skill_5";
+
+	else if (rInfo.vDir.y >= 0.25f)
+		m_wstrStateKey = L"Skill_1";
+
+	else if (rInfo.vDir.y >= -0.25f)
+		m_wstrStateKey = L"Skill_2";
+
+	else if (rInfo.vDir.y >= -0.75f)
+		m_wstrStateKey = L"Skill_3";
+
+	else
+		m_wstrStateKey = L"Skill_4";
+
+	if (m_tFrame.fFrame >= m_tFrame.fMax - 1)
+		m_pObj->SetOrder(OD_STAND);
 }

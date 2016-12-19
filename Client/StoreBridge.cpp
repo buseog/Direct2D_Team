@@ -21,8 +21,8 @@
 
 CStoreBridge::CStoreBridge(void)
 : m_bSelect(false)
-, m_bDrag(false)
-, m_bWeapon(false)
+, m_bTooltip(false)
+, m_bPick(false)
 , m_bArmor(false)
 , m_iSelectIndex(-1)
 , m_iFood(-1)
@@ -391,5 +391,9 @@ void CStoreBridge::SortItem(INFO& rInfo)
 //}
 
 void CStoreBridge::LoadData(void)
+{
+}
+
+void CStoreBridge::ShowTooltip(void)
 {
 }

@@ -60,6 +60,26 @@ void CBack::Progress(void)
 	if (CKeyMgr::GetInstance()->KeyDown('2'))
 	{
 		D3DXVECTOR3 vPos = ::GetMouse() - m_vScroll;
+		CObjMgr::GetInstance()->AddObject(OBJ_UNIT, CObjFactory<CAllyUnit, CUnitBridge>::CreateObj(L"YuSeongryong", L"Walk_1", D3DXVECTOR3(vPos.x, vPos.y, 0.f)));
+	}
+
+	
+	if (CKeyMgr::GetInstance()->KeyDown('3'))
+	{
+		D3DXVECTOR3 vPos = ::GetMouse() - m_vScroll;
+		CObjMgr::GetInstance()->AddObject(OBJ_UNIT, CObjFactory<CAllyUnit, CUnitBridge>::CreateObj(L"Samyeong", L"Walk_1", D3DXVECTOR3(vPos.x, vPos.y, 0.f)));
+	}
+
+	if (CKeyMgr::GetInstance()->KeyDown('4'))
+	{
+		D3DXVECTOR3 vPos = ::GetMouse() - m_vScroll;
+		CObjMgr::GetInstance()->AddObject(OBJ_UNIT, CObjFactory<CAllyUnit, CUnitBridge>::CreateObj(L"BlueDragon", L"Stand_1", D3DXVECTOR3(vPos.x, vPos.y, 0.f)));
+	}
+
+
+	if (CKeyMgr::GetInstance()->KeyDown('5'))
+	{
+		D3DXVECTOR3 vPos = ::GetMouse() - m_vScroll;
 		CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CPlayer, CUnitBridge>::CreateObj(L"Walk_1", vPos.x, vPos.y));
 	}
 

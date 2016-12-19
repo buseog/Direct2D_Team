@@ -21,7 +21,7 @@ HRESULT CEnemyUnit::Initialize(void)
 	//m_wstrObjKey = L"EnemyUnit";
 	m_fSpeed = 30.f;
 	m_vTargetPoint = D3DXVECTOR3(450.f, 350.f, 0.f);
-
+	m_iOrder = OD_PATROL;
 	m_tInfo.vSize = D3DXVECTOR3(130.f,140.f,0.f);
 
 	return S_OK;

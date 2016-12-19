@@ -10,6 +10,7 @@ private:
 
 private:
 	CScene*		m_pScene;
+	CScene*		m_arScene[SC_END];
 	wstring		wstrMouse;		//	마우스 텍스쳐 바꾸기 위한 변수
 	FRAME		m_tFrame;		//	마우스 텍스쳐 스프라이트 돌리기 위한 변수
 

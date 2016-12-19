@@ -27,21 +27,50 @@ HRESULT CObjMgr::Initialize(void)
 
 void CObjMgr::Progress(void)
 {
-	for(size_t i = 0; i < OBJ_END; ++i)
+	switch (m_eSceneID)
 	{
-		for(list<CObj*>::iterator	iter = m_ObjList[m_eSceneID][i].begin();
-			iter != m_ObjList[m_eSceneID][i].end(); )
+	case SC_FIELD:
+		for(size_t i = 0; i < OBJ_END; ++i)
 		{
-			(*iter)->Progress();
+			if (i == OBJ_UNIT)
+				continue;
 
-			if ((*iter)->GetDestroy())
+			for(list<CObj*>::iterator	iter = m_ObjList[m_eSceneID][i].begin();
+				iter != m_ObjList[m_eSceneID][i].end(); )
 			{
-				::Safe_Delete(*iter);
-				iter = m_ObjList[m_eSceneID][i].erase(iter);
+				(*iter)->Progress();
+
+				if ((*iter)->GetDestroy())
+				{
+					::Safe_Delete(*iter);
+					iter = m_ObjList[m_eSceneID][i].erase(iter);
+				}
+				else
+					++iter;
 			}
-			else
-				++iter;
 		}
+		break;
+	case SC_BATTLEFIELD:
+		for(size_t i = 0; i < OBJ_END; ++i)
+		{
+			if (i == OBJ_PLAYER)
+				continue;
+
+			for(list<CObj*>::iterator	iter = m_ObjList[m_eSceneID][i].begin();
+				iter != m_ObjList[m_eSceneID][i].end(); )
+			{
+				(*iter)->Progress();
+
+				if ((*iter)->GetDestroy())
+				{
+					::Safe_Delete(*iter);
+					iter = m_ObjList[m_eSceneID][i].erase(iter);
+				}
+				else
+					++iter;
+			}
+		}
+		break;
 	}
 }
 
@@ -104,6 +133,9 @@ int	CObjMgr::Picking(void)
 
 	for(int i = 0; i < OBJ_END; ++i)
 	{
+		if (i == OBJ_EFFECT)
+			continue;
+
 		for(list<CObj*>::iterator	iter = m_ObjList[m_eSceneID][i].begin();
 			iter != m_ObjList[m_eSceneID][i].end(); ++iter)
 		{

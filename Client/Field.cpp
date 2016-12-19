@@ -41,7 +41,12 @@
 #include "TownButton.h"
 #include "TownBridge.h"
 
+
 #include "SoundMgr.h"
+
+#include "AllyUnit.h"
+#include "UnitBridge.h"
+#include "ObjFactory.h"
 
 
 
@@ -64,12 +69,10 @@ HRESULT	CField::Initialize(void)
 	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CPlayerBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
 	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"GoniSh", L"Walk_1", D3DXVECTOR3(500.f, 200.f, 0.f)));
 
-	
-
-
 	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi,CMainUiBridge>::CreateUI(L"FieldMainUi",400.f,553.f));	
 	CUIMgr::GetInstance()->AddUI(UI_INVEN, CUIFactory<CInventory,CInvenBridge>::CreateUI(L"Inventory", 580.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STAT, CUIFactory<CStatus,CStatusBridge>::CreateUI(L"Status", 180.f, 250.f));
+
 	//CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CStore,CStoreBridge>::CreateUI(L"Store", 180.f,250.f));
 	/*CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CBasicStore,CBasicStoreBridge>::CreateUI(L"Store",200.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CDrugStore,CDrugStoreBridge>::CreateUI(L"Store",200.f,250.f));
@@ -99,8 +102,6 @@ void	CField::Progress(void)
 	CUIMgr::GetInstance()->Progress();
 	CUIMgr::GetInstance()->Picking();
 	CObjMgr::GetInstance()->Picking();
-	
-
 }
 
 void	CField::Render(void)
@@ -118,17 +119,17 @@ void	CField::LoadPNG(void)
 {
 	CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Map/Map00.png", L"Field", TEX_SINGLE);
 
-	/*if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Tile/Tile/Tile%d.png", 
-		L"TILE", TEX_MULTI, L"Tile", 216)))
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI1.png", 
+		L"HpBar", TEX_SINGLE)))
 	{
-		ERR_MSG(L"Tile 멀티 텍스쳐 생성 실패")
+		ERR_MSG(L"HpBar 싱글 텍스쳐 생성 실패")
 		return;
-	}*/
+	}
 
-	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/TILEMAP/TILE0%d.png", 
-		L"TILE", TEX_MULTI, L"Tile", 4)))
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/CharInfo/UI12.png", 
+		L"MpBar", TEX_SINGLE)))
 	{
-		ERR_MSG(L"TILE 멀티 텍스쳐 생성 실패")
+		ERR_MSG(L"MpBar 싱글 텍스쳐 생성 실패")
 		return;
 	}
 	
@@ -249,6 +250,14 @@ void	CField::LoadPNG(void)
 	}
 
 
+
+	/////////////////////////////////////////툴팁버튼
+	if(FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/TownButton/UI0.png", 
+		L"StoreButton", TEX_SINGLE)))
+	{
+		ERR_MSG(L"TestUnit 싱글 텍스쳐 생성 실패");
+		return;
+	}
 	// 마을 버튼 - 은지 추가
 	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/Town/Big/Town%d.png", 
 		L"BIGTOWN", TEX_MULTI, L"BigTown", 2)))
@@ -257,4 +266,6 @@ void	CField::LoadPNG(void)
 		return;
 	}
 
+
 }
+

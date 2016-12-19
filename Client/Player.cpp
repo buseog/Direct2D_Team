@@ -108,3 +108,39 @@ void CPlayer::SetMinusDefence(int _iDefence)
 {
 	m_tUnitData.iDeffence -= _iDefence;
 }
+
+void CPlayer::SetPlusHP(int _iHP)
+{
+	m_tUnitData.iMaxHelathPoint += _iHP;
+	m_tUnitData.iHealthPoint	+= _iHP;
+}
+
+void CPlayer::SetMinusHP(int _iHP)
+{
+	m_tUnitData.iMaxHelathPoint -= _iHP;
+	m_tUnitData.iHealthPoint	-= _iHP;
+}
+
+void CPlayer::SetRecoveryHP(int _iHP)
+{
+	
+
+	if(m_tUnitData.iHealthPoint == m_tUnitData.iMaxHelathPoint)
+		return;
+	
+	m_tUnitData.iHealthPoint	+= _iHP;
+
+	if(m_tUnitData.iHealthPoint > m_tUnitData.iMaxHelathPoint)
+		m_tUnitData.iHealthPoint = m_tUnitData.iMaxHelathPoint;
+
+}
+
+int CPlayer::GetHP(void)
+{
+	return m_tUnitData.iHealthPoint;
+}	
+
+int	CPlayer::GetMaxHP(void)
+{
+	return m_tUnitData.iMaxHelathPoint;
+}

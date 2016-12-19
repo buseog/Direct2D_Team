@@ -32,8 +32,8 @@ public:
 		pObj->SetBridge(pBridge);
 		pObj->Initialize();
 		pObj->SetPos(vPos);
-		pObj->SetTargetPoint(pObj->GetInfo()->vPos);
-		//pObj->SetOriginPos(pObj->GetInfo()->vPos);
+		//pObj->SetTargetPoint(pObj->GetInfo()->vPos);
+		pObj->SetOriginPos(pObj->GetInfo()->vPos);
 		pBridge->SetObj(pObj);
 		pBridge->SetFrame(wstrState);
 		pBridge->Initialize();
@@ -57,6 +57,26 @@ public:
 		pBridge->SetFrame(wstrState);
 		pBridge->Initialize();
 		pBridge->SetObjSize();
+		
+		return pObj;
+	}
+
+	
+	static CObj*	CreateObj(const wstring& wstrState, D3DXVECTOR3 vPos, float fTime)
+	{
+		CObj*	pObj = new T;
+		CBridge* pBridge = new T2;
+
+		pObj->SetBridge(pBridge);
+		pObj->Initialize();
+		pObj->SetPos(vPos);
+		//pObj->SetTargetPoint(pObj->GetInfo()->vPos);
+		pObj->SetOriginPos(pObj->GetInfo()->vPos);
+		pBridge->SetObj(pObj);
+		pBridge->SetFrame(wstrState);
+		pBridge->Initialize();
+		pBridge->SetObjSize();
+		pBridge->SetTime(fTime);
 		
 		return pObj;
 	}

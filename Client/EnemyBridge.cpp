@@ -18,6 +18,7 @@ HRESULT	CEnemyBridge::Initialize(void)
 {
 	
 	m_wstrStateKey = L"Walk_1";
+	
 	return S_OK;
 }
 
@@ -26,7 +27,18 @@ void	CEnemyBridge::Progress(INFO& rInfo)
 
 	WorldMatrix(rInfo);
 	Frame();
-	Patrol(rInfo);
+	
+
+	switch (m_pObj->GetOrder())
+	{
+		case OD_STAND:
+			Stop(rInfo);
+			break;
+
+		case OD_PATROL:
+			Patrol(rInfo);
+			break;
+	}
 	
 	
 }
@@ -41,7 +53,7 @@ void	CEnemyBridge::Render(void)
 		return;
 
 	float fX = pTexture->tImgInfo.Width / 2.f;
-	float fY = pTexture->tImgInfo.Height / 2.f;
+	float fY = pTexture->tImgInfo.Height / 2.f + 30.f;
 
 	CDevice::GetInstance()->GetSprite()->SetTransform(&m_pObj->GetInfo()->matWorld);
 	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
@@ -131,3 +143,22 @@ void	CEnemyBridge::Patrol(INFO& rInfo)
 	}
 }
 
+void CEnemyBridge::Stop(INFO &rInfo)
+{
+		// 캐릭터 y각도에 따라서 각도 전환
+	if (rInfo.vDir.y >= 0.75f)
+		m_wstrStateKey = L"Stand_5";
+
+	else if (rInfo.vDir.y >= 0.25f)
+		m_wstrStateKey = L"Stand_1";
+
+	else if (rInfo.vDir.y >= -0.25f)
+		m_wstrStateKey = L"Stand_2";
+
+	else if (rInfo.vDir.y >= -0.75f)
+		m_wstrStateKey = L"Stand_3";
+
+	else
+		m_wstrStateKey = L"Stand_4";
+
+}

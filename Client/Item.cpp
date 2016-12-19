@@ -80,6 +80,11 @@ void	CItem::SetFoodPlus(int iCount)
 	m_tItem.iCount += iCount;
 }
 
+void	CItem::SetFoodMinus(int iCount)
+{
+	m_tItem.iCount -= iCount;
+}
+
 void	CItem::SetFoodZero(void)
 {
 	m_tItem.iCount = 0;

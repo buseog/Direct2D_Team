@@ -7,6 +7,7 @@
 CBridge::CBridge(void)
 : m_pObj(NULL)
 , m_pUi(NULL)
+, m_fTime(-1)
 , m_wstrStateKey(L"")
 {
 	ZeroMemory(&m_tFrame, sizeof(FRAME));
@@ -111,4 +112,9 @@ int		CBridge::Picking(void)
 const	wstring&	CBridge::GetStateKey(void)
 {
 	return m_wstrStateKey;
+}
+
+void CBridge::SetTime(float fTime)
+{
+	m_fTime = fTime;
 }
