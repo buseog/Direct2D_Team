@@ -9,6 +9,8 @@ private:
 	vector<CUi*>	m_vecPortrait;
 	bool	m_bStage;
 	float	m_fTime;
+	CObj*	m_pPick;
+	wstring m_strMonsterKey;
 
 public:
 	void	BattleWait(void);

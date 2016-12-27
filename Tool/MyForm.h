@@ -64,6 +64,7 @@ public:	// 패스 파인더 임시
 public: // 유닛 
 	afx_msg void OnUnitTool();
 
+	afx_msg void OnItemTool();
 };
 
 

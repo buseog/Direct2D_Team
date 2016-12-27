@@ -25,7 +25,7 @@ HRESULT CUnitBridge::Initialize(void)
 void CUnitBridge::Progress(INFO& rInfo)
 {
 	WorldMatrix(rInfo);
-	Frame();
+	CBridge::Frame();
 	
 
 	switch (m_pObj->GetOrder())
@@ -134,19 +134,19 @@ void	CUnitBridge::Move(INFO& rInfo)
 
 	// 캐릭터 y각도에 따라서 각도 전환
 	if (rInfo.vDir.y >= 0.75f)
-		m_wstrStateKey = L"Walk_5";
+		SetFrame(L"Walk_5");
 
 	else if (rInfo.vDir.y >= 0.25f)
-		m_wstrStateKey = L"Walk_1";
+		SetFrame(L"Walk_1");
 
 	else if (rInfo.vDir.y >= -0.25f)
-		m_wstrStateKey = L"Walk_2";
+		SetFrame(L"Walk_2");
 
 	else if (rInfo.vDir.y >= -0.75f)
-		m_wstrStateKey = L"Walk_3";
+		SetFrame(L"Walk_3");
 
 	else
-		m_wstrStateKey = L"Walk_4";
+		SetFrame(L"Walk_4");
 
 	if(fDistance > 10.f)
 	{
@@ -157,6 +157,7 @@ void	CUnitBridge::Move(INFO& rInfo)
 		rInfo.vDir.x = cosf(m_pObj->GetRevolution());
 		rInfo.vDir.y = -sinf(m_pObj->GetRevolution());
 		m_pObj->SetOrder(OD_STAND);
+		SetFrame(L"Stand_1");
 	}
 
 }
@@ -188,19 +189,19 @@ void	CUnitBridge::AStarMove(INFO& rInfo)
 
 	// 캐릭터 y각도에 따라서 각도 전환
 	if (rInfo.vDir.y >= 0.75f)
-		m_wstrStateKey = L"Walk_5";
+		SetFrame(L"Walk_5");
 
 	else if (rInfo.vDir.y >= 0.25f)
-		m_wstrStateKey = L"Walk_1";
+		SetFrame(L"Walk_1");
 
 	else if (rInfo.vDir.y >= -0.25f)
-		m_wstrStateKey = L"Walk_2";
+		SetFrame(L"Walk_2");
 
 	else if (rInfo.vDir.y >= -0.75f)
-		m_wstrStateKey = L"Walk_3";
+		SetFrame(L"Walk_3");
 
 	else
-		m_wstrStateKey = L"Walk_4";
+		SetFrame(L"Walk_4");
 
 	rInfo.vPos += rInfo.vDir * m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime();
 
@@ -209,7 +210,10 @@ void	CUnitBridge::AStarMove(INFO& rInfo)
 		m_vecBestList.pop_front();
 	}
 	if (m_vecBestList.empty())
+	{
 		m_pObj->SetOrder(OD_STAND);
+		SetFrame(L"Stand_1");
+	}
 }
 
 void	CUnitBridge::Attack(INFO& rInfo)
@@ -231,19 +235,20 @@ void	CUnitBridge::Attack(INFO& rInfo)
 
 			// 캐릭터 y각도에 따라서 각도 전환
 			if (rInfo.vDir.y >= 0.75f)
-				m_wstrStateKey = L"Attack_5";
+				SetFrame(L"Attack_5");
 
 			else if (rInfo.vDir.y >= 0.25f)
-				m_wstrStateKey = L"Attack_1";
+				SetFrame(L"Attack_1");
 
 			else if (rInfo.vDir.y >= -0.25f)
-				m_wstrStateKey = L"Attack_2";
+				SetFrame(L"Attack_2");
 
 			else if (rInfo.vDir.y >= -0.75f)
-				m_wstrStateKey = L"Attack_3";
+				SetFrame(L"Attack_3");
 
 			else
-				m_wstrStateKey = L"Attack_4";
+				SetFrame(L"Attack_4");
+
 
 			return;
 		}
@@ -256,19 +261,19 @@ void	CUnitBridge::Attack(INFO& rInfo)
 
 	// 캐릭터 y각도에 따라서 각도 전환
 	if (rInfo.vDir.y >= 0.75f)
-		m_wstrStateKey = L"Walk_5";
+		SetFrame(L"Walk_5");
 
 	else if (rInfo.vDir.y >= 0.25f)
-		m_wstrStateKey = L"Walk_1";
+		SetFrame(L"Walk_1");
 
 	else if (rInfo.vDir.y >= -0.25f)
-		m_wstrStateKey = L"Walk_2";
+		SetFrame(L"Walk_2");
 
 	else if (rInfo.vDir.y >= -0.75f)
-		m_wstrStateKey = L"Walk_3";
+		SetFrame(L"Walk_3");
 
 	else
-		m_wstrStateKey = L"Walk_4";
+		SetFrame(L"Walk_4");
 
 	if(fDistance > 10.f)
 	{
@@ -283,19 +288,19 @@ void	CUnitBridge::Stop(INFO& rInfo)
 {
 	// 캐릭터 y각도에 따라서 각도 전환
 	if (rInfo.vDir.y >= 0.75f)
-		m_wstrStateKey = L"Stand_5";
+		SetFrame(L"Stand_5");
 
 	else if (rInfo.vDir.y >= 0.25f)
-		m_wstrStateKey = L"Stand_1";
+		SetFrame(L"Stand_1");
 
 	else if (rInfo.vDir.y >= -0.25f)
-		m_wstrStateKey = L"Stand_2";
+		SetFrame(L"Stand_2");
 
 	else if (rInfo.vDir.y >= -0.75f)
-		m_wstrStateKey = L"Stand_3";
+		SetFrame(L"Stand_3");
 
 	else
-		m_wstrStateKey = L"Stand_4";
+		SetFrame(L"Stand_4");
 }
 
 void	CUnitBridge::Patrol(INFO& rInfo)
@@ -307,19 +312,19 @@ void	CUnitBridge::Patrol(INFO& rInfo)
 
 	// 캐릭터 y각도에 따라서 각도 전환
 	if (rInfo.vDir.y >= 0.75f)
-		m_wstrStateKey = L"Walk_5";
+		SetFrame(L"Walk_5");
 
 	else if (rInfo.vDir.y >= 0.25f)
-		m_wstrStateKey = L"Walk_1";
+		SetFrame(L"Walk_1");
 
 	else if (rInfo.vDir.y >= -0.25f)
-		m_wstrStateKey = L"Walk_2";
+		SetFrame(L"Walk_2");
 
 	else if (rInfo.vDir.y >= -0.75f)
-		m_wstrStateKey = L"Walk_3";
+		SetFrame(L"Walk_3");
 
 	else
-		m_wstrStateKey = L"Walk_4";
+		SetFrame(L"Walk_4");
 
 	if(fDistance > m_pObj->GetSpeed() * CTimeMgr::GetInstance()->GetTime())
 	{
@@ -336,20 +341,17 @@ void	CUnitBridge::Patrol(INFO& rInfo)
 void	CUnitBridge::Skill(INFO&	rInfo)
 {
 	if (rInfo.vDir.y >= 0.75f)
-		m_wstrStateKey = L"Skill_5";
+		SetFrame(L"Skill_5");
 
 	else if (rInfo.vDir.y >= 0.25f)
-		m_wstrStateKey = L"Skill_1";
+		SetFrame(L"Skill_1");
 
 	else if (rInfo.vDir.y >= -0.25f)
-		m_wstrStateKey = L"Skill_2";
+		SetFrame(L"Skill_2");
 
 	else if (rInfo.vDir.y >= -0.75f)
-		m_wstrStateKey = L"Skill_3";
+		SetFrame(L"Skill_3");
 
 	else
-		m_wstrStateKey = L"Skill_4";
-
-	if (m_tFrame.fFrame >= m_tFrame.fMax - 1)
-		m_pObj->SetOrder(OD_STAND);
+		SetFrame(L"Skill_4");
 }

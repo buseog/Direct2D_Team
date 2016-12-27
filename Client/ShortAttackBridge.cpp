@@ -25,7 +25,7 @@ void	CShortAttackBridge::Progress(INFO& rInfo)
 {
 	WorldMatrix(rInfo);
 	Frame();	
-
+	ArtificiaIintelligence(rInfo);
 	switch (m_pObj->GetOrder())
 	{
 		case OD_STAND:
@@ -42,6 +42,10 @@ void	CShortAttackBridge::Progress(INFO& rInfo)
 
 		case OD_ATTACK:
 			Attack(rInfo);
+			break;
+
+		case OD_DIE:
+			//m_pObj->SetDestroy(true);
 			break;
 	}
 
@@ -85,24 +89,6 @@ void CShortAttackBridge::WorldMatrix(INFO& rInfo)
 		D3DXMatrixScaling(&matScale, -1.f, 1.f, 0.f);
 	}
 
-	// 캐릭터 y각도에 따라서 각도 전환
-	if (rInfo.vDir.y >= 0.75f)
-		m_wstrStateKey = L"Walk_5";
-
-	else if (rInfo.vDir.y >= 0.25f)
-		m_wstrStateKey = L"Walk_1";
-
-	else if (rInfo.vDir.y >= -0.25f)
-		m_wstrStateKey = L"Walk_2";
-
-	else if (rInfo.vDir.y >= -0.75f)
-		m_wstrStateKey = L"Walk_3";
-
-	else
-		m_wstrStateKey = L"Walk_4";
-
-
-
 	D3DXMatrixTranslation(&matTrans, 
 		rInfo.vPos.x + m_pObj->GetScroll().x, 
 		rInfo.vPos.y + m_pObj->GetScroll().y, 
@@ -113,8 +99,11 @@ void CShortAttackBridge::WorldMatrix(INFO& rInfo)
 
 void CShortAttackBridge::Move(INFO &rInfo)
 {
-
 	const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_UNIT);
+
+	if (pPlayer == NULL)
+		return;
+
 	m_pObj->SetTargetPoint(((CPlayer*)pPlayer)->GetInfo()->vPos);
 
 	rInfo.vDir = m_pObj->GetTargetPoint() - rInfo.vPos;
@@ -124,20 +113,20 @@ void CShortAttackBridge::Move(INFO &rInfo)
 	
 		// 캐릭터 y각도에 따라서 각도 전환
 	if (rInfo.vDir.y >= 0.75f)
-		m_wstrStateKey = L"Walk_5";
-
+		SetFrame(L"Walk_5");
 
 	else if (rInfo.vDir.y >= 0.25f)
-		m_wstrStateKey = L"Walk_1";
+		SetFrame(L"Walk_1");
 
 	else if (rInfo.vDir.y >= -0.25f)
-		m_wstrStateKey = L"Walk_2";
+		SetFrame(L"Walk_2");
 
 	else if (rInfo.vDir.y >= -0.75f)
-		m_wstrStateKey = L"Walk_3";
+		SetFrame(L"Walk_3");
 
 	else
-		m_wstrStateKey = L"Walk_4";
+		SetFrame(L"Walk_4");
+
 
 
 	if(fDistance > 10.f)
@@ -147,6 +136,7 @@ void CShortAttackBridge::Move(INFO &rInfo)
 	if(rInfo.vPos == m_pObj->GetTargetPoint())
 	{
 		m_pObj->SetOrder(OD_STAND);
+		SetFrame(L"Stand_1");
 	}
 }
 
@@ -176,7 +166,10 @@ void	CShortAttackBridge::AStarMove(INFO& rInfo)
 		m_vecBestList.pop_front();
 	}
 	if (m_vecBestList.empty())
+	{
 		m_pObj->SetOrder(OD_STAND);
+		SetFrame(L"Stand_1");
+	}
 }
 
 
@@ -184,21 +177,71 @@ void	CShortAttackBridge::Stop(INFO& rInfo)
 {
 	// 캐릭터 y각도에 따라서 각도 전환
 	if (rInfo.vDir.y >= 0.75f)
-		m_wstrStateKey = L"Stand_5";
+		SetFrame(L"Stand_5");
 
 	else if (rInfo.vDir.y >= 0.25f)
-		m_wstrStateKey = L"Stand_1";
+		SetFrame(L"Stand_1");
 
 	else if (rInfo.vDir.y >= -0.25f)
-		m_wstrStateKey = L"Stand_2";
+		SetFrame(L"Stand_2");
 
 	else if (rInfo.vDir.y >= -0.75f)
-		m_wstrStateKey = L"Stand_3";
+		SetFrame(L"Stand_3");
 
 	else
-		m_wstrStateKey = L"Stand_4";
+		SetFrame(L"Stand_4");
 }
 
 void	CShortAttackBridge::Attack(INFO& rInfo)
 {
+	if (rInfo.vDir.y >= 0.75f)
+		SetFrame(L"Attack_5");
+
+	else if (rInfo.vDir.y >= 0.25f)
+		SetFrame(L"Attack_1");
+
+	else if (rInfo.vDir.y >= -0.25f)
+		SetFrame(L"Attack_2");
+
+	else if (rInfo.vDir.y >= -0.75f)
+		SetFrame(L"Attack_3");
+
+	else
+		SetFrame(L"Attack_4");
+	
 }
+
+void   CShortAttackBridge::ArtificiaIintelligence(INFO& rInfo)
+{
+
+	const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_UNIT);
+
+	if (pPlayer == NULL)
+		return;
+
+	m_pObj->SetTargetPoint(((CPlayer*)pPlayer)->GetInfo()->vPos);
+
+	rInfo.vDir = m_pObj->GetTargetPoint() - rInfo.vPos;
+	
+	float fDistance = D3DXVec3Length(&rInfo.vDir);
+	D3DXVec3Normalize(&rInfo.vDir, &rInfo.vDir);
+	
+	if(fDistance  <= m_pObj->GetStat()->fRange)//공격
+	{
+		m_pObj->SetOrder(OD_ATTACK);
+	}
+
+	else if(fDistance >= m_pObj->GetStat()->fRange)//이동
+	{
+		//SetAstar(rInfo.vPos);
+		m_pObj->SetOrder(OD_MOVE);
+	}
+
+	else if(fDistance  <= m_pObj->GetStat()->fRange*2/3)//도망
+	{
+		m_pObj->SetOrder(OD_BACK);
+	}
+
+}
+
+

@@ -1,9 +1,12 @@
 #include "StdAfx.h"
 #include "FieldBackBridge.h"
-#include "EnemyUnit.h"
-#include "SceneMgr.h"
+
 #include "ObjMgr.h"
+#include "UiMgr.h"
 #include "KeyMgr.h"
+#include "SceneMgr.h"
+
+#include "EnemyUnit.h"
 #include "ObjFactory.h"
 #include "Effect.h"
 #include "StandEffectBridge.h"
@@ -16,9 +19,24 @@
 #include "Datasubject.h"
 #include "UiObserver.h"
 
+#include "Player.h"
+#include "PlayerBridge.h"
+#include "EnemyUnit.h"
+#include "EnemyBridge.h"
+
+#include "MainUi.h"
+#include "MainUiBridge.h"
+#include "Inventory.h"
+#include "InvenBridge.h"
+#include "Status.h"
+#include "StatusBridge.h"
+#include "BattleField.h"
+
+
 CFieldBackBridge::CFieldBackBridge(void)
 : m_bStage(false)
 , m_fTime(-1.f)
+, m_pPick(NULL)
 {
 	m_iX = 45;
 	m_iY = 80;
@@ -32,11 +50,28 @@ CFieldBackBridge::~CFieldBackBridge(void)
 
 HRESULT	CFieldBackBridge::Initialize(void)
 {
-	LoadTile(L"../Data/FieldTile.dat");
-	LoadBack(L"../Data/FieldObject.dat");
+	const CObj* m_pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_PLAYER);
 
-	InitPortrait();
+	if (m_pPlayer == NULL)
+	{
+		LoadTile(L"../Data/FieldTile.dat");
+		LoadBack(L"../Data/FieldObject.dat");
 
+		InitPortrait();
+
+		CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CPlayerBridge>::CreateObj(L"Stand_1", 300.f, 300.f));
+		CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"GoniSh", L"Walk_1", D3DXVECTOR3(500.f, 200.f, 0.f)));
+		CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"DocuGawa", L"Walk_1", D3DXVECTOR3(200.f, 300.f, 0.f)));
+		CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"BlueDragon", L"Walk_1", D3DXVECTOR3(600.f, 100.f, 0.f)));
+		CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"HonGanji", L"Walk_1", D3DXVECTOR3(1200.f, 400.f, 0.f)));
+		CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"KimYuSin", L"Walk_1", D3DXVECTOR3(1500.f, 700.f, 0.f)));
+		CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"Waki", L"Walk_1", D3DXVECTOR3(900.f, 300.f, 0.f)));
+
+		CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi,CMainUiBridge>::CreateUI(L"FieldMainUi",400.f,553.f));	
+		CUIMgr::GetInstance()->AddUI(UI_INVEN, CUIFactory<CInventory,CInvenBridge>::CreateUI(L"Inventory", 580.f,250.f));
+		CUIMgr::GetInstance()->AddUI(UI_STAT, CUIFactory<CStatus,CStatusBridge>::CreateUI(L"Status", 180.f, 250.f));
+
+	}
 	return S_OK;
 }
 
@@ -47,6 +82,8 @@ void	CFieldBackBridge::Progress(INFO& rInfo)
 		const CObj*	pPlayer = CObjMgr::GetInstance()->GetObj(OBJ_PLAYER);
 		((CPlayer*)pPlayer)->SetDamage(50);
 	}
+
+	m_pObj->SetOriginScroll(m_pObj->GetScroll().x, m_pObj->GetScroll().y);
 }
 
 void	CFieldBackBridge::Render(void)
@@ -118,8 +155,8 @@ void	CFieldBackBridge::Release(void)
 	for_each(m_vecBack.begin(), m_vecBack.end(), DeleteObj());
 	m_vecBack.clear();
 
-	for_each(m_vecPortrait.begin(), m_vecPortrait.end(), DeleteObj());
-	m_vecPortrait.clear();
+	/*for_each(m_vecPortrait.begin(), m_vecPortrait.end(), DeleteObj());
+	m_vecPortrait.clear();*/
 	
 }
 
@@ -147,10 +184,14 @@ int	CFieldBackBridge::Picking(void)
 				CObjMgr::GetInstance()->AddObject(OBJ_EFFECT, CObjFactory<CEffect, CTimerEffectBridge>::CreateObj(L"BattleWait", pPlayer->GetInfo()->vPos, m_fTime));
 				
 				(*iter)->SetOrder(OD_STAND);
+				m_strMonsterKey=(*iter)->GetObjKey();
+				((CPlayer*)pPlayer)->SetOrder(OD_STAND);
 				m_bStage = true;
+				m_pPick = *iter;
 
 				return 1;	
 			}
+
 		}
 	}	
 
@@ -161,8 +202,28 @@ int	CFieldBackBridge::Picking(void)
 
 	if(m_bStage && m_fTime <= 0.f)		
 	{
+		list<CObj*>* pUnitList = CObjMgr::GetInstance()->GetObjList(SC_FIELD, OBJ_UNIT);
+
 		CSceneMgr::GetInstance()->SetScene(SC_BATTLEFIELD);
+		((CBattleField*)CSceneMgr::GetInstance()->GetScene(SC_BATTLEFIELD))->SetMonster(m_strMonsterKey);
+
+		int iX = 0;
+		int iY = 0;
+
+		for (list<CObj*>::iterator iter = pUnitList->begin(); iter != pUnitList->end(); ++iter)
+		{
+			if (iX == 3)
+			{
+				iX = 0;
+				++iY;
+			}
+
+			CObjMgr::GetInstance()->AddObject(OBJ_UNIT, (*iter));
+			(*iter)->SetPos(D3DXVECTOR3(100 + (TILECX * iX), 100 + (TILECY * iY), 0.f));
+			++iX;
+		}
 		m_bStage = false;
+		m_pPick->SetDestroy(true);
 		return 1;
 	}
 
@@ -184,6 +245,8 @@ void	CFieldBackBridge::InitPortrait(void)
 	int iCount = 0;
 
 	float fYPos = 0;
+
+	m_vecPortrait.reserve(10);
 
 	for (int i = 0; i < 10; ++i)
 	{

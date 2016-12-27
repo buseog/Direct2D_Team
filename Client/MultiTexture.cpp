@@ -68,6 +68,9 @@ const TEXINFO* CMultiTexture::GetTexture(const wstring& wstrStateKey /*= L""*/,
 	if(iter == m_MapMultiTexture.end())
 		return NULL;
 
+	if (iter->second.size() <= (unsigned)iCnt)
+		return NULL;
+
 
 	return iter->second[iCnt];
 }

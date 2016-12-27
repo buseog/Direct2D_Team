@@ -1,11 +1,15 @@
 #include "StdAfx.h"
 #include "Village.h"
 #include "ObjMgr.h"
-#include "UiFactory.h"
 #include "UiMgr.h"
+#include "KeyMgr.h"
+#include "UiFactory.h"
+
 #include "ObjFactory.h"
 #include "VillageBackBridge.h"
 #include "Back.h"
+#include "MainUi.h"
+#include "MainUiBridge.h"
 
 #include "BasicTownButton.h"
 #include "BasicBridge.h"
@@ -15,6 +19,8 @@
 
 #include "MercenaryTownButton.h"
 #include "MercenaryBridge.h"
+
+#include "SoundMgr.h"
 
 CVillage::CVillage(void)
 {
@@ -28,6 +34,8 @@ CVillage::~CVillage(void)
 HRESULT	CVillage::Initialize(void)
 {
 	LoadPNG();
+	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi,CMainUiBridge>::CreateUI(L"FieldMainUi",400.f,553.f));	
+
 	// 마을 배경
 	CObjMgr::GetInstance()->AddObject(OBJ_BACK, CObjFactory<CBack, CVillageBackBridge>::CreateObj(L"Village", 0, 0));
 
@@ -40,6 +48,10 @@ HRESULT	CVillage::Initialize(void)
 	// 용병상점
 	CUIMgr::GetInstance()->AddUI(UI_BUTTON, CUIFactory<CMercenaryTownButton,CMercenaryBridge>::CreateUI(L"Mercenary", 650.f, 400.f));
 
+	CSoundMgr::GetInstance()->SoundStop(0);
+
+	CSoundMgr::GetInstance()->SoundPlay(2, 0);
+
 	return S_OK;
 }
 
@@ -48,6 +60,9 @@ void	CVillage::Progress(void)
 	CObjMgr::GetInstance()->Progress();
 	CUIMgr::GetInstance()->Progress();
 	CUIMgr::GetInstance()->Picking();
+
+	if (CKeyMgr::GetInstance()->KeyDown('Y'))
+		CSceneMgr::GetInstance()->SetScene(SC_FIELD);
 }
 
 void	CVillage::Render(void)
@@ -87,6 +102,13 @@ void	CVillage::LoadPNG(void)
 		L"MERCENARY", TEX_MULTI, L"Mercenary", 3)))
 	{
 		ERR_MSG(L"MERCENARY 멀티 텍스쳐 생성 실패")
+		return;
+	}
+
+	if (FAILED(CTextureMgr::GetInstance()->InsertTexture(L"../Texture/UI/Pannel/UI0.png", 
+		L"FieldMainUi", TEX_SINGLE)))
+	{
+		ERR_MSG(L"MainUI 싱글 텍스쳐 생성 실패")
 		return;
 	}
 }

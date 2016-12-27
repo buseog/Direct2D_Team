@@ -7,7 +7,11 @@ class CBattleFieldBackBridge :
 private:
 	RECT				m_rcDrag;
 	D3DXVECTOR2			m_vDrag[5];
+	D3DXVECTOR3			m_vScore;
 	int					m_iDragState;
+
+	bool	m_bStage;
+	float	m_fTime;
 
 public:
 	virtual HRESULT	Initialize(void);

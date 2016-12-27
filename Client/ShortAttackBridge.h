@@ -17,6 +17,10 @@ private:
 	void	Attack(INFO& rInfo);
 	void	AStarMove(INFO& rInfo);
 
+	/*virtual	void	Frame(void);*/
+
+	void	ArtificiaIintelligence(INFO& rInfo);
+
 public:
 	virtual HRESULT	Initialize(void);
 	virtual void	Progress(INFO& rInfo);

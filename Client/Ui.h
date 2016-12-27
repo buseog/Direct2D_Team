@@ -16,6 +16,7 @@ protected:
 		
 
 public:
+	void	SetView(bool bView);
 	const INFO*		GetInfo(void) const;
 	void			SetPos(const D3DXVECTOR3& vPos);
 	void			SetPos(float fX, float fY);

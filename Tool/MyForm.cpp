@@ -39,6 +39,7 @@ BEGIN_MESSAGE_MAP(CMyForm, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON7, &CMyForm::OnPathFind)
 	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CMyForm::OnTcnSelchangeTab1)
 	ON_BN_CLICKED(IDC_BUTTON3, &CMyForm::OnUnitTool)
+	ON_BN_CLICKED(IDC_BUTTON6, &CMyForm::OnItemTool)
 END_MESSAGE_MAP()
 
 
@@ -183,4 +184,16 @@ void CMyForm::OnUnitTool()
 	}
 
 	m_UnitTool.ShowWindow(SW_SHOW);
+}
+
+void CMyForm::OnItemTool()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	if(((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool()->GetSafeHwnd() == NULL)
+	{
+		((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool()->Create(IDD_ITEMTOOL);
+	}
+
+	((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool()->ShowWindow(SW_SHOW);
 }

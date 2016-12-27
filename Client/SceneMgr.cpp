@@ -7,6 +7,7 @@
 #include "Field.h"
 #include "Village.h"
 #include "BattleField.h"
+#include "InVillage.h"
 
 
 IMPLEMENT_SINGLETON(CSceneMgr)
@@ -23,39 +24,9 @@ CSceneMgr::~CSceneMgr(void)
 }
 void CSceneMgr::SetScene(SCENEID _eScene)
 {
-	switch(_eScene)
+	if (_eScene == SC_FIELD)
 	{
-	case SC_START:
-		if (m_arScene[SC_START] == NULL)
-			m_pScene = new CStart;
-
-		else
-			m_pScene = m_arScene[SC_START];
-		break;
-
-	case SC_FIELD:
-		if (m_arScene[SC_FIELD] == NULL)
-			m_pScene = new CField;
-
-		else
-			m_pScene = m_arScene[SC_FIELD];
-		break;
-	
-	case SC_VILLAGE:
-		if (m_arScene[SC_VILLAGE] == NULL)
-			m_pScene = new CVillage;
-
-		else
-			m_pScene = m_arScene[SC_VILLAGE];
-		break;
-
-	case SC_BATTLEFIELD:
-		if (m_arScene[SC_BATTLEFIELD] == NULL)
-			m_pScene = new CBattleField;
-
-		else
-			m_pScene = m_arScene[SC_BATTLEFIELD];
-		break;
+		::Safe_Delete(m_pScene);
 	}
 
 	CObjMgr::GetInstance()->SetSceneID(_eScene);
@@ -72,10 +43,59 @@ void CSceneMgr::SetScene(SCENEID _eScene)
 		return;
 	}
 
-	if(FAILED(m_pScene->Initialize()))
+	switch(_eScene)
 	{
-		ERR_MSG(L"Scene Init Failed");
-		return;
+	case SC_START:
+			m_pScene = new CStart;
+			m_pScene->Initialize();
+
+		break;
+
+	case SC_FIELD:
+		if (m_arScene[SC_FIELD] == NULL)
+		{
+			m_pScene = new CField;
+			m_arScene[SC_FIELD] = m_pScene;
+			m_pScene->Initialize();
+		}
+		else
+		{
+			CUIMgr::GetInstance()->BattleFIeldClear();
+			CObjMgr::GetInstance()->BattleFieldClear();	
+			m_pScene = m_arScene[SC_FIELD];
+			list<CObj*>* pBackList = CObjMgr::GetInstance()->GetObjList(SC_FIELD, OBJ_BACK);
+			CObj* pBack = pBackList->front();
+			D3DXVECTOR3 vScroll = pBack->GetOriginScroll();
+			pBack->SetScroll(vScroll.x, vScroll.y);
+		}
+		break;
+	
+	case SC_VILLAGE:
+		if (m_arScene[SC_VILLAGE] == NULL)
+		{
+			m_pScene = new CVillage;
+			m_arScene[SC_VILLAGE] = m_pScene;
+			m_pScene->Initialize();
+		}
+		else
+			m_pScene = m_arScene[SC_VILLAGE];
+		break;
+
+	case SC_BATTLEFIELD:
+		{
+		m_pScene = new CBattleField;
+		m_pScene->Initialize();
+
+		list<CObj*>* pBackList = CObjMgr::GetInstance()->GetObjList(SC_FIELD, OBJ_BACK);
+		CObj* pBack = pBackList->front();
+		pBack->SetScroll(0.f, 0.f);
+		}
+		break;
+
+	case SC_INVILLAGE:
+		m_pScene = new CInVillage;
+		m_pScene->Initialize();
+		break;
 	}
 }
 
@@ -121,7 +141,8 @@ void CSceneMgr::Release(void)
 {
 	for (int i = 0; i < SC_END; ++i)
 	{
-		::Safe_Delete(m_arScene[i]);
+		if (m_arScene[i])
+			::Safe_Delete(m_arScene[i]);
 	}
 	m_pScene = NULL;
 }
@@ -141,4 +162,9 @@ void CSceneMgr::SetMouse(const wstring& wstrMouseKey)
 const wstring	CSceneMgr::GetMouse(void)
 {
 	return wstrMouse;
+}
+
+const CScene* CSceneMgr::GetScene( SCENEID _SceneId )
+{
+	return m_arScene[_SceneId];
 }

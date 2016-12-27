@@ -9,23 +9,8 @@
 #include "ObjFactory.h"
 #include "UIFactory.h"
 
-#include "Back.h"
-#include "FieldBackBridge.h"
-#include "Player.h"
-#include "PlayerBridge.h"
-
-
 #include "Obj.h"
 
-#include "EnemyUnit.h"
-#include "EnemyBridge.h"
-
-#include "MainUi.h"
-#include "MainUiBridge.h"
-#include "Inventory.h"
-#include "InvenBridge.h"
-#include "Status.h"
-#include "StatusBridge.h"
 #include "Store.h"
 #include "StoreBridge.h"
 #include "BasicStore.h"
@@ -41,9 +26,15 @@
 #include "TownButton.h"
 #include "TownBridge.h"
 
+
+#include "SoundMgr.h"
+
 #include "AllyUnit.h"
 #include "UnitBridge.h"
 #include "ObjFactory.h"
+
+#include "Back.h"
+#include "FieldBackBridge.h"
 
 
 
@@ -62,19 +53,27 @@ HRESULT	CField::Initialize(void)
 	LoadPNG();
 	CSceneMgr::GetInstance()->SetMouse(L"Hand_Stand");
 
+
 	CObjMgr::GetInstance()->AddObject(OBJ_BACK, CObjFactory<CBack, CFieldBackBridge>::CreateObj(L"Field", 0, 0));
-	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CObjFactory<CPlayer, CPlayerBridge>::CreateObj(L"Walk_1", 300.f, 300.f));
-	CObjMgr::GetInstance()->AddObject(OBJ_MONSTER, CObjFactory<CEnemyUnit, CEnemyBridge>::CreateObj(L"GoniSh", L"Walk_1", D3DXVECTOR3(500.f, 200.f, 0.f)));
 
-	CUIMgr::GetInstance()->AddUI(UI_MAIN, CUIFactory<CMainUi,CMainUiBridge>::CreateUI(L"FieldMainUi",400.f,553.f));	
-	CUIMgr::GetInstance()->AddUI(UI_INVEN, CUIFactory<CInventory,CInvenBridge>::CreateUI(L"Inventory", 580.f,250.f));
-	CUIMgr::GetInstance()->AddUI(UI_STAT, CUIFactory<CStatus,CStatusBridge>::CreateUI(L"Status", 180.f, 250.f));
-
+	////////////
 	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CBasicStore,CBasicStoreBridge>::CreateUI(L"Store",200.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CDrugStore,CDrugStoreBridge>::CreateUI(L"Store",200.f,250.f));
 	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CMercenaryStore,CMercenaryStoreBridge>::CreateUI(L"Store",200.f,250.f));
-
+	CUIMgr::GetInstance()->AddUI(UI_STORE, CUIFactory<CMercenaryDisplay,CMercenaryDisplayBridge>::CreateUI(L"Store",0.f,250.f));
+/////////////
 	CUIMgr::GetInstance()->AddUI(UI_BUTTON, CUIFactory<CTownButton,CTownBridge>::CreateUI(L"BigTown", 1720.f, 320.f));
+
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/FieldBGM.wav");		// 필드 - 0
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/Battleground.wav");	// 배틀존 - 1
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/Town.wav");			// 마을 - 2
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/BuyItem.wav");		// 클릭 시 - 3
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/IceWall.wav");		// 아이스 월 - 4
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/storm.wav");			// 스톰 - 5
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/lightning.wav");		// 라이트닝 - 6
+	CSoundMgr::GetInstance()->LoadWave(L"../Sound/Boom.wav");			// 폭발 - 7
+
+	CSoundMgr::GetInstance()->SoundPlay(0, 1);
 
 	return S_OK;	
 

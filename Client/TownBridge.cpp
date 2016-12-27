@@ -5,6 +5,8 @@
 #include "Ui.h"
 #include "SceneMgr.h"
 #include "KeyMgr.h"
+#include "SoundMgr.h"
+#include "TimeMgr.h"
 
 CTownBridge::CTownBridge(void)
 {
@@ -35,8 +37,8 @@ void CTownBridge::Render(void)
 	if(pTexture == NULL)
 		return;
 
-	float fX = pTexture->tImgInfo.Width  / 2.f - m_pObj->GetScroll().x;
-	float fY = pTexture->tImgInfo.Height / 2.f - m_pObj->GetScroll().y;
+	float fX = pTexture->tImgInfo.Width  / 2.f;
+	float fY = pTexture->tImgInfo.Height / 2.f;
 
 	CDevice::GetInstance()->GetSprite()->SetTransform(&m_pUi->GetInfo()->matWorld);
 	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
@@ -55,8 +57,8 @@ void CTownBridge::WorldMatrix(INFO& rInfo)
 
 
 	D3DXMatrixTranslation(&matTrans, 
-		rInfo.vPos.x , 
-		rInfo.vPos.y, 
+		rInfo.vPos.x + m_pObj->GetScroll().x, 
+		rInfo.vPos.y + m_pObj->GetScroll().y, 
 		0.f);
 
 	rInfo.matWorld = matTrans;
@@ -79,6 +81,7 @@ int CTownBridge::Picking(void)
 		SetMapKey(1);
 		if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON, 6))
 		{
+			CSoundMgr::GetInstance()->SoundPlay(3, 0);
 			CSceneMgr::GetInstance()->SetScene(SC_VILLAGE);
 			return 1;	
 		}

@@ -79,3 +79,9 @@ void	CUi::SetSize(D3DXVECTOR3 vSize)
 {
 	m_tInfo.vSize = vSize;
 }
+
+void	CUi::SetView(bool bView)
+{
+
+	m_bView = bView;	
+}

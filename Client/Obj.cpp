@@ -2,12 +2,14 @@
 #include "Obj.h"
 
 D3DXVECTOR3	CObj::m_vScroll;
+D3DXVECTOR3	CObj::m_vOriginScroll;
 
 CObj::CObj(void)
 : m_wstrObjKey(L"")
 , m_pBridge(NULL)
 , m_bDestroy(false)
 , m_bSelect(false)
+, m_bHit(false)
 , m_fRotation(0.f)
 , m_fRevolution(0.f)
 , m_iOrder(0)
@@ -84,6 +86,12 @@ const D3DXVECTOR3	CObj::GetTargetPoint(void)
 	return m_vTargetPoint;
 }
 
+
+const D3DXVECTOR3 CObj::GetOriginScroll( void )
+{
+	return m_vOriginScroll;
+}
+
 void	CObj::SetTargetPoint(D3DXVECTOR3 pTargetPoint)
 {
 	m_vTargetPoint = pTargetPoint;
@@ -129,8 +137,8 @@ const UNITDATA* CObj::GetStat(void) const
 
 void CObj::SetScroll(float fX, float fY)
 {
-	m_vScroll.x += fX;
-	m_vScroll.y += fY;
+	m_vScroll.x = fX;
+	m_vScroll.y = fY;
 }
 
 void	CObj::SetSize(D3DXVECTOR3 vSize)
@@ -175,4 +183,27 @@ void	CObj::SetDamage(int iAttack)
 {
 	m_tUnitData.iHealthPoint -= iAttack;
 
+}
+
+
+void CObj::SetOriginScroll(float fX, float fY )
+{
+	m_vOriginScroll.x = fX;
+	m_vOriginScroll.y = fY;
+}
+
+const wstring&	CObj::GetStateKey(void)
+{
+	return m_wstrStateKey;
+}
+
+bool CObj::GetHit(void)
+{
+
+	return m_bHit;
+}
+
+void CObj::SetHit(bool  bHit)
+{
+	m_bHit = bHit;
 }

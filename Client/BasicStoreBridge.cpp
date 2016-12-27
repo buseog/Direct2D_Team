@@ -95,7 +95,7 @@ void CBasicStoreBridge::Render(void)
 	D3DXMATRIX matTrans;
 	D3DXMatrixTranslation(&matTrans, 600.f, 200.f, 0.f);
 	TCHAR m_szTooltip[MIN_STR];
-	wsprintf(m_szTooltip,L"Tooltip : %d ,index : %d\nSelect : %d",(int)m_bTooltip,m_iIndex,(int)m_bPick);
+	wsprintf(m_szTooltip,L"Tooltip : %d ,index : %d\nSelect : %d , move : %d",(int)m_bTooltip,m_iIndex,(int)m_bPick,(int)m_bMove);
 	CDevice::GetInstance()->GetSprite()->SetTransform(&matTrans);
 	CDevice::GetInstance()->GetFont()->DrawTextW(CDevice::GetInstance()->GetSprite(), 
 		m_szTooltip, 
@@ -150,8 +150,8 @@ int CBasicStoreBridge::Picking(void) ///툴팁기능 추가해야함
 
 
 
-	if(PtInRect(&m_pUi->GetRect(),Pt))
-	{
+	//if(PtInRect(&m_pUi->GetRect(),Pt))
+	//{
 		for(size_t j =0; j<20; ++j)
 		{
 			if(PtInRect(&m_ItemSlot[j]->GetRect(), Pt) && m_ItemSlot[j]->GetObjKey() != L"Empty")
@@ -159,7 +159,7 @@ int CBasicStoreBridge::Picking(void) ///툴팁기능 추가해야함
 				m_bTooltip=true;
 				if(!m_bPick)
 					m_iIndex = j;
-				if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON,4))
+				if(CKeyMgr::GetInstance()->KeyDown(VK_LBUTTON,1))
 				{
 					if(!m_bPick)//flase
 						m_bPick=true;
@@ -176,7 +176,7 @@ int CBasicStoreBridge::Picking(void) ///툴팁기능 추가해야함
 			}
 		}
 
-	}
+	//}
 	if(m_bPick&&m_bTooltip)//툴팁 버튼 클릭
 	{
 		for(size_t i =0; i<m_vecButton.size(); ++i)
@@ -187,78 +187,9 @@ int CBasicStoreBridge::Picking(void) ///툴팁기능 추가해야함
 				{
 				case 0://구매버튼
 					{
-						//const CUi* pUi = CUIMgr::GetInstance()->GetUi(UI_INVEN);
-						//m_pUi
-						//= NULL;
-						CUi* pUi = CUIMgr::GetInstance()->GetUi(SC_FIELD,UI_INVEN);
-						vector<CItem*>* pInven  =  ((CInvenBridge*)pUi->GetBridge())->GetItemSlot();
-						//pInven = ((CInvenBridge*)CUIMgr::GetInstance()->GetUi(SC_FIELD,UI_INVEN))->GetItemSlot();
-					//	vector<CItem*>* pInven = ((CInvenBridge*)pUi)->GetItemSlot();
-						//(*pInven)[0]->
-						for(size_t i =0; i < (*pInven).size(); ++i)
-						{
-							
-							if((*pInven)[i]->GetObjKey()==L"Empty")
-							{
-								CItem*	pTemp = (*pInven)[i];
 
-								ITEM*			pItemData = new ITEM;
-								pItemData->eType = m_ItemSlot[m_iIndex]->GetItemInfo()->eType;
-								pItemData->iCount = m_ItemSlot[m_iIndex]->GetItemInfo()->iCount;
-								pItemData->iOption = m_ItemSlot[m_iIndex]->GetItemInfo()->iOption;
-								pItemData->iPrice = m_ItemSlot[m_iIndex]->GetItemInfo()->iPrice;
-								pItemData->iWeight = m_ItemSlot[m_iIndex]->GetItemInfo()->iWeight;
-								pItemData->wstrName = m_ItemSlot[m_iIndex]->GetItemInfo()->wstrName;
+						BuyItem();
 
-								/*pItemData=*/
-								//m_ItemSlot[m_iIndex]->GetItemInfo()->eType
-								switch(m_ItemSlot[m_iIndex]->GetItemInfo()->eType)
-								{
-								case IT_WEAPON:
-									{
-										(*pInven)[i] = CreateWeapon(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
-										break;
-									}
-								case IT_ARMOR:
-									{
-										(*pInven)[i] = CreateArmor(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
-										break;
-									}
-								case IT_GLOVE:
-									{
-										(*pInven)[i] = CreateGlove(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
-										break;
-									}
-								case IT_HELMET:
-									{
-										(*pInven)[i] = CreateHelmet(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
-										break;
-									}
-								case IT_BOOTS:
-									{
-										(*pInven)[i] = CreateBoots(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
-										break;
-									}
-								case IT_BELT:
-									{
-										(*pInven)[i] = CreateBelt(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
-										break;
-									}
-								case IT_FOOD:
-									{
-										(*pInven)[i] = CreateFood(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
-										break;
-									}
-									
-								}
-
-								::Safe_Delete(pTemp);
-								
-								::Safe_Delete(pItemData);
-								break;
-							}
-							//
-						}
 					break;
 					}
 				case 1://취소버튼
@@ -271,6 +202,34 @@ int CBasicStoreBridge::Picking(void) ///툴팁기능 추가해야함
 		}
 	}
 
+	
+	if(PtInRect(&m_pUi->GetRect(),Pt))
+	{
+		const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_wstrStateKey);
+		float fX = (float)(pTexture->tImgInfo.Width/2);
+		float fY = (float)(pTexture->tImgInfo.Height/2);
+		if(m_pUi->GetInfo()->vPos.x+fX >= Pt.x &&
+			m_pUi->GetInfo()->vPos.x-fX <= Pt.x &&
+			m_pUi->GetInfo()->vPos.y -fY <=Pt.y &&
+			m_pUi->GetInfo()->vPos.y -fY+40 >=Pt.y )
+		{ 
+			//float tmpx = Pt.x;
+			//float tmpy = Pt.y;
+			if(!m_bMove)
+			{
+				m_bMove=true;
+			}
+			else
+			{
+				m_bMove=false;
+			}
+			if(CKeyMgr::GetInstance()->StayKeyDown(VK_LBUTTON))
+			{
+				m_pUi->SetPos(D3DXVECTOR3((float)Pt.x/*+fX-20*/,(float)Pt.y+fY-20,0.f));
+			}
+			
+		}
+	}
 	return -1;
 }
 
@@ -356,7 +315,7 @@ void CBasicStoreBridge::LoadData(void)
 		::Safe_Delete(pItemData);
 
 	}
-
+	
 	CloseHandle(hFile);
 }
 
@@ -489,4 +448,82 @@ void CBasicStoreBridge::ShowTooltip(void)
 
 
 
+}
+
+void CBasicStoreBridge::BuyItem(void)
+{
+	CUi* pUi = CUIMgr::GetInstance()->GetUi(SC_INVILLAGE,UI_INVEN);
+	CUi* pUi2 = CUIMgr::GetInstance()->GetUi(SC_FIELD, UI_INVEN);
+	vector<CItem*>* pInven  =  ((CInvenBridge*)pUi->GetBridge())->GetItemSlot();
+	vector<CItem*>* pInven2  =  ((CInvenBridge*)pUi2->GetBridge())->GetItemSlot();
+	for(size_t i =0; i < (*pInven).size(); ++i)
+	{
+
+		if((*pInven)[i]->GetObjKey()==L"Empty")
+		{
+			CItem*	pTemp = (*pInven)[i];
+
+			ITEM*			pItemData = new ITEM;
+			pItemData->eType = m_ItemSlot[m_iIndex]->GetItemInfo()->eType;
+			pItemData->iCount = m_ItemSlot[m_iIndex]->GetItemInfo()->iCount;
+			pItemData->iOption = m_ItemSlot[m_iIndex]->GetItemInfo()->iOption;
+			pItemData->iPrice = m_ItemSlot[m_iIndex]->GetItemInfo()->iPrice;
+			pItemData->iWeight = m_ItemSlot[m_iIndex]->GetItemInfo()->iWeight;
+			pItemData->wstrName = m_ItemSlot[m_iIndex]->GetItemInfo()->wstrName;
+
+			/*pItemData=*/
+			//m_ItemSlot[m_iIndex]->GetItemInfo()->eType
+			switch(m_ItemSlot[m_iIndex]->GetItemInfo()->eType)
+			{
+			case IT_WEAPON:
+				{
+					(*pInven)[i] = CreateWeapon(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
+					(*pInven2)[i] = CreateWeapon(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
+					break;
+				}
+			case IT_ARMOR:
+				{
+					(*pInven)[i] = CreateArmor(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
+					(*pInven2)[i] = CreateArmor(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
+					break;
+				}
+			case IT_GLOVE:
+				{
+					(*pInven)[i] = CreateGlove(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
+					(*pInven2)[i] = CreateGlove(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
+					break;
+				}
+			case IT_HELMET:
+				{
+					(*pInven)[i] = CreateHelmet(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
+					(*pInven2)[i] = CreateHelmet(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
+					break;
+				}
+			case IT_BOOTS:
+				{
+					(*pInven)[i] = CreateBoots(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
+					(*pInven2)[i] = CreateBoots(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
+					break;
+				}
+			case IT_BELT:
+				{
+					(*pInven)[i] = CreateBelt(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
+					(*pInven2)[i] = CreateBelt(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
+					break;
+				}
+			case IT_FOOD:
+				{
+					(*pInven)[i] = CreateFood(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
+					(*pInven2)[i] = CreateFood(pItemData,D3DXVECTOR3(0.f,0.f,0.f));
+					break;
+				}
+
+			}
+
+			::Safe_Delete(pTemp);
+
+			::Safe_Delete(pItemData);
+			break;
+		}
+	}
 }

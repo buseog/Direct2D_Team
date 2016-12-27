@@ -49,8 +49,7 @@ void CBack::Progress(void)
 	if (m_vScroll.y < MaxY)
 		m_vScroll.y = MaxY;
 
-
-
+	
 	if (CKeyMgr::GetInstance()->KeyDown('1'))
 	{
 		D3DXVECTOR3 vPos = ::GetMouse() - m_vScroll;

@@ -13,6 +13,9 @@ private:
 	vector<CItem*>	m_ItemSlot;
 	vector<CItem*>	m_EquipSlot;
 	vector<CItem*>	m_TempSlot;
+
+private:
+	vector<CUi*>		m_vecButton;
 	
 
 private:
@@ -25,12 +28,23 @@ private:
 	bool	m_bArmor;
 	bool	m_bBelt;
 
+	bool	m_bTooltip;
+	bool	m_bPick;
+	bool	m_bMove;
+
 
 public:
 	void SortItem(INFO& rInfo);
 	void AddItem(INFO& rInfo);
 	void SetItem(INFO& rInfo);
 	vector<CItem*>* GetItemSlot(void);
+
+	void ShowTooltip(void);
+	
+	//void BuyItem(void);
+
+
+
 	
 	CItem*	CreateWeapon(D3DXVECTOR3 vPos);
 	CItem*	CreateArmor(D3DXVECTOR3 vPos);

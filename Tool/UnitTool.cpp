@@ -40,7 +40,6 @@ CUnitTool::~CUnitTool()
 void CUnitTool::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_PICTURE1, m_Picture);
 	DDX_Text(pDX, IDC_UNITEDIT1, m_strName);
 	DDX_Text(pDX, IDC_UNITEDIT2, m_iStr);
 	DDX_Text(pDX, IDC_UNITEDIT3, m_iDex);
@@ -63,7 +62,6 @@ void CUnitTool::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_UNITEDIT13, m_fAttackSpeed);
 	DDX_Text(pDX, IDC_UNITEDIT14, m_fMoveSpeed);
 	DDX_Radio(pDX, IDC_RADIO1, (int&)m_UnitType);
-	DDX_Control(pDX, IDC_LIST1, m_PortraitList);
 	DDX_Control(pDX, IDC_LIST2, m_UnitList);
 	DDX_Text(pDX, IDC_UNITEDIT15, m_fRange);
 }
@@ -99,7 +97,7 @@ BOOL CUnitTool::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
-	MoveWindow(0,0,1024,768);
+//	MoveWindow(0,0,1024,768);
 	UpdateData(TRUE);
 
 	//CFileInfo FileInfo;
@@ -624,11 +622,8 @@ void CUnitTool::OnBnClickedButton5()
 void CUnitTool::OnBnClickedButtonShowItemTool()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	//((*CMainFrame)AfxGetMainWnd())->
-	//((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool();
 	if(((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool()->GetSafeHwnd() == NULL)
 	{
-		//m_pUnitTool = new CUnitTool;
 		((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool()->Create(IDD_ITEMTOOL);
 	}
 

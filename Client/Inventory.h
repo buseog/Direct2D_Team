@@ -6,6 +6,8 @@ class CInventory :
 	public CUi
 {
 public:
+	virtual void	SetView(bool bView);
+public:
 	virtual HRESULT Initialize(void);
 	virtual void Progress(void);
 	virtual void Render(void);

@@ -42,6 +42,9 @@ void CBridge::SetUI(CUi*	pUi)
 
 void CBridge::SetFrame(const wstring& wstrStateKey)
 {
+	if (m_wstrStateKey == wstrStateKey)
+		return;
+
 	m_wstrStateKey = wstrStateKey;
 	m_tFrame.fFrame = 0.f;
 	m_tFrame.fCount = (float)CTextureMgr::GetInstance()->GetImgCount(m_pObj->GetObjKey(), wstrStateKey);
@@ -58,7 +61,24 @@ void	CBridge::Frame(void)
 	m_tFrame.fFrame += m_tFrame.fCount * CTimeMgr::GetInstance()->GetTime();
 
 	if(m_tFrame.fFrame > m_tFrame.fMax)
+	{
+		if (m_pObj)
+		{
+			if (m_pObj->GetOrder() == OD_DIE)
+			{
+				m_pObj->SetDestroy(true);
+				return;
+			}
+
+			if (m_pObj->GetOrder() == OD_SKILL)
+			{
+				m_pObj->SetOrder(OD_STAND);
+				return;
+			}
+		}
+
 		m_tFrame.fFrame = 0;
+	}
 }
 
 void	CBridge::SetObjSize(void)

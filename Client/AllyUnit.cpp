@@ -50,16 +50,16 @@ void CAllyUnit::Progress(void)
 		m_pBridge->Progress(m_tInfo);
 	}
 
-	/*if(m_wstrObjKey==L"TestUnit")
-	{
-		ScaleSync();
-		return;
-	}
-	else
-	{
-		WorldMatrix();
-		return;
-	}*/
+	//if(m_wstrObjKey==L"TestUnit")
+	//{
+	//	ScaleSync();
+	//	return;
+	//}
+	//else
+	//{
+	//	WorldMatrix();
+	//	return;
+	//}
 }
 
 void CAllyUnit::Render(void)
@@ -69,17 +69,17 @@ void CAllyUnit::Render(void)
 		m_pBridge->Render();
 	}
 
-	//const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_wstrObjKey);
-	//
-	//if(pTexture == NULL)
-	//	return;
+	/*const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_wstrObjKey);
+	
+	if(pTexture == NULL)
+		return;
 
-	//float fX = pTexture->tImgInfo.Width  / 2.f;
-	//float fY = pTexture->tImgInfo.Height / 2.f;
+	float fX = pTexture->tImgInfo.Width  / 2.f;
+	float fY = pTexture->tImgInfo.Height / 2.f;
 
-	//CDevice::GetInstance()->GetSprite()->SetTransform(&m_tInfo.matWorld);
-	//CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
-	//	NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+	CDevice::GetInstance()->GetSprite()->SetTransform(&m_tInfo.matWorld);
+	CDevice::GetInstance()->GetSprite()->Draw(pTexture->pTexture, 
+		NULL, &D3DXVECTOR3(fX, fY, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));*/
 
 }
 

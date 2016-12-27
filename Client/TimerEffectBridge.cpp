@@ -32,8 +32,8 @@ void CTimerEffectBridge::Render(void)
 	if(pTexture == NULL)
 		return;
 
-	float fX = pTexture->tImgInfo.Width / 2.f;
-	float fY = pTexture->tImgInfo.Height;
+	float fX = (float)pTexture->tImgInfo.Width / 2.f;
+	float fY = (float)pTexture->tImgInfo.Height;
 
 	CDevice::GetInstance()->Render_End();
 	CDevice::GetInstance()->Render_Begin();
@@ -59,12 +59,22 @@ void CTimerEffectBridge::Release(void)
 
 void CTimerEffectBridge::WorldMatrix(INFO& rInfo)
 {
-	D3DXMATRIX	matTrans;
 
-	D3DXMatrixTranslation(&matTrans, 
-		rInfo.vPos.x + m_pObj->GetScroll().x, 
-		rInfo.vPos.y + m_pObj->GetScroll().y + 20.f, 
-		0.f);
+	D3DXMATRIX	matTrans;
+	if (m_wstrStateKey == L"Victory")
+	{
+		D3DXMatrixTranslation(&matTrans, 
+			rInfo.vPos.x, 
+			rInfo.vPos.y, 
+			0.f);
+	}
+	else
+	{
+		D3DXMatrixTranslation(&matTrans, 
+			rInfo.vPos.x + m_pObj->GetScroll().x, 
+			rInfo.vPos.y + m_pObj->GetScroll().y + 20.f, 
+			0.f);
+	}
 
 	rInfo.matWorld = matTrans;
 
@@ -73,15 +83,21 @@ void CTimerEffectBridge::WorldMatrix(INFO& rInfo)
 
 void CTimerEffectBridge::EffectTime(void)
 {
+	if(m_fTime <= 0)
+		m_pObj->SetDestroy(true);
+	
 	m_fTime -= CTimeMgr::GetInstance()->GetTime();
 
 	m_tFrame.fFrame += m_tFrame.fCount * CTimeMgr::GetInstance()->GetTime();
 
 	if(m_tFrame.fFrame > m_tFrame.fMax)
-		m_tFrame.fFrame = 0;
+	{
+		if (m_wstrStateKey == L"Victory")
+			return;
 
-	if(m_fTime <= 0)
-		m_pObj->SetDestroy(true);
+		m_tFrame.fFrame = 0;
+	}
+
 
 	return;
 	

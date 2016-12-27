@@ -25,11 +25,6 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
 
 	DECLARE_MESSAGE_MAP()
-private:
-	
-	CStatic m_Picture;// 비트맵이미지
-	CImage* pPngImage;
-
 
 private:
 	void Release(void);
@@ -46,7 +41,6 @@ private: ///basestatus
 	int m_iInt;
 	
 private:
-	
 	int m_iLevel;
 	int m_iAttack;
 	int m_iDeffence;

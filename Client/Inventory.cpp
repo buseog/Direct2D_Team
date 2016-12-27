@@ -48,3 +48,9 @@ void	CInventory::Release(void)
 {
 	::Safe_Delete(m_pBridge);
 }
+
+void	CInventory::SetView(bool bView)
+{
+
+	m_bView = bView;	
+}

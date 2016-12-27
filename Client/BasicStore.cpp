@@ -12,7 +12,7 @@ CBasicStore::~CBasicStore(void)
 
 HRESULT	CBasicStore::Initialize(void)
 {
-	//m_wstrObjKey = L"Inventory";	
+	m_wstrObjKey = L"BASIC";	
 
 	return S_OK;
 }

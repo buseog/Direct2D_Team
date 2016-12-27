@@ -21,6 +21,7 @@ public:
 	void		AddSorting(CUi*	pUi);
 	void		MapClear(void);
 	int			Picking(void);
+	void		BattleFIeldClear(void);
 
 public:
 	HRESULT			Initialize(void);

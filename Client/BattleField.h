@@ -10,6 +10,7 @@ public:
 	virtual void	Render(void);
 	virtual void	Release(void);
 	virtual void	LoadPNG(void);
+	void SetMonster(wstring _MonsterKey);
 
 public:
 	CBattleField(void);

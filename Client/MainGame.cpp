@@ -8,6 +8,7 @@
 #include "AStar.h"
 #include "CrowdMgr.h"
 #include "DataSubject.h"
+#include "SoundMgr.h"
 
 CMainGame::CMainGame(void)
 : m_pDevice(CDevice::GetInstance())
@@ -29,6 +30,7 @@ CMainGame::~CMainGame(void)
 
 HRESULT CMainGame::Initialize(void)
 {
+	CSoundMgr::GetInstance()->Init();
 	if(FAILED(m_pDevice->InitDevice()))
 	{
 		ERR_MSG(L"Client Device Create Failed")
@@ -49,6 +51,7 @@ void CMainGame::Progress(void)
 
 	if (m_pSceneMgr)
 		m_pSceneMgr->Progress();
+
 	D3DXMatrixTranslation(&m_matTrans, 600.f, 50.f, 0.f);	
 }
 

@@ -45,7 +45,8 @@ void CBackBridge::LoadTile(const wstring& wstrPath)
 
 	while(1)
 	{
-		TILE2*			pTile = new TILE2;
+		TILE*			pTile = new TILE;
+		TILE2*			pTile2 = new TILE2;
 
 		ReadFile(hFile, pTile, sizeof(TILE), &dwByte, NULL);
 
@@ -54,8 +55,13 @@ void CBackBridge::LoadTile(const wstring& wstrPath)
 			::Safe_Delete(pTile);
 			break;
 		}
-		//pTile->Connectlist.clear();
-		m_vecTile.push_back(pTile);
+
+		pTile2->vPos = pTile->vPos;
+		pTile2->vSize = pTile->vSize;
+		pTile2->byDrawID = pTile->byDrawID;
+		pTile2->byOption = pTile->byOption;
+
+		m_vecTile.push_back(pTile2);
 	}
 
 	CloseHandle(hFile);

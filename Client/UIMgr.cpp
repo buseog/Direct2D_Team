@@ -101,6 +101,20 @@ int	CUIMgr::Picking(void)
 
 	return iResult;
 }
+
+void CUIMgr::BattleFIeldClear( void )
+{
+	for(int i = 0; i < UI_END; ++i)
+	{
+		for(list<CUi*>::iterator	iter = m_UiList[SC_BATTLEFIELD][i].begin();
+			iter != m_UiList[SC_BATTLEFIELD][i].end(); ++iter)
+		{
+			::Safe_Delete(*iter);
+		}
+		m_UiList[SC_BATTLEFIELD][i].clear();
+	}
+}
+
 CUi*	CUIMgr::GetUi(SCENEID _eScene,UIID _eUI)
 {
 	

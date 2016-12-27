@@ -32,3 +32,20 @@ void CEffect::Release(void)
 {
 	::Safe_Delete(m_pBridge);
 }
+
+const RECT	CEffect::GetRect(void)
+{
+	const TEXINFO*		pTexture = CTextureMgr::GetInstance()->GetTexture(m_wstrObjKey, m_pBridge->GetStateKey(), 0);
+
+	float fX = (float)pTexture->tImgInfo.Width;
+	float fY = (float)pTexture->tImgInfo.Height;
+
+	RECT rc  = {
+		long(m_tInfo.vPos.x - fX / 2.f),
+		long(m_tInfo.vPos.y - fY / 2.f),
+		long(m_tInfo.vPos.x + fX / 2.f),
+		long(m_tInfo.vPos.y + fY / 2.f)
+	};
+
+	return rc;
+}

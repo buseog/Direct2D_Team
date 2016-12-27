@@ -317,9 +317,9 @@ int	CCrowdMgr::KeyInput(void)
 	if (CKeyMgr::GetInstance()->KeyDown('Q'))
 	{
 		D3DXVECTOR3 vMouse = ::GetMouse() - m_vecSelectUnit.front()->GetScroll();
-		
+		m_vecSelectUnit.front()->GetBridge()->SetFrame(L"Skill_1");
 		CSKillMgr::Skill(m_vecSelectUnit.front()->GetInfo()->vPos, vMouse, m_vecSelectUnit.front()->GetObjKey());
-		m_vecSelectUnit.front()->SetOrder(OD_SKILL);
+		m_vecSelectUnit.front()->SetOrder(OD_SKILL);	
 	}
 
 	return -1;

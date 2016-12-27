@@ -169,1234 +169,1290 @@
 	</References>
 	<Files>
 		<Filter
-			Name="00. MainGame"
-			>
-			<File
-				RelativePath=".\MainGame.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\MainGame.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="97. Mgr"
+			Name="00. Interface"
 			>
 			<Filter
-				Name="01. TextureMgr"
+				Name="99. Default"
 				>
-				<File
-					RelativePath=".\Texture.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Texture.h"
-					>
-				</File>
-				<File
-					RelativePath=".\TextureMgr.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\TextureMgr.h"
-					>
-				</File>
 				<Filter
-					Name="00. SingleTexture"
+					Name="리소스 파일"
+					Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
+					UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 					>
 					<File
-						RelativePath=".\SingleTexture.cpp"
+						RelativePath=".\Client.ico"
 						>
 					</File>
 					<File
-						RelativePath=".\SingleTexture.h"
+						RelativePath=".\Client.rc"
+						>
+					</File>
+					<File
+						RelativePath=".\small.ico"
 						>
 					</File>
 				</Filter>
 				<Filter
-					Name="01. MultiTexture"
+					Name="소스 파일"
+					Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
+					UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 					>
 					<File
-						RelativePath=".\MultiTexture.cpp"
+						RelativePath=".\Client.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\MultiTexture.h"
+						RelativePath=".\stdafx.cpp"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="1"
+							/>
+						</FileConfiguration>
+					</File>
+				</Filter>
+				<Filter
+					Name="헤더 파일"
+					Filter="h;hpp;hxx;hm;inl;inc;xsd"
+					UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+					>
+					<File
+						RelativePath=".\Client.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Resource.h"
+						>
+					</File>
+					<File
+						RelativePath=".\stdafx.h"
+						>
+					</File>
+					<File
+						RelativePath=".\targetver.h"
 						>
 					</File>
 				</Filter>
 			</Filter>
 			<Filter
-				Name="06. KeyMgr"
+				Name="00. MainGame"
 				>
 				<File
-					RelativePath=".\KeyMgr.cpp"
+					RelativePath=".\MainGame.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\KeyMgr.h"
+					RelativePath=".\MainGame.h"
 					>
 				</File>
 			</Filter>
 			<Filter
-				Name="02. SceneMgr"
+				Name="01. Scene"
 				>
 				<File
-					RelativePath=".\SceneMgr.cpp"
+					RelativePath=".\Scene.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\SceneMgr.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="03. ObjMgr"
-				>
-				<File
-					RelativePath=".\ObjMgr.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\ObjMgr.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="05. AStar"
-				>
-				<File
-					RelativePath=".\AStar.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\AStar.h"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-						/>
-					</FileConfiguration>
-				</File>
-			</Filter>
-			<Filter
-				Name="08. TimeMgr"
-				>
-				<File
-					RelativePath=".\TimeMgr.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\TimeMgr.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="07. CrowdMgr"
-				>
-				<File
-					RelativePath=".\CrowdMgr.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\CrowdMgr.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="04. UIMgr"
-				>
-				<File
-					RelativePath=".\UIMgr.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\UIMgr.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="00. Device"
-				>
-				<File
-					RelativePath=".\Device.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Device.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="09. SkillMgr"
-				>
-				<File
-					RelativePath=".\SKillMgr.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\SKillMgr.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="98. Design"
-			>
-			<Filter
-				Name="00. ObjFactory"
-				>
-				<File
-					RelativePath=".\ItemFactory.h"
-					>
-				</File>
-				<File
-					RelativePath=".\ObjFactory.h"
-					>
-				</File>
-				<File
-					RelativePath=".\UIFactory.h"
-					>
-				</File>
-				<File
-					RelativePath=".\UnitFactory.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="01. Bridge"
-				>
-				<File
-					RelativePath=".\Bridge.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Bridge.h"
+					RelativePath=".\Scene.h"
 					>
 				</File>
 				<Filter
-					Name="00. ObjBridge"
+					Name="00. Start"
 					>
 					<File
-						RelativePath=".\ObjBridge.cpp"
+						RelativePath=".\Start.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\ObjBridge.h"
+						RelativePath=".\Start.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="01. Field"
+					>
+					<File
+						RelativePath=".\Field.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Field.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="03. Village"
+					>
+					<File
+						RelativePath=".\Village.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Village.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="02. BattleField"
+					>
+					<File
+						RelativePath=".\BattleField.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\BattleField.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="04. InVillage"
+					>
+					<File
+						RelativePath=".\InVillage.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\InVillage.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="02. Obj"
+				>
+				<File
+					RelativePath=".\Obj.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Obj.h"
+					>
+				</File>
+				<Filter
+					Name="00. Back"
+					>
+					<File
+						RelativePath=".\Back.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Back.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="01. Player"
+					>
+					<File
+						RelativePath=".\Player.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Player.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="03. Unit"
+					>
+					<File
+						RelativePath=".\Unit.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Unit.h"
 						>
 					</File>
 					<Filter
-						Name="02. UnitBridge"
+						Name="00. AllyUnit"
 						>
 						<File
-							RelativePath=".\UnitBridge.cpp"
+							RelativePath=".\AllyUnit.cpp"
 							>
 						</File>
 						<File
-							RelativePath=".\UnitBridge.h"
+							RelativePath=".\AllyUnit.h"
 							>
 						</File>
 					</Filter>
 					<Filter
-						Name="03. EffectBridge"
+						Name="01. EnemyUnit"
 						>
-						<File
-							RelativePath=".\EffectBridge.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\EffectBridge.h"
-							>
-						</File>
 						<Filter
-							Name="00. MoveEffectBridge"
+							Name="00. ShortAttack"
 							>
 							<File
-								RelativePath=".\MoveEffectBridge.cpp"
+								RelativePath=".\ShortAttack.cpp"
 								>
 							</File>
 							<File
-								RelativePath=".\MoveEffectBridge.h"
+								RelativePath=".\ShortAttack.h"
 								>
-								<FileConfiguration
-									Name="Debug|Win32"
-									>
-									<Tool
-										Name="VCCustomBuildTool"
-									/>
-								</FileConfiguration>
 							</File>
 						</Filter>
 						<Filter
-							Name="01. StandEffectBridge"
+							Name="01. LongAttack"
 							>
 							<File
-								RelativePath=".\StandEffectBridge.cpp"
+								RelativePath=".\LongAttack.cpp"
 								>
 							</File>
 							<File
-								RelativePath=".\StandEffectBridge.h"
+								RelativePath=".\LongAttack.h"
 								>
-								<FileConfiguration
-									Name="Debug|Win32"
-									>
-									<Tool
-										Name="VCCustomBuildTool"
-									/>
-								</FileConfiguration>
 							</File>
 						</Filter>
 						<Filter
-							Name="02. TimerEffect"
+							Name="02. FieldUnit"
 							>
 							<File
-								RelativePath=".\TimerEffectBridge.cpp"
+								RelativePath=".\EnemyUnit.cpp"
 								>
 							</File>
 							<File
-								RelativePath=".\TimerEffectBridge.h"
+								RelativePath=".\EnemyUnit.h"
 								>
 							</File>
 						</Filter>
 					</Filter>
 					<Filter
-						Name="01. PlayerBridge"
+						Name="99. EmptyUnit"
 						>
 						<File
-							RelativePath=".\PlayerBridge.cpp"
+							RelativePath=".\EmptyUnit.cpp"
 							>
 						</File>
 						<File
-							RelativePath=".\PlayerBridge.h"
+							RelativePath=".\EmptyUnit.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="02. Effect"
+					>
+					<File
+						RelativePath=".\Effect.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Effect.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="03. UI"
+				>
+				<File
+					RelativePath=".\Ui.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Ui.h"
+					>
+				</File>
+				<Filter
+					Name="00. MainUI"
+					>
+					<File
+						RelativePath=".\MainUi.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\MainUi.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="01. Inventory"
+					>
+					<File
+						RelativePath=".\Inventory.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Inventory.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="02. Status"
+					>
+					<File
+						RelativePath=".\Status.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Status.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="03. Store"
+					>
+					<File
+						RelativePath=".\Store.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Store.h"
+						>
+					</File>
+					<Filter
+						Name="00. BasicStore"
+						>
+						<File
+							RelativePath=".\BasicStore.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\BasicStore.h"
 							>
 						</File>
 					</Filter>
 					<Filter
-						Name="00. BackBridge"
+						Name="01. DrugStore"
 						>
 						<File
-							RelativePath=".\BackBridge.cpp"
+							RelativePath=".\DrugStore.cpp"
 							>
 						</File>
 						<File
-							RelativePath=".\BackBridge.h"
+							RelativePath=".\DrugStore.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="02. MercenaryStore"
+						>
+						<File
+							RelativePath=".\MercenaryStore.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\MercenaryStore.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="04. Button"
+					>
+					<File
+						RelativePath=".\MyButton.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\MyButton.h"
+						>
+					</File>
+					<Filter
+						Name="00. HotKeyStop"
+						>
+						<File
+							RelativePath=".\HotKeyStop.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\HotKeyStop.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="01. HotKeyMove"
+						>
+						<File
+							RelativePath=".\HotKeyMove.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\HotKeyMove.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="02. HotKeyAttack"
+						>
+						<File
+							RelativePath=".\HotKeyAttack.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\HotKeyAttack.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="03. TownButton"
+						>
+						<File
+							RelativePath=".\TownButton.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\TownButton.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="04. BasicTownButton"
+						>
+						<File
+							RelativePath=".\BasicTownButton.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\BasicTownButton.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="05. DrugTownButton"
+						>
+						<File
+							RelativePath=".\DrugTownButton.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\DrugTownButton.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="06. MercenaryTownButton"
+						>
+						<File
+							RelativePath=".\MercenaryTownButton.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\MercenaryTownButton.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="07. StoreButton"
+						>
+						<File
+							RelativePath=".\StoreButton.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\StoreButton.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="05. Portrait"
+					>
+					<File
+						RelativePath=".\Portrait.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Portrait.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="06. MercenaryDisplay"
+					>
+					<File
+						RelativePath=".\MercenaryDisplay.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\MercenaryDisplay.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="04. Item"
+				>
+				<File
+					RelativePath=".\Item.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Item.h"
+					>
+				</File>
+				<Filter
+					Name="00. Weapon"
+					>
+					<File
+						RelativePath=".\Weapon.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Weapon.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="01. Armor"
+					>
+					<File
+						RelativePath=".\Armor.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Armor.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="02. Glove"
+					>
+					<File
+						RelativePath=".\Glove.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Glove.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="03. Helmet"
+					>
+					<File
+						RelativePath=".\Helmet.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Helmet.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="04. Boots"
+					>
+					<File
+						RelativePath=".\Boots.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Boots.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="05. Belt"
+					>
+					<File
+						RelativePath=".\Belt.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Belt.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="06. Food"
+					>
+					<File
+						RelativePath=".\Food.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Food.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="09. Empty"
+					>
+					<File
+						RelativePath=".\EmptyItem.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\EmptyItem.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="97. Mgr"
+				>
+				<Filter
+					Name="01. TextureMgr"
+					>
+					<File
+						RelativePath=".\Texture.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Texture.h"
+						>
+					</File>
+					<File
+						RelativePath=".\TextureMgr.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\TextureMgr.h"
+						>
+					</File>
+					<Filter
+						Name="00. SingleTexture"
+						>
+						<File
+							RelativePath=".\SingleTexture.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\SingleTexture.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="01. MultiTexture"
+						>
+						<File
+							RelativePath=".\MultiTexture.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\MultiTexture.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="06. KeyMgr"
+					>
+					<File
+						RelativePath=".\KeyMgr.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\KeyMgr.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="02. SceneMgr"
+					>
+					<File
+						RelativePath=".\SceneMgr.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SceneMgr.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="03. ObjMgr"
+					>
+					<File
+						RelativePath=".\ObjMgr.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\ObjMgr.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="05. AStar"
+					>
+					<File
+						RelativePath=".\AStar.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\AStar.h"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCustomBuildTool"
+							/>
+						</FileConfiguration>
+					</File>
+				</Filter>
+				<Filter
+					Name="08. TimeMgr"
+					>
+					<File
+						RelativePath=".\TimeMgr.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\TimeMgr.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="07. CrowdMgr"
+					>
+					<File
+						RelativePath=".\CrowdMgr.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CrowdMgr.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="04. UIMgr"
+					>
+					<File
+						RelativePath=".\UIMgr.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UIMgr.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="00. Device"
+					>
+					<File
+						RelativePath=".\Device.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Device.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="09. SkillMgr"
+					>
+					<File
+						RelativePath=".\SKillMgr.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SKillMgr.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="10. CollisionMgr"
+					>
+					<File
+						RelativePath=".\CollisionMgr.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\CollisionMgr.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="11. SoundMgr"
+					>
+					<File
+						RelativePath=".\SoundMgr.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SoundMgr.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="98. Design"
+				>
+				<Filter
+					Name="00. ObjFactory"
+					>
+					<File
+						RelativePath=".\ItemFactory.h"
+						>
+					</File>
+					<File
+						RelativePath=".\ObjFactory.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UIFactory.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UnitFactory.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="01. Observer"
+					>
+					<File
+						RelativePath=".\Observer.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Observer.h"
+						>
+					</File>
+					<Filter
+						Name="00. Subject"
+						>
+						<File
+							RelativePath=".\Subject.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\Subject.h"
 							>
 						</File>
 						<Filter
-							Name="00. FieldBackBridge"
+							Name="00. DataSubject"
 							>
 							<File
-								RelativePath=".\FieldBackBridge.cpp"
+								RelativePath=".\DataSubject.cpp"
 								>
 							</File>
 							<File
-								RelativePath=".\FieldBackBridge.h"
-								>
-							</File>
-						</Filter>
-						<Filter
-							Name="02. VillageBackBridge"
-							>
-							<File
-								RelativePath=".\VillageBackBridge.cpp"
-								>
-							</File>
-							<File
-								RelativePath=".\VillageBackBridge.h"
-								>
-							</File>
-						</Filter>
-						<Filter
-							Name="01. BattleFieldBackBridge"
-							>
-							<File
-								RelativePath=".\BattleFieldBackBridge.cpp"
-								>
-							</File>
-							<File
-								RelativePath=".\BattleFieldBackBridge.h"
+								RelativePath=".\DataSubject.h"
 								>
 							</File>
 						</Filter>
 					</Filter>
 					<Filter
-						Name="04. EnemyBridge"
-						>
-						<Filter
-							Name="00. ShortAttackBridge"
-							>
-							<File
-								RelativePath=".\ShortAttackBridge.cpp"
-								>
-							</File>
-							<File
-								RelativePath=".\ShortAttackBridge.h"
-								>
-							</File>
-						</Filter>
-						<Filter
-							Name="01. LongAttackBridge"
-							>
-							<File
-								RelativePath=".\LongAttackBridge.cpp"
-								>
-							</File>
-							<File
-								RelativePath=".\LongAttackBridge.h"
-								>
-							</File>
-						</Filter>
-						<Filter
-							Name="02. FieldEnemyBridge"
-							>
-							<File
-								RelativePath=".\EnemyBridge.cpp"
-								>
-							</File>
-							<File
-								RelativePath=".\EnemyBridge.h"
-								>
-							</File>
-						</Filter>
-					</Filter>
-				</Filter>
-				<Filter
-					Name="01. UiBridge"
-					>
-					<File
-						RelativePath=".\UiBridge.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\UiBridge.h"
-						>
-					</File>
-					<Filter
-						Name="00. MainUIBridge"
+						Name="01. UIObserver"
 						>
 						<File
-							RelativePath=".\MainUiBridge.cpp"
+							RelativePath=".\UIObserver.cpp"
 							>
 						</File>
 						<File
-							RelativePath=".\MainUiBridge.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="01. InvenBridge"
-						>
-						<File
-							RelativePath=".\InvenBridge.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\InvenBridge.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="02. StatusBridge"
-						>
-						<File
-							RelativePath=".\StatusBridge.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\StatusBridge.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="04. StoreBridge"
-						>
-						<File
-							RelativePath=".\StoreBridge.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\StoreBridge.h"
-							>
-						</File>
-						<Filter
-							Name="00. BasicStoreBridge"
-							>
-							<File
-								RelativePath=".\BasicStoreBridge.cpp"
-								>
-							</File>
-							<File
-								RelativePath=".\BasicStoreBridge.h"
-								>
-							</File>
-						</Filter>
-						<Filter
-							Name="01. DrugStoreBridge"
-							>
-							<File
-								RelativePath=".\DrugStoreBridge.cpp"
-								>
-							</File>
-							<File
-								RelativePath=".\DrugStoreBridge.h"
-								>
-							</File>
-						</Filter>
-						<Filter
-							Name="02. MercenaryStoreBridge"
-							>
-							<File
-								RelativePath=".\MercenaryStoreBridge.cpp"
-								>
-							</File>
-							<File
-								RelativePath=".\MercenaryStoreBridge.h"
-								>
-							</File>
-						</Filter>
-					</Filter>
-					<Filter
-						Name="05. ButtonBridge"
-						>
-						<File
-							RelativePath=".\ButtonBridge.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\ButtonBridge.h"
-							>
-						</File>
-						<Filter
-							Name="00. HotKeyBridge"
-							>
-							<File
-								RelativePath=".\HotKeyBridge.cpp"
-								>
-							</File>
-							<File
-								RelativePath=".\HotKeyBridge.h"
-								>
-							</File>
-						</Filter>
-						<Filter
-							Name="01. TownBridge"
-							>
-							<File
-								RelativePath=".\TownBridge.cpp"
-								>
-							</File>
-							<File
-								RelativePath=".\TownBridge.h"
-								>
-							</File>
-						</Filter>
-						<Filter
-							Name="02. BasicBridge"
-							>
-							<File
-								RelativePath=".\BasicBridge.cpp"
-								>
-							</File>
-							<File
-								RelativePath=".\BasicBridge.h"
-								>
-							</File>
-						</Filter>
-						<Filter
-							Name="03. DrugBridge"
-							>
-							<File
-								RelativePath=".\DrugBridge.cpp"
-								>
-							</File>
-							<File
-								RelativePath=".\DrugBridge.h"
-								>
-							</File>
-						</Filter>
-						<Filter
-							Name="04. MercenaryBridge"
-							>
-							<File
-								RelativePath=".\MercenaryBridge.cpp"
-								>
-							</File>
-							<File
-								RelativePath=".\MercenaryBridge.h"
-								>
-							</File>
-						</Filter>
-					</Filter>
-					<Filter
-						Name="06. PortraitBridge"
-						>
-						<File
-							RelativePath=".\PortraitBridge.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\PortraitBridge.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="07. MercenaryDisplayBridge"
-						>
-						<File
-							RelativePath=".\MercenaryDisplayBridge.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\MercenaryDisplayBridge.h"
+							RelativePath=".\UIObserver.h"
 							>
 						</File>
 					</Filter>
 				</Filter>
-			</Filter>
-			<Filter
-				Name="02. Observer"
-				>
-				<File
-					RelativePath=".\Observer.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Observer.h"
-					>
-				</File>
-				<Filter
-					Name="00. Subject"
-					>
-					<File
-						RelativePath=".\Subject.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Subject.h"
-						>
-					</File>
-					<Filter
-						Name="00. DataSubject"
-						>
-						<File
-							RelativePath=".\DataSubject.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\DataSubject.h"
-							>
-						</File>
-					</Filter>
-				</Filter>
-				<Filter
-					Name="01. UIObserver"
-					>
-					<File
-						RelativePath=".\UIObserver.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\UIObserver.h"
-						>
-					</File>
-				</Filter>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="01. Scene"
-			>
-			<File
-				RelativePath=".\Scene.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Scene.h"
-				>
-			</File>
-			<Filter
-				Name="00. Start"
-				>
-				<File
-					RelativePath=".\Start.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Start.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="01. Field"
-				>
-				<File
-					RelativePath=".\Field.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Field.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="03. Village"
-				>
-				<File
-					RelativePath=".\Village.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Village.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="02. BattleField"
-				>
-				<File
-					RelativePath=".\BattleField.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\BattleField.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="02. Obj"
-			>
-			<File
-				RelativePath=".\Obj.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Obj.h"
-				>
-			</File>
-			<Filter
-				Name="00. Back"
-				>
-				<File
-					RelativePath=".\Back.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Back.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="01. Player"
-				>
-				<File
-					RelativePath=".\Player.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Player.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="03. Unit"
-				>
-				<File
-					RelativePath=".\Unit.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Unit.h"
-					>
-				</File>
-				<Filter
-					Name="00. AllyUnit"
-					>
-					<File
-						RelativePath=".\AllyUnit.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\AllyUnit.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="01. EnemyUnit"
-					>
-					<Filter
-						Name="00. ShortAttack"
-						>
-						<File
-							RelativePath=".\ShortAttack.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\ShortAttack.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="01. LongAttack"
-						>
-						<File
-							RelativePath=".\LongAttack.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\LongAttack.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="02. FieldUnit"
-						>
-						<File
-							RelativePath=".\EnemyUnit.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\EnemyUnit.h"
-							>
-						</File>
-					</Filter>
-				</Filter>
-				<Filter
-					Name="99. EmptyUnit"
-					>
-					<File
-						RelativePath=".\EmptyUnit.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\EmptyUnit.h"
-						>
-					</File>
-				</Filter>
-			</Filter>
-			<Filter
-				Name="02. Effect"
-				>
-				<File
-					RelativePath=".\Effect.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Effect.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="03. UI"
-			>
-			<File
-				RelativePath=".\Ui.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Ui.h"
-				>
-			</File>
-			<Filter
-				Name="00. MainUI"
-				>
-				<File
-					RelativePath=".\MainUi.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\MainUi.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="01. Inventory"
-				>
-				<File
-					RelativePath=".\Inventory.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Inventory.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="02. Status"
-				>
-				<File
-					RelativePath=".\Status.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Status.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="03. Store"
-				>
-				<File
-					RelativePath=".\Store.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Store.h"
-					>
-				</File>
-				<Filter
-					Name="00. BasicStore"
-					>
-					<File
-						RelativePath=".\BasicStore.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\BasicStore.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="01. DrugStore"
-					>
-					<File
-						RelativePath=".\DrugStore.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\DrugStore.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="02. MercenaryStore"
-					>
-					<File
-						RelativePath=".\MercenaryStore.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\MercenaryStore.h"
-						>
-					</File>
-				</Filter>
-			</Filter>
-			<Filter
-				Name="04. Button"
-				>
-				<File
-					RelativePath=".\MyButton.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\MyButton.h"
-					>
-				</File>
-				<Filter
-					Name="00. HotKeyStop"
-					>
-					<File
-						RelativePath=".\HotKeyStop.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\HotKeyStop.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="01. HotKeyMove"
-					>
-					<File
-						RelativePath=".\HotKeyMove.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\HotKeyMove.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="02. HotKeyAttack"
-					>
-					<File
-						RelativePath=".\HotKeyAttack.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\HotKeyAttack.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="03. TownButton"
-					>
-					<File
-						RelativePath=".\TownButton.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\TownButton.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="04. BasicTownButton"
-					>
-					<File
-						RelativePath=".\BasicTownButton.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\BasicTownButton.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="05. DrugTownButton"
-					>
-					<File
-						RelativePath=".\DrugTownButton.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\DrugTownButton.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="06. MercenaryTownButton"
-					>
-					<File
-						RelativePath=".\MercenaryTownButton.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\MercenaryTownButton.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="07. StoreButton"
-					>
-					<File
-						RelativePath=".\StoreButton.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\StoreButton.h"
-						>
-					</File>
-				</Filter>
-			</Filter>
-			<Filter
-				Name="05. Portrait"
-				>
-				<File
-					RelativePath=".\Portrait.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Portrait.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="06. MercenaryDisplay"
-				>
-				<File
-					RelativePath=".\MercenaryDisplay.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\MercenaryDisplay.h"
-					>
-				</File>
 			</Filter>
 		</Filter>
 		<Filter
-			Name="04. Item"
+			Name="01. Bridge"
 			>
 			<File
-				RelativePath=".\Item.cpp"
+				RelativePath=".\Bridge.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Item.h"
+				RelativePath=".\Bridge.h"
 				>
 			</File>
 			<Filter
-				Name="00. Weapon"
+				Name="00. ObjBridge"
 				>
 				<File
-					RelativePath=".\Weapon.cpp"
+					RelativePath=".\ObjBridge.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Weapon.h"
+					RelativePath=".\ObjBridge.h"
 					>
 				</File>
-			</Filter>
-			<Filter
-				Name="01. Armor"
-				>
-				<File
-					RelativePath=".\Armor.cpp"
+				<Filter
+					Name="02. UnitBridge"
 					>
-				</File>
-				<File
-					RelativePath=".\Armor.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="02. Glove"
-				>
-				<File
-					RelativePath=".\Glove.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Glove.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="03. Helmet"
-				>
-				<File
-					RelativePath=".\Helmet.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Helmet.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="04. Boots"
-				>
-				<File
-					RelativePath=".\Boots.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Boots.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="05. Belt"
-				>
-				<File
-					RelativePath=".\Belt.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Belt.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="06. Food"
-				>
-				<File
-					RelativePath=".\Food.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Food.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="09. Empty"
-				>
-				<File
-					RelativePath=".\EmptyItem.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\EmptyItem.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="99. Default"
-			>
-			<Filter
-				Name="리소스 파일"
-				Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-				UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-				>
-				<File
-					RelativePath=".\Client.ico"
-					>
-				</File>
-				<File
-					RelativePath=".\Client.rc"
-					>
-				</File>
-				<File
-					RelativePath=".\small.ico"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="소스 파일"
-				Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
-				UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
-				>
-				<File
-					RelativePath=".\Client.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\stdafx.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
+					<File
+						RelativePath=".\UnitBridge.cpp"
 						>
-						<Tool
-							Name="VCCLCompilerTool"
-							UsePrecompiledHeader="1"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
+					</File>
+					<File
+						RelativePath=".\UnitBridge.h"
 						>
-						<Tool
-							Name="VCCLCompilerTool"
-							UsePrecompiledHeader="1"
-						/>
-					</FileConfiguration>
-				</File>
+					</File>
+				</Filter>
+				<Filter
+					Name="03. EffectBridge"
+					>
+					<File
+						RelativePath=".\EffectBridge.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\EffectBridge.h"
+						>
+					</File>
+					<Filter
+						Name="00. MoveEffectBridge"
+						>
+						<File
+							RelativePath=".\MoveEffectBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\MoveEffectBridge.h"
+							>
+							<FileConfiguration
+								Name="Debug|Win32"
+								>
+								<Tool
+									Name="VCCustomBuildTool"
+								/>
+							</FileConfiguration>
+						</File>
+					</Filter>
+					<Filter
+						Name="01. StandEffectBridge"
+						>
+						<File
+							RelativePath=".\StandEffectBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\StandEffectBridge.h"
+							>
+							<FileConfiguration
+								Name="Debug|Win32"
+								>
+								<Tool
+									Name="VCCustomBuildTool"
+								/>
+							</FileConfiguration>
+						</File>
+					</Filter>
+					<Filter
+						Name="02. TimerEffect"
+						>
+						<File
+							RelativePath=".\TimerEffectBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\TimerEffectBridge.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="01. PlayerBridge"
+					>
+					<File
+						RelativePath=".\PlayerBridge.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\PlayerBridge.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="00. BackBridge"
+					>
+					<File
+						RelativePath=".\BackBridge.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\BackBridge.h"
+						>
+					</File>
+					<Filter
+						Name="00. FieldBackBridge"
+						>
+						<File
+							RelativePath=".\FieldBackBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\FieldBackBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="02. VillageBackBridge"
+						>
+						<File
+							RelativePath=".\VillageBackBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\VillageBackBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="01. BattleFieldBackBridge"
+						>
+						<File
+							RelativePath=".\BattleFieldBackBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\BattleFieldBackBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="03. InVillageBackBridge"
+						>
+						<File
+							RelativePath=".\InVillageBackBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\InVillageBackBridge.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="04. EnemyBridge"
+					>
+					<Filter
+						Name="00. ShortAttackBridge"
+						>
+						<File
+							RelativePath=".\ShortAttackBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\ShortAttackBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="01. LongAttackBridge"
+						>
+						<File
+							RelativePath=".\LongAttackBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\LongAttackBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="02. FieldEnemyBridge"
+						>
+						<File
+							RelativePath=".\EnemyBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\EnemyBridge.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
 			</Filter>
 			<Filter
-				Name="헤더 파일"
-				Filter="h;hpp;hxx;hm;inl;inc;xsd"
-				UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+				Name="01. UiBridge"
 				>
 				<File
-					RelativePath=".\Client.h"
+					RelativePath=".\UiBridge.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Resource.h"
+					RelativePath=".\UiBridge.h"
 					>
 				</File>
-				<File
-					RelativePath=".\stdafx.h"
+				<Filter
+					Name="00. MainUIBridge"
 					>
-				</File>
-				<File
-					RelativePath=".\targetver.h"
+					<File
+						RelativePath=".\MainUiBridge.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\MainUiBridge.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="01. InvenBridge"
 					>
-				</File>
+					<File
+						RelativePath=".\InvenBridge.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\InvenBridge.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="02. StatusBridge"
+					>
+					<File
+						RelativePath=".\StatusBridge.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\StatusBridge.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="04. StoreBridge"
+					>
+					<File
+						RelativePath=".\StoreBridge.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\StoreBridge.h"
+						>
+					</File>
+					<Filter
+						Name="00. BasicStoreBridge"
+						>
+						<File
+							RelativePath=".\BasicStoreBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\BasicStoreBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="01. DrugStoreBridge"
+						>
+						<File
+							RelativePath=".\DrugStoreBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\DrugStoreBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="02. MercenaryStoreBridge"
+						>
+						<File
+							RelativePath=".\MercenaryStoreBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\MercenaryStoreBridge.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="05. ButtonBridge"
+					>
+					<File
+						RelativePath=".\ButtonBridge.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\ButtonBridge.h"
+						>
+					</File>
+					<Filter
+						Name="00. HotKeyBridge"
+						>
+						<File
+							RelativePath=".\HotKeyBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\HotKeyBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="01. TownBridge"
+						>
+						<File
+							RelativePath=".\TownBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\TownBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="02. BasicBridge"
+						>
+						<File
+							RelativePath=".\BasicBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\BasicBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="03. DrugBridge"
+						>
+						<File
+							RelativePath=".\DrugBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\DrugBridge.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="04. MercenaryBridge"
+						>
+						<File
+							RelativePath=".\MercenaryBridge.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\MercenaryBridge.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="06. PortraitBridge"
+					>
+					<File
+						RelativePath=".\PortraitBridge.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\PortraitBridge.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="07. MercenaryDisplayBridge"
+					>
+					<File
+						RelativePath=".\MercenaryDisplayBridge.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\MercenaryDisplayBridge.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="08. EndUIBridge"
+					>
+				</Filter>
 			</Filter>
 		</Filter>
 		<File
