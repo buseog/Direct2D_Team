@@ -13,6 +13,7 @@
 IMPLEMENT_DYNCREATE(CSecondMini, CView)
 
 CSecondMini::CSecondMini()
+:m_ObjRend(false)
 {
 
 }
@@ -40,14 +41,14 @@ void CSecondMini::OnDraw(CDC* pDC)
 		D3DCLEAR_STENCIL | D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET, 
 		D3DCOLOR_ARGB(255, 0, 0, 255), 1.f, 0);
 	CDevice::GetInstance()->Render_Begin();
-
-	/*if(pBackGround->GetObjCount() < -1)
-	{
+	
+	if(m_ObjRend)
 		pBackGround->SecondRender();
-	}*/
-
+		
 	CDevice::GetInstance()->Render_End();
 	CDevice::GetInstance()->GetDevice()->Present(NULL, NULL, m_hWnd, NULL);
+
+	m_ObjRend = true;
 }
 
 

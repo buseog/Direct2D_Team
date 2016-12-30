@@ -41,6 +41,7 @@ private: ///basestatus
 	int m_iInt;
 	
 private:
+	
 	int m_iLevel;
 	int m_iAttack;
 	int m_iDeffence;
@@ -68,7 +69,7 @@ private:
 	UINT m_UnitType;//라디오버튼
 private:
 	CListBox m_UnitList;//유닛리스트
-	CListBox m_PortraitList;//초상화리스트
+
 
 	
 
@@ -81,7 +82,7 @@ private://수식연산함수
 	void CalcMoveSpeed(void);
 private:
 	void SetRadioAction(void);
-	void test(CString _Path);
+	//void test(CString _Path);
 
 public:
 	afx_msg void OnEnChangeSTR();
@@ -110,7 +111,7 @@ public:
 	afx_msg void OnLbnSelchangeAddedUnitList();
 	afx_msg void OnBnClickedButtonSave();
 	afx_msg void OnBnClickedButtonLoad();
-	afx_msg void OnBnClickedButton5();
+//	afx_msg void OnBnClickedButton5();
 
 	afx_msg void OnBnClickedButtonShowItemTool();
 };

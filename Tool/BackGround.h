@@ -54,7 +54,12 @@ public: // 지형 오브젝트 관련 - 은지 추가
 	void		SetObjszObj(CString	_szObjKey);
 	void		ObjPick(D3DXVECTOR3& vPos, int& iIndex, CString& szObj, CString& szState);
 	void		ObjRender(void);
-
+	float		m_fTransX;
+	float		m_fTransY;
+	void		SetTrans(float _TransX, float _TransY);
+	float		m_iObjCountKey;
+	void		SetObjectCount(int _iObjCountKey);
+	int			GetObjectCount(void);
 
 public:
 	CBackGround(void);

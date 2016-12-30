@@ -1,13 +1,16 @@
 #pragma once
+#include "afxwin.h"
+#include "BackGround.h"
 
 
 // CSecondForm 폼 뷰입니다.
 
+class CMainFrm;
 class CSecondForm : public CFormView
 {
 	DECLARE_DYNCREATE(CSecondForm)
 
-protected:
+public:
 	CSecondForm();           // 동적 만들기에 사용되는 protected 생성자입니다.
 	virtual ~CSecondForm();
 
@@ -29,9 +32,6 @@ protected:
 public: //수치 출력 관련
 	CString m_StateKey;
 	CString m_ObjKey;
-
-	void	SetKey(float _fObjKey, float _StateKey);
-
 public: // 세이브, 로드 관련
 	afx_msg void	OnLoadButton();
 	afx_msg void	OnSaveButton();
@@ -41,6 +41,27 @@ public: // 세이브, 로드 관련
 
 	/*map<BYTE, TILE*>	m_MapTileData;
 	map<int, BACK*>		m_MapObjectData;*/
+
+	CBackGround*	m_pBack;
+
+	afx_msg void OnPositionChange();
+	float m_PositionX;
+	float m_PositionY;
+	float m_PositionZ;
+	float m_TransX;
+	float m_TransY;
+	float m_TransZ;
+
+	afx_msg void OnCreateButton();
+	float m_RotX;
+	float m_RotY;
+	float m_RotZ;
+
+	void	SetPos(float _fPosx, float _fPosy);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	CEdit m_CPositionX;
+	afx_msg void OnEnChangeEdit12();
+
 
 };
 

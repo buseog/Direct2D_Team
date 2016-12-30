@@ -13,6 +13,7 @@
 #include "MainFrm.h"
 #include "KeyMgr.h"
 #include "BackGround.h"
+#include "SecondForm.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -33,6 +34,9 @@ BEGIN_MESSAGE_MAP(CToolView, CScrollView)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_MOUSEMOVE()
 	ON_WM_RBUTTONDOWN()
+	ON_WM_KEYDOWN()
+	ON_WM_ACTIVATE()
+	ON_WM_KEYUP()
 END_MESSAGE_MAP()
 
 // CToolView 생성/소멸
@@ -74,16 +78,7 @@ void CToolView::OnDraw(CDC* /*pDC*/)
 
 	m_pBack->Render();
 
-	if (CKeyMgr::GetInstance()->KeyDown('1'))
-	{
-		if (m_pBack->GetTileCheck())
-			m_pBack->SetTileCheck(false);
-		else
-			m_pBack->SetTileCheck(true);
-	}
-
-	Invalidate(FALSE);
-
+	
 
 	CDevice::GetInstance()->Render_End();
 	CDevice::GetInstance()->GetDevice()->Present(NULL, NULL, NULL, NULL);
@@ -226,6 +221,7 @@ void CToolView::OnInitialUpdate()
 
 	m_pBack->SetMainView(this);
 
+	
 }
 
 void CToolView::OnDestroy()
@@ -263,9 +259,30 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)	// 타일 피킹 - 은지 추�
 
 void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 {
-	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
 	CScrollView::OnMouseMove(nFlags, point);
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	m_pSecond = ((CMainFrame*)AfxGetMainWnd())->GetSecondForm();
+
+
+	D3DXVECTOR3 Mouse = ::GetMouse();
+
+	m_pSecond->SetPos(Mouse.x, Mouse.y);
+
+
+	m_pSecond->Invalidate(false);
+
+	if (CKeyMgr::GetInstance()->KeyDown('P'))
+	{
+		if (m_pBack->GetTileCheck())
+			m_pBack->SetTileCheck(false);
+		else
+			m_pBack->SetTileCheck(true);
+	}
+	
+	Invalidate(false);
+
 }
 
 void CToolView::OnRButtonDown(UINT nFlags, CPoint point)
@@ -281,4 +298,39 @@ void CToolView::OnRButtonDown(UINT nFlags, CPoint point)
 		((CMainFrame*)AfxGetMainWnd())->GetForm()->m_DlgTab2.m_szObjKey,
 		((CMainFrame*)AfxGetMainWnd())->GetForm()->m_DlgTab2.m_szStateKey);
 
+	Invalidate(false);
+}
+
+
+void CToolView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다
+
+	/*if (CKeyMgr::GetInstance()->KeyDown('P'))
+	{
+		if (m_pBack->GetTileCheck())
+			m_pBack->SetTileCheck(false);
+		else
+			m_pBack->SetTileCheck(true);
+	}*/
+	
+	//Invalidate(false);
+
+	CScrollView::OnKeyDown(nChar, nRepCnt, nFlags);
+
+}
+
+void CToolView::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
+{
+	CScrollView::OnActivate(nState, pWndOther, bMinimized);
+
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
+
+}
+
+void CToolView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	CScrollView::OnKeyUp(nChar, nRepCnt, nFlags);
 }

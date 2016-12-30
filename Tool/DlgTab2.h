@@ -2,6 +2,7 @@
 #include "afxwin.h"
 #include "SecondForm.h"
 #include "BackGround.h"
+#include "SecondMini.h"
 
 
 // CDlgTab2 대화 상자입니다.
@@ -29,6 +30,7 @@ public:
 	CListBox m_ListBox02;
 	CSecondForm*		m_pSecondForm;
 	CBackGround*		m_pBack;
+	CSecondMini*		m_pSecondMini;
 	
 public:
 	afx_msg void OnAddBox();

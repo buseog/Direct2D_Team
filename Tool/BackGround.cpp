@@ -11,6 +11,7 @@ CBackGround::CBackGround(void)
 , m_pMainView(NULL)
 , m_bTileCheck(false)
 , m_iCountKey(0)
+,m_iObjCountKey(0)
 {
 }
 
@@ -21,6 +22,7 @@ CBackGround::~CBackGround(void)
 
 HRESULT CBackGround::Initialize(void)
 {
+
 	for (int i = 0; i < TILEY; ++i)
 	{
 		for (int j = 0; j < TILEX; ++j)
@@ -37,6 +39,8 @@ HRESULT CBackGround::Initialize(void)
 			m_vecTile.push_back(pTile);
 		}
 	}
+	m_fTransX = 1.f;
+	m_fTransY = 1.f;
 
 	return S_OK;
 }
@@ -296,17 +300,20 @@ void CBackGround::ObjPick(D3DXVECTOR3& vPos, int& iIndex, CString& szObj, CStrin
 
 void CBackGround::ObjRender(void)
 {
-	D3DXMATRIX	matTrans;
-	TCHAR		szBuf[MIN_STR] = L"";
+	D3DXMATRIX	matScale, matTrans, matWorld;
 
 	for (size_t i = 0; i < m_vecBack.size(); ++i)
 	{
 
 		const TEXINFO*	pObjTexture = CTextureMgr::GetInstance()->GetTexture(L"OBJECT", L"Object", m_vecBack[i]->iIndex);
 		
+		D3DXMatrixScaling(&matScale, m_fTransX, m_fTransY, 0.f);
+
 		D3DXMatrixTranslation(&matTrans, m_vecBack[i]->vPos.x - m_pMainView->GetScrollPos(0), m_vecBack[i]->vPos.y - m_pMainView->GetScrollPos(1), 0.f);
 		
-		m_pDevice->GetSprite()->SetTransform(&matTrans);
+		matWorld = matScale * matTrans;
+
+		m_pDevice->GetSprite()->SetTransform(&matWorld);
 		m_pDevice->GetSprite()->Draw(pObjTexture->pTexture, 
 			NULL, &D3DXVECTOR3(pObjTexture->tImgInfo.Width / 2.f, pObjTexture->tImgInfo.Height / 2.f, 0.f), NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
@@ -327,21 +334,38 @@ void CBackGround::SecondRender(void)
 {
 	D3DXMATRIX	matScale, matTrans, matWorld;
 
-	const TEXINFO*	pObjTexture = CTextureMgr::GetInstance()->GetTexture(L"OBJECT", L"Object", m_iBackCountKey);
+	const TEXINFO*	pObjTexture = CTextureMgr::GetInstance()->GetTexture(L"OBJECT", L"Object", (int)m_iObjCountKey);
 		
-	D3DXMatrixScaling(&matScale, 0.2f, 0.2f, 0.f);
+	D3DXMatrixScaling(&matScale, 1.2f, 1.2f, 0.f);
 
-	D3DXMatrixTranslation(&matTrans,0.f, 0.f, 0.f);
+	D3DXMatrixTranslation(&matTrans, 0.f, 0.f, 0.f);
 
 	matWorld = matScale * matTrans;
 		
 	m_pDevice->GetSprite()->SetTransform(&matWorld);
 	m_pDevice->GetSprite()->Draw(pObjTexture->pTexture, 
-					NULL, NULL/*&D3DXVECTOR3(1892.f, 780.f, 0.f)*/, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+					NULL, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 }
 
 int CBackGround::GetObjCount(void)
 {
 	return m_iBackCountKey;
+}
+
+void CBackGround::SetTrans(float _TransX, float _TransY)
+{
+	m_fTransX = _TransX;
+	m_fTransY = _TransY;
+}
+
+
+void CBackGround::SetObjectCount(int _iObjCountKey)
+{
+	m_iObjCountKey = (float)_iObjCountKey;
+}
+
+int	CBackGround::GetObjectCount(void)
+{
+	return (int)m_iObjCountKey;
 }

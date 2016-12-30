@@ -95,13 +95,13 @@ void CDlgTab2::OnAddBox()
 
 	m_pBack = ((CMainFrame*)AfxGetMainWnd())->GetMainView()->GetBackGround();
 
-	m_pBack->SetObjCount(m_iCount);
+	m_pBack->SetObjectCount(m_iCount);
 	m_pBack->SetObjszObj(L"OBJECT");
 	m_pBack->SetObjszState(L"Object");
 
 	Invalidate(false);
 	((CMainFrame*)AfxGetMainWnd())->GetMainView()->Invalidate(false);
-	((CMainFrame*)AfxGetMainWnd())->GetMiniView()->Invalidate(false);
+	((CMainFrame*)AfxGetMainWnd())->GetSecondMini()->Invalidate(false);
 
 	UpdateData(FALSE);
 

@@ -93,10 +93,8 @@ void CDlgTab1::OnAddBox()
 
 	m_pBack->SetCount(m_iCount);
 
-	Invalidate(false);
 	((CMainFrame*)AfxGetMainWnd())->GetMainView()->Invalidate(false);
 	((CMainFrame*)AfxGetMainWnd())->GetMiniView()->Invalidate(false);
-
 	UpdateData(FALSE);
 
 

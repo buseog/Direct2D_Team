@@ -118,7 +118,7 @@ void CMyForm::OnClickButton()
 	m_pBack->Initialize();
 
 	((CMainFrame*)AfxGetMainWnd())->GetMainView()->SetScrollSizes(MM_TEXT, CSize(TILECX * (int)m_TileX, (TILECY / 2) * (int)m_TileY));
-	((CMainFrame*)AfxGetMainWnd())->GetMainView()->Invalidate(TRUE);
+	((CMainFrame*)AfxGetMainWnd())->GetMainView()->Invalidate(false);
 
 
 	UpdateData(FALSE);
@@ -189,8 +189,7 @@ void CMyForm::OnUnitTool()
 void CMyForm::OnItemTool()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-
-	if(((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool()->GetSafeHwnd() == NULL)
+		if(((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool()->GetSafeHwnd() == NULL)
 	{
 		((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool()->Create(IDD_ITEMTOOL);
 	}

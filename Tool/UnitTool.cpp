@@ -62,6 +62,7 @@ void CUnitTool::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_UNITEDIT13, m_fAttackSpeed);
 	DDX_Text(pDX, IDC_UNITEDIT14, m_fMoveSpeed);
 	DDX_Radio(pDX, IDC_RADIO1, (int&)m_UnitType);
+
 	DDX_Control(pDX, IDC_LIST2, m_UnitList);
 	DDX_Text(pDX, IDC_UNITEDIT15, m_fRange);
 }
@@ -85,7 +86,7 @@ BEGIN_MESSAGE_MAP(CUnitTool, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON3, &CUnitTool::OnBnClickedButtonSave)
 	ON_BN_CLICKED(IDC_BUTTON4, &CUnitTool::OnBnClickedButtonLoad)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_RADIO1,IDC_RADIO3, RadioCtrl)
-	ON_BN_CLICKED(IDC_BUTTON5, &CUnitTool::OnBnClickedButton5)
+//	ON_BN_CLICKED(IDC_BUTTON5, &CUnitTool::OnBnClickedButton5)
 	ON_BN_CLICKED(IDC_BUTTON6, &CUnitTool::OnBnClickedButtonShowItemTool)
 END_MESSAGE_MAP()
 
@@ -97,7 +98,6 @@ BOOL CUnitTool::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
-//	MoveWindow(0,0,1024,768);
 	UpdateData(TRUE);
 
 	//CFileInfo FileInfo;
@@ -570,58 +570,59 @@ void CUnitTool::OnBnClickedButtonLoad()
 	UpdateData(FALSE);
 	AfxMessageBox(L"Load Complete");
 }
-void CUnitTool::test(CString _Path)
-{
-	m_PortraitList.ResetContent();
-	CString tpath=_Path+L"/*.*";// =L"../Texture/*.*";
-	
-	CFileFind finder;
-	//CFileFind는 파일, 디렉터리가 존재하면 TRUE 를 반환함
-	BOOL bWorking = finder.FindFile(tpath); //
-
-	CString fileName;
-	CString DirName;
-
-	while (bWorking)
-	{
-		//다음 파일 / 폴더 가 존재하면다면 TRUE 반환
-		bWorking = finder.FindNextFile();
-		//파일 일때
-		if(finder.IsDirectory())
-		{
-			DirName = finder.GetFileName();
-			if( DirName == _T(".") || 
-				DirName == _T("..")|| 
-				DirName == _T("Thumbs.db") ) continue;
-			keylist.push_back(DirName);
-			mapTest.insert(map<CString,CString>::value_type(DirName,finder.GetFilePath()));
-			CString Path = _Path +L"/"+DirName;
-			test(Path);
-		}
-		if (finder.IsArchived())
-		{
-			fileName = finder.GetFileName();
-			
-			if( fileName == _T(".") || 
-				fileName == _T("..")|| 
-				fileName == _T("Thumbs.db") ) continue;
-			CString Path = finder.GetFilePath();
-			addrlist.push_back(Path);
-
-		}
-
-	}
-
-}
-void CUnitTool::OnBnClickedButton5()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	test(L"../Texture");
-}
+//void CUnitTool::test(CString _Path)
+//{
+//	m_PortraitList.ResetContent();
+//	CString tpath=_Path+L"/*.*";// =L"../Texture/*.*";
+//	
+//	CFileFind finder;
+//	//CFileFind는 파일, 디렉터리가 존재하면 TRUE 를 반환함
+//	BOOL bWorking = finder.FindFile(tpath); //
+//
+//	CString fileName;
+//	CString DirName;
+//
+//	while (bWorking)
+//	{
+//		//다음 파일 / 폴더 가 존재하면다면 TRUE 반환
+//		bWorking = finder.FindNextFile();
+//		//파일 일때
+//		if(finder.IsDirectory())
+//		{
+//			DirName = finder.GetFileName();
+//			if( DirName == _T(".") || 
+//				DirName == _T("..")|| 
+//				DirName == _T("Thumbs.db") ) continue;
+//			keylist.push_back(DirName);
+//			mapTest.insert(map<CString,CString>::value_type(DirName,finder.GetFilePath()));
+//			CString Path = _Path +L"/"+DirName;
+//			test(Path);
+//		}
+//		if (finder.IsArchived())
+//		{
+//			fileName = finder.GetFileName();
+//			
+//			if( fileName == _T(".") || 
+//				fileName == _T("..")|| 
+//				fileName == _T("Thumbs.db") ) continue;
+//			CString Path = finder.GetFilePath();
+//			addrlist.push_back(Path);
+//
+//		}
+//
+//	}
+//
+//}
+//void CUnitTool::OnBnClickedButton5()
+//{
+//	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+//	test(L"../Texture");
+//}
 
 void CUnitTool::OnBnClickedButtonShowItemTool()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	
 	if(((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool()->GetSafeHwnd() == NULL)
 	{
 		((CMainFrame*)AfxGetMainWnd())->GetForm()->GetItemTool()->Create(IDD_ITEMTOOL);

@@ -5,7 +5,7 @@
 
 #pragma once
 class CBackGround;
-
+class CSecondForm;
 class CToolDoc;
 
 class CToolView : public CScrollView
@@ -21,6 +21,7 @@ public:
 // 작업입니다.
 private:
 	CBackGround*		m_pBack;
+	CSecondForm*		m_pSecond;
 
 public:
 	CBackGround*	GetBackGround(void);
@@ -56,6 +57,9 @@ public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
+	afx_msg void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
 };
 
 #ifndef _DEBUG  // ToolView.cpp의 디버그 버전
